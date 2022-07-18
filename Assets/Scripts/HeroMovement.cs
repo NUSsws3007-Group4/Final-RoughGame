@@ -14,8 +14,6 @@ public class HeroMovement : MonoBehaviour
     /// 定义常量
     /// 在糅合时修改
     /// </summary>
-    //生命值
-    private const int mHealthDefault = 5;
     //默认最大速度
     private const float mMaxSpeedDefault = 5f;
     //默认加速度
@@ -28,7 +26,7 @@ public class HeroMovement : MonoBehaviour
 
     private Vector3 mRespawnPoint;
     //移动方向
-    private enum mDirection { left = -1, stop, right };
+    public enum mDirection { left = -1, stop, right };
     private mDirection mMoveDir;
     private mDirection mFaceDir = mDirection.right;
     //位置状态
@@ -46,7 +44,6 @@ public class HeroMovement : MonoBehaviour
     private float mSpeed = 0f;
     //最大速度
     private float mMaxSpeed = 5f;
-    private int mHealth = 5;
     //加速度
     private float mAcceleration;
     //冲刺
@@ -68,6 +65,7 @@ public class HeroMovement : MonoBehaviour
     private int mJumpCount = 0;
     //碰撞体
     private Rigidbody2D mRigidbody;
+    public GameObject muim;
 
     public void setRespawnPoint(Vector2 _point)
     {
@@ -78,18 +76,9 @@ public class HeroMovement : MonoBehaviour
         smoothmove = !smoothmove;
     }
 
-    public int getHealth()
-    {
-        return mHealth;
-    }
-    public void setHealth(int _health)
-    {
-        mHealth = _health;
-    }
-
     public void respawn()
     {
-        mHealth = mHealthDefault;
+        muim.GetComponent<bloodbarcontrol>().setvolume(muim.GetComponent<bloodbarcontrol>().maxblood);
         mRigidbody.velocity = new Vector2(0f, 0f);
         gameObject.transform.localPosition = mRespawnPoint;
         mSpeed = 0f;
@@ -99,7 +88,6 @@ public class HeroMovement : MonoBehaviour
     public void hurt(int _damage = 1)
     {
         mAnimeControl.SetTrigger("Hurt");
-        mHealth -= _damage;
     }
 
     void Start()
@@ -124,7 +112,7 @@ public class HeroMovement : MonoBehaviour
             pos.y += gameObject.GetComponent<BoxCollider2D>().size.y*2;
             mForceSneak = Physics2D.OverlapCircle(pos, 0.5f, LayerMask.GetMask("Ground"));
         }
-        if (mHealth <= 0)
+        if (muim.GetComponent<bloodbarcontrol>().getvolume() <= 0)
         {
             respawn();
         }
