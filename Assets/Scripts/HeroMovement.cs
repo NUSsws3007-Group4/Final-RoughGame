@@ -114,7 +114,10 @@ public class HeroMovement : MonoBehaviour
 
     void Update()
     {
-
+        if(transform.position.x<-30f || transform.position.x>34f || transform.position.y>20f || transform.position.y<-20f)
+        {
+            respawn();
+        }
         if (mIsSneak)
         {
             Vector2 pos = transform.position;
