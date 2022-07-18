@@ -1,0 +1,16 @@
+/.vscode
+/.vs
+/EXE
+/Library
+/Logs
+/obj
+/ProjectSettings
+/Temp
+/UserSettings
+.vsconfig
+Assembly-CSharp.csproj
+*.sln
+*.zip
+*.7z
+*.rar
+/Assets/TextMesh Pro/Documentation
