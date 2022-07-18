@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class HeroMovement : MonoBehaviour
 {
-    /// <summary>
-    /// 测试用
-    /// </summary>
 
     public void randomrespawn()
     {
@@ -77,7 +74,7 @@ public class HeroMovement : MonoBehaviour
         mRespawnPoint = new Vector3(_point.x, _point.y);
     }
     public void switchmovesys()
-    {
+    { 
         smoothmove = !smoothmove;
     }
 
@@ -403,6 +400,7 @@ public class HeroMovement : MonoBehaviour
                     touchLadder();
                 }
                 break;
+            case "Items":
             default:
                 Debug.LogWarning("Unknow collision enter");
                 break;
