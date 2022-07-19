@@ -5,10 +5,14 @@ using UnityEngine.UI;
 
 public class HeroMovement : MonoBehaviour
 {
-
-    public void randomrespawn()
+    public Text text;
+    public void settestui()
     {
-        setRespawnPoint(new Vector2(Random.Range(-13f, 5f), Random.Range(-5f, 10f)));
+        string ui = "Position status: " + mPlace + ", Facing: " + mFaceDir
+            + ", Health: " + mHealth + "\nSpawn at: " + mRespawnPoint + "\nDsah used:" +
+            mDashUsed + "\nSpeed: " + mRigidbody.velocity + "\nRunning: " + mIsRun +
+            "\nSneak: " + mIsSneak + ", Forced Sneak: " + mForceSneak;
+        text.text = ui;
     }
     /// <summary>
     /// 定义常量
@@ -97,7 +101,7 @@ public class HeroMovement : MonoBehaviour
 
     void Update()
     {
-        if(transform.position.x<-30f || transform.position.x>34f || transform.position.y>20f || transform.position.y<-20f)
+        if (transform.position.x<-30f || transform.position.x>34f || transform.position.y>20f || transform.position.y<-20f)
         {
             respawn();
         }
@@ -411,12 +415,12 @@ public class HeroMovement : MonoBehaviour
             switch (LayerMask.LayerToName(collisionobj.gameObject.layer))
             {
                 case "Ground":
+                    mPlace = mPlaceStatus.InAir;
                     if (colliNormal.y > 0 && colliNormal.y > Mathf.Abs(colliNormal.x))
                     {
 
                         if (mPlace != mPlaceStatus.OnGround)
                         {
-                            Debug.LogError("ground");
                             touchGround();
                         }
                     }
