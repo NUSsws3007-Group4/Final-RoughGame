@@ -493,7 +493,7 @@ public class HeroBehavior : MonoBehaviour
         mAnimeControl.SetBool("IsOnLadder", mPlace == mPlaceStatus.OnLadder);
         mAnimeControl.SetBool("IsJump", mPlace == mPlaceStatus.InAir && mRigidbody.velocity.y > 0);
         mAnimeControl.SetBool("IsFall", mPlace == mPlaceStatus.InAir && mRigidbody.velocity.y <= 0);
-        if ((mAnimeControl.GetBool("IsOnLadder") && mRigidbody.velocity.y < 0.05f))
+        if ((mAnimeControl.GetBool("IsOnLadder") && mRigidbody.velocity.y < 0.05f) && mAnimeControl.GetCurrentAnimatorStateInfo(0).IsName("climb"))
         {
             Debug.Log("Stop Anime");
             mAnimeControl.speed = 0;
