@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 46624489}
   - component: {fileID: 46624488}
   - component: {fileID: 46624487}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: trap3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -828,7 +828,7 @@ GameObject:
   - component: {fileID: 104233353}
   - component: {fileID: 104233355}
   - component: {fileID: 104233354}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: hiddenarea2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11132,7 +11132,7 @@ GameObject:
   - component: {fileID: 846417101}
   - component: {fileID: 846417103}
   - component: {fileID: 846417102}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: hiddenarea3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11563,7 +11563,7 @@ GameObject:
   - component: {fileID: 1007077676}
   - component: {fileID: 1007077675}
   - component: {fileID: 1007077674}
-  m_Layer: 14
+  m_Layer: 18
   m_Name: Break1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
