@@ -398,6 +398,16 @@ public class HeroBehavior : MonoBehaviour
                 respaned = false;
             }
         }
+
+        //攻击
+        if(mPlace == mPlaceStatus.OnGround || mPlace == mPlaceStatus.InAir)
+        {
+            if(Input.GetKeyDown(KeyCode.J))//按下J开始攻击
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+                mAnimeControl.SetBool("Attack", true);
+            }
+        }
     }
 
     private bool isDashAvalible()
