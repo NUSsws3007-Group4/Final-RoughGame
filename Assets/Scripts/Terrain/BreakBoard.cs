@@ -15,26 +15,32 @@ public class BreakBoard : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.layer == 19)
-        {
-            gameObject.SetActive(false);
-            foreach (Transform i in transform)
-            {
-                i.gameObject.SetActive(false);
-            }
-        }
-    }
-    private void OnTriggerStay(Collider other)
-    {
+        Debug.Log("attack:" + other.gameObject.layer);
         if (other.gameObject.layer == 19)
         {
-            gameObject.SetActive(false);
             foreach (Transform i in transform)
             {
                 i.gameObject.SetActive(false);
             }
+            gameObject.SetActive(false);
         }
     }
+
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        Debug.Log("attack:" + other.gameObject.layer);
+        if (other.gameObject.layer == 19)
+        {
+            foreach (Transform i in transform)
+            {
+                i.gameObject.SetActive(false);
+            }
+            gameObject.SetActive(false);
+        }
+    }
+
+
 }

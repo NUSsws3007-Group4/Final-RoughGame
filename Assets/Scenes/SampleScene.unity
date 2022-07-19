@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 46624489}
   - component: {fileID: 46624488}
   - component: {fileID: 46624487}
+  - component: {fileID: 46624490}
   m_Layer: 18
   m_Name: trap3
   m_TagString: Untagged
@@ -402,6 +403,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &46624490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46624483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2568c460a72cb744a86aee33805f7b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &48194906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,7 +1329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336839944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 0.55, z: 0}
+  m_LocalPosition: {x: 0.4424, y: 0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1357,7 +1370,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4124, y: 0.07}
+  m_Offset: {x: 0, y: 0.07}
   serializedVersion: 2
   m_Radius: 0.66
 --- !u!212 &336839949
@@ -11107,6 +11120,14 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4268124987306695002, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268124987306695002, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695003, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: muim
       value: 
@@ -11566,7 +11587,7 @@ GameObject:
   - component: {fileID: 1007077677}
   - component: {fileID: 1007077676}
   - component: {fileID: 1007077675}
-  - component: {fileID: 1007077674}
+  - component: {fileID: 1007077678}
   m_Layer: 18
   m_Name: Break1
   m_TagString: Untagged
@@ -11767,18 +11788,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1007077674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007077670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2568c460a72cb744a86aee33805f7b79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!66 &1007077675
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -11834,7 +11843,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!19719996 &1007077677
 TilemapCollider2D:
@@ -11852,6 +11861,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &1007077678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007077670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb65cd4e8ad1a1f45a22b6b01747c80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1024113240
 PrefabInstance:
   m_ObjectHideFlags: 0
