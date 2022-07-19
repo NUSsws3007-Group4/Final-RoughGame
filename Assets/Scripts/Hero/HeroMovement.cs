@@ -110,10 +110,54 @@ public class HeroMovement : MonoBehaviour
     ///</summary>
     private int mJumpCount = 0;
     /// <summary> 
+    ///友善度
+    ///</summary>
+    private int mFriendship = 0;
+    /// <summary> 
     ///碰撞体
     ///</summary>
     private Rigidbody2D mRigidbody;
     public bloodbarcontrol mHealth;
+    /// <summary>
+    /// 获取友善度
+    /// </summary>
+    /// <returns>
+    /// 返回int值的友善度
+    /// </returns>
+    public int getFriendship()
+    {
+        return mFriendship;
+    }
+    /// <summary>
+    /// 更改友善度
+    /// </summary>
+    /// <param name="_Friendship">
+    /// 新友善度值
+    /// </param>
+    public void setFriendship(int _Friendship)
+    {
+        mFriendship = _Friendship;
+    }
+    /// <summary>
+    /// 减少友善度
+    /// </summary>
+    /// <param name="_Friendship">
+    /// 友善度减少值
+    /// </param>
+    public void downFriendship(int _reduce)
+    {
+        mFriendship -= _reduce;
+    }
+    /// <summary>
+    /// 增加友善度
+    /// </summary>
+    /// <param name="_Friendship">
+    /// 友善度增加值
+    /// </param>
+    public void upFriendship(int _increase)
+    {
+        mFriendship += _increase;
+    }
 
     public void setRespawnPoint(Vector2 _point)
     {
