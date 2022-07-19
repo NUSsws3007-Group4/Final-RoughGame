@@ -30,16 +30,16 @@ public class HeroMovement : MonoBehaviour
     private mDirection mMoveDir;
     private mDirection mFaceDir = mDirection.right;
     //位置状态
-    private enum mPlaceSctatus
+    private enum mPlaceStatus
     {
-        Invaild = 0,
+        Invalid = 0,
         OnGround = 1,
         OnWallRight = 18,
         OnWallLeft = 34,
         InAir = 4,
         OnLadder = 8,
     }
-    private mPlaceSctatus mPlace = mPlaceSctatus.InAir;
+    private mPlaceStatus mPlace = mPlaceStatus.InAir;
     //人物速度
     private float mSpeed = 0f;
     //最大速度
@@ -60,25 +60,20 @@ public class HeroMovement : MonoBehaviour
     //跑动
     private bool mIsRun = false;
     //能跳的段数
-    private int mJumpSkill = 2;
-    //已经跳的段数
+    private int mJumpSkill = 1;
+    //空中已经跳的段数
     private int mJumpCount = 0;
     //碰撞体
     private Rigidbody2D mRigidbody;
-    public GameObject muim;
+    public bloodbarcontrol mHealth;
 
     public void setRespawnPoint(Vector2 _point)
     {
         mRespawnPoint = new Vector3(_point.x, _point.y);
     }
-    public void switchmovesys()
-    { 
-        smoothmove = !smoothmove;
-    }
-
     public void respawn()
     {
-        muim.GetComponent<bloodbarcontrol>().setvolume(muim.GetComponent<bloodbarcontrol>().maxblood);
+        mHealth.setvolume(mHealth.maxblood);
         mRigidbody.velocity = new Vector2(0f, 0f);
         gameObject.transform.localPosition = mRespawnPoint;
         mSpeed = 0f;
@@ -112,13 +107,13 @@ public class HeroMovement : MonoBehaviour
             pos.y += gameObject.GetComponent<BoxCollider2D>().size.y*2;
             mForceSneak = Physics2D.OverlapCircle(pos, 0.5f, LayerMask.GetMask("Ground"));
         }
-        if (muim.GetComponent<bloodbarcontrol>().getvolume() <= 0)
+        if (mHealth.getvolume() <= 0)
         {
             respawn();
         }
         mAnimeControl.SetBool("IsMove", !(mSpeed == 0f));
-        mAnimeControl.SetBool("IsJump", mPlace == mPlaceSctatus.InAir && mRigidbody.velocity.y > 0);
-        mAnimeControl.SetBool("IsFall", mPlace == mPlaceSctatus.InAir && mRigidbody.velocity.y <= 0);
+        mAnimeControl.SetBool("IsJump", mPlace == mPlaceStatus.InAir && mRigidbody.velocity.y > 0);
+        mAnimeControl.SetBool("IsFall", mPlace == mPlaceStatus.InAir && mRigidbody.velocity.y <= 0);
         //esc键退出
         if (Input.GetKey(KeyCode.Escape))
         {
@@ -160,12 +155,12 @@ public class HeroMovement : MonoBehaviour
         }
 
         //跑动
-        if (Input.GetKeyDown(KeyCode.LeftShift) && mPlace == mPlaceSctatus.OnGround && !mIsSneak)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && mPlace == mPlaceStatus.OnGround && !mIsSneak)
         {
             mIsRun = true;
             mMaxSpeed = mMaxSpeedDefault * 2f;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift) || mPlace != mPlaceSctatus.OnGround)
+        if (Input.GetKeyUp(KeyCode.LeftShift) || mPlace != mPlaceStatus.OnGround)
         {
             //todo：结束冲刺缓慢减速？
             mIsRun = false;
@@ -189,7 +184,7 @@ public class HeroMovement : MonoBehaviour
         //不移&减速
         else
         {
-            if (mPlace != mPlaceSctatus.InAir && mSpeed != 0)
+            if (mPlace != mPlaceStatus.InAir && mSpeed != 0)
             {
                 Debug.Log("Slowing Down");
                 //新的速度是原速度减去加速度*时间*方向
@@ -201,17 +196,30 @@ public class HeroMovement : MonoBehaviour
         //跳
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log(mJumpCount);
-            if (mJumpCount < mJumpSkill)
+
+            if (mPlace == mPlaceStatus.OnGround)
             {
+                Debug.Log("Jump");
+                mPlace = mPlaceStatus.InAir;
+                Vector2 vel = mRigidbody.velocity;
+                vel.y = mJumpForce;
+                mRigidbody.velocity = vel;
+            }
+            else if (mJumpCount < mJumpSkill)
+            {
+                mPlace = mPlaceStatus.InAir;
                 Vector2 vel = mRigidbody.velocity;
                 vel.y = mJumpForce;
                 mRigidbody.velocity = vel;
                 mJumpCount++;
             }
+            else
+            {
+                Debug.Log("Jump limit place:" + mPlace);
+            }
         }
         //爬梯子
-        if (mPlace == mPlaceSctatus.OnLadder)
+        if (mPlace == mPlaceStatus.OnLadder)
         {
             if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
             {
@@ -249,7 +257,7 @@ public class HeroMovement : MonoBehaviour
         {
             mDashUsed = true;
             mIsDash = true;
-            if (mJumpCount == 2)
+            if (mJumpCount >= mJumpSkill)
                 mJumpCount--;
             mRigidbody.velocity = new Vector2(75f * (float)mFaceDir, 0);
         }
@@ -289,13 +297,13 @@ public class HeroMovement : MonoBehaviour
     {
         mDashUsed = false;
         mJumpCount = 0;
-        mPlace = mPlaceSctatus.OnGround;
+        mPlace = mPlaceStatus.OnGround;
     }
 
     private void touchLadder()
     {
         mRigidbody.gravityScale = 0;
-        mPlace = mPlaceSctatus.OnLadder;
+        mPlace = mPlaceStatus.OnLadder;
         mDashUsed = false;
     }
 
@@ -307,17 +315,17 @@ public class HeroMovement : MonoBehaviour
         mDashUsed = false;
         if (_xNormal > 0)
         {
-            mPlace = mPlaceSctatus.OnWallRight;
+            mPlace = mPlaceStatus.OnWallRight;
             velocity.x = velocity.x < 0 ? 0 : velocity.x;
         }
         else if (_xNormal < 0)
         {
-            mPlace = mPlaceSctatus.OnWallLeft;
+            mPlace = mPlaceStatus.OnWallLeft;
             velocity.x = velocity.x > 0 ? 0 : velocity.x;
         }
         else
         {
-            mPlace = mPlaceSctatus.OnGround;
+            mPlace = mPlaceStatus.OnGround;
             return;
         }
         mRigidbody.velocity = velocity;
@@ -325,17 +333,14 @@ public class HeroMovement : MonoBehaviour
     }
     private void leftWall()
     {
-        if (mJumpCount == 2)
-        {
-            mJumpCount--;
-        }
+        
     }
 
     private void leftLadder()
     {
         mRigidbody.gravityScale = 3;
-        mPlace = mPlaceSctatus.InAir;
-        if (mJumpCount == 2)
+        mPlace = mPlaceStatus.InAir;
+        if (mJumpCount >= mJumpSkill)
         {
             mJumpCount--;
         }
@@ -370,13 +375,13 @@ public class HeroMovement : MonoBehaviour
                 }
                 else if (colliNormal.y < 0 && -colliNormal.y > Mathf.Abs(colliNormal.x))
                 {
-                    if (mPlace == mPlaceSctatus.OnGround)
+                    if (mPlace == mPlaceStatus.OnGround)
                     {
                         mForceSneak = true;
                     }
                 }
                 //侧面且没有站在地上
-                else if (!(mPlace == mPlaceSctatus.OnGround))
+                else if (!(mPlace == mPlaceStatus.OnGround))
                 {
                     touchWall(colliNormal.x);
                 }
@@ -400,52 +405,61 @@ public class HeroMovement : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collisionobj)
     {
-        Vector2 colliNormal = collisionobj.contacts[0].normal;
-        switch (LayerMask.LayerToName(collisionobj.gameObject.layer))
+        foreach (ContactPoint2D colliPoint in collisionobj.contacts)
         {
-            case "Ground":
-                if (colliNormal.y > 0 && colliNormal.y > Mathf.Abs(colliNormal.x))
-                {
-                    mPlace = mPlaceSctatus.OnGround;
-                }
-                //顶到头了
-                else if (colliNormal.y < 0 && -colliNormal.y > Mathf.Abs(colliNormal.x))
-                {
-                    if (mPlace == mPlaceSctatus.OnGround)
+            Vector2 colliNormal = colliPoint.normal;
+            switch (LayerMask.LayerToName(collisionobj.gameObject.layer))
+            {
+                case "Ground":
+                    if (colliNormal.y > 0 && colliNormal.y > Mathf.Abs(colliNormal.x))
                     {
-                        mForceSneak = true;
+
+                        if (mPlace != mPlaceStatus.OnGround)
+                        {
+                            Debug.LogError("ground");
+                            touchGround();
+                        }
                     }
-                }
-                else if (!(mPlace == mPlaceSctatus.OnGround))
-                {
-                    touchWall(colliNormal.x);
-                }
-                break;
-            case "Ladder":
-                if (colliNormal.y > 0 && colliNormal.y > Mathf.Abs(colliNormal.x))
-                {
-                    touchGround();
-                }
-                else
-                {
-                    touchLadder();
-                }
-                break;
-            default:
-                Debug.LogWarning("Unknow collision stay");
-                break;
+                    //顶到头了
+                    else if (colliNormal.y < 0 && -colliNormal.y > Mathf.Abs(colliNormal.x))
+                    {
+                        if (mPlace == mPlaceStatus.OnGround)
+                        {
+                            mForceSneak = true;
+                        }
+                    }
+                    else if (!(mPlace == mPlaceStatus.OnGround))
+                    {
+                        touchWall(colliNormal.x);
+                    }
+                    break;
+                case "Ladder":
+                    if (colliNormal.y > 0 && colliNormal.y > Mathf.Abs(colliNormal.x))
+                    {
+                        touchGround();
+                    }
+                    else
+                    {
+                        touchLadder();
+                    }
+                    break;
+                default:
+                    Debug.LogWarning("Unknow collision stay");
+                    break;
+            }
         }
     }
     private void OnCollisionExit2D(Collision2D collisionobj)
     {
+        Debug.Log("Collision exit");
         switch (LayerMask.LayerToName(collisionobj.gameObject.layer))
         {
             case "Ground":
-                if (mPlace == mPlaceSctatus.OnWallRight || mPlace == mPlaceSctatus.OnWallLeft)
+                if (mPlace == mPlaceStatus.OnWallRight || mPlace == mPlaceStatus.OnWallLeft)
                 {
                     leftWall();
                 }
-                mPlace = mPlaceSctatus.InAir;
+                mPlace = mPlaceStatus.InAir;
                 break;
             case "Ladder":
                 leftLadder();

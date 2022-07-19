@@ -10210,6 +10210,10 @@ PrefabInstance:
       propertyPath: muim
       value: 
       objectReference: {fileID: 2107621998}
+    - target: {fileID: 4268124987306695003, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: mHealth
+      value: 
+      objectReference: {fileID: 2107622001}
     - target: {fileID: 4268124987306695004, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -36147,6 +36151,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1946264407965240022, guid: 6c58c5d20c7a25a4284a27d5cccb07be, type: 3}
   m_PrefabInstance: {fileID: 1024113240}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2107622001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1946264407965240020, guid: 6c58c5d20c7a25a4284a27d5cccb07be, type: 3}
+  m_PrefabInstance: {fileID: 1024113240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107621998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccfded6108ea05e408d68a20504c7f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2110811218
 GameObject:
   m_ObjectHideFlags: 0
