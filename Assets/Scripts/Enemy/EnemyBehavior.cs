@@ -13,7 +13,8 @@ public class EnemyBehavior : MonoBehaviour
     protected SpriteRenderer enemyRenderer;
     protected Rigidbody2D mRigidbody;
     public GameObject targethero;
-    protected Vector3 targetpos, initialpos, initialright, pos;
+    protected Vector3 targetpos, initialpos, initialright, pos, targetDirection, vel;
+    protected RaycastHit2D info;
 
 
     void Start()
@@ -22,7 +23,7 @@ public class EnemyBehavior : MonoBehaviour
         initialpos = transform.localPosition;
         initialright = transform.right;
         mRigidbody = gameObject.GetComponent<Rigidbody2D>();
-        Vector3 vel = mRigidbody.velocity;
+        vel = mRigidbody.velocity;
         vel.x = 0f;
         mRigidbody.velocity = transform.right * 4 + vel;
     }
@@ -34,67 +35,68 @@ public class EnemyBehavior : MonoBehaviour
             Death();
         pos = transform.localPosition;
         targetpos = targethero.transform.localPosition;
-        distance = Vector3.Distance(pos, targetpos);
-        if (distance <= detectDistance)
+        if (patrol)
         {
-            angle = Vector3.Angle(targetpos - pos, transform.right);
-            if (angle < detectAngle)
+            vel = mRigidbody.velocity;
+            vel.x = 0f;
+            mRigidbody.velocity = transform.right * 4 + vel;
+            distance = Vector3.Distance(pos, targetpos);
+            if (distance <= detectDistance)
             {
-                patrol = false;
-                transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+                angle = Vector3.Angle(targetpos - pos, transform.right);
+                if (angle < detectAngle)
+                {
+                    targetDirection = (targetpos - pos).normalized;
+                    info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
+                    if (info.collider != null && info.collider.gameObject.layer == 8)
+                    {
+                        patrol = false;
+                        transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+                    }
+                }
             }
         }
-
-        if (!patrol)
+        else
         {
-            dot = Vector3.Dot(transform.right, (targetpos - pos).normalized);
-            if (-0.1f <= dot && dot <= 0.1f)
-            {
-                Vector2 vel = mRigidbody.velocity;
-                vel.x = 0f;
-            }
-            else
-            {
-                if (dot < -0.1f)
-                    transform.right = -transform.right;
-                Vector3 vel = mRigidbody.velocity;
-                vel.x = 0f;
-                mRigidbody.velocity = transform.right * 4 + vel;
-            }
-            AttackTime += Time.deltaTime;
+            if (targethero.GetComponent<HeroMovement>().IsRespawned())
+                Respawn();
 
+            targetDirection = (targetpos - pos).normalized;
+            dot = Vector3.Dot(transform.right, targetDirection);
+            info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
+            if (dot < -0.1f)
+                transform.right = -transform.right;
+            vel = mRigidbody.velocity;
+            vel.x = 0f;
+            mRigidbody.velocity = transform.right * 4 + vel;
+
+            AttackTime += Time.deltaTime;
             if (AttackTime >= 2.0f)
             {
                 eject();
                 AttackTime = 0f;
             }
 
-            if (targethero.GetComponent<HeroMovement>().IsRespawned() || distance > chasedistance)
+            if (info.collider == null || (info.collider != null && info.collider.gameObject.layer != 8))
             {
-                patrol = true;
-                mLifeLeft = 100;
-                transform.localPosition = initialpos;
-                transform.right = initialright;
-                Vector3 vel = mRigidbody.velocity;
-                vel.x = 0f;
-                mRigidbody.velocity = transform.right * 4 + vel;
-                AttackTime = 1.5f;
-                transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+                timeCount += Time.deltaTime;
+                if (timeCount >= 2f)
+                {
+                    timeCount = 0;
+                    Respawn();
+                }
             }
+            else
+                timeCount = 0;
         }
-        else
-        {
-            Vector3 vel = mRigidbody.velocity;
-            vel.x = 0f;
-            mRigidbody.velocity = transform.right * 4 + vel;
-        }
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (patrol && collision.gameObject.layer == 17)
             transform.right = -transform.right;
-        Vector3 vel = mRigidbody.velocity;
+        vel = mRigidbody.velocity;
         vel.x = 0f;
         mRigidbody.velocity = transform.right * 4 + vel;
     }
@@ -103,6 +105,18 @@ public class EnemyBehavior : MonoBehaviour
     {
         //TODO: 爆金币
         Destroy(transform.gameObject);
+    }
+    protected void Respawn()
+    {
+        patrol = true;
+        mLifeLeft = 100;
+        transform.localPosition = initialpos;
+        transform.right = initialright;
+        vel = mRigidbody.velocity;
+        vel.x = 0f;
+        mRigidbody.velocity = transform.right * 4 + vel;
+        AttackTime = 1.5f;
+        transform.GetChild(0).GetComponent<Renderer>().enabled = false;
     }
     protected virtual void eject()
     {
