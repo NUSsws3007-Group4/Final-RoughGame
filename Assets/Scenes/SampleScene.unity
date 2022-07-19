@@ -634,6 +634,7 @@ GameObject:
   - component: {fileID: 336839948}
   - component: {fileID: 336839947}
   - component: {fileID: 336839946}
+  - component: {fileID: 336839950}
   m_Layer: 19
   m_Name: AttackIndicator
   m_TagString: normalAttack
@@ -757,6 +758,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &336839950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336839944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae33f755f5f8dd42b22f559a60ec3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurt: 0
 --- !u!1 &370939954
 GameObject:
   m_ObjectHideFlags: 0
@@ -37586,8 +37600,9 @@ GameObject:
   - component: {fileID: 2114483298}
   - component: {fileID: 2114483297}
   - component: {fileID: 2114483299}
+  - component: {fileID: 2114483301}
   m_Layer: 0
-  m_Name: Switch
+  m_Name: Switch1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37746,6 +37761,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &2114483301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114483295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2b2d8e5a3650e4baa9040177e31d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2118886153 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2375899389666742316, guid: d0b39c07e2064d6429592461773bd380, type: 3}
