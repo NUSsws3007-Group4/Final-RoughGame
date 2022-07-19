@@ -4,28 +4,32 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    protected float timeCount = 0, AttackTime = 1.5f,
+    protected float waitTimer = 0, attackTimer = 1.5f, attackedTimer = 0.5f,
                     detectDistance = 8f, chasedistance = 12f, detectAngle = 45f,
                     distance, angle, dot;
-    protected int mLifeLeft = 100, mFriendshipRequired = 20;
+    protected int mLifeLeft = 4, mFriendshipRequired = 20;
     protected bool patrol = true;
     protected SpriteRenderer enemyRenderer;
     protected Rigidbody2D mRigidbody;
     public GameObject targetHero;
     protected Vector3 targetpos, initialpos, initialright, pos, targetDirection, vel;
     protected RaycastHit2D info;
+    protected Animator anim;
 
 
     void Start()
     {
-        targetHero = GameObject.Find("hero");
+        anim = GetComponent<Animator>();
         enemyRenderer = GetComponent<SpriteRenderer>();
+        mRigidbody = gameObject.GetComponent<Rigidbody2D>();
+        targetHero = GameObject.Find("hero");
+
         initialpos = transform.localPosition;
         initialright = transform.right;
-        mRigidbody = gameObject.GetComponent<Rigidbody2D>();
         vel = mRigidbody.velocity;
         vel.x = 0f;
         mRigidbody.velocity = transform.right * 4 + vel;
+
     }
 
     // Update is called once per frame
@@ -63,41 +67,51 @@ public class EnemyBehavior : MonoBehaviour
                 mRigidbody.velocity = new Vector3(0, 0, 0);
             }
 
-            AttackTime += Time.deltaTime;
-            if (AttackTime >= 2.0f)
+            attackTimer += Time.deltaTime;
+            if (attackTimer >= 2.0f)
             {
                 attackBehavior();
-                AttackTime = 0f;
+                attackTimer = 0f;
             }
 
             if (info.collider == null || (info.collider != null && info.collider.gameObject.layer != 8))
             {
-                timeCount += Time.deltaTime;
-                if (timeCount >= 2f)
+                waitTimer += Time.deltaTime;
+                if (waitTimer >= 2f)
                 {
-                    timeCount = 0;
+                    waitTimer = 0;
                     Respawn();
                 }
             }
             else
-                timeCount = 0;
-        }
+                waitTimer = 0;
 
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (patrol && collision.gameObject.layer == 17)
             transform.right = -transform.right;
         vel = mRigidbody.velocity;
         vel.x = 0f;
         mRigidbody.velocity = transform.right * 4 + vel;
+
+        if (collision.gameObject.layer == 19)
+        {
+            mRigidbody.velocity = new Vector3(0, 0, 0);
+            anim.SetTrigger("Attacked");
+            mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+            Debug.Log(mLifeLeft);
+        }
     }
 
     void Death()
     {
         //TODO: 爆金币
-        Destroy(transform.gameObject);
+        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
+        if (info.normalizedTime >= 1 && info.IsName("attacked"))
+            Destroy(transform.gameObject);
     }
     protected void Respawn()
     {
@@ -108,7 +122,7 @@ public class EnemyBehavior : MonoBehaviour
         vel = mRigidbody.velocity;
         vel.x = 0f;
         mRigidbody.velocity = transform.right * 4 + vel;
-        AttackTime = 1.5f;
+        attackTimer = 1.5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
     }
     protected virtual void patrolBehavior()

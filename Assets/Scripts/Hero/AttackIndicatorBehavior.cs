@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AttackIndicatorBehavior : MonoBehaviour
 {  
-    private float attackTimer = 0f;
-    public int normalAttackHarm = 25;//普通攻击伤害
+    protected float attackTimer = 0f;
     void Start()
     {
         attackTimer = 0f;
+        gameObject.GetComponent<HeroAttackHurt>().hurt=1;
     }
 
     void Update()
@@ -27,13 +27,7 @@ public class AttackIndicatorBehavior : MonoBehaviour
         if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Debug.Log("Attacking enemy");
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            Debug.Log("Attacking enemy");
+            gameObject.SetActive(false);
         }
     }
 }
