@@ -28,7 +28,7 @@ public class EnemyBehavior : MonoBehaviour
         initialright = transform.right;
         vel = mRigidbody.velocity;
         vel.x = 0f;
-        mRigidbody.velocity = transform.right * 4 + vel;
+        mRigidbody.velocity = transform.right * 2 + vel;
 
     }
 
@@ -108,7 +108,7 @@ public class EnemyBehavior : MonoBehaviour
             transform.right = -transform.right;
         vel = mRigidbody.velocity;
         vel.x = 0f;
-        mRigidbody.velocity = transform.right * 4 + vel;
+        mRigidbody.velocity = transform.right * 2 + vel;
 
         if (collision.gameObject.layer == 19)
         {
@@ -132,7 +132,7 @@ public class EnemyBehavior : MonoBehaviour
         transform.right = initialright;
         vel = mRigidbody.velocity;
         vel.x = 0f;
-        mRigidbody.velocity = transform.right * 4 + vel;
+        mRigidbody.velocity = transform.right * 2 + vel;
         attackTimer = 0.5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
     }
@@ -141,7 +141,7 @@ public class EnemyBehavior : MonoBehaviour
         transform.GetChild(1).GetComponent<Renderer>().enabled = false;
         vel = mRigidbody.velocity;
         vel.x = 0f;
-        mRigidbody.velocity = transform.right * 4 + vel;
+        mRigidbody.velocity = transform.right * 2 + vel;
         distance = Vector3.Distance(pos, targetpos);
         if (distance <= detectDistance)
         {
