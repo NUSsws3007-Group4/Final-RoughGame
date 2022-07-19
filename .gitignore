@@ -15,3 +15,4 @@ Assembly-CSharp.csproj
 *.rar
 /Assets/TextMesh Pro/Documentation
 !/ProjectSettings/TagManager.asset
+!/ProjectSettings/Physics2DSettings.asset
