@@ -22,7 +22,9 @@ public class EnemyBehavior : MonoBehaviour
         initialpos = transform.localPosition;
         initialright = transform.right;
         mRigidbody = gameObject.GetComponent<Rigidbody2D>();
-        mRigidbody.velocity = transform.right * 4 + new Vector3(0f, -3f, 0f);
+        Vector3 vel = mRigidbody.velocity;
+        vel.x = 0f;
+        mRigidbody.velocity = transform.right * 4 + vel;
     }
 
     // Update is called once per frame
@@ -47,12 +49,17 @@ public class EnemyBehavior : MonoBehaviour
         {
             dot = Vector3.Dot(transform.right, (targetpos - pos).normalized);
             if (-0.1f <= dot && dot <= 0.1f)
-                mRigidbody.velocity = new Vector3(0f, -3f, 0f);
+            {
+                Vector2 vel = mRigidbody.velocity;
+                vel.x = 0f;
+            }
             else
             {
                 if (dot < -0.1f)
                     transform.right = -transform.right;
-                mRigidbody.velocity = transform.right * 4 + new Vector3(0f, -3f, 0f);
+                Vector3 vel = mRigidbody.velocity;
+                vel.x = 0f;
+                mRigidbody.velocity = transform.right * 4 + vel;
             }
             AttackTime += Time.deltaTime;
 
@@ -68,14 +75,18 @@ public class EnemyBehavior : MonoBehaviour
                 mLifeLeft = 100;
                 transform.localPosition = initialpos;
                 transform.right = initialright;
-                mRigidbody.velocity = transform.right * 4 + new Vector3(0f, -3f, 0f);
+                Vector3 vel = mRigidbody.velocity;
+                vel.x = 0f;
+                mRigidbody.velocity = transform.right * 4 + vel;
                 AttackTime = 1.5f;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
             }
         }
         else
         {
-            mRigidbody.velocity = transform.right * 4 + new Vector3(0f, -3f, 0f);
+            Vector3 vel = mRigidbody.velocity;
+            vel.x = 0f;
+            mRigidbody.velocity = transform.right * 4 + vel;
         }
     }
 
@@ -83,7 +94,9 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (patrol && collision.gameObject.layer == 17)
             transform.right = -transform.right;
-        mRigidbody.velocity = transform.right * 4 + new Vector3(0f, -3f, 0f);
+        Vector3 vel = mRigidbody.velocity;
+        vel.x = 0f;
+        mRigidbody.velocity = transform.right * 4 + vel;
     }
 
     void Death()
