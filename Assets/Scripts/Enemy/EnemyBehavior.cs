@@ -58,7 +58,7 @@ public class EnemyBehavior : MonoBehaviour
         }
         else
         {
-            if (targethero.GetComponent<HeroMovement>().IsRespawned())
+            if (targethero.GetComponent<HeroBehavior>().IsRespawned())
                 Respawn();
 
             targetDirection = targetpos - pos;

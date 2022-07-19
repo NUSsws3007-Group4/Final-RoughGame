@@ -5,11 +5,11 @@ using UnityEngine;
 public class herointeract : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject muim;
+    public bloodbarcontrol mUIManager = null;
     private float mHurtTimer = 0;
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class herointeract : MonoBehaviour
         if (collider.gameObject.tag == "cherry")
         {
             Destroy(collider.gameObject);
-            muim.GetComponent<bloodbarcontrol>().increasevolume(1f);
+            mUIManager.increasevolume(1f);
         }
 
     }
@@ -34,8 +34,8 @@ public class herointeract : MonoBehaviour
         if (collider.gameObject.layer == 14 || collider.gameObject.layer == 13)
         {
             mHurtTimer = 0;
-            muim.GetComponent<bloodbarcontrol>().decreasevolume(1f);
-            gameObject.GetComponent<HeroMovement>().hurt();
+            mUIManager.decreasevolume(1f);
+            gameObject.GetComponent<HeroBehavior>().hurt();
         }
         //gameObject.GetComponent<HeroMovement>().setspeed(-50*((float)gameObject.GetComponent<HeroMovement>().getMoveDirection()));
     }
@@ -47,8 +47,8 @@ public class herointeract : MonoBehaviour
             if (mHurtTimer >= 1f)
             {
                 mHurtTimer = 0;
-                muim.GetComponent<bloodbarcontrol>().decreasevolume(1f);
-                gameObject.GetComponent<HeroMovement>().hurt();
+                mUIManager.decreasevolume(1f);
+                gameObject.GetComponent<HeroBehavior>().hurt();
             }
             
         }

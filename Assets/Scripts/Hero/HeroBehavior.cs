@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HeroMovement : MonoBehaviour
+public class HeroBehavior : MonoBehaviour
 {
     public Text text;
     public void settestui()

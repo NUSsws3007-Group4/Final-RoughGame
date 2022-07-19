@@ -32,7 +32,7 @@ public class CloseCombactEnemyBehavior : MonoBehaviour
             if (timer == 0)
             {
                 timer = attackgap;
-                collision.gameObject.GetComponent<HeroMovement>().hurt();
+                collision.gameObject.GetComponent<HeroBehavior>().hurt();
                 muim.GetComponent<bloodbarcontrol>().decreasevolume(1f);
             }
         }
