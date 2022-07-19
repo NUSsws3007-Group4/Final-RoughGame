@@ -35,57 +35,70 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mLifeLeft <= 0)
-            Death();
-        pos = transform.localPosition;
-        targetpos = targetHero.transform.localPosition;
-        targetDirection = targetpos - pos;
-        dot = Vector3.Dot(transform.right, targetDirection.normalized);
-
-        if (patrol)
+        if (anim.GetBool("Attacked"))
         {
-            if (targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
-                friendlyBehavior();
-            else
-                patrolBehavior();
+            attackedTimer -= Time.deltaTime;
+            mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
+            if (attackedTimer <= 0)
+            {
+                attackedTimer = 0.5f;
+                anim.SetBool("Attacked", false);
+                if (mLifeLeft <= 0)
+                    Death();
+            }
         }
         else
         {
-            if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
-                Respawn();
-            info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
-            if (dot < -0.2f)
-                transform.right = -transform.right;
-            if (dot < -0.2f || dot > 0.2f)
+            pos = transform.localPosition;
+            targetpos = targetHero.transform.localPosition;
+            targetDirection = targetpos - pos;
+            dot = Vector3.Dot(transform.right, targetDirection.normalized);
+
+            if (patrol)
             {
-                vel = mRigidbody.velocity;
-                vel.x = 0f;
-                mRigidbody.velocity = transform.right * 4 + vel;
+                if (targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
+                    friendlyBehavior();
+                else
+                    patrolBehavior();
             }
             else
             {
-                mRigidbody.velocity = new Vector3(0, 0, 0);
-            }
-
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= 2.0f)
-            {
-                attackBehavior();
-                attackTimer = 0f;
-            }
-
-            if (info.collider == null || (info.collider != null && info.collider.gameObject.layer != 8))
-            {
-                waitTimer += Time.deltaTime;
-                if (waitTimer >= 2f)
-                {
-                    waitTimer = 0;
+                if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
                     Respawn();
+                info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
+                if (dot < -0.2f)
+                    transform.right = -transform.right;
+                if (dot < -0.2f || dot > 0.2f)
+                {
+                    vel = mRigidbody.velocity;
+                    vel.x = Mathf.Min(Mathf.Abs(Vector3.Dot(transform.right, targetDirection)) * 2, transform.right.x * 4);
+                    mRigidbody.velocity = vel;
                 }
-            }
-            else
-                waitTimer = 0;
+                else
+                {
+                    mRigidbody.velocity = new Vector3(0, 0, 0);
+                }
 
+                attackTimer += Time.deltaTime;
+                if (attackTimer >= 2.0f)
+                {
+                    attackBehavior();
+                    attackTimer = 0f;
+                }
+
+                if (info.collider == null || (info.collider != null && info.collider.gameObject.layer != 8))
+                {
+                    waitTimer += Time.deltaTime;
+                    if (waitTimer >= 2f)
+                    {
+                        waitTimer = 0;
+                        Respawn();
+                    }
+                }
+                else
+                    waitTimer = 0;
+
+            }
         }
     }
 
@@ -99,30 +112,28 @@ public class EnemyBehavior : MonoBehaviour
 
         if (collision.gameObject.layer == 19)
         {
+            anim.SetBool("Attacked", true);
             mRigidbody.velocity = new Vector3(0, 0, 0);
-            anim.SetTrigger("Attacked");
+            mRigidbody.AddForce(-100 * transform.right);
             mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
-            Debug.Log(mLifeLeft);
+            Debug.Log("Life:" + mLifeLeft);
         }
     }
 
     void Death()
     {
-        //TODO: 爆金币
-        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
-        if (info.normalizedTime >= 1 && info.IsName("attacked"))
-            Destroy(transform.gameObject);
+        Destroy(transform.gameObject);
     }
     protected void Respawn()
     {
         patrol = true;
-        mLifeLeft = 100;
+        mLifeLeft = 4;
         transform.localPosition = initialpos;
         transform.right = initialright;
         vel = mRigidbody.velocity;
         vel.x = 0f;
         mRigidbody.velocity = transform.right * 4 + vel;
-        attackTimer = 1.5f;
+        attackTimer = 0.5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
     }
     protected virtual void patrolBehavior()
@@ -151,6 +162,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (dot < -0.2f)
             transform.right = -transform.right;
+        attackedTimer = 0.5f;
         mRigidbody.velocity = new Vector3(0, 0, 0);
         transform.GetChild(1).GetComponent<Renderer>().enabled = true;
     }
