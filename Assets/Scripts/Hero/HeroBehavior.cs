@@ -512,6 +512,7 @@ public class HeroBehavior : MonoBehaviour
         Vector2 colliNormal = collisionobj.contacts[0].normal;
         switch (LayerMask.LayerToName(collisionobj.gameObject.layer))
         {
+            case "Destructble":
             case "Ground":
                 //平面
                 if (colliNormal.y > 0 && colliNormal.y > Mathf.Abs(colliNormal.x))
@@ -542,6 +543,16 @@ public class HeroBehavior : MonoBehaviour
                 }
                 break;
             case "Items":
+                break;
+            case "Teleport":
+                if(collisionobj.gameObject.tag == "JumpPad")
+                {
+                    mPlace = mPlaceStatus.InAir;
+                    Vector2 vel = mRigidbody.velocity;
+                    vel.y = mJumpForce * 2;
+                    mRigidbody.velocity = vel;
+                }
+                break;
             default:
                 Debug.LogWarning("Unknow collision enter");
                 break;

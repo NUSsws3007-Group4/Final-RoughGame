@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destructable : MonoBehaviour
+public class BreakBoard : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,17 +15,26 @@ public class Destructable : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.layer==8)
+        if(other.gameObject.layer == 19)
         {
+            gameObject.SetActive(false);
             foreach (Transform i in transform)
             {
                 i.gameObject.SetActive(false);
             }
-            Debug.Log("Trap Destoryed");
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == 19)
+        {
             gameObject.SetActive(false);
-            //Destroy(transform.gameObject);
+            foreach (Transform i in transform)
+            {
+                i.gameObject.SetActive(false);
+            }
         }
     }
 }
