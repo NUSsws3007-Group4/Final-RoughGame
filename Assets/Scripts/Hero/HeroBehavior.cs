@@ -368,8 +368,6 @@ public class HeroBehavior : MonoBehaviour
         {
             mDashUsed = true;
             mIsDash = true;
-            if (mJumpCount >= mJumpSkill)
-                mJumpCount--;
             mRigidbody.velocity = new Vector2(75f * (float)mFaceDir, 0);
         }
 
