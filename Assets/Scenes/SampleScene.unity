@@ -600,8 +600,7 @@ GameObject:
   - component: {fileID: 336839949}
   - component: {fileID: 336839948}
   - component: {fileID: 336839947}
-  - component: {fileID: 336839951}
-  - component: {fileID: 336839950}
+  - component: {fileID: 336839946}
   m_Layer: 19
   m_Name: AttackIndicator
   m_TagString: normalAttack
@@ -617,13 +616,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336839944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.157, y: 0.713, z: 0}
+  m_LocalPosition: {x: 0.03, y: 0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1918388484}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &336839946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336839944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbca10382749ce43836f031ce1418e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &336839947
 Rigidbody2D:
   serializedVersion: 4
@@ -658,9 +669,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4123348, y: 0.0038523674}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.66182184
+  m_Radius: 0.8
 --- !u!212 &336839949
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -713,31 +724,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &336839950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336839944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b684a474d3446e04785fcd1087395cc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &336839951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336839944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae33f755f5f8dd42b22f559a60ec3b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hurt: 0
 --- !u!1 &370939954
 GameObject:
   m_ObjectHideFlags: 0
@@ -10426,11 +10412,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.66
+      value: -6.69
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: -9.68
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10591,7 +10577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
