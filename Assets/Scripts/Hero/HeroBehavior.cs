@@ -363,6 +363,9 @@ public class HeroBehavior : MonoBehaviour
         {
             mFaceDir = mFaceDir == mDirection.right ? mDirection.left : mDirection.right;
             gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
+            Vector2 meeldir = transform.GetChild(0).localPosition;
+            meeldir.x = -meeldir.x;
+            transform.GetChild(0).localPosition = meeldir;
         }
         //冲刺
         if (Input.GetKeyDown(KeyCode.Q) && isDashAvalible())
