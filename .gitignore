@@ -16,3 +16,4 @@ Assembly-CSharp.csproj
 /Assets/TextMesh Pro/Documentation
 !/ProjectSettings/TagManager.asset
 !/ProjectSettings/Physics2DSettings.asset
+Packages/packages-lock.json

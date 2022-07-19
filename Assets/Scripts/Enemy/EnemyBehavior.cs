@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    protected float timeCount = 0;
-    protected float AttackTime = 1.5f;
-    protected int mLifeLeft = 100;
+    protected float timeCount = 0, AttackTime = 1.5f,
+                    detectDistance = 8f, chasedistance = 12f, detectAngle = 45f,
+                    distance, angle, dot;
+    protected int mLifeLeft = 100, mFriendshipRequired = 20;
     protected bool patrol = true;
-    protected float detectDistance = 8f, chasedistance = 12f, detectAngle = 45f, distance, angle;
-    protected float dot;
     protected SpriteRenderer enemyRenderer;
     protected Rigidbody2D mRigidbody;
-    public GameObject targethero;
+    public GameObject targetHero;
     protected Vector3 targetpos, initialpos, initialright, pos, targetDirection, vel;
     protected RaycastHit2D info;
 
 
     void Start()
     {
+        targetHero = GameObject.Find("hero");
         enemyRenderer = GetComponent<SpriteRenderer>();
         initialpos = transform.localPosition;
         initialright = transform.right;
@@ -34,46 +34,39 @@ public class EnemyBehavior : MonoBehaviour
         if (mLifeLeft <= 0)
             Death();
         pos = transform.localPosition;
-        targetpos = targethero.transform.localPosition;
+        targetpos = targetHero.transform.localPosition;
+        targetDirection = targetpos - pos;
+        dot = Vector3.Dot(transform.right, targetDirection.normalized);
+
         if (patrol)
         {
-            vel = mRigidbody.velocity;
-            vel.x = 0f;
-            mRigidbody.velocity = transform.right * 4 + vel;
-            distance = Vector3.Distance(pos, targetpos);
-            if (distance <= detectDistance)
-            {
-                angle = Vector3.Angle(targetpos - pos, transform.right);
-                if (angle < detectAngle)
-                {
-                    targetDirection = (targetpos - pos).normalized;
-                    info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
-                    if (info.collider != null && info.collider.gameObject.layer == 8)
-                    {
-                        patrol = false;
-                        transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-                    }
-                }
-            }
+            if (targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
+                friendlyBehavior();
+            else
+                patrolBehavior();
         }
         else
         {
-            if (targethero.GetComponent<HeroBehavior>().IsRespawned())
+            if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
                 Respawn();
-
-            targetDirection = targetpos - pos;
-            dot = Vector3.Dot(transform.right, targetDirection.normalized);
             info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
             if (dot < -0.2f)
                 transform.right = -transform.right;
-            vel = mRigidbody.velocity;
-            vel.x = 0f;
-            mRigidbody.velocity = transform.right * 4 + vel;
+            if (dot < -0.2f || dot > 0.2f)
+            {
+                vel = mRigidbody.velocity;
+                vel.x = 0f;
+                mRigidbody.velocity = transform.right * 4 + vel;
+            }
+            else
+            {
+                mRigidbody.velocity = new Vector3(0, 0, 0);
+            }
 
             AttackTime += Time.deltaTime;
             if (AttackTime >= 2.0f)
             {
-                eject();
+                attackBehavior();
                 AttackTime = 0f;
             }
 
@@ -118,10 +111,39 @@ public class EnemyBehavior : MonoBehaviour
         AttackTime = 1.5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
     }
-    protected virtual void eject()
+    protected virtual void patrolBehavior()
+    {
+        transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+        vel = mRigidbody.velocity;
+        vel.x = 0f;
+        mRigidbody.velocity = transform.right * 4 + vel;
+        distance = Vector3.Distance(pos, targetpos);
+        if (distance <= detectDistance)
+        {
+            angle = Vector3.Angle(targetpos - pos, transform.right);
+            if (angle < detectAngle)
+            {
+                targetDirection = (targetpos - pos).normalized;
+                info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
+                if (info.collider != null && info.collider.gameObject.layer == 8)
+                {
+                    patrol = false;
+                    transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+                }
+            }
+        }
+    }
+    protected virtual void friendlyBehavior()
+    {
+        if (dot < -0.2f)
+            transform.right = -transform.right;
+        mRigidbody.velocity = new Vector3(0, 0, 0);
+        transform.GetChild(1).GetComponent<Renderer>().enabled = true;
+    }
+    protected virtual void attackBehavior()
     {
         GameObject remoteAttack = Instantiate(Resources.Load("Prefabs/BulletScreen") as GameObject);
-        targetpos = targethero.transform.localPosition;
+        targetpos = targetHero.transform.localPosition;
         remoteAttack.transform.localPosition = transform.localPosition;
         remoteAttack.transform.up = (targetpos - transform.localPosition).normalized;
     }
