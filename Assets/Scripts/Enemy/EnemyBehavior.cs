@@ -61,10 +61,10 @@ public class EnemyBehavior : MonoBehaviour
             if (targethero.GetComponent<HeroMovement>().IsRespawned())
                 Respawn();
 
-            targetDirection = (targetpos - pos).normalized;
-            dot = Vector3.Dot(transform.right, targetDirection);
+            targetDirection = targetpos - pos;
+            dot = Vector3.Dot(transform.right, targetDirection.normalized);
             info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
-            if (dot < -0.1f)
+            if (dot < -0.2f)
                 transform.right = -transform.right;
             vel = mRigidbody.velocity;
             vel.x = 0f;
