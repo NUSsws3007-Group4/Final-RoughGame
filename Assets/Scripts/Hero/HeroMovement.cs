@@ -121,6 +121,16 @@ public class HeroMovement : MonoBehaviour
             respawn();
         }
         mAnimeControl.SetBool("IsMove", !(mSpeed == 0f));
+        mAnimeControl.SetBool("IsMoveVertical", mRigidbody.velocity.y >= 0.05f);
+        mAnimeControl.SetBool("IsOnLadder", mPlace == mPlaceStatus.OnLadder);
+        if (mAnimeControl.GetBool("IsOnLadder") && mRigidbody.velocity.y < 0.05f)
+        {
+            mAnimeControl.speed = 0;
+        }
+        else
+        {
+            mAnimeControl.speed = 1;
+        }
         mAnimeControl.SetBool("IsJump", mPlace == mPlaceStatus.InAir && mRigidbody.velocity.y > 0);
         mAnimeControl.SetBool("IsFall", mPlace == mPlaceStatus.InAir && mRigidbody.velocity.y <= 0);
         //esc键退出
