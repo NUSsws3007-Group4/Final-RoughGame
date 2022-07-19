@@ -6,12 +6,12 @@ public class EnemyBehavior : MonoBehaviour
 {
     protected float timeCount = 0;
     protected float AttackTime = 1.5f;
-    protected float enemySpeed = 4f;
     protected int mLifeLeft = 100;
     protected bool patrol = true;
     protected float detectDistance = 8f, chasedistance = 12f, detectAngle = 45f, distance, angle;
     protected float dot;
     protected SpriteRenderer enemyRenderer;
+    protected Rigidbody2D mRigidbody;
     public GameObject targethero;
     protected Vector3 targetpos, initialpos, initialright, pos;
 
@@ -21,6 +21,8 @@ public class EnemyBehavior : MonoBehaviour
         enemyRenderer = GetComponent<SpriteRenderer>();
         initialpos = transform.localPosition;
         initialright = transform.right;
+        mRigidbody = gameObject.GetComponent<Rigidbody2D>();
+        mRigidbody.velocity = transform.right * 4 + new Vector3(0f, -3f, 0f);
     }
 
     // Update is called once per frame
@@ -28,7 +30,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (mLifeLeft <= 0)
             Death();
-        transform.localPosition += enemySpeed * transform.right * Time.smoothDeltaTime;
         pos = transform.localPosition;
         targetpos = targethero.transform.localPosition;
         distance = Vector3.Distance(pos, targetpos);
@@ -46,14 +47,12 @@ public class EnemyBehavior : MonoBehaviour
         {
             dot = Vector3.Dot(transform.right, (targetpos - pos).normalized);
             if (-0.1f <= dot && dot <= 0.1f)
-                enemySpeed = 0f;
+                mRigidbody.velocity = new Vector3(0f, -3f, 0f);
             else
             {
-                enemySpeed = 4f;
                 if (dot < -0.1f)
-                {
                     transform.right = -transform.right;
-                }
+                mRigidbody.velocity = transform.right * 4 + new Vector3(0f, -3f, 0f);
             }
             AttackTime += Time.deltaTime;
 
@@ -65,14 +64,18 @@ public class EnemyBehavior : MonoBehaviour
 
             if (targethero.GetComponent<HeroMovement>().IsRespawned() || distance > chasedistance)
             {
-                enemySpeed = 4f;
                 patrol = true;
                 mLifeLeft = 100;
                 transform.localPosition = initialpos;
                 transform.right = initialright;
+                mRigidbody.velocity = transform.right * 4 + new Vector3(0f, -3f, 0f);
                 AttackTime = 1.5f;
                 transform.GetChild(0).GetComponent<Renderer>().enabled = false;
             }
+        }
+        else
+        {
+            mRigidbody.velocity = transform.right * 4 + new Vector3(0f, -3f, 0f);
         }
     }
 
@@ -80,6 +83,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (patrol && collision.gameObject.layer == 17)
             transform.right = -transform.right;
+        mRigidbody.velocity = transform.right * 4 + new Vector3(0f, -3f, 0f);
     }
 
     void Death()

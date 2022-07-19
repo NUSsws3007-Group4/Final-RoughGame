@@ -564,7 +564,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 145772252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a356b5e75309a42902858246b8678f, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &222164910 stripped
@@ -638,6 +638,10 @@ PrefabInstance:
     - target: {fileID: 6878245784732791202, guid: 8e11f08edad2ad74d909a5e400306003, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878245784924638480, guid: 8e11f08edad2ad74d909a5e400306003, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6878245785721683031, guid: 8e11f08edad2ad74d909a5e400306003, type: 3}
       propertyPath: m_SortingOrder
@@ -10272,11 +10276,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.18
+      value: 5.73
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.4
+      value: -10.98
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_LocalPosition.z
@@ -36525,7 +36529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6878245784732791202, guid: 8e11f08edad2ad74d909a5e400306003, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.89
+      value: 14.36
       objectReference: {fileID: 0}
     - target: {fileID: 6878245784732791202, guid: 8e11f08edad2ad74d909a5e400306003, type: 3}
       propertyPath: m_LocalPosition.y
@@ -36562,6 +36566,10 @@ PrefabInstance:
     - target: {fileID: 6878245784732791202, guid: 8e11f08edad2ad74d909a5e400306003, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878245784924638480, guid: 8e11f08edad2ad74d909a5e400306003, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6878245785721683031, guid: 8e11f08edad2ad74d909a5e400306003, type: 3}
       propertyPath: m_SortingOrder
