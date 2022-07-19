@@ -405,7 +405,7 @@ public class HeroBehavior : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.J))//按下J开始攻击
             {
                 transform.GetChild(0).gameObject.SetActive(true);
-                mAnimeControl.SetBool("Attack", true);
+                mAnimeControl.SetTrigger("Attack");
             }
         }
     }
