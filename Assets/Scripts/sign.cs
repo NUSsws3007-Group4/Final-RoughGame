@@ -25,12 +25,12 @@ public class sign : MonoBehaviour
             dialogbox.SetActive(true);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("½øÈë·¶Î§");
         playerinsign = true;
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log("Àë¿ª·¶Î§");
         playerinsign = false;
