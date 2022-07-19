@@ -18,26 +18,42 @@ public class HeroMovement : MonoBehaviour
     /// 定义常量
     /// 在糅合时修改
     /// </summary>
-    //默认最大速度
+    /// <summary> 
+    ///默认最大速度
+    ///</summary>
     private const float mMaxSpeedDefault = 5f;
-    //默认加速度
+    /// <summary> 
+    ///默认加速度
+    ///</summary>
     private const float mAccelerationDefault = 30f;
-    //弹跳能力
+    /// <summary> 
+    ///弹跳能力
+    ///</summary>
     private const float mJumpForce = 13f;
-    //冲刺能力
+    /// <summary> 
+    ///冲刺能力
+    ///</summary>
     private const float mDashForce = 0.15f;
     private bool respaned = false;
-    //重生无敌
+    /// <summary> 
+    ///重生无敌
+    ///</summary>
     private float respawnTimer = 0f;
-    //重生无敌计时
+    /// <summary> 
+    ///重生无敌计时
+    ///</summary>
     public Animator mAnimeControl = null;
 
     private Vector3 mRespawnPoint;
-    //移动方向
+    /// <summary> 
+    ///移动方向
+    ///</summary>
     public enum mDirection { left = -1, stop, right };
     private mDirection mMoveDir;
     private mDirection mFaceDir = mDirection.right;
-    //位置状态
+    /// <summary> 
+    ///位置状态
+    ///</summary>
     private enum mPlaceStatus
     {
         Invalid = 0,
@@ -48,30 +64,54 @@ public class HeroMovement : MonoBehaviour
         OnLadder = 8,
     }
     private mPlaceStatus mPlace = mPlaceStatus.InAir;
-    //人物速度
+    /// <summary> 
+    ///人物速度
+    ///</summary>
     private float mSpeed = 0f;
-    //最大速度
+    /// <summary> 
+    ///最大速度
+    ///</summary>
     private float mMaxSpeed = 5f;
-    //加速度
+    /// <summary> 
+    ///加速度
+    ///</summary>
     private float mAcceleration;
-    //冲刺
+    /// <summary> 
+    ///冲刺
+    ///</summary>
     private bool mIsDash = false;
-    //冲刺已使用
+    /// <summary> 
+    ///冲刺已使用
+    ///</summary>
     private bool mDashUsed = false;
     private float mDashTimeCount = 0;
-    //加速过程
+    /// <summary> 
+    ///加速过程
+    ///</summary>
     private bool smoothmove;
-    //蹲下状态
+    /// <summary> 
+    ///蹲下状态
+    ///</summary>
     private bool mIsSneak = false;
-    //顶到头了
+    /// <summary> 
+    ///顶到头了
+    ///</summary>
     private bool mForceSneak = false;
-    //跑动
+    /// <summary> 
+    ///跑动
+    ///</summary>
     private bool mIsRun = false;
-    //能跳的段数
+    /// <summary> 
+    ///能跳的段数
+    ///</summary>
     private int mJumpSkill = 1;
-    //空中已经跳的段数
+    /// <summary> 
+    ///空中已经跳的段数
+    ///</summary>
     private int mJumpCount = 0;
-    //碰撞体
+    /// <summary> 
+    ///碰撞体
+    ///</summary>
     private Rigidbody2D mRigidbody;
     public bloodbarcontrol mHealth;
 
@@ -93,10 +133,12 @@ public class HeroMovement : MonoBehaviour
     {
         mAnimeControl.SetTrigger("Hurt");
     }
-
+    /// <summary> 
+    ///!!!Change it in real game!!!
+    ///</summary>
     void Start()
     {
-        //!!!Change it in real game!!!
+
         mRespawnPoint = new Vector3(0f, 0f);
         mAcceleration = mAccelerationDefault;
         mMaxSpeed = mMaxSpeedDefault;
@@ -240,30 +282,25 @@ public class HeroMovement : MonoBehaviour
         //爬梯子
         if (mPlace == mPlaceStatus.OnLadder)
         {
+            Vector2 vel = mRigidbody.velocity;
+            vel.y = 0f;
             if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
             {
-                Vector2 vel = mRigidbody.velocity;
                 vel.y = mMaxSpeed;
-                mRigidbody.velocity = vel;
             }
             if (!Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S))
             {
-                Vector2 vel = mRigidbody.velocity;
                 vel.y = -mMaxSpeed;
-                mRigidbody.velocity = vel;
             }
             if (Input.GetKeyUp(KeyCode.W))
             {
-                Vector2 vel = mRigidbody.velocity;
                 vel.y = 0;
-                mRigidbody.velocity = vel;
             }
             if (Input.GetKeyUp(KeyCode.S))
             {
-                Vector2 vel = mRigidbody.velocity;
                 vel.y = 0;
-                mRigidbody.velocity = vel;
             }
+            mRigidbody.velocity = vel;
         }
         //刷新面向
         if (mSpeed * (int)mFaceDir < 0)
@@ -280,12 +317,7 @@ public class HeroMovement : MonoBehaviour
                 mJumpCount--;
             mRigidbody.velocity = new Vector2(75f * (float)mFaceDir, 0);
         }
-        //刷新位置
-        /*
-        Vector3 CurrentLocalPosition = gameObject.transform.localPosition;
-        CurrentLocalPosition.x += mSpeed * Time.smoothDeltaTime;
-        gameObject.transform.localPosition = CurrentLocalPosition;
-        */
+
         if (mIsDash)
         {
             mDashTimeCount += Time.smoothDeltaTime;
@@ -339,7 +371,7 @@ public class HeroMovement : MonoBehaviour
     {
         Vector2 velocity = mRigidbody.velocity;
         if (velocity.y <= 0)
-            velocity.y = -mMaxSpeed / 2;
+            velocity.y = -2f * mMaxSpeed / 3;
         mDashUsed = false;
         if (_xNormal > 0)
         {
