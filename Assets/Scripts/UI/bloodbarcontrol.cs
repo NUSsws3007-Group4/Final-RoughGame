@@ -117,4 +117,14 @@ public class bloodbarcontrol : MonoBehaviour
         bloodbarentity.GetComponent<RectTransform>().sizeDelta=entitysize;
         bloodbareffect.GetComponent<RectTransform>().sizeDelta=effectsize;
     }
+
+    public bool IsDead()
+    {
+        return targetvolume <= 0f;
+    }
+
+    public void Respawn()
+    {
+        targetvolume = maxblood;
+    }
 }

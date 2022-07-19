@@ -26,6 +26,10 @@ public class HeroMovement : MonoBehaviour
     private const float mJumpForce = 13f;
     //冲刺能力
     private const float mDashForce = 0.15f;
+    private bool respaned = false;
+    //重生无敌
+    private float respawnTimer = 0f;
+    //重生无敌计时
     public Animator mAnimeControl = null;
 
     private Vector3 mRespawnPoint;
@@ -77,6 +81,7 @@ public class HeroMovement : MonoBehaviour
     }
     public void respawn()
     {
+        respaned = true;
         mHealth.setvolume(mHealth.maxblood);
         mRigidbody.velocity = new Vector2(0f, 0f);
         gameObject.transform.localPosition = mRespawnPoint;
@@ -101,14 +106,14 @@ public class HeroMovement : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.x<-30f || transform.position.x>34f || transform.position.y>20f || transform.position.y<-20f)
+        if (transform.position.x < -30f || transform.position.x > 34f || transform.position.y > 20f || transform.position.y < -20f)
         {
             respawn();
         }
         if (mIsSneak)
         {
             Vector2 pos = transform.position;
-            pos.y += gameObject.GetComponent<BoxCollider2D>().size.y*2;
+            pos.y += gameObject.GetComponent<BoxCollider2D>().size.y * 2;
             mForceSneak = Physics2D.OverlapCircle(pos, 0.5f, LayerMask.GetMask("Ground"));
         }
         if (mHealth.getvolume() <= 0)
@@ -287,8 +292,17 @@ public class HeroMovement : MonoBehaviour
             velocity.x = mSpeed;
             mRigidbody.velocity = velocity;
         }
+        if (respaned)
+        {
+            respawnTimer += Time.deltaTime;
+            if (respawnTimer >= 2f)
+            {
+                respawnTimer = 0;
+                respaned = false;
+            }
+        }
     }
-    
+
     private bool isDashAvalible()
     {
         Debug.LogWarning(mPlace);
@@ -337,7 +351,7 @@ public class HeroMovement : MonoBehaviour
     }
     private void leftWall()
     {
-        
+
     }
 
     private void leftLadder()
@@ -472,5 +486,9 @@ public class HeroMovement : MonoBehaviour
                 Debug.LogWarning("Unknow collision exit");
                 break;
         }
+    }
+    public bool IsRespawned()
+    {
+        return respawnTimer >= 0.001f;
     }
 }
