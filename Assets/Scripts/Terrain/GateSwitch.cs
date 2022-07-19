@@ -17,9 +17,9 @@ public class GateSwitch : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == 8 && Input.GetKey(KeyCode.E))
         {
-            foreach(Transform i in transform)
+            foreach (Transform i in transform)
             {
                 i.gameObject.SetActive(false);
             }
@@ -28,6 +28,12 @@ public class GateSwitch : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-
+        if (collision.gameObject.layer == 8 && Input.GetKey(KeyCode.E))
+        {
+            foreach (Transform i in transform)
+            {
+                i.gameObject.SetActive(false);
+            }
+        }
     }
 }
