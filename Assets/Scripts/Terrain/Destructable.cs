@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class destructablelayer : MonoBehaviour
+public class Destructable : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,8 @@ public class destructablelayer : MonoBehaviour
         if(collision.gameObject.layer==8)
         {
             Debug.Log("Trap Destoryed");
-            Destroy(transform.gameObject);
+            gameObject.SetActive(false);
+            //Destroy(transform.gameObject);
         }
     }
 }

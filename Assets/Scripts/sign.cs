@@ -20,19 +20,19 @@ public class sign : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && playerinsign)
         {
-            Debug.Log("°´ÏÂe¼ü");
+            Debug.Log("æŒ‰ä¸‹eé”®");
             dialogboxtext.text = signtext;
             dialogbox.SetActive(true);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("½øÈë·¶Î§");
+        Debug.Log("è¿›å…¥èŒƒå›´");
         playerinsign = true;
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("Àë¿ª·¶Î§");
+        Debug.Log("ç¦»å¼€èŒƒå›´");
         playerinsign = false;
         dialogbox.SetActive(false);
     }
