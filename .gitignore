@@ -4,7 +4,7 @@
 /Library
 /Logs
 /obj
-/ProjectSettings
+/ProjectSettings/*
 /Temp
 /UserSettings
 .vsconfig
