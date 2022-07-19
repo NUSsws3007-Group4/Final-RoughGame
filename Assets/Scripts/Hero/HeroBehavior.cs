@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HeroBehavior : MonoBehaviour
 {
     public Text text;
+    private float attackCD = 1.0f;
     public void settestui()
     {
         string ui = "Position status: " + mPlace + ", Facing: " + mFaceDir
@@ -398,10 +399,12 @@ public class HeroBehavior : MonoBehaviour
         }
 
         //攻击
+        attackCD += Time.deltaTime;
         if(mPlace == mPlaceStatus.OnGround || mPlace == mPlaceStatus.InAir)
         {
-            if(Input.GetKeyDown(KeyCode.J))//按下J开始攻击
+            if(Input.GetKeyDown(KeyCode.J) && attackCD >= 0.8f)//按下J开始攻击
             {
+                attackCD = 0f;
                 transform.GetChild(0).gameObject.SetActive(true);
                 mAnimeControl.SetTrigger("Attack");
             }
