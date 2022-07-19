@@ -242,7 +242,7 @@ public class HeroBehavior : MonoBehaviour
         }
 
         //蹲下操作
-        if (!mIsSneak && (Input.GetKeyDown(KeyCode.LeftControl) || mForceSneak))
+        if (!mIsSneak && (Input.GetKeyDown(KeyCode.LeftControl)||Input.GetKeyDown(KeyCode.S) || mForceSneak))
         {
             BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>();
             Vector2 colliderSize = collider.size;
@@ -256,7 +256,7 @@ public class HeroBehavior : MonoBehaviour
             mMaxSpeed = mMaxSpeedDefault / 2f;
             mAcceleration = mAccelerationDefault / 2f;
         }
-        if (mIsSneak && (Input.GetKeyUp(KeyCode.LeftControl) || (!mForceSneak && !Input.GetKey(KeyCode.LeftControl))))
+        if (mIsSneak && (Input.GetKeyUp(KeyCode.LeftControl)||Input.GetKeyDown(KeyCode.S) || (!mForceSneak && !Input.GetKey(KeyCode.LeftControl))))
         {
 
             BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>();
