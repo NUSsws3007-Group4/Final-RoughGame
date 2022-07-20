@@ -222,15 +222,6 @@ public class HeroBehavior : MonoBehaviour
             respawn();
         }
         
-        if (mAnimeControl.GetBool("IsOnLadder") && mRigidbody.velocity.y < 0.05f)
-        {
-            mAnimeControl.speed = 0;
-        }
-        else
-        {
-            mAnimeControl.speed = 1;
-        }
-        
         //esc键退出
         if (Input.GetKey(KeyCode.Escape))
         {
