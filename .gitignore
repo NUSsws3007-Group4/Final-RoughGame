@@ -17,3 +17,4 @@ Assembly-CSharp.csproj
 !/ProjectSettings/TagManager.asset
 !/ProjectSettings/Physics2DSettings.asset
 Packages/packages-lock.json
+/Web
