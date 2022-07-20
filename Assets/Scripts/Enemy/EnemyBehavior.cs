@@ -51,6 +51,8 @@ public class EnemyBehavior : MonoBehaviour
         {
             if (mFriendshipStatus == 0 && targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
                 mFriendshipStatus = 2;
+            if (mFriendshipStatus == 2 && targetHero.GetComponent<HeroBehavior>().getFriendship() < mFriendshipRequired)
+                mFriendshipStatus = 0;
 
             pos = transform.localPosition;
             targetpos = targetHero.transform.localPosition;
@@ -93,7 +95,7 @@ public class EnemyBehavior : MonoBehaviour
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
-                    for (int i = 0; i < multiplication; ++i)
+                    for (int i = 0; i < multiplication + 1; ++i)
                         attackBehavior();
                     break;
             }
@@ -190,6 +192,7 @@ public class EnemyBehavior : MonoBehaviour
         targetpos = targetHero.transform.localPosition;
         remoteAttack.transform.localPosition = transform.localPosition;
         remoteAttack.transform.up = (targetpos - transform.localPosition).normalized;
+        Debug.Log("EnemyAttacking");
     }
 
 }
