@@ -7,7 +7,7 @@ public class EnemyBehavior : MonoBehaviour
     protected float waitTimer = 0, attackTimer = 1.5f, attackedTimer = 0.5f,
                     detectDistance = 8f, chasedistance = 12f, detectAngle = 45f,
                     distance, angle, dot;
-    protected int mLifeLeft = 4, mFriendshipRequired = 20;
+    protected int mLifeLeft = 4, mFriendshipRequired = 20, mFriendshipStatus = 0, multiplication = 2;
     protected bool patrol = true;
     protected SpriteRenderer enemyRenderer;
     protected Rigidbody2D mRigidbody;
@@ -49,56 +49,22 @@ public class EnemyBehavior : MonoBehaviour
         }
         else
         {
+            if (mFriendshipStatus == 0 && targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
+                mFriendshipStatus = 2;
+
             pos = transform.localPosition;
             targetpos = targetHero.transform.localPosition;
             targetDirection = targetpos - pos;
             dot = Vector3.Dot(transform.right, targetDirection.normalized);
 
             if (patrol)
-            {
-                if (targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
+                if (mFriendshipStatus >= 1)
                     friendlyBehavior();
                 else
                     patrolBehavior();
-            }
             else
-            {
-                if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
-                    Respawn();
-                info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
-                if (dot < -0.2f)
-                    transform.right = -transform.right;
-                if (dot < -0.2f || dot > 0.2f)
-                {
-                    vel = mRigidbody.velocity;
-                    vel.x = Mathf.Min(Mathf.Abs(Vector3.Dot(transform.right, targetDirection)) * 2, transform.right.x * 4);
-                    mRigidbody.velocity = vel;
-                }
-                else
-                {
-                    mRigidbody.velocity = new Vector3(0, 0, 0);
-                }
+                chaseBehavior();
 
-                attackTimer += Time.deltaTime;
-                if (attackTimer >= 2.0f)
-                {
-                    attackBehavior();
-                    attackTimer = 0f;
-                }
-
-                if (info.collider == null || (info.collider != null && info.collider.gameObject.layer != 8))
-                {
-                    waitTimer += Time.deltaTime;
-                    if (waitTimer >= 2f)
-                    {
-                        waitTimer = 0;
-                        Respawn();
-                    }
-                }
-                else
-                    waitTimer = 0;
-
-            }
         }
     }
 
@@ -108,7 +74,7 @@ public class EnemyBehavior : MonoBehaviour
             transform.right = -transform.right;
         vel = mRigidbody.velocity;
         vel.x = 0f;
-        mRigidbody.velocity = transform.right * 2 + vel;
+        mRigidbody.velocity = transform.right * 2 + vel; // Turn back when patrolling
 
         if (collision.gameObject.layer == 19)
         {
@@ -116,6 +82,21 @@ public class EnemyBehavior : MonoBehaviour
             mRigidbody.velocity = new Vector3(0, 0, 0);
             mRigidbody.AddForce(-100 * transform.right);
             mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+            switch (mFriendshipStatus)
+            {
+                case 2:
+                    for (int i = 0; i < multiplication - 1; ++i)
+                        mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+                    mFriendshipStatus = 1;
+                    targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
+                    break;
+                case 1:
+                    mFriendshipStatus = -1;
+                    targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
+                    for (int i = 0; i < multiplication; ++i)
+                        attackBehavior();
+                    break;
+            }
             Debug.Log("Life:" + mLifeLeft);
         }
     }
@@ -165,6 +146,43 @@ public class EnemyBehavior : MonoBehaviour
         attackedTimer = 0.5f;
         mRigidbody.velocity = new Vector3(0, 0, 0);
         transform.GetChild(1).GetComponent<Renderer>().enabled = true;
+    }
+    protected virtual void chaseBehavior()
+    {
+        if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
+            Respawn();
+        info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
+        if (dot < -0.2f)
+            transform.right = -transform.right;
+        if (dot < -0.2f || dot > 0.2f)
+        {
+            vel = mRigidbody.velocity;
+            vel.x = Mathf.Min(Mathf.Abs(Vector3.Dot(transform.right, targetDirection)) * 2, transform.right.x * 4);
+            mRigidbody.velocity = vel;
+        }
+        else
+        {
+            mRigidbody.velocity = new Vector3(0, 0, 0);
+        }
+
+        attackTimer += Time.deltaTime;
+        if (attackTimer >= 2.0f)
+        {
+            attackBehavior();
+            attackTimer = 0f;
+        }
+
+        if (info.collider == null || (info.collider != null && info.collider.gameObject.layer != 8))
+        {
+            waitTimer += Time.deltaTime;
+            if (waitTimer >= 2f)
+            {
+                waitTimer = 0;
+                Respawn();
+            }
+        }
+        else
+            waitTimer = 0;
     }
     protected virtual void attackBehavior()
     {
