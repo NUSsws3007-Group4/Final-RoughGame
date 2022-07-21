@@ -23,7 +23,6 @@ public class Protal : MonoBehaviour
         {
 
             DontDestroyOnLoad(GameObject.Find("KeepInTransfer"));
-
             SceneManager.LoadScene(nextLevel);
         }
     }
