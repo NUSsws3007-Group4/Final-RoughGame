@@ -20,10 +20,11 @@ public class RockBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (l1 && l2 && l3 && l4){
+        if (l1 && l2 && l3 && l4)
+        {
             solved = true;
             s.gameObject.SetActive(false);
-            }
+        }
     }
 
 }
