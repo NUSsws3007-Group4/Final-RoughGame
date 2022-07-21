@@ -18,3 +18,4 @@ Assembly-CSharp.csproj
 !/ProjectSettings/Physics2DSettings.asset
 Packages/packages-lock.json
 /Web
+Packages/packages-lock.json
