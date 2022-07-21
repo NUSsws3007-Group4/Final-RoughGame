@@ -7,7 +7,7 @@ public class EnemyBehavior : MonoBehaviour
     protected float waitTimer = 0, attackTimer = 1.5f, attackedTimer = 0.5f,
                     detectDistance = 8f, chaseDistance = 12f, detectAngle = 45f,
                     distance, angle, dot;
-    protected int mLifeLeft = 4, mFriendshipRequired = 20, mFriendshipStatus = 0, multiplication = 2, friendshipAddValue = 5;
+    protected int mLifeLeft = 4, mFriendshipRequired = 20, mFriendshipStatus = 0, multiplication = 2, friendshipAddValue = 10;
     protected bool patrol = true, frienshipAdded = false;
     protected SpriteRenderer enemyRenderer;
     protected Rigidbody2D mRigidbody;
@@ -136,20 +136,19 @@ public class EnemyBehavior : MonoBehaviour
     }
     protected virtual void friendlyBehavior()
     {
+        distance = Vector3.Distance(pos, targetpos);
         if (dot < -0.2f)
             transform.right = -transform.right;
-        if (-0.2f < dot && dot < 0.2f)
+
+        if (!frienshipAdded && distance < detectDistance)
         {
-            if (!frienshipAdded)
-            {
-                Debug.Log("Friendship added:" + friendshipAddValue);
-                targetHero.gameObject.GetComponent<HeroBehavior>().upFriendship(friendshipAddValue);
-                frienshipAdded = true;
-            }
+            Debug.Log("Friendship added:" + friendshipAddValue + gameObject.name);
+            targetHero.gameObject.GetComponent<HeroBehavior>().upFriendship(friendshipAddValue);
+            frienshipAdded = true;
+            transform.GetChild(1).GetComponent<Renderer>().enabled = true;
         }
         attackedTimer = 0.5f;
         mRigidbody.velocity = new Vector3(0, 0, 0);
-        transform.GetChild(1).GetComponent<Renderer>().enabled = true;
     }
     protected virtual void chaseBehavior()
     {

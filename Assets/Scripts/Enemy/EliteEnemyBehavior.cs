@@ -6,17 +6,23 @@ public class EliteEnemyBehavior : EnemyBehavior
     private bool edgeTouched = false;
     private float cx1, cx2, cy1, cy2;
     private Vector3 spawnPoint;
+    private GameObject guardPortal;
     // Start is called before the first frame update
-    override protected void Start()
+    protected override void Start()
     {
         anim = GetComponent<Animator>();
         enemyRenderer = GetComponent<SpriteRenderer>();
         mRigidbody = gameObject.GetComponent<Rigidbody2D>();
         targetHero = GameObject.Find("hero");
+        guardPortal = GameObject.Find("portal");
         detectDistance = 5f;
         chaseDistance = 20f;
+        mFriendshipRequired = 70;
+        friendshipAddValue = 0;
+        mLifeLeft=10;
         initialpos = transform.localPosition;
         initialright = transform.right;
+        guardPortal.SetActive(false);
     }
 
     protected override void attackBehavior()
@@ -29,26 +35,26 @@ public class EliteEnemyBehavior : EnemyBehavior
         cy2 = Mathf.Min(b1.max.y, b2.max.y);
         if (!((cx1 > cx2) || (cy1 > cy2)))
         {
-            Invoke("CloseCombact",0.2f);
+            Invoke("CloseCombact", 0.2f);
             anim.SetTrigger("Attacking");
             attackTimer = 0f;
 
         }
         else if (remoteAttackTimer >= 6.0f)
         {
-            Invoke("CloseCombact",0.2f);
+            Invoke("CloseCombact", 0.2f);
             anim.SetTrigger("Attacking");
             remoteAttackTimer = 0f;
             attackTimer = 0f;
             spawnPoint = transform.localPosition;
             spawnPoint.y += 0.6f;
-            spawnPoint.x += 0.4f*transform.right.x;
+            spawnPoint.x += 0.4f * transform.right.x;
             Invoke("GenerateRemote", 0.2f);
 
 
         }
     }
-    override protected void patrolBehavior()
+    protected override void patrolBehavior()
     {
         transform.GetChild(1).GetComponent<Renderer>().enabled = false;
         Debug.Log("patrolliing...");
@@ -67,11 +73,11 @@ public class EliteEnemyBehavior : EnemyBehavior
         }
     }
 
-    override protected void chaseBehavior()
+    protected override void chaseBehavior()
     {
 
         if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
-            Invoke("Respawn",0.2f);
+            Invoke("Respawn", 0.2f);
         else
         {
             info = Physics2D.Raycast(transform.localPosition, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
@@ -111,7 +117,19 @@ public class EliteEnemyBehavior : EnemyBehavior
                 waitTimer = 0;
         }
     }
-    override protected void OnTriggerEnter2D(Collider2D collision)
+    protected override void friendlyBehavior()
+    {
+        base.friendlyBehavior();
+        if (distance < detectDistance)
+            guardPortal.SetActive(true);
+
+    }
+    protected override void Death()
+    {
+        base.Death();
+        guardPortal.SetActive(true);
+    }
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 17)
             edgeTouched = true;
@@ -143,12 +161,12 @@ public class EliteEnemyBehavior : EnemyBehavior
         }
     }
 
-    override protected void Respawn()
+    protected override void Respawn()
     {
         Debug.Log("Elite Respawn" + initialpos);
         edgeTouched = false;
         patrol = true;
-        mLifeLeft = 4;
+        mLifeLeft = 10;
         mRigidbody.velocity = new Vector3(0, 0, 0);
         transform.localPosition = initialpos;
         transform.right = initialright;
