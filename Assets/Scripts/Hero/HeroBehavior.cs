@@ -10,8 +10,8 @@ public class HeroBehavior : MonoBehaviour
     public void settestui()
     {
         string ui = "Position status: " + mPlace + ", Facing: " + mFaceDir
-            + ", Health: " + mHealth + "\nSpawn at: " + mRespawnPoint + "\nDsah used:" +
-            mDashUsed + "\nSpeed: " + mRigidbody.velocity + "\nRunning: " + mIsRun +
+            + ", Health: " + mHealth + "\nSpawn at: " + mRespawnPoint + 
+            "\nSpeed: " + mRigidbody.velocity + "\nRunning: " + mIsRun +
             "\nSneak: " + mIsSneak + ", Forced Sneak: " + mForceSneak;
         text.text = ui;
     }
@@ -31,10 +31,10 @@ public class HeroBehavior : MonoBehaviour
     ///弹跳能力
     ///</summary>
     private const float mJumpForce = 13f;
-    /// <summary> 
-    ///冲刺能力
-    ///</summary>
-    private const float mDashForce = 0.15f;
+    /// <summary>
+    /// 冲刺
+    /// </summary>
+    DashManager mDashManager = new DashManager();
     private bool respaned = false;
     /// <summary> 
     ///重生无敌
@@ -55,7 +55,7 @@ public class HeroBehavior : MonoBehaviour
     /// <summary> 
     ///位置状态
     ///</summary>
-    private enum mPlaceStatus
+    public enum mPlaceStatus
     {
         Invalid = 0,
         OnGround = 1,
@@ -78,15 +78,6 @@ public class HeroBehavior : MonoBehaviour
     ///</summary>
     private float mAcceleration;
     /// <summary> 
-    ///冲刺
-    ///</summary>
-    private bool mIsDash = false;
-    /// <summary> 
-    ///冲刺已使用
-    ///</summary>
-    private bool mDashUsed = false;
-    private float mDashTimeCount = 0;
-    /// <summary> 
     ///加速过程
     ///</summary>
     private bool smoothmove;
@@ -105,7 +96,7 @@ public class HeroBehavior : MonoBehaviour
     /// <summary> 
     ///能跳的段数
     ///</summary>
-    private int mJumpSkill = 1;
+    private int mJumpSkill = 0;
     /// <summary> 
     ///空中已经跳的段数
     ///</summary>
@@ -124,6 +115,14 @@ public class HeroBehavior : MonoBehaviour
     /****************
      * 接口区
      ****************/
+    public void setJumpSkill(int _skill)
+    {
+        mJumpSkill = _skill;
+    }
+    public void setDashSkill(bool _enabled)
+    {
+        mDashManager.setDashSkill(_enabled);
+    }
     /// <summary>
     /// 触发攻击动画
     /// </summary>
@@ -221,7 +220,7 @@ public class HeroBehavior : MonoBehaviour
         {
             respawn();
         }
-        
+
         //esc键退出
         if (Input.GetKey(KeyCode.Escape))
         {
@@ -232,7 +231,7 @@ public class HeroBehavior : MonoBehaviour
 #endif
         }
         //蹲下操作
-        if (!mIsSneak && ((Input.GetKeyDown(KeyCode.LeftControl)||Input.GetKeyDown(KeyCode.S)) || mForceSneak))
+        if (!mIsSneak && ((Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.S)) || mForceSneak))
         {
             BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>();
             Vector2 colliderSize = collider.size;
@@ -246,7 +245,7 @@ public class HeroBehavior : MonoBehaviour
             mMaxSpeed = mMaxSpeedDefault / 2f;
             mAcceleration = mAccelerationDefault / 2f;
         }
-        if (mIsSneak && ((Input.GetKeyUp(KeyCode.LeftControl)||Input.GetKeyUp(KeyCode.S)) || (!mForceSneak && !Input.GetKey(KeyCode.LeftControl)&&!Input.GetKey(KeyCode.S))))
+        if (mIsSneak && ((Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.S)) || (!mForceSneak && !Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.S))))
         {
 
             BoxCollider2D collider = gameObject.GetComponent<BoxCollider2D>();
@@ -358,29 +357,14 @@ public class HeroBehavior : MonoBehaviour
             transform.GetChild(0).localPosition = meeldir;
         }
         //冲刺
-        if (Input.GetKeyDown(KeyCode.Q) && isDashAvalible())
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            mDashUsed = true;
-            mIsDash = true;
-            mRigidbody.velocity = new Vector2(75f * (float)mFaceDir, 0);
+            mDashManager.startDash(mPlace);
         }
-
-        if (mIsDash)
-        {
-            mDashTimeCount += Time.smoothDeltaTime;
-            if (mDashTimeCount >= mDashForce)
-            {
-                mIsDash = false;
-                mDashTimeCount = 0;
-            }
-            mRigidbody.velocity = new Vector2(15f * (float)mFaceDir, 0);
-        }
-        else
-        {
-            Vector2 velocity = mRigidbody.velocity;
-            velocity.x = mSpeed;
-            mRigidbody.velocity = velocity;
-        }
+        Vector2 velocity = mRigidbody.velocity;
+        velocity.x = mSpeed;
+        mDashManager.updateDash(velocity, mPlace, mFaceDir);
+        mRigidbody.velocity = velocity;
         if (respaned)
         {
             respawnTimer += Time.deltaTime;
@@ -393,9 +377,9 @@ public class HeroBehavior : MonoBehaviour
 
         //攻击
         attackCD += Time.deltaTime;
-        if(mPlace == mPlaceStatus.OnGround || mPlace == mPlaceStatus.InAir)
+        if (mPlace == mPlaceStatus.OnGround || mPlace == mPlaceStatus.InAir)
         {
-            if(Input.GetKeyDown(KeyCode.J) && attackCD >= 0.8f)//按下J开始攻击
+            if (Input.GetKeyDown(KeyCode.J) && attackCD >= 0.8f)//按下J开始攻击
             {
                 attackCD = 0f;
                 transform.GetChild(0).gameObject.SetActive(true);
@@ -404,17 +388,9 @@ public class HeroBehavior : MonoBehaviour
         }
     }
 
-    private bool isDashAvalible()
-    {
-        Debug.LogWarning(mPlace);
-        if (((int)mPlace & 14) == 0)
-            return false;
-        return !mDashUsed;
-    }
-
     private void touchGround()
     {
-        mDashUsed = false;
+        mDashManager.resetDash();
         mJumpCount = 0;
         mPlace = mPlaceStatus.OnGround;
     }
@@ -423,15 +399,15 @@ public class HeroBehavior : MonoBehaviour
     {
         mRigidbody.gravityScale = 0;
         mPlace = mPlaceStatus.OnLadder;
-        mDashUsed = false;
+        mDashManager.resetDash();
     }
 
-    private void touchWall(float _xNormal)
+    private mPlaceStatus touchWall(float _xNormal)
     {
         Vector2 velocity = mRigidbody.velocity;
         if (velocity.y <= 0)
             velocity.y = -2f * mMaxSpeed / 3;
-        mDashUsed = false;
+        mDashManager.resetDash();
         if (_xNormal > 0)
         {
             mPlace = mPlaceStatus.OnWallRight;
@@ -444,11 +420,10 @@ public class HeroBehavior : MonoBehaviour
         }
         else
         {
-            mPlace = mPlaceStatus.OnGround;
-            return;
+            return mPlace = mPlaceStatus.OnGround;
         }
         mRigidbody.velocity = velocity;
-
+        return mPlace;
     }
     private void leftWall()
     {
@@ -554,6 +529,7 @@ public class HeroBehavior : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collisionobj)
     {
+        mPlaceStatus tempStatus = mPlaceStatus.Invalid;
         foreach (ContactPoint2D colliPoint in collisionobj.contacts)
         {
             Vector2 colliNormal = colliPoint.normal;
@@ -561,12 +537,12 @@ public class HeroBehavior : MonoBehaviour
             {
                 case "Destructble":
                 case "Ground":
-                    mPlace = mPlaceStatus.InAir;
                     if (colliNormal.y > 0 && colliNormal.y > Mathf.Abs(colliNormal.x))
                     {
 
                         if (mPlace != mPlaceStatus.OnGround)
                         {
+                            tempStatus = mPlaceStatus.OnGround;
                             touchGround();
                         }
                     }
@@ -580,7 +556,7 @@ public class HeroBehavior : MonoBehaviour
                     }
                     else if (!(mPlace == mPlaceStatus.OnGround))
                     {
-                        touchWall(colliNormal.x);
+                        tempStatus = touchWall(colliNormal.x);
                     }
                     break;
                 case "Ladder":
@@ -597,6 +573,10 @@ public class HeroBehavior : MonoBehaviour
                     Debug.LogWarning("Unprocessed collision stay:" + LayerMask.LayerToName(collisionobj.gameObject.layer));
                     break;
             }
+        }
+        if(tempStatus != mPlaceStatus.Invalid)
+        {
+            mPlace = tempStatus;
         }
     }
     private void OnCollisionExit2D(Collision2D collisionobj)
@@ -623,5 +603,89 @@ public class HeroBehavior : MonoBehaviour
     public bool IsRespawned()
     {
         return respawnTimer >= 0.001f;
+    }
+}
+
+class DashManager
+{
+    /// <summary> 
+    ///冲刺能力
+    ///</summary>
+    private const float mDashForce = 0.15f;
+    private const float mDashSpeed = 17f;
+    /// <summary>
+    /// 获取冲刺能力
+    /// </summary>
+    private bool mDashEnabled = false;
+    /// <summary> 
+    ///冲刺
+    ///</summary>
+    private bool mIsDash = false;
+    /// <summary> 
+    ///冲刺已使用
+    ///</summary>
+    private bool mDashUsed = false;
+    /// <summary>
+    /// 冲刺计时器
+    /// </summary>
+    private float mDashTimeCount = 0;
+    public void setDashSkill (bool _enabled)
+    {
+        mDashEnabled = _enabled;
+    }
+    public bool isDashAvalible(HeroBehavior.mPlaceStatus _place)
+    {
+        if (!mDashEnabled)
+            return false;
+        if (((int)_place & 14) == 0)
+            return false;
+        return !mDashUsed;
+    }
+    public bool isDashing()
+    {
+        return mIsDash;
+    }
+    public void resetDash()
+    {
+        mDashUsed = false;
+    }
+    public bool startDash(HeroBehavior.mPlaceStatus _place)
+    {
+        if(!isDashAvalible(_place))
+        {
+            return false;
+        }
+        else
+        {
+            mIsDash = true;
+            mDashUsed = true;
+            return true;
+        }
+    }
+    //更新位置覆写
+    public Vector2 updateDash(Vector2 _speed, HeroBehavior.mPlaceStatus _place, HeroBehavior.mDirection _faceing)
+    {
+        if (mIsDash)
+        {
+            if (_place == HeroBehavior.mPlaceStatus.InAir)
+            {
+                mDashTimeCount += Time.smoothDeltaTime;
+                if (mDashTimeCount >= mDashForce)
+                {
+                    mIsDash = false;
+                    mDashTimeCount = 0;
+                }
+                return new Vector2(mDashSpeed * (float)_faceing, 0);
+            }
+            else
+            {
+                mIsDash = false;
+                return _speed;
+            }
+        }
+        else
+        {
+            return _speed;
+        }
     }
 }
