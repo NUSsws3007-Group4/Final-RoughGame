@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5184608538983036942}
   - component: {fileID: 5184608538983036929}
   - component: {fileID: 5184608538983036928}
+  - component: {fileID: 3158770765440285024}
+  - component: {fileID: 606816595397627322}
   m_Layer: 10
   m_Name: RemoteEnemyInAir
   m_TagString: Untagged
@@ -112,7 +114,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.2, y: 3.2}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!50 &5184608538983036929
 Rigidbody2D:
@@ -147,7 +149,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f2af23758a45f4793dec28114e1596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targethero: {fileID: 0}
+  targetHero: {fileID: 0}
+--- !u!95 &3158770765440285024
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5184608538983036930}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 721f6bd18fbc33e4fa744cfb2ade955f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &606816595397627322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5184608538983036930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 280be04c06ff7a247ad8e022d01aa640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetHero: {fileID: 0}
 --- !u!1 &5184608539540093753
 GameObject:
   m_ObjectHideFlags: 0
