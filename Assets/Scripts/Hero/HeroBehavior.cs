@@ -593,7 +593,7 @@ public class HeroBehavior : MonoBehaviour
                     }
                     break;
                 default:
-                    Debug.LogWarning("Unknow collision stay");
+                    Debug.LogWarning("Unprocessed collision stay:" + LayerMask.LayerToName(collisionobj.gameObject.layer));
                     break;
             }
         }
