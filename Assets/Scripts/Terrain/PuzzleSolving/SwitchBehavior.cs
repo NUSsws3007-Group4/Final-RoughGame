@@ -20,6 +20,7 @@ public class SwitchBehavior : MonoBehaviour
         {
             con.switchLst[switchCode1] = !con.switchLst[switchCode1];
             con.switchLst[switchCode2] = !con.switchLst[switchCode2];
+            con.switchLst[switchCode3] = !con.switchLst[switchCode3];
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
