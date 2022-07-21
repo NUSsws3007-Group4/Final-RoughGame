@@ -91,6 +91,8 @@ public class EnemyBehavior : MonoBehaviour
                         mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
                     mFriendshipStatus = 1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
+                    if (frienshipAdded)
+                        targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(friendshipAddValue);
                     break;
                 case 1:
                     mFriendshipStatus = -1;
@@ -144,7 +146,15 @@ public class EnemyBehavior : MonoBehaviour
     protected virtual void friendlyBehavior()
     {
         if (dot < -0.2f)
+        {
             transform.right = -transform.right;
+            if (!frienshipAdded)
+            {
+                Debug.Log("Friendship added:" + friendshipAddValue);
+                targetHero.gameObject.GetComponent<HeroBehavior>().upFriendship(friendshipAddValue);
+                frienshipAdded = true;
+            }
+        }
         attackedTimer = 0.5f;
         mRigidbody.velocity = new Vector3(0, 0, 0);
         transform.GetChild(1).GetComponent<Renderer>().enabled = true;

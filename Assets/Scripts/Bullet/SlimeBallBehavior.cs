@@ -50,7 +50,7 @@ public class SlimeBallBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != 10 && collision.gameObject.layer != 17)
+        if (collision.gameObject.layer != 10 && collision.gameObject.layer != 17 && collision.gameObject.layer != 13)
         {
             anim.SetBool("ToDestroy", true);
             attackSpeed = 0f;
