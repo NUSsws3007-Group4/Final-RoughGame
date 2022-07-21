@@ -7,6 +7,9 @@ public class herointeract : MonoBehaviour
     HeroBehavior mHeroBehavior = null;
     // Start is called before the first frame update
     public bloodbarcontrol mUIManager = null;
+    public bagmanager mybagmanager;
+    public storemanager mystoremanager;
+
     private float mHurtTimer = 0;
     void Start()
     {
@@ -16,7 +19,30 @@ public class herointeract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            if(mybagmanager.bagisopen)
+            {
+                mybagmanager.closemybag();
+            }
+            else
+            {
+                mystoremanager.closemystore();
+                mybagmanager.openmybag();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            if(mystoremanager.storeisopen)
+            {
+                mystoremanager.closemystore();
+            }
+            else
+            {
+                mybagmanager.closemybag();
+                mystoremanager.openmystore();
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collider)

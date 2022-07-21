@@ -106,7 +106,7 @@ public class bloodbarcontrol : MonoBehaviour
         {
             if(bloodvolume<effectvolume) effectdeltavolume=-effectalterspeed; else effectdeltavolume=effectalterspeed;
             effectvolume+=effectdeltavolume*Time.smoothDeltaTime;
-            if(bloodvolume!=targetvolume && ((effectdeltavolume>0 && effectvolume>bloodvolume) || (effectdeltavolume<0 && effectvolume<bloodvolume)))
+            if(bloodvolume==targetvolume && ((effectdeltavolume>0 && effectvolume>bloodvolume) || (effectdeltavolume<0 && effectvolume<bloodvolume)))
             {
                 effectvolume=bloodvolume;
             }
@@ -116,15 +116,5 @@ public class bloodbarcontrol : MonoBehaviour
         effectsize.x=effectvolume*rate;
         bloodbarentity.GetComponent<RectTransform>().sizeDelta=entitysize;
         bloodbareffect.GetComponent<RectTransform>().sizeDelta=effectsize;
-    }
-
-    public bool IsDead()
-    {
-        return targetvolume <= 0f;
-    }
-
-    public void Respawn()
-    {
-        targetvolume = maxblood;
     }
 }

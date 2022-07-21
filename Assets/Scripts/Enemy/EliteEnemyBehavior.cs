@@ -18,6 +18,7 @@ public class EliteEnemyBehavior : EnemyBehavior
 
     override protected void patrolBehavior()
     {
+        Debug.Log("patrolliing...");
         transform.GetChild(1).GetComponent<Renderer>().enabled = false;
         distance = Vector3.Distance(pos, targetpos);
         if (distance <= detectDistance)
@@ -117,6 +118,7 @@ public class EliteEnemyBehavior : EnemyBehavior
     override protected void Respawn()
     {
         Debug.Log("Elite Respawn" + initialpos);
+        edgeTouched = false;
         patrol = true;
         mLifeLeft = 4;
         mRigidbody.velocity = new Vector3(0, 0, 0);

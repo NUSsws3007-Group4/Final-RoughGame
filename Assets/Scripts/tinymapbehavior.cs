@@ -16,7 +16,7 @@ public class tinymapbehavior : MonoBehaviour
 
     void Start()
     {
-        Darkcover.color=new Color(0f,0f,0f,0f);
+        //Darkcover.color=new Color(0f,0f,0f,0f);
         ftrt=ftcanvas.GetComponent<RectTransform>();
         msizedelta=ftrt.sizeDelta;
         msizedelta.y/=3f; 
@@ -48,7 +48,8 @@ public class tinymapbehavior : MonoBehaviour
             }
             gameObject.GetComponent<RectTransform>().sizeDelta=msizedelta;
             gameObject.GetComponent<RectTransform>().anchoredPosition=mpos;  
-            Darkcover.color=new Color(0f,0f,0f,0.6f); 
+            Darkcover.gameObject.SetActive(true);   
+            //Darkcover.color=new Color(0f,0f,0f,0.6f); 
         }
 
         if(Input.GetKeyUp(KeyCode.Tab))
@@ -67,7 +68,8 @@ public class tinymapbehavior : MonoBehaviour
             mpos.y=0f;
             gameObject.GetComponent<RectTransform>().sizeDelta=msizedelta;
             gameObject.GetComponent<RectTransform>().anchoredPosition=mpos;
-            Darkcover.color=new Color(0f,0f,0f,0f);
+            Darkcover.gameObject.SetActive(false);
+            //Darkcover.color=new Color(0f,0f,0f,0f);
         }
     }
 }
