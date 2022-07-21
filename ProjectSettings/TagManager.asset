@@ -8,6 +8,8 @@ TagManager:
   - cherry
   - normalAttack
   - JumpPad
+  - Dash
+  - DoubleJump
   layers:
   - Default
   - TransparentFX

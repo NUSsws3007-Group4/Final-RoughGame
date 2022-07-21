@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class herointeract : MonoBehaviour
 {
+    HeroBehavior mHeroBehavior = null;
     // Start is called before the first frame update
     public bloodbarcontrol mUIManager = null;
     private float mHurtTimer = 0;
     void Start()
     {
-        
+        mHeroBehavior = gameObject.GetComponent<HeroBehavior>();
     }
 
     // Update is called once per frame
@@ -20,18 +21,31 @@ public class herointeract : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        if (collider.gameObject.tag == "cherry")
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
-            Destroy(collider.gameObject);
-            mUIManager.increasevolume(1f);
+            if (collider.gameObject.tag == "cherry")
+            {
+                Destroy(collider.gameObject);
+                mUIManager.increasevolume(1f);
+            }
         }
 
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        
-        if (collider.gameObject.layer == 14 || collider.gameObject.layer == 13)
+        if(collider.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            if(collider.gameObject.tag=="Dash")
+            {
+                mHeroBehavior.setDashSkill(true);
+            }
+            else if(collider.gameObject.tag == "DoubleJump")
+            {
+                mHeroBehavior.setJumpSkill(1);
+            }
+        }
+        else if (collider.gameObject.layer == 14 || collider.gameObject.layer == 13)
         {
             mHurtTimer = 0;
             mUIManager.decreasevolume(1f);

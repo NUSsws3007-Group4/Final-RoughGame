@@ -359,11 +359,11 @@ public class HeroBehavior : MonoBehaviour
         //冲刺
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            mDashManager.startDash(mPlace);
+            Debug.Log("Can start dash: "+mDashManager.startDash(mPlace));
         }
         Vector2 velocity = mRigidbody.velocity;
         velocity.x = mSpeed;
-        mDashManager.updateDash(velocity, mPlace, mFaceDir);
+        velocity = mDashManager.updateDash(velocity, mPlace, mFaceDir);
         mRigidbody.velocity = velocity;
         if (respaned)
         {
@@ -616,7 +616,7 @@ class DashManager
     /// <summary>
     /// 获取冲刺能力
     /// </summary>
-    private bool mDashEnabled = false;
+    private bool mDashEnabled = true;
     /// <summary> 
     ///冲刺
     ///</summary>
@@ -669,6 +669,7 @@ class DashManager
         {
             if (_place == HeroBehavior.mPlaceStatus.InAir)
             {
+                
                 mDashTimeCount += Time.smoothDeltaTime;
                 if (mDashTimeCount >= mDashForce)
                 {
