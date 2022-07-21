@@ -17,7 +17,7 @@ public class EnemyBehavior : MonoBehaviour
     protected Animator anim;
 
 
-    void Start()
+    protected virtual void Start()
     {
         anim = GetComponent<Animator>();
         enemyRenderer = GetComponent<SpriteRenderer>();
@@ -33,20 +33,10 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (anim.GetBool("Attacked"))
-        {
-            attackedTimer -= Time.deltaTime;
-            mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
-            if (attackedTimer <= 0)
-            {
-                attackedTimer = 0.5f;
-                anim.SetBool("Attacked", false);
-                if (mLifeLeft <= 0)
-                    Death();
-            }
-        }
+            attackedBehavior();
         else
         {
             if (mFriendshipStatus == 0 && targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
@@ -105,11 +95,11 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    void Death()
+    protected virtual void Death()
     {
         Destroy(transform.gameObject);
     }
-    protected void Respawn()
+    protected virtual void Respawn()
     {
         patrol = true;
         mLifeLeft = 4;
@@ -121,6 +111,7 @@ public class EnemyBehavior : MonoBehaviour
         attackTimer = 0.5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
     }
+    
     protected virtual void patrolBehavior()
     {
         transform.GetChild(1).GetComponent<Renderer>().enabled = false;
@@ -203,6 +194,19 @@ public class EnemyBehavior : MonoBehaviour
         remoteAttack.transform.localPosition = transform.localPosition;
         remoteAttack.transform.up = (targetpos - transform.localPosition).normalized;
         Debug.Log("EnemyAttacking");
+    }
+
+    protected virtual void attackedBehavior()
+    {
+        attackedTimer -= Time.deltaTime;
+        mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
+        if (attackedTimer <= 0)
+        {
+            attackedTimer = 0.5f;
+            anim.SetBool("Attacked", false);
+            if (mLifeLeft <= 0)
+                Death();
+        }
     }
 
 }
