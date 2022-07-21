@@ -18,6 +18,7 @@ public class ItemBasicBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("destory");
         if(collision.gameObject.layer == LayerMask.NameToLayer("Player") )
         {
             Destroy(transform.gameObject);
