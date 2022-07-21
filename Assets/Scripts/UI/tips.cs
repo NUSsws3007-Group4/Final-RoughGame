@@ -18,10 +18,7 @@ public class tips: MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            dialogbox.SetActive(false);
-        }
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
