@@ -4,38 +4,30 @@ using UnityEngine;
 
 public class CloseCombactEnemyBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private float timer;
-    private float attackgap;
-    public GameObject muim = null;
-
+   protected float attackTimer = 0f;
+   GameObject parent;
     void Start()
     {
-        attackgap = 1f;
-        timer = 1f;
+        attackTimer = 0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (timer > 0)
+        attackTimer += Time.deltaTime;
+        if(attackTimer >= 0.25f)
         {
-            timer -= Time.deltaTime;
-            if (timer < 0) timer = 0;
+            gameObject.SetActive(false);
+            attackTimer = 0f;
         }
+        
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if (collision.gameObject.layer == 8)
+        if(collision.gameObject.layer == 8)
         {
-            if (timer == 0)
-            {
-                timer = attackgap;
-                collision.gameObject.GetComponent<HeroBehavior>().hurt();
-                muim.GetComponent<bloodbarcontrol>().decreasevolume(1f);
-            }
+            Debug.Log("Attacking hero");
+            gameObject.SetActive(false);
         }
     }
-
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
     protected float waitTimer = 0, attackTimer = 1.5f, attackedTimer = 0.5f,
-                    detectDistance = 8f, chasedistance = 12f, detectAngle = 45f,
+                    detectDistance = 8f, chaseDistance = 12f, detectAngle = 45f,
                     distance, angle, dot;
     protected int mLifeLeft = 4, mFriendshipRequired = 20, mFriendshipStatus = 0, multiplication = 2, friendshipAddValue = 5;
     protected bool patrol = true, frienshipAdded = false;
@@ -125,7 +125,7 @@ public class EnemyBehavior : MonoBehaviour
             if (angle < detectAngle)
             {
                 targetDirection = (targetpos - pos).normalized;
-                info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
+                info = Physics2D.Raycast(transform.localPosition, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
                 if (info.collider != null && info.collider.gameObject.layer == 8)
                 {
                     patrol = false;
@@ -156,7 +156,7 @@ public class EnemyBehavior : MonoBehaviour
             Respawn();
         else
         {
-            info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
+            info = Physics2D.Raycast(transform.localPosition, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
             if (dot < -0.2f)
                 transform.right = -transform.right;
             if (dot < -0.2f || dot > 0.2f)
@@ -210,6 +210,11 @@ public class EnemyBehavior : MonoBehaviour
             if (mLifeLeft <= 0)
                 Death();
         }
+    }
+
+    protected virtual void CloseCombact()
+    {
+        transform.GetChild(2).gameObject.SetActive(true);
     }
 
 }
