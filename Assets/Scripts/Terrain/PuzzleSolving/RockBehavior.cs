@@ -9,6 +9,13 @@ public class RockBehavior : MonoBehaviour
     public bool solved;
     public Sprite triggered;
     private GameObject s, keyArea;
+    public void setSwitch(bool _enabled)
+    {
+        foreach (Transform i in transform)
+        {
+            i.gameObject.SetActive(_enabled);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
