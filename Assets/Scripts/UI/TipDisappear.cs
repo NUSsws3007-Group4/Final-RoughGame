@@ -15,6 +15,7 @@ public class TipDisappear : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            Debug.LogError("exiting");
             gameObject.SetActive(false);
         }
     }
