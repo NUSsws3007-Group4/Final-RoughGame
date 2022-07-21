@@ -21,8 +21,10 @@ public class Protal : MonoBehaviour
     {
         if(collision.gameObject.layer==LayerMask.NameToLayer("Player"))
         {
-            SceneManager.LoadScene(nextLevel);
+
             DontDestroyOnLoad(GameObject.Find("KeepInTransfer"));
+
+            SceneManager.LoadScene(nextLevel);
         }
     }
 }
