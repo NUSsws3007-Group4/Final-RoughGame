@@ -78,9 +78,9 @@ public class coincontrol : MonoBehaviour
     {
         entitysize=canvasrt.sizeDelta;
         float theight=entitysize.y/=30f;
-        showtext.GetComponent<RectTransform>().sizeDelta=new Vector2(theight*4f,theight);
-        showtext.GetComponent<RectTransform>().anchoredPosition=new Vector3(theight*2f+10f,-theight*3-20f,0f);
-        showtext.fontSize=(int)(theight*9f/10f);
+        showtext.GetComponent<RectTransform>().sizeDelta=new Vector2(theight*4f,theight/8f*10f);
+        showtext.GetComponent<RectTransform>().anchoredPosition=new Vector3(theight*2f+10f,-theight*3.5f-20f,0f);
+        showtext.fontSize=(int)(theight);
         coinicon.GetComponent<RectTransform>().sizeDelta=new Vector2(theight,theight);
         coinicon.GetComponent<RectTransform>().anchoredPosition=new Vector3(theight,-theight*3-20f,0f);
     }

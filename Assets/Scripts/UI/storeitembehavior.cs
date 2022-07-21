@@ -39,9 +39,7 @@ public class storeitembehavior : MonoBehaviour
 
     void Start()
     {
-        //judgesoldout();
-        refreshstorenum();
-        judgelocked();
+        refreshmyself();
         if(item.itemprice==0) buttonprice.text="free"; else buttonprice.text=inttostring(item.itemprice);
         colorred=new Color(1f,0f,0f,1f);
         colorblack=new Color(0f,0f,0f,1f);
@@ -56,9 +54,10 @@ public class storeitembehavior : MonoBehaviour
 
     public void refreshmyself() //统一刷新
     {
-        judgesoldout();
+        //judgesoldout();
+        //judgelocked();
+        refreshstorenum();
         judgelocked();
-        //refreshsotrenum();
     }
 
     public void refreshstorenum() //更新库存数量
@@ -80,7 +79,6 @@ public class storeitembehavior : MonoBehaviour
         {
             stg.sell(item);
             refreshstorenum();
-            //judgesoldout();
         }
     }
 
@@ -90,13 +88,13 @@ public class storeitembehavior : MonoBehaviour
 
         if(item.itemnuminstore>0)
         {
-            soldoutsig.GetComponent<RectTransform>().sizeDelta=new Vector2(0f,0f);
+            soldoutsig.gameObject.SetActive(false);
             itemimage.color=new Color(1f,1f,1f,1f);
             buybutton.interactable=true;
         }
         else
         {
-            soldoutsig.GetComponent<RectTransform>().sizeDelta=new Vector2(60f,60f);
+            soldoutsig.gameObject.SetActive(true);
             itemimage.color=new Color(0.6f,0.6f,0.6f,1f);
             buybutton.interactable=false;
         }
@@ -109,17 +107,19 @@ public class storeitembehavior : MonoBehaviour
 
     private void lockthisitem()
     {
-        soldoutsig.GetComponent<RectTransform>().sizeDelta=new Vector2(0f,0f);
-        lockedimage.GetComponent<RectTransform>().sizeDelta=new Vector2(80f,30f);
-        itemimage.color=new Color(0.6f,0.6f,0.6f,1f);
+        soldoutsig.gameObject.SetActive(false);
+        lockedimage.gameObject.SetActive(true);
+        itemimage.color=new Color(1f,1f,1f,1f);
         buybutton.interactable=false;
+        gameObject.GetComponent<Button>().interactable=false;
         storenumtxt.text="";
     }
 
     private void unlockthisitem()
     {
-        lockedimage.GetComponent<RectTransform>().sizeDelta=new Vector2(0f,0f);
-        //judgesoldout();
+        lockedimage.gameObject.SetActive(false);
+        gameObject.GetComponent<Button>().interactable=true;
+        buybutton.interactable=true;
         refreshstorenum();
     }
 

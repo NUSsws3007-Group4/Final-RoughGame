@@ -15,6 +15,7 @@ public class camerafollow : MonoBehaviour
 
     private Vector3 offset;
     private Vector3 currentpos;
+    public bool iffollow=true;
 
     void Start()
     {
@@ -28,31 +29,34 @@ public class camerafollow : MonoBehaviour
 
     void Update()
     {
-        currentpos=transform.position;
-        targetpos=target.transform.position;
+        if(iffollow)
+        {
+            currentpos=transform.position;
+            targetpos=target.transform.position;
         
-        if(targetpos.x>worldbound.max.x-camerasizex)
-        {
-            targetpos.x=worldbound.max.x-camerasizex;
-        }
-        else if(targetpos.x<worldbound.min.x+camerasizex)
-        {
-            targetpos.x=worldbound.min.x+camerasizex;
-        }
-        if(targetpos.y>worldbound.max.y-camerasizey)
-        {
-            targetpos.y=worldbound.max.y-camerasizey;
-        }
-        else if(targetpos.y<worldbound.min.y+camerasizey)
-        {
-            targetpos.y=worldbound.min.y+camerasizey;
-        }
+            if(targetpos.x>worldbound.max.x-camerasizex)
+            {
+                targetpos.x=worldbound.max.x-camerasizex;
+            }
+            else if(targetpos.x<worldbound.min.x+camerasizex)
+            {
+                targetpos.x=worldbound.min.x+camerasizex;
+            }
+            if(targetpos.y>worldbound.max.y-camerasizey)
+            {
+                targetpos.y=worldbound.max.y-camerasizey;
+            }
+            else if(targetpos.y<worldbound.min.y+camerasizey)
+            {
+                targetpos.y=worldbound.min.y+camerasizey;
+            }
 
-        currentpos.x=Mathf.SmoothDamp(transform.position.x,targetpos.x,ref xVelocity,smoothTime);
-        currentpos.y=Mathf.SmoothDamp(transform.position.y,targetpos.y,ref yVelocity,smoothTime/2f);
-        //currentpos.x=targetpos.x;
-        //currentpos.y=targetpos.y;
+            currentpos.x=Mathf.SmoothDamp(transform.position.x,targetpos.x,ref xVelocity,smoothTime);
+            currentpos.y=Mathf.SmoothDamp(transform.position.y,targetpos.y,ref yVelocity,smoothTime/2f);
+            //currentpos.x=targetpos.x;
+            //currentpos.y=targetpos.y;
 
-        transform.position=currentpos;
+            transform.position=currentpos;
+        }
     }
 }
