@@ -31,7 +31,6 @@ public class BeeBehavior : MonoBehaviour
 
         if(patrol)
         {
-            transform.right = originRight;
             patrolBehavior();
         }
         else
