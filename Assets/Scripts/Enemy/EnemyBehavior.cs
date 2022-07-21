@@ -137,8 +137,9 @@ public class EnemyBehavior : MonoBehaviour
     protected virtual void friendlyBehavior()
     {
         if (dot < -0.2f)
-        {
             transform.right = -transform.right;
+        if (-0.2f < dot && dot < 0.2f)
+        {
             if (!frienshipAdded)
             {
                 Debug.Log("Friendship added:" + friendshipAddValue);

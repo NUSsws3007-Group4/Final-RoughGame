@@ -10,7 +10,7 @@ public class HeroBehavior : MonoBehaviour
     public void settestui()
     {
         string ui = "Position status: " + mPlace + ", Facing: " + mFaceDir
-            + ", Health: " + mHealth + "\nSpawn at: " + mRespawnPoint + 
+            + ", Health: " + mHealth + "\nSpawn at: " + mRespawnPoint +
             "\nSpeed: " + mRigidbody.velocity + "\nRunning: " + mIsRun +
             "\nSneak: " + mIsSneak + ", Forced Sneak: " + mForceSneak;
         text.text = ui;
@@ -159,7 +159,12 @@ public class HeroBehavior : MonoBehaviour
     /// </param>
     public void downFriendship(int _reduce)
     {
-        mFriendship -= _reduce;
+        if (mFriendship > -600)
+        {
+            mFriendship -= _reduce;
+            if (mFriendship < 0)
+                mFriendship = 0;
+        }
     }
     /// <summary>
     /// 增加友善度
@@ -169,7 +174,12 @@ public class HeroBehavior : MonoBehaviour
     /// </param>
     public void upFriendship(int _increase)
     {
-        mFriendship += _increase;
+        if (mFriendship > -600)
+        {
+            mFriendship += _increase;
+            if (mFriendship > 100)
+                mFriendship = 100;
+        }
     }
 
     public void setRespawnPoint(Vector2 _point)
@@ -359,7 +369,7 @@ public class HeroBehavior : MonoBehaviour
         //冲刺
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("Can start dash: "+mDashManager.startDash(mPlace));
+            Debug.Log("Can start dash: " + mDashManager.startDash(mPlace));
         }
         Vector2 velocity = mRigidbody.velocity;
         velocity.x = mSpeed;
@@ -513,7 +523,7 @@ public class HeroBehavior : MonoBehaviour
             case "Items":
                 break;
             case "Teleport":
-                if(collisionobj.gameObject.tag == "JumpPad")
+                if (collisionobj.gameObject.tag == "JumpPad")
                 {
                     mPlace = mPlaceStatus.InAir;
                     Vector2 vel = mRigidbody.velocity;
@@ -574,7 +584,7 @@ public class HeroBehavior : MonoBehaviour
                     break;
             }
         }
-        if(tempStatus != mPlaceStatus.Invalid)
+        if (tempStatus != mPlaceStatus.Invalid)
         {
             mPlace = tempStatus;
         }
@@ -629,7 +639,7 @@ class DashManager
     /// 冲刺计时器
     /// </summary>
     private float mDashTimeCount = 0;
-    public void setDashSkill (bool _enabled)
+    public void setDashSkill(bool _enabled)
     {
         mDashEnabled = _enabled;
     }
@@ -651,7 +661,7 @@ class DashManager
     }
     public bool startDash(HeroBehavior.mPlaceStatus _place)
     {
-        if(!isDashAvalible(_place))
+        if (!isDashAvalible(_place))
         {
             return false;
         }
@@ -669,7 +679,7 @@ class DashManager
         {
             if (_place == HeroBehavior.mPlaceStatus.InAir)
             {
-                
+
                 mDashTimeCount += Time.smoothDeltaTime;
                 if (mDashTimeCount >= mDashForce)
                 {

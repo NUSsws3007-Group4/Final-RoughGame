@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7135992370971150377}
   - component: {fileID: 7135992370971150376}
   - component: {fileID: 7135992370971150379}
+  - component: {fileID: 3747733643525316585}
   m_Layer: 13
   m_Name: CloseCombactArea
   m_TagString: Untagged
@@ -195,6 +196,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3747733643525316585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7135992370971150374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe010181d844bd4449714cb54218b2c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7135992371169982077
 GameObject:
   m_ObjectHideFlags: 0
