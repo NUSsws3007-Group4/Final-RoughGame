@@ -5,7 +5,7 @@ public class EliteEnemyBehavior : EnemyBehavior
     private float remoteAttackTimer = 0f;
     private bool edgeTouched = false;
     // Start is called before the first frame update
-    protected override void Start()
+    override protected void Start()
     {
         anim = GetComponent<Animator>();
         enemyRenderer = GetComponent<SpriteRenderer>();
@@ -34,7 +34,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         }
     }
 
-    protected override void chaseBehavior()
+    override protected void chaseBehavior()
     {
 
         if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
@@ -113,11 +113,6 @@ public class EliteEnemyBehavior : EnemyBehavior
         }
     }
 
-    protected void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 17)
-            edgeTouched = true;
-    }
     override protected void Respawn()
     {
         Debug.Log("Elite Respawn" + initialpos);
