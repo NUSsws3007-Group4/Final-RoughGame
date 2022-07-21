@@ -10812,6 +10812,7 @@ MonoBehaviour:
   dialoguebox: {fileID: 1199055879}
   cm: {fileID: 315969408}
   hero: {fileID: 1918388477}
+  stg: {fileID: 689011599}
 --- !u!61 &522285367
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11849,7 +11850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &695808811
 Transform:
   m_ObjectHideFlags: 0
@@ -12253,11 +12254,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.63
+      value: -11.98
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.33
+      value: 12.26
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_LocalPosition.z

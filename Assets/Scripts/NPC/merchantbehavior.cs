@@ -10,6 +10,7 @@ public class merchantbehavior : MonoBehaviour
     private float timer;
     public cameramanagerbehavior cm;
     public GameObject hero;
+    public storemanager stg;
 
     void Start()
     {
@@ -31,9 +32,9 @@ public class merchantbehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        //Destroy(collider.gameObject);
         if(collider.gameObject.tag=="Player")
         {
+            stg.canopenstore=true;
             if(flag)
             {
                 flag=false;
@@ -43,5 +44,10 @@ public class merchantbehavior : MonoBehaviour
                 timer=3f;
             }
         }
+    }
+
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        stg.canopenstore=false;
     }
 }
