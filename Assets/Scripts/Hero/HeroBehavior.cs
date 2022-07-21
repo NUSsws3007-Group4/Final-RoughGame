@@ -559,6 +559,7 @@ public class HeroBehavior : MonoBehaviour
             Vector2 colliNormal = colliPoint.normal;
             switch (LayerMask.LayerToName(collisionobj.gameObject.layer))
             {
+                case "Destructble":
                 case "Ground":
                     mPlace = mPlaceStatus.InAir;
                     if (colliNormal.y > 0 && colliNormal.y > Mathf.Abs(colliNormal.x))
@@ -603,6 +604,7 @@ public class HeroBehavior : MonoBehaviour
         Debug.Log("Collision exit");
         switch (LayerMask.LayerToName(collisionobj.gameObject.layer))
         {
+            case "Destructble":
             case "Ground":
                 if (mPlace == mPlaceStatus.OnWallRight || mPlace == mPlaceStatus.OnWallLeft)
                 {
