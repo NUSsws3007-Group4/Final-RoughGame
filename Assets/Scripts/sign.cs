@@ -7,7 +7,7 @@ public class sign : MonoBehaviour
     public GameObject dialogbox;
     public Text dialogboxtext;
     public string signtext;
-    private bool playerinsign;
+    private bool playerinsign=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,20 +20,18 @@ public class sign : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && playerinsign)
         {
-            Debug.Log("按下e键");
             dialogboxtext.text = signtext;
             dialogbox.SetActive(true);
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("进入范围");
+        if(collision.gameObject.layer==8)
         playerinsign = true;
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("离开范围");
-        playerinsign = false;
-        dialogbox.SetActive(false);
+         playerinsign = false;
+            dialogbox.SetActive(false); 
     }
 }

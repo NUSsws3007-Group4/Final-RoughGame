@@ -11122,6 +11122,7 @@ GameObject:
   - component: {fileID: 574546132}
   - component: {fileID: 574546135}
   - component: {fileID: 574546134}
+  - component: {fileID: 574546137}
   - component: {fileID: 574546136}
   m_Layer: 12
   m_Name: dash
@@ -11235,6 +11236,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb969c92611b930428637e24efba7784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &574546137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574546131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade9fcb64c67716468ae60dc526c17c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogbox: {fileID: 1690000204}
+  dialogboxtext: {fileID: 661890258}
+  signtext: ' now you can press q to dash.press e to exit this tip'
 --- !u!114 &614443258 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5466738978980751488, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
@@ -11397,15 +11413,15 @@ RectTransform:
   m_GameObject: {fileID: 661890256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.37, y: 0.37, z: 0.37}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.45, y: 0.7, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1690000205}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.4000053, y: 15.700005}
+  m_AnchoredPosition: {x: -0.26, y: 22.67}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661890258
@@ -11429,17 +11445,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
+    m_FontSize: 15
+    m_FontStyle: 3
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 50
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: null
 --- !u!222 &661890259
@@ -12076,6 +12092,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: hero
       objectReference: {fileID: 0}
+    - target: {fileID: 4268124987306694998, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4268124987306694999, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
@@ -12481,7 +12501,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883515049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.864483, y: 5.9879184, z: -9.835237}
+  m_LocalPosition: {x: 0.72, y: 0.9, z: -9.835237}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12670,7 +12690,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -13286,7 +13305,7 @@ GameObject:
   - component: {fileID: 1177786484}
   m_Layer: 6
   m_Name: lupai
-  m_TagString: Dash
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38614,6 +38633,7 @@ GameObject:
   - component: {fileID: 1581844050}
   - component: {fileID: 1581844052}
   - component: {fileID: 1581844051}
+  - component: {fileID: 1581844054}
   - component: {fileID: 1581844053}
   m_Layer: 12
   m_Name: doublejump
@@ -38727,6 +38747,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb969c92611b930428637e24efba7784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1581844054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581844049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade9fcb64c67716468ae60dc526c17c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogbox: {fileID: 1690000204}
+  dialogboxtext: {fileID: 661890258}
+  signtext: ' now you can double jump.press e to exit this tip'
 --- !u!1 &1594209264
 GameObject:
   m_ObjectHideFlags: 0
@@ -39062,7 +39097,7 @@ RectTransform:
   m_GameObject: {fileID: 1690000204}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.66, y: 6.66, z: 6.66}
+  m_LocalScale: {x: 10.61, y: 5.54, z: 5.54}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 661890257}
@@ -39094,7 +39129,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e219878d64ce2444c8f60ae2ff2b9a18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8ce060d606122854a86e253ee2698f0e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
