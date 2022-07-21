@@ -19,7 +19,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         chaseDistance = 20f;
         mFriendshipRequired = 70;
         friendshipAddValue = 0;
-        mLifeLeft=10;
+        mLifeLeft = 10;
         initialpos = transform.localPosition;
         initialright = transform.right;
         guardPortal.SetActive(false);
@@ -121,13 +121,15 @@ public class EliteEnemyBehavior : EnemyBehavior
     {
         base.friendlyBehavior();
         if (distance < detectDistance)
+        {
             guardPortal.SetActive(true);
+        }
 
     }
     protected override void Death()
     {
-        base.Death();
         guardPortal.SetActive(true);
+        base.Death();
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
