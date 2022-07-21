@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingItem : MonoBehaviour
+public class Elevator : MonoBehaviour
 {
     public bool MoveUpDown;
     public static float Speed = 3f;
