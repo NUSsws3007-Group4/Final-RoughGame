@@ -5,6 +5,7 @@ using UnityEngine;
 public class FlyEliteEnemy : EnemyBehavior
 {
     private Vector3 stayPosition;
+    private float arrowShotTimer = 0f;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -39,13 +40,19 @@ public class FlyEliteEnemy : EnemyBehavior
     protected override void chaseBehavior()
     {
         transform.localPosition = stayPosition;
-        attackBehavior();
+        arrowShotTimer += Time.deltaTime;
+        if(arrowShotTimer >= 1.0f)
+        {
+            arrowShotTimer = 0f;
+            attackBehavior();
+        }
+        
     }
 
     protected override void attackBehavior()
     {
         anim.SetBool("FLyEliteAttack", true);
-        GameObject tempArrow = Instantiate(Resources.Load("Prefabs/Ball") as GameObject);
+        GameObject tempArrow = Instantiate(Resources.Load("Prefabs/Arrow") as GameObject);
         targetpos = targetHero.transform.localPosition;
         tempArrow.transform.localPosition = transform.localPosition;
         tempArrow.transform.right = (targetpos - transform.localPosition).normalized;
