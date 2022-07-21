@@ -28,7 +28,7 @@ public class BeeBehavior : EnemyBehavior
     {
         targetpos = targetHero.transform.localPosition;
         targetpos.z = 0f;
-        transform.right = targetpos - transform.localPosition;
+        //transform.right = targetpos - transform.localPosition;
 
         transform.localPosition += transform.right * Time.smoothDeltaTime * beeSpeed;
     }
