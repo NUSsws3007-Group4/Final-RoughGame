@@ -111,7 +111,7 @@ public class EnemyBehavior : MonoBehaviour
         attackTimer = 0.5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
     }
-    
+
     protected virtual void patrolBehavior()
     {
         transform.GetChild(1).GetComponent<Renderer>().enabled = false;
@@ -154,38 +154,41 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
             Respawn();
-        info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
-        if (dot < -0.2f)
-            transform.right = -transform.right;
-        if (dot < -0.2f || dot > 0.2f)
-        {
-            vel = mRigidbody.velocity;
-            vel.x = Mathf.Min(Mathf.Abs(Vector3.Dot(transform.right, targetDirection)) * 2, transform.right.x * 4);
-            mRigidbody.velocity = vel;
-        }
         else
         {
-            mRigidbody.velocity = new Vector3(0, 0, 0);
-        }
-
-        attackTimer += Time.deltaTime;
-        if (attackTimer >= 2.0f)
-        {
-            attackBehavior();
-            attackTimer = 0f;
-        }
-
-        if (info.collider == null || (info.collider != null && info.collider.gameObject.layer != 8))
-        {
-            waitTimer += Time.deltaTime;
-            if (waitTimer >= 2f)
+            info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
+            if (dot < -0.2f)
+                transform.right = -transform.right;
+            if (dot < -0.2f || dot > 0.2f)
             {
-                waitTimer = 0;
-                Respawn();
+                vel = mRigidbody.velocity;
+                vel.x = Mathf.Min(Mathf.Abs(Vector3.Dot(transform.right, targetDirection)) * 2, transform.right.x * 4);
+                mRigidbody.velocity = vel;
             }
+            else
+            {
+                mRigidbody.velocity = new Vector3(0, 0, 0);
+            }
+
+            attackTimer += Time.deltaTime;
+            if (attackTimer >= 2.0f)
+            {
+                attackBehavior();
+                attackTimer = 0f;
+            }
+
+            if (info.collider == null || (info.collider != null && info.collider.gameObject.layer != 8))
+            {
+                waitTimer += Time.deltaTime;
+                if (waitTimer >= 2f)
+                {
+                    waitTimer = 0;
+                    Respawn();
+                }
+            }
+            else
+                waitTimer = 0;
         }
-        else
-            waitTimer = 0;
     }
     protected virtual void attackBehavior()
     {
