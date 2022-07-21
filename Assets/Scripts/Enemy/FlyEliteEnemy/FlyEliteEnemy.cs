@@ -11,8 +11,10 @@ public class FlyEliteEnemy : EnemyBehavior
     // Start is called before the first frame update
     protected override void Start()
     {
-        detectDistance = 10f;
+        detectDistance = 15f;
         detectAngle = 90f;
+        chaseDistance = 20f;
+        mLifeLeft = 10;
 
         anim = GetComponent<Animator>();
         enemyRenderer = GetComponent<SpriteRenderer>();
@@ -27,13 +29,14 @@ public class FlyEliteEnemy : EnemyBehavior
     override protected void patrolBehavior()
     {
         anim.SetBool("FlyEliteIdle", true);
-
+        rock.GetComponent<RockBehavior>().setSwitch(false);
+        transform.GetChild(2).GetComponent<Renderer>().enabled = false;
         base.patrolBehavior();
     }
 
     protected override void chaseBehavior()
     {
-        // rock.GetComponent<RockBehavior>().
+
         mRigidbody.velocity = new Vector3(0, 0, 0);
 
         arrowShotTimer += Time.deltaTime;
@@ -46,7 +49,7 @@ public class FlyEliteEnemy : EnemyBehavior
             attackBehavior();
         }
 
-        if (distance >= 5f)
+        if (distance >= chaseDistance)
         {
             arrowShotTimer = 0f;
             transform.GetChild(0).GetComponent<Renderer>().enabled = false;
@@ -77,7 +80,8 @@ public class FlyEliteEnemy : EnemyBehavior
         base.friendlyBehavior();
         if (distance < detectDistance)
         {
-            // rock.GetComponent<RockBehavior>().
+            rock.GetComponent<RockBehavior>().setSwitch(true);
+            transform.GetChild(2).GetComponent<Renderer>().enabled = true;
         }
 
     }

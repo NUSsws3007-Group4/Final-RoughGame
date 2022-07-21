@@ -8,7 +8,7 @@ public class RockBehavior : MonoBehaviour
     public GameObject p1, p2, p3, p4,l1,l2,l3,l4,l5;
     public bool solved;
     public Sprite triggered;
-    private GameObject s, keyArea;
+    private GameObject s, elite;
     public void setSwitch(bool _enabled)
     {
         foreach (Transform i in transform)
@@ -21,6 +21,7 @@ public class RockBehavior : MonoBehaviour
     {
         solved = false;
         s=GameObject.Find("Switch");
+        elite=GameObject.Find("elite");
     }
 
     // Update is called once per frame
@@ -38,7 +39,7 @@ public class RockBehavior : MonoBehaviour
         {
             solved = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = triggered;
-
+            elite.GetComponent<FlyEliteEnemy>().AllowPass();
             foreach (Transform i in transform)
             {
                 i.gameObject.SetActive(false);

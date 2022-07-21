@@ -93,11 +93,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            myhero.GetComponent<HeroBehavior>().setFriendship(100 - myhero.GetComponent<HeroBehavior>().getFriendship());
-            Debug.Log(myhero.GetComponent<HeroBehavior>().getFriendship());
-        }
 
     }
 }
