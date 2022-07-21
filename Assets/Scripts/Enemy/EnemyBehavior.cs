@@ -31,7 +31,7 @@ public class EnemyBehavior : MonoBehaviour
         mRigidbody.velocity = transform.right * 2 + vel;
 
     }
-
+    protected virtual void Awake(){}
     // Update is called once per frame
     protected virtual void Update()
     {
