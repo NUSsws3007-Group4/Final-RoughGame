@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FlyEliteEnemy : EnemyBehavior
 {
-    //private Vector3 stayPosition;
+    private const float pi = 3.1415926f;
+    private int barrageAttackCount = 0;
     private float arrowShotTimer = 0f;
     // Start is called before the first frame update
     protected override void Start()
@@ -25,7 +26,6 @@ public class FlyEliteEnemy : EnemyBehavior
         anim.SetBool("FlyEliteIdle", true);
         
         base.patrolBehavior();
-
     }
 
     protected override void chaseBehavior()
@@ -58,5 +58,30 @@ public class FlyEliteEnemy : EnemyBehavior
         targetpos = targetHero.transform.localPosition;
         tempArrow.transform.localPosition = transform.localPosition;
         tempArrow.transform.right = (targetpos - transform.localPosition).normalized;
+        
+        barrageAttackCount++;
+        if(barrageAttackCount >= 3)
+        {
+            barrageAttackCount = 0;
+            BarrageArrowAttack();
+        }
+        
+    }
+    private void BarrageArrowAttack()
+    {
+        Vector3 tvec, direction;
+        //Debug.Log("Barrage!");
+        for (float i = -30f; i <= 30f; i += 20f)
+        {
+            GameObject barrageAttack = Instantiate(Resources.Load("Prefabs/Arrow") as GameObject);
+            barrageAttack.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            barrageAttack.transform.localPosition = transform.localPosition;
+
+            tvec = targetHero.transform.localPosition - transform.localPosition;
+            direction.x = tvec.x * Mathf.Cos(i / 180f * pi) + tvec.y * Mathf.Sin(i / 180f * pi);
+            direction.y = -tvec.x * Mathf.Sin(i / 180f * pi) + tvec.y * Mathf.Cos(i / 180f * pi);
+            direction.z = 0;
+            barrageAttack.transform.up = direction.normalized;
+        }
     }
 }
