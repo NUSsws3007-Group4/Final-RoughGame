@@ -19,6 +19,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         chaseDistance = 20f;
         mFriendshipRequired = 70;
         friendshipAddValue = 0;
+        mLifeLeft=10;
         initialpos = transform.localPosition;
         initialright = transform.right;
         guardPortal.SetActive(false);
@@ -165,7 +166,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         Debug.Log("Elite Respawn" + initialpos);
         edgeTouched = false;
         patrol = true;
-        mLifeLeft = 4;
+        mLifeLeft = 10;
         mRigidbody.velocity = new Vector3(0, 0, 0);
         transform.localPosition = initialpos;
         transform.right = initialright;
