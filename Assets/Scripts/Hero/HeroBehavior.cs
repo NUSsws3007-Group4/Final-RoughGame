@@ -616,7 +616,7 @@ class DashManager
     /// <summary>
     /// 获取冲刺能力
     /// </summary>
-    private bool mDashEnabled = true;
+    private bool mDashEnabled = false;
     /// <summary> 
     ///冲刺
     ///</summary>
