@@ -16,10 +16,10 @@ public class ItemBasicBehavior : MonoBehaviour
         
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("destory");
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player") )
+        if (collision.gameObject.layer == 8)
         {
             Destroy(transform.gameObject);
         }
