@@ -557,6 +557,7 @@ GameObject:
   - component: {fileID: 231017887}
   - component: {fileID: 231017888}
   - component: {fileID: 231017889}
+  - component: {fileID: 231017890}
   m_Layer: 12
   m_Name: gem-1
   m_TagString: diamond
@@ -657,6 +658,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9375, y: 0.8125}
   m_EdgeRadius: 0
+--- !u!114 &231017890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231017886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb969c92611b930428637e24efba7784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &362785852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,6 +2210,7 @@ GameObject:
   - component: {fileID: 622463094}
   - component: {fileID: 622463095}
   - component: {fileID: 622463096}
+  - component: {fileID: 622463097}
   m_Layer: 12
   m_Name: bloodflask1
   m_TagString: cherry
@@ -2297,6 +2311,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
+--- !u!114 &622463097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622463093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb969c92611b930428637e24efba7784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &649844596
 GameObject:
   m_ObjectHideFlags: 0
@@ -8548,6 +8574,7 @@ GameObject:
   - component: {fileID: 819147651}
   - component: {fileID: 819147652}
   - component: {fileID: 819147653}
+  - component: {fileID: 819147654}
   m_Layer: 12
   m_Name: gem-1 (1)
   m_TagString: diamond
@@ -8648,6 +8675,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9375, y: 0.8125}
   m_EdgeRadius: 0
+--- !u!114 &819147654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819147650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb969c92611b930428637e24efba7784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &826833571
 GameObject:
   m_ObjectHideFlags: 0
@@ -8659,6 +8698,7 @@ GameObject:
   - component: {fileID: 826833572}
   - component: {fileID: 826833573}
   - component: {fileID: 826833574}
+  - component: {fileID: 826833575}
   m_Layer: 12
   m_Name: bloodflask1 (2)
   m_TagString: cherry
@@ -8759,6 +8799,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
+--- !u!114 &826833575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826833571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb969c92611b930428637e24efba7784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &830845333
 GameObject:
   m_ObjectHideFlags: 0
@@ -8770,6 +8822,7 @@ GameObject:
   - component: {fileID: 830845334}
   - component: {fileID: 830845335}
   - component: {fileID: 830845336}
+  - component: {fileID: 830845337}
   m_Layer: 12
   m_Name: bloodflask1 (3)
   m_TagString: cherry
@@ -8870,6 +8923,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
+--- !u!114 &830845337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830845333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb969c92611b930428637e24efba7784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &837392434
 GameObject:
   m_ObjectHideFlags: 0
@@ -34512,6 +34577,7 @@ GameObject:
   - component: {fileID: 1262040960}
   - component: {fileID: 1262040961}
   - component: {fileID: 1262040962}
+  - component: {fileID: 1262040963}
   m_Layer: 12
   m_Name: bloodflask1 (1)
   m_TagString: cherry
@@ -34612,6 +34678,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
+--- !u!114 &1262040963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262040959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb969c92611b930428637e24efba7784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1264645290
 GameObject:
   m_ObjectHideFlags: 0
