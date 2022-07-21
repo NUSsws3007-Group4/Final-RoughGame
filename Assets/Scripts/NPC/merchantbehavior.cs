@@ -11,6 +11,7 @@ public class merchantbehavior : MonoBehaviour
     public cameramanagerbehavior cm;
     public GameObject hero;
     public storemanager stg;
+    public bagmanager bg;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class merchantbehavior : MonoBehaviour
         if(collider.gameObject.tag=="Player")
         {
             stg.canopenstore=true;
+            bg.cansell=true;
             if(flag)
             {
                 flag=false;
@@ -49,5 +51,8 @@ public class merchantbehavior : MonoBehaviour
     void OnTriggerExit2D(Collider2D collider)
     {
         stg.canopenstore=false;
+        bg.cansell=false;
+        stg.closemystore();
+        bg.judgecanuse();
     }
 }

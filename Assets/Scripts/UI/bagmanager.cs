@@ -15,16 +15,21 @@ public class bagmanager : MonoBehaviour
     public itemstruct nowselecteditem;
     public Button discardbutton;
     public Button usebutton;
-    public Text usebuttontxt;
+    public Image useimage;
+    public Image sellimage;
     public bag myitemlist; //real bag store
     public bool bagisopen;
+    public bool cansell;
 
     public void openmybag()
     {
         mybagUI.SetActive(true);
         usebutton.interactable=false;
         discardbutton.interactable=false;
-        usebuttontxt.text="Use";
+
+        useimage.gameObject.SetActive(true);
+        sellimage.gameObject.SetActive(false);
+
         iteminformationshowed.text="";
         bagisopen=true;
     }
@@ -94,6 +99,7 @@ public class bagmanager : MonoBehaviour
 
     public void judgecanuse()
     {
+        if(nowselecteditem==null) return;
         switch(nowselecteditem.itemname)
         {
             case "bloodflask":
@@ -127,19 +133,12 @@ public class bagmanager : MonoBehaviour
             }
             case "diamond":
             {
-                usebutton.interactable=true;
+                usebutton.interactable=cansell;
                 break;
             }
             case "emptyflask":
             {
-                if(true) //be close enough to a merchant
-                {
-                    usebutton.interactable=true;
-                }
-                else
-                {
-                    usebutton.interactable=false;
-                }
+                usebutton.interactable=cansell;
                 break;
             }
         }
@@ -242,11 +241,11 @@ public class bagmanager : MonoBehaviour
     void Awake()
     {
         myitemlist.itemlist.Clear();
-        bloodflask.itemnum=0;
-        energyflask.itemnum=0;
-        friendshipflask.itemnum=0;
-        emptyflask.itemnum=0;
-        diamond.itemnum=0;
+        bloodflask.itemnum=1;
+        energyflask.itemnum=1;
+        friendshipflask.itemnum=1;
+        emptyflask.itemnum=1;
+        diamond.itemnum=1;
         refreshall();
     }
 
@@ -255,6 +254,7 @@ public class bagmanager : MonoBehaviour
         usebutton.interactable=false;
         discardbutton.interactable=false;
         iteminformationshowed.text="";
+        cansell=false;
         closemybag();
     }
 

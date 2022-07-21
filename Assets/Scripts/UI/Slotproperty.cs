@@ -14,11 +14,13 @@ public class Slotproperty : MonoBehaviour
         bagmanager bg=GameObject.Find("Canvas").GetComponent<bagmanager>();
         if(slotitem.itemname=="diamond" || slotitem.itemname=="emptyflask")
         {
-            bg.usebuttontxt.text="Sell";
+            bg.useimage.gameObject.SetActive(false);
+            bg.sellimage.gameObject.SetActive(true);
         }
         else
         {
-            bg.usebuttontxt.text="Use";
+            bg.useimage.gameObject.SetActive(true);
+            bg.sellimage.gameObject.SetActive(false);
         }
         bg.updateinfo(slotitem.iteminfo);
         bg.nowselecteditem=slotitem;
