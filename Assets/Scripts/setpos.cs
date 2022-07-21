@@ -19,6 +19,7 @@ public class setpos : MonoBehaviour
         setposition(0f,0f);
         gameObject.GetComponent<bloodbarcontrol>().setsize();
         gameObject.GetComponent<energybarcontrol>().setsize();
+        gameObject.GetComponent<coincontrol>().setsize();
     }
 
     public void setrighttop()
@@ -26,20 +27,23 @@ public class setpos : MonoBehaviour
         setposition(canvasrt.sizeDelta.x*4f/5f-canvasrt.sizeDelta.y*3f/30f-10f,0f);
         gameObject.GetComponent<bloodbarcontrol>().setsize();
         gameObject.GetComponent<energybarcontrol>().setsize();
+        gameObject.GetComponent<coincontrol>().setsize();
     }
 
     public void setleftbottom()
     {
-        setposition(0f,10f-canvasrt.sizeDelta.y*26f/30f);
+        setposition(0f,20f-canvasrt.sizeDelta.y*25f/30f);
         gameObject.GetComponent<bloodbarcontrol>().setsize();
         gameObject.GetComponent<energybarcontrol>().setsize();
+        gameObject.GetComponent<coincontrol>().setsize();
     }
 
     public void setrightbottom()
     {
-        setposition(canvasrt.sizeDelta.x*4f/5f-canvasrt.sizeDelta.y*3f/30f-10f,10f-canvasrt.sizeDelta.y*26f/30f);
+        setposition(canvasrt.sizeDelta.x*4f/5f-canvasrt.sizeDelta.y*3f/30f-10f,20f-canvasrt.sizeDelta.y*25f/30f);
         gameObject.GetComponent<bloodbarcontrol>().setsize();
         gameObject.GetComponent<energybarcontrol>().setsize();
+        gameObject.GetComponent<coincontrol>().setsize();
     }
 
     void Start()
