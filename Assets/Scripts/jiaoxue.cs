@@ -14,7 +14,10 @@ public class jiaoxue : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
+        {
+            Time.timeScale = 1 - Time.timeScale;
             gameObject.GetComponent<Renderer>().enabled = !gameObject.GetComponent<Renderer>().enabled;
+        }
     }
 
 }
