@@ -18,6 +18,7 @@ public class storemanager : MonoBehaviour
     public Image plate;
     public Image listplate;
     public Image title;
+    public bool canopenstore=false;
 
     private float clock;
 
@@ -55,8 +56,11 @@ public class storemanager : MonoBehaviour
 
     public void openmystore()
     {
-        mystoreUI.SetActive(true);
-        storeisopen=true;
+        if(canopenstore)
+        {
+            mystoreUI.SetActive(true);
+            storeisopen=true;
+        }
     }
 
     public void closemystore()
@@ -110,6 +114,7 @@ public class storemanager : MonoBehaviour
     {
         seticestyle();
         closemystore();
+        canopenstore=false;
         clock=0;
     }
 
