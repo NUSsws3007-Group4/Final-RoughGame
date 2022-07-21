@@ -7,8 +7,8 @@ public class EnemyBehavior : MonoBehaviour
     protected float waitTimer = 0, attackTimer = 1.5f, attackedTimer = 0.5f,
                     detectDistance = 8f, chasedistance = 12f, detectAngle = 45f,
                     distance, angle, dot;
-    protected int mLifeLeft = 4, mFriendshipRequired = 20, mFriendshipStatus = 0, multiplication = 2;
-    protected bool patrol = true;
+    protected int mLifeLeft = 4, mFriendshipRequired = 20, mFriendshipStatus = 0, multiplication = 2, friendshipAddValue = 5;
+    protected bool patrol = true, frienshipAdded = false;
     protected SpriteRenderer enemyRenderer;
     protected Rigidbody2D mRigidbody;
     public GameObject targetHero;
