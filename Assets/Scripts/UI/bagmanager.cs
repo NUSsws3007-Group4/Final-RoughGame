@@ -212,6 +212,7 @@ public class bagmanager : MonoBehaviour
 
     public void pickupitem(itemstruct newitem)
     {
+        Debug.Log(newitem.itemname);
         if(!myitemlist.itemlist.Contains(newitem))
         {
             newitem.itemnum=1;
@@ -241,12 +242,11 @@ public class bagmanager : MonoBehaviour
     void Awake()
     {
         myitemlist.itemlist.Clear();
-
-        bloodflask.itemnum=1;
-        energyflask.itemnum=1;
-        friendshipflask.itemnum=1;
-        emptyflask.itemnum=1;
-        diamond.itemnum=1;
+        bloodflask.itemnum=0;
+        energyflask.itemnum=0;
+        friendshipflask.itemnum=0;
+        emptyflask.itemnum=0;
+        diamond.itemnum=0;
         refreshall();
     }
 

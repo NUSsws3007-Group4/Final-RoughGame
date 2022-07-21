@@ -9,6 +9,7 @@ public class herointeract : MonoBehaviour
     public bloodbarcontrol mUIManager = null;
     public bagmanager mybagmanager;
     public storemanager mystoremanager;
+    public itemstruct bloodflask,energyflask,friendshipflask,emptyflask,diamond;
 
     private float mHurtTimer = 0;
     void Start()
@@ -49,10 +50,34 @@ public class herointeract : MonoBehaviour
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
-            if (collider.gameObject.tag == "cherry")
+            switch(collider.gameObject.tag)
             {
-                Destroy(collider.gameObject);
-                mUIManager.increasevolume(1f);
+                case "cherry":
+                {
+                    //Destroy(collider.gameObject);
+                    mybagmanager.pickupitem(bloodflask);
+                    break;
+                }
+                case "energyflask":
+                {
+                    mybagmanager.pickupitem(energyflask);
+                    break;
+                }
+                case "diamond":
+                {
+                    mybagmanager.pickupitem(diamond);
+                    break;
+                }
+                case "Dash":
+                {
+                    mHeroBehavior.setDashSkill(true);
+                    break;
+                }
+                case "DoubleJump":
+                {
+                    mHeroBehavior.setJumpSkill(1);
+                    break;
+                }
             }
         }
 
@@ -60,18 +85,7 @@ public class herointeract : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.layer == LayerMask.NameToLayer("Item"))
-        {
-            if(collider.gameObject.tag=="Dash")
-            {
-                mHeroBehavior.setDashSkill(true);
-            }
-            else if(collider.gameObject.tag == "DoubleJump")
-            {
-                mHeroBehavior.setJumpSkill(1);
-            }
-        }
-        else if (collider.gameObject.layer == 14 || collider.gameObject.layer == 13)
+        if (collider.gameObject.layer == 14 || collider.gameObject.layer == 13)
         {
             mHurtTimer = 0;
             mUIManager.decreasevolume(1f);
