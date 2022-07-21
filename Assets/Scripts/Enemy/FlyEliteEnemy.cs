@@ -4,47 +4,49 @@ using UnityEngine;
 
 public class FlyEliteEnemy : EnemyBehavior
 {
-    private Vector3 stayPosition;
+    //private Vector3 stayPosition;
     private float arrowShotTimer = 0f;
     // Start is called before the first frame update
     protected override void Start()
     {
+        detectDistance = 10f;
+        detectAngle = 90f;
+
         anim = GetComponent<Animator>();
         enemyRenderer = GetComponent<SpriteRenderer>();
         mRigidbody = gameObject.GetComponent<Rigidbody2D>();
         targetHero = GameObject.Find("hero");
-        detectDistance = 10f;
+        detectDistance = 4f;
         initialpos = transform.localPosition;
         initialright = transform.right;
     }
     override protected void patrolBehavior()
     {
         anim.SetBool("FlyEliteIdle", true);
+        
+        base.patrolBehavior();
 
-        transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-        distance = Vector3.Distance(pos, targetpos);
-        if (distance <= detectDistance)
-        {
-            targetDirection = (targetpos - pos).normalized;
-            info = Physics2D.Raycast(transform.localPosition, targetDirection, chasedistance, 1 << 6 | 1 << 8);
-            if (info.collider != null && info.collider.gameObject.layer == 8)
-            {
-                patrol = false;
-                stayPosition = transform.localPosition;
-                transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-            }
-
-        }
     }
 
     protected override void chaseBehavior()
     {
-        transform.localPosition = stayPosition;
+        mRigidbody.velocity = new Vector3(0, 0, 0);
+
         arrowShotTimer += Time.deltaTime;
+        
+        distance = Vector3.Distance(pos, targetpos);
+        
         if(arrowShotTimer >= 1.0f)
         {
             arrowShotTimer = 0f;
             attackBehavior();
+        }
+
+        if(distance >= 5f)
+        {
+            arrowShotTimer = 0f;
+            transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+            patrol = true;
         }
         
     }
