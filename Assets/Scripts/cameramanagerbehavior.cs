@@ -51,6 +51,11 @@ public class cameramanagerbehavior : MonoBehaviour
         maincamera.transform.localPosition=new Vector3(x,y,-10);
     }
 
+    public void setmaintargerget(GameObject newtarget)
+    {
+        maincamera.GetComponent<camerafollow>().target=newtarget;
+    }
+
     public void setmaincamerasize(float halfheight)
     {
         maincamera.orthographicSize=halfheight;

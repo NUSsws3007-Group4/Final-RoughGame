@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowBehavior : MonoBehaviour
 {
-    private float arrowSpeed = 10f;
+    private float arrowSpeed = 15f;
 
     void Start()
     {
