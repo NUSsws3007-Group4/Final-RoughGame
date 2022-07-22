@@ -12561,8 +12561,8 @@ GameObject:
   - component: {fileID: 1294527408}
   - component: {fileID: 1294527407}
   m_Layer: 16
-  m_Name: "\u8DF3\u53F0"
-  m_TagString: Untagged
+  m_Name: jumppad
+  m_TagString: JumpPad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
