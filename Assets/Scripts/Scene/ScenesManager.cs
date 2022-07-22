@@ -10,11 +10,11 @@ public class ScenesManager : MonoBehaviour
     {
         Debug.LogWarning(SceneManager.GetActiveScene().name+"onload");
             GameObject hero;
-            if (hero = GameObject.Find("hero"))
-            {
-                hero.GetComponent<HeroBehavior>().setRespawnPoint(transform.position);
-                hero.transform.position = transform.position;
-            }
+        if (hero = GameObject.Find("hero"))
+        {
+            hero.GetComponent<HeroBehavior>().setRespawnPoint(transform.position);
+            hero.transform.position = transform.position;
+        }
     }
 
     // Update is called once per frame
