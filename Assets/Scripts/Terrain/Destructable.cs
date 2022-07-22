@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Destructable : MonoBehaviour
 {
+    //public GameObject doublejumpsign;
+    //public GameObject doublejumptutorial;
+    //public cameramanagerbehavior cm;
     // Start is called before the first frame update
+    public bool destroied;
+
     void Start()
     {
-        
+        destroied=false;
+        //doublejumptutorial.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,7 +31,13 @@ public class Destructable : MonoBehaviour
             }
             Debug.Log("Trap Destoryed");
             gameObject.SetActive(false);
+            destroied=true;
             //Destroy(transform.gameObject);
+            //if(doublejumpsign!=null)
+            //{
+            //    doublejumptutorial.SetActive(true);
+            //    cm.startfocus(doublejumpsign,3f,doublejumptutorial);
+            //}
         }
     }
 }

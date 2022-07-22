@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class BreakBoard : MonoBehaviour
 {
+    public GameObject dashsign;
+    public GameObject dashtutorialbox;
+    public cameramanagerbehavior cm;
+    public GameObject focusassis;
     // Start is called before the first frame update
     void Start()
     {
-        
+        dashtutorialbox.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,6 +29,9 @@ public class BreakBoard : MonoBehaviour
                 i.gameObject.SetActive(false);
             }
             gameObject.SetActive(false);
+            focusassis.transform.position=dashsign.transform.position;
+            dashtutorialbox.SetActive(true);
+            cm.startfocus(focusassis,3f,dashtutorialbox);
         }
     }
 

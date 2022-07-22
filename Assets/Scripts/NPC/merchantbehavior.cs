@@ -17,18 +17,12 @@ public class merchantbehavior : MonoBehaviour
     {
         timer=0f;
         flag=true;
-        dialoguebox.SetActive(false);
+        if(dialoguebox!=null) dialoguebox.SetActive(false);
     }
 
     void Update()
     {
-        if(timer>0) timer-=Time.smoothDeltaTime;
-        if(timer<0)
-        {
-            dialoguebox.SetActive(false);
-            cm.setmaintargerget(hero);
-            timer=0;
-        }
+
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -40,10 +34,8 @@ public class merchantbehavior : MonoBehaviour
             if(flag)
             {
                 flag=false;
-                dialoguebox.SetActive(true);
-                cm.setmaintargerget(gameObject);
-                //dialoguetxt.text="Need something or have something to sell?Maybe I can do you a favour.";
-                timer=3f;
+                if(dialoguebox!=null) dialoguebox.SetActive(true);
+                cm.startfocus(gameObject,3f,dialoguebox);
             }
         }
     }

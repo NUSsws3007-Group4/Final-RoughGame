@@ -15,7 +15,7 @@ public class EnemyBehavior : MonoBehaviour
     protected Vector3 targetpos, initialpos, initialright, pos, targetDirection, vel;
     protected RaycastHit2D info;
     protected Animator anim;
-
+    protected bool isactive=true;
 
     protected virtual void Start()
     {
@@ -31,37 +31,43 @@ public class EnemyBehavior : MonoBehaviour
         mRigidbody.velocity = transform.right * 2 + vel;
 
     }
-    protected virtual void Awake(){}
+    protected virtual void Awake()
+    {
+        //isactive=true;
+    }
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (anim.GetBool("Attacked"))
-            attackedBehavior();
-        else
+        if(isactive)
         {
-            if (mFriendshipStatus == 0 && targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
-                mFriendshipStatus = 2;
-            if (mFriendshipStatus == 2 && targetHero.GetComponent<HeroBehavior>().getFriendship() < mFriendshipRequired)
-                mFriendshipStatus = 0;
-
-            pos = transform.localPosition;
-            targetpos = targetHero.transform.localPosition;
-            targetDirection = targetpos - pos;
-            dot = Vector3.Dot(transform.right, targetDirection.normalized);
-
-            if (patrol)
-                if (mFriendshipStatus >= 1)
-                    friendlyBehavior();
-                else
-                    patrolBehavior();
+            if (anim.GetBool("Attacked"))
+                attackedBehavior();
             else
-                chaseBehavior();
+            {
+                if (mFriendshipStatus == 0 && targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
+                    mFriendshipStatus = 2;
+                if (mFriendshipStatus == 2 && targetHero.GetComponent<HeroBehavior>().getFriendship() < mFriendshipRequired)
+                    mFriendshipStatus = 0;
 
+                pos = transform.localPosition;
+                targetpos = targetHero.transform.localPosition;
+                targetDirection = targetpos - pos;
+                dot = Vector3.Dot(transform.right, targetDirection.normalized);
+
+                if (patrol)
+                    if (mFriendshipStatus >= 1)
+                        friendlyBehavior();
+                    else
+                        patrolBehavior();
+                else
+                    chaseBehavior();
+            }
         }
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
+        if(!isactive) return;
         if (patrol && collision.gameObject.layer == 17)
             transform.right = -transform.right;
         vel = mRigidbody.velocity;
@@ -99,6 +105,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         Destroy(transform.gameObject);
     }
+
     protected virtual void Respawn()
     {
         patrol = true;

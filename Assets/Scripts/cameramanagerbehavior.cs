@@ -11,6 +11,10 @@ public class cameramanagerbehavior : MonoBehaviour
     public RawImage tinymap;
     public RawImage auxiliaryviewUI;
     public RenderTexture auxiliaryview;
+    public GameObject hero;
+    private float timer;
+    private GameObject dialoguebox;
+    //public GameObject followassis;
 
     void Awake()
     {
@@ -61,15 +65,33 @@ public class cameramanagerbehavior : MonoBehaviour
         maincamera.orthographicSize=halfheight;
     }
 
+    public void startfocus(GameObject newtarget,float time,GameObject childbox=null)
+    {
+        timer=time;
+        dialoguebox=childbox;
+        setmaintargerget(newtarget);
+        
+    }
+
     void Start()
     {
         //setauxiliarycamera(0,0,60f,60f,1);
         //setauxiliaryviewUI(0f,0f,200f,200f);
         setmaincamerafollow();
+        timer=0;
     }
 
     void Update()
     {
-        
+        if(timer>0) timer-=Time.smoothDeltaTime;
+        if(timer<0)
+        {
+            setmaintargerget(hero);
+            timer=0;
+            if(dialoguebox!=null)
+            {
+                dialoguebox.SetActive(false);
+            }
+        }
     }
 }
