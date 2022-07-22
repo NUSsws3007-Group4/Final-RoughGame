@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovingItem : MonoBehaviour
 {
-    public bool MoveUpDown, stayCollision;
+    public bool MoveUpDown;
     public static float Speed = 3f;
     public GameObject mPlayer;
     private Vector3 offSet, originPos;
@@ -19,7 +19,7 @@ public class MovingItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!MoveUpDown && stayCollision)//是左右移动 且 玩家与平台在一起
+        if(!MoveUpDown)//是左右移动
         {
             Vector3 pos = transform.position;
             offSet = pos - originPos;
@@ -34,23 +34,9 @@ public class MovingItem : MonoBehaviour
         {
             gameObject.GetComponent<Rigidbody2D>().velocity = -gameObject.GetComponent<Rigidbody2D>().velocity;
         }
-        
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             originPos = transform.position;
-            stayCollision = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            stayCollision = false;
         }
     }
 }
