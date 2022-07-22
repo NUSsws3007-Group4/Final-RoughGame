@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class FriendshipTipBehavior : SlimeBehavior
 {
-    public GameObject s1, s2;
     override protected void Start()
     {
         base.Start();
         mRigidbody.velocity = new Vector3(0, 0, 0);
         mFriendshipRequired = 0;
-        friendshipAddValue = 50;
-        s1.SetActive(false);
-        s2.SetActive(false);
+        friendshipAddValue = 60;
     }
     protected override void patrolBehavior()
     {
@@ -23,9 +20,6 @@ public class FriendshipTipBehavior : SlimeBehavior
         base.friendlyBehavior();
         if (frienshipAdded)
         {
-            mFriendshipRequired = 20;
-            s1.SetActive(true);
-            s2.SetActive(true);
             Invoke("Death", 15);
         }
     }

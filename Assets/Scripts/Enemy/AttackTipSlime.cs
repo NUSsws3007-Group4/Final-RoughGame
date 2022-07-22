@@ -9,7 +9,7 @@ public class AttackTipSlime : SlimeBehavior
     {
         base.Start();
         mRigidbody.velocity = new Vector3(0, 0, 0);
-        
+        s.SetActive(false);
     }
     protected override void patrolBehavior()
     {
@@ -20,5 +20,10 @@ public class AttackTipSlime : SlimeBehavior
     {
         base.chaseBehavior();
         mRigidbody.velocity = vel / 10;
+    }
+    protected override void Death()
+    {
+        s.SetActive(true);
+        base.Death();
     }
 }
