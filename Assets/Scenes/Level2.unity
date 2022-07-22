@@ -2650,7 +2650,6 @@ GameObject:
   m_Component:
   - component: {fileID: 579129368}
   - component: {fileID: 579129367}
-  - component: {fileID: 579129366}
   m_Layer: 0
   m_Name: PuzzleCamera
   m_TagString: Untagged
@@ -2658,14 +2657,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &579129366
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579129365}
-  m_Enabled: 1
 --- !u!20 &579129367
 Camera:
   m_ObjectHideFlags: 0
@@ -12561,8 +12552,8 @@ GameObject:
   - component: {fileID: 1294527408}
   - component: {fileID: 1294527407}
   m_Layer: 16
-  m_Name: "\u8DF3\u53F0"
-  m_TagString: Untagged
+  m_Name: jumppad
+  m_TagString: JumpPad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13510,7 +13501,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1622445626}
   - component: {fileID: 1622445625}
-  - component: {fileID: 1622445624}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -13518,14 +13508,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1622445624
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1622445623}
-  m_Enabled: 1
 --- !u!20 &1622445625
 Camera:
   m_ObjectHideFlags: 0
