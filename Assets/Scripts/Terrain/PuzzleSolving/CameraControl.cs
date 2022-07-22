@@ -18,16 +18,15 @@ public class CameraControl : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            cam.depth = 6;
-        }
+        
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            cam.depth = 6;
+            Vector2 colliNormal = collision.contacts[0].normal;
+            if (colliNormal.y < -0.9f)
+                cam.depth = 6;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

@@ -69,6 +69,10 @@ public class HeroBehavior : MonoBehaviour
     ///人物速度
     ///</summary>
     private float mSpeed = 0f;
+    /// <summary>
+    /// 地面移动速度
+    /// </summary>
+    private float mOffsetSpeed = 0f;
     /// <summary> 
     ///最大速度
     ///</summary>
@@ -131,6 +135,11 @@ public class HeroBehavior : MonoBehaviour
         mAnimeControl.SetTrigger("Attack");
     }
 
+    public void setOffsetSpeed(float _speed)
+    {
+        mOffsetSpeed = _speed;
+    }
+
     /// <summary>
     /// 获取友善度
     /// </summary>
@@ -154,7 +163,7 @@ public class HeroBehavior : MonoBehaviour
     /// <summary>
     /// 减少友善度
     /// </summary>
-    /// <param name="_Friendship">
+    /// <param name="_reduce">
     /// 友善度减少值
     /// </param>
     public void downFriendship(int _reduce)
@@ -169,7 +178,7 @@ public class HeroBehavior : MonoBehaviour
     /// <summary>
     /// 增加友善度
     /// </summary>
-    /// <param name="_Friendship">
+    /// <param name="_increase">
     /// 友善度增加值
     /// </param>
     public void upFriendship(int _increase)
@@ -251,7 +260,7 @@ public class HeroBehavior : MonoBehaviour
             colliderOffset.y = colliderSize.y / 2;
             collider.offset = colliderOffset;
             mIsSneak = true;
-            mSpeed /= 2f;
+            mSpeed = (mSpeed - mOffsetSpeed) / 2 + mOffsetSpeed;
             mMaxSpeed = mMaxSpeedDefault / 2f;
             mAcceleration = mAccelerationDefault / 2f;
         }
@@ -287,35 +296,34 @@ public class HeroBehavior : MonoBehaviour
         //左移
         if (getMoveDirection() != mDirection.stop)
         {
-            if (Mathf.Abs(mSpeed) < mMaxSpeed)
+            if (Mathf.Abs(mSpeed - mOffsetSpeed) < mMaxSpeed)
             {
                 Debug.Log("Accelerating");
                 mSpeed += ((float)getMoveDirection()) * mAcceleration * Time.smoothDeltaTime;
             }
             else
             {
-                mSpeed = ((float)getMoveDirection()) * mMaxSpeed;
+                mSpeed = ((float)getMoveDirection()) * mMaxSpeed + mOffsetSpeed;
             }
         }
         //不移&减速
         else
         {
-            if (mPlace != mPlaceStatus.InAir && mSpeed != 0)
+            if (mPlace != mPlaceStatus.InAir && mSpeed != mOffsetSpeed)
             {
                 Debug.Log("Slowing Down");
                 //新的速度是原速度减去加速度*时间*方向
-                float newSpeed = ((smoothmove) ? mSpeed - mAcceleration * Time.smoothDeltaTime * (mSpeed > 0 ? 1 : -1) : 0f);
+                float newSpeed = ((smoothmove) ? mSpeed - mAcceleration * Time.smoothDeltaTime * (mSpeed > mOffsetSpeed ? 1 : -1) : mOffsetSpeed);
                 //到0不再减速
-                mSpeed = (newSpeed * mSpeed < 0) ? 0 : newSpeed;
+                mSpeed = ((newSpeed- mOffsetSpeed) * (mSpeed - mOffsetSpeed) < 0) ? mOffsetSpeed : newSpeed;
             }
         }
         //跳
         if (Input.GetKeyDown(KeyCode.Space))
         {
 
-            if (mPlace == mPlaceStatus.OnGround)
+            if (mPlace == mPlaceStatus.OnGround || mPlace == mPlaceStatus.OnLadder)
             {
-                Debug.Log("Jump");
                 mPlace = mPlaceStatus.InAir;
                 Vector2 vel = mRigidbody.velocity;
                 vel.y = mJumpForce;
@@ -358,7 +366,7 @@ public class HeroBehavior : MonoBehaviour
             mRigidbody.velocity = vel;
         }
         //刷新面向
-        if (mSpeed * (int)mFaceDir < 0)
+        if ((mSpeed - mOffsetSpeed) * (int)mFaceDir < 0)
         {
             mFaceDir = mFaceDir == mDirection.right ? mDirection.left : mDirection.right;
             gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
