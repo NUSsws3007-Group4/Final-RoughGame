@@ -11,6 +11,7 @@ TagManager:
   - Dash
   - DoubleJump
   - diamond
+  - Puzzle
   layers:
   - Default
   - TransparentFX

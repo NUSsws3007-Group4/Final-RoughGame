@@ -216,7 +216,7 @@ public class HeroBehavior : MonoBehaviour
     void Update()
     {
         updateAnime();
-        if (transform.position.x < -30f || transform.position.x > 34f || transform.position.y > 20f || transform.position.y < -20f)
+        if (transform.position.x < -35f || transform.position.x > 34f || transform.position.y > 20f || transform.position.y < -20f)
         {
             respawn();
         }

@@ -7,16 +7,21 @@ public class FlyEliteEnemy : EnemyBehavior
     private const float pi = 3.1415926f;
     private int barrageAttackCount = 0;
     private float arrowShotTimer = 0f;
+    private GameObject guardKey, rock;
     // Start is called before the first frame update
     protected override void Start()
     {
-        detectDistance = 10f;
+        detectDistance = 15f;
         detectAngle = 90f;
+        chaseDistance = 20f;
+        mLifeLeft = 10;
 
         anim = GetComponent<Animator>();
         enemyRenderer = GetComponent<SpriteRenderer>();
         mRigidbody = gameObject.GetComponent<Rigidbody2D>();
         targetHero = GameObject.Find("hero");
+        guardKey = GameObject.Find("KeyArea");
+        rock = GameObject.Find("Rock");
         detectDistance = 4f;
         initialpos = transform.localPosition;
         initialright = transform.right;
@@ -24,31 +29,33 @@ public class FlyEliteEnemy : EnemyBehavior
     override protected void patrolBehavior()
     {
         anim.SetBool("FlyEliteIdle", true);
-        
+        rock.GetComponent<RockBehavior>().setSwitch(false);
+        transform.GetChild(2).GetComponent<Renderer>().enabled = false;
         base.patrolBehavior();
     }
 
     protected override void chaseBehavior()
     {
+
         mRigidbody.velocity = new Vector3(0, 0, 0);
 
         arrowShotTimer += Time.deltaTime;
-        
+
         distance = Vector3.Distance(pos, targetpos);
-        
-        if(arrowShotTimer >= 1.0f)
+
+        if (arrowShotTimer >= 1.0f)
         {
             arrowShotTimer = 0f;
             attackBehavior();
         }
 
-        if(distance >= 5f)
+        if (distance >= chaseDistance)
         {
             arrowShotTimer = 0f;
             transform.GetChild(0).GetComponent<Renderer>().enabled = false;
             patrol = true;
         }
-        
+
     }
 
     protected override void attackBehavior()
@@ -58,14 +65,25 @@ public class FlyEliteEnemy : EnemyBehavior
         targetpos = targetHero.transform.localPosition;
         tempArrow.transform.localPosition = transform.localPosition;
         tempArrow.transform.right = (targetpos - transform.localPosition).normalized;
-        
+
         barrageAttackCount++;
-        if(barrageAttackCount >= 3)
+        if (barrageAttackCount >= 3)
         {
             barrageAttackCount = 0;
             BarrageArrowAttack();
         }
-        
+
+    }
+
+    protected override void friendlyBehavior()
+    {
+        base.friendlyBehavior();
+        if (distance < detectDistance)
+        {
+            rock.GetComponent<RockBehavior>().setSwitch(true);
+            transform.GetChild(2).GetComponent<Renderer>().enabled = true;
+        }
+
     }
     private void BarrageArrowAttack()
     {
@@ -84,4 +102,15 @@ public class FlyEliteEnemy : EnemyBehavior
             barrageAttack.transform.up = direction.normalized;
         }
     }
+
+    protected override void Death()
+    {
+        Destroy(guardKey.gameObject);
+        base.Death();
+    }
+    public void AllowPass()
+    {
+        Destroy(guardKey.gameObject);
+    }
+
 }

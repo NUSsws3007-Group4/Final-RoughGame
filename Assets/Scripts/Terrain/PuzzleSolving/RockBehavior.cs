@@ -4,26 +4,46 @@ using UnityEngine;
 
 public class RockBehavior : MonoBehaviour
 {
-    public bool l1, l2, l3, l4, solved;
-    private GameObject s, keyArea;
+    public bool[] switchLst = { false, false, false, false, false };
+    public GameObject p1, p2, p3, p4,l1,l2,l3,l4,l5;
+    public bool solved;
+    public Sprite triggered;
+    private GameObject s, elite;
+    public void setSwitch(bool _enabled)
+    {
+        foreach (Transform i in transform)
+        {
+            i.gameObject.SetActive(_enabled);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        l1 = false;
-        l2 = false;
-        l3 = false;
-        l4 = false;
         solved = false;
         s=GameObject.Find("Switch");
+        elite=GameObject.Find("elite");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (l1 && l2 && l3 && l4)
+        p1.SetActive(!switchLst[1]);
+        p2.SetActive(!switchLst[2]);
+        p3.SetActive(!switchLst[3]);
+        p4.SetActive(!switchLst[4]);
+        l4.SetActive(switchLst[4]);
+        l3.SetActive(switchLst[4] && switchLst[3]);
+        l2.SetActive(switchLst[4] && switchLst[3] && switchLst[2]);
+        l1.SetActive(switchLst[4] && switchLst[3] && switchLst[2] && switchLst[1]);
+        if (switchLst[4] && switchLst[1] && switchLst[2] && switchLst[3])
         {
             solved = true;
-            s.gameObject.SetActive(false);
+            gameObject.GetComponent<SpriteRenderer>().sprite = triggered;
+            elite.GetComponent<FlyEliteEnemy>().AllowPass();
+            foreach (Transform i in transform)
+            {
+                i.gameObject.SetActive(false);
+            }
         }
     }
 
