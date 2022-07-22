@@ -32,6 +32,10 @@ public class HeroBehavior : MonoBehaviour
     ///</summary>
     private const float mJumpForce = 13f;
     /// <summary>
+    /// 离墙速度
+    /// </summary>
+    public float mJumpHorizon = 2.6f;
+    /// <summary>
     /// 冲刺
     /// </summary>
     DashManager mDashManager = new DashManager();
@@ -322,11 +326,19 @@ public class HeroBehavior : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
 
-            if (mPlace == mPlaceStatus.OnGround || mPlace == mPlaceStatus.OnLadder)
+            if (mPlace == mPlaceStatus.OnGround)
             {
                 mPlace = mPlaceStatus.InAir;
                 Vector2 vel = mRigidbody.velocity;
                 vel.y = mJumpForce;
+                mRigidbody.velocity = vel;
+            }
+            else if (mPlace == mPlaceStatus.OnLadder)
+            {
+                mPlace = mPlaceStatus.InAir;
+                Vector2 vel = mRigidbody.velocity;
+                vel.y = mJumpForce;
+                vel.x = -(int)mFaceDir * mJumpHorizon;
                 mRigidbody.velocity = vel;
             }
             else if (mJumpCount < mJumpSkill)
@@ -677,6 +689,10 @@ class DashManager
         {
             mIsDash = true;
             mDashUsed = true;
+            if (((int)_place & 10) != 0)
+            {
+
+            }
             return true;
         }
     }
