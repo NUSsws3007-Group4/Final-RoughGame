@@ -85,7 +85,7 @@ public class EnemyBehavior : MonoBehaviour
             {
                 case 2:
                     for (int i = 0; i < multiplication - 1; ++i)
-                        mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+                        mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt;
                     mFriendshipStatus = 1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
