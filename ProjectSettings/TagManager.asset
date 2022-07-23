@@ -12,6 +12,7 @@ TagManager:
   - DoubleJump
   - diamond
   - Puzzle
+  - bullet
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - WayPoint
   - Destructble
   - PlayerBullet
-  - 
+  - PowerUp
   - 
   - 
   - 

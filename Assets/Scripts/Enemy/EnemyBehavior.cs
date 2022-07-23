@@ -7,7 +7,7 @@ public class EnemyBehavior : MonoBehaviour
     protected float waitTimer = 0, attackTimer = 1.5f, attackedTimer = 0.5f,
                     detectDistance = 8f, chaseDistance = 12f, detectAngle = 45f,
                     distance, angle, dot;
-    protected int mLifeLeft = 4, mFriendshipRequired = 20, mFriendshipStatus = 0, multiplication = 2, friendshipAddValue = 10;
+    protected int mLifeLeft = 100, mFriendshipRequired = 20, mFriendshipStatus = 0, multiplication = 2, friendshipAddValue = 10;
     protected bool patrol = true, frienshipAdded = false;
     protected SpriteRenderer enemyRenderer;
     protected Rigidbody2D mRigidbody;
@@ -79,7 +79,8 @@ public class EnemyBehavior : MonoBehaviour
             anim.SetBool("Attacked", true);
             mRigidbody.velocity = new Vector3(0, 0, 0);
             mRigidbody.AddForce(-100 * transform.right);
-            mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+            mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt *
+            collision.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;//计算受伤
             switch (mFriendshipStatus)
             {
                 case 2:
@@ -109,7 +110,7 @@ public class EnemyBehavior : MonoBehaviour
     protected virtual void Respawn()
     {
         patrol = true;
-        mLifeLeft = 4;
+        mLifeLeft = 100;//基础生命值以史莱姆为例子
         transform.localPosition = initialpos;
         transform.right = initialright;
         vel = mRigidbody.velocity;
