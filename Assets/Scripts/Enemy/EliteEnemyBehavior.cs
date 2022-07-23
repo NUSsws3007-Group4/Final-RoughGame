@@ -24,7 +24,23 @@ public class EliteEnemyBehavior : EnemyBehavior
         initialright = transform.right;
         guardPortal.SetActive(false);
     }
+    protected override void attackedBehavior()
+    {
+        transform.GetChild(3).gameObject.SetActive(true);
+        transform.GetChild(4).gameObject.SetActive(true);
+        attackedTimer -= Time.deltaTime;
+        mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
+        if (attackedTimer <= 0)
+        {
+            attackedTimer = 0.5f;
+            anim.SetBool("Attacked", false);
+            transform.GetChild(3).gameObject.SetActive(false);
+            transform.GetChild(4).gameObject.SetActive(false);
+            if (mLifeLeft <= 0)
+                Death();
+        }
 
+    }
     protected override void attackBehavior()
     {
         Bounds b1 = transform.GetChild(2).GetComponent<BoxCollider2D>().bounds;
