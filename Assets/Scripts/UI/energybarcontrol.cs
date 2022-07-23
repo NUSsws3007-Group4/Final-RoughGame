@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class energybarcontrol : MonoBehaviour
 {
-    public int maxenergy=10;
+    public int maxenergy=5;
     private const float alterspeed=3f;
     private const float effectalterspeed=2f;
 

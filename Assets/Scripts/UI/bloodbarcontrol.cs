@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class bloodbarcontrol : MonoBehaviour
 {
-    public int maxblood=10;
+    public int maxblood=200;
     private const float alterspeed=3f;
     private const float effectalterspeed=2f;
 
