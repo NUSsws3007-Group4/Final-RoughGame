@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class bloodbarcontrol : MonoBehaviour
 {
-    public int maxblood=5;
+    public int maxblood=10;
     private const float alterspeed=3f;
     private const float effectalterspeed=2f;
 
@@ -28,6 +28,10 @@ public class bloodbarcontrol : MonoBehaviour
     public Text deltatext;
     private float timer;
 
+    private Vector3 deltatextpos;
+    private Color deltatextcolor;
+    private float deltastaytime=1.5f;
+
     private string inttostring(int k)
     {
         string m="";
@@ -42,6 +46,7 @@ public class bloodbarcontrol : MonoBehaviour
 
     public void changemaxblood(int delta)
     {
+        if(delta>0) increasevolume(delta); else decreasevolume(-delta);
         maxblood+=delta;
     }
 
@@ -62,10 +67,13 @@ public class bloodbarcontrol : MonoBehaviour
         targetvolume=targetvolume+delta;
 
         showtext.text=inttostring(targetvolume);
-        timer=2f;
+        timer=deltastaytime;
         deltatext.text="+"+inttostring(delta);
-        deltatext.color=new Color(0f,1f,0f,1f);
+        deltatext.color=new Color(0f,1f,0f,0f);
         deltatext.gameObject.SetActive(true);
+        deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-10f,0f);
+        deltatextpos=new Vector3(10f,-10f,0f);
+        deltatextcolor=new Color(0f,1f,0,0f);
 
         if(targetvolume<0) targetvolume=0;
         if(targetvolume>maxblood) targetvolume=maxblood;
@@ -78,10 +86,13 @@ public class bloodbarcontrol : MonoBehaviour
         targetvolume=targetvolume-delta;
 
         showtext.text=inttostring(targetvolume);
-        timer=2f;
+        timer=deltastaytime;
         deltatext.text="-"+inttostring(delta);
-        deltatext.color=new Color(1f,0f,0f,1f);
+        deltatext.color=new Color(1f,0f,0f,0f);
         deltatext.gameObject.SetActive(true);
+        deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-10f,0f);
+        deltatextpos=new Vector3(10f,-10f,0f);
+        deltatextcolor=new Color(1f,0f,0,0f);
 
         if(targetvolume<0) targetvolume=0;
         if(targetvolume>maxblood) targetvolume=maxblood;
@@ -115,6 +126,7 @@ public class bloodbarcontrol : MonoBehaviour
 
     void Start()
     {
+        maxblood=10;
         //initiate size and position
         bloodvolume=maxblood;
         effectvolume=maxblood;
@@ -158,7 +170,23 @@ public class bloodbarcontrol : MonoBehaviour
         bloodbarentity.GetComponent<RectTransform>().sizeDelta=entitysize;
         bloodbareffect.GetComponent<RectTransform>().sizeDelta=effectsize;
 
-        if(timer>0) timer-=Time.unscaledDeltaTime;
+        if(timer>0)
+        {
+            timer-=Time.unscaledDeltaTime;
+            if(timer>=deltastaytime-0.5f)
+            {
+                deltatextpos.y+=Time.unscaledDeltaTime*(10f/0.5f);
+                deltatextcolor.a+=Time.unscaledDeltaTime*(1f/0.5f);
+                deltatext.GetComponent<RectTransform>().anchoredPosition=deltatextpos;
+                deltatext.color=deltatextcolor;
+            }
+            else
+            {
+                deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,0f,0f);
+                deltatextcolor.a=1f;
+                deltatext.color=deltatextcolor;
+            }
+        }
         if(timer<0)
         {
             timer=0;
