@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 3158770765440285024}
   - component: {fileID: 606816595397627322}
   m_Layer: 10
-  m_Name: elite2
+  m_Name: Elite2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8762515502702642858}
   - component: {fileID: 8762515502702642857}
   m_Layer: 10
-  m_Name: RemoteEnemyOnGround
+  m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
