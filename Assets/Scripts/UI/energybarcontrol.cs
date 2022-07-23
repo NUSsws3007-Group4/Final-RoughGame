@@ -28,6 +28,10 @@ public class energybarcontrol : MonoBehaviour
     public Text deltatext;
     private float timer;
 
+    private Vector3 deltatextpos;
+    private Color deltatextcolor;
+    private float deltastaytime=1.5f;
+
     private string inttostring(int k)
     {
         string m="";
@@ -63,10 +67,13 @@ public class energybarcontrol : MonoBehaviour
         targetvolume=targetvolume+delta;
 
         showtext.text=inttostring(targetvolume);
-        timer=2f;
+        timer=deltastaytime;
         deltatext.text="+"+inttostring(delta);
-        deltatext.color=new Color(0f,1f,0f,1f);
+        deltatext.color=new Color(0f,1f,0f,0f);
         deltatext.gameObject.SetActive(true);
+        deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-20f,0f);
+        deltatextpos=new Vector3(10f,-20f,0f);
+        deltatextcolor=new Color(0f,1f,0,0f);
 
         if(targetvolume<0) targetvolume=0;
         if(targetvolume>maxenergy) targetvolume=maxenergy;
@@ -79,10 +86,13 @@ public class energybarcontrol : MonoBehaviour
         targetvolume=targetvolume-delta;
 
         showtext.text=inttostring(targetvolume);
-        timer=2f;
+        timer=deltastaytime;
         deltatext.text="-"+inttostring(delta);
-        deltatext.color=new Color(1f,0f,0f,1f);
+        deltatext.color=new Color(1f,0f,0f,0f);
         deltatext.gameObject.SetActive(true);
+        deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-20f,0f);
+        deltatextpos=new Vector3(10f,-20f,0f);
+        deltatextcolor=new Color(1f,0f,0,0f);
 
         if(targetvolume<0) targetvolume=0;
         if(targetvolume>maxenergy) targetvolume=maxenergy;
@@ -116,6 +126,7 @@ public class energybarcontrol : MonoBehaviour
 
     void Start()
     {
+        maxenergy=10;
         //initiate size and position
         energyvolume=maxenergy;
         effectvolume=maxenergy;
@@ -159,7 +170,23 @@ public class energybarcontrol : MonoBehaviour
         energybarentity.GetComponent<RectTransform>().sizeDelta=entitysize;
         energybareffect.GetComponent<RectTransform>().sizeDelta=effectsize;
 
-        if(timer>0) timer-=Time.unscaledDeltaTime;
+        if(timer>0)
+        {
+            timer-=Time.unscaledDeltaTime;
+            if(timer>=deltastaytime-0.5f)
+            {
+                deltatextpos.y+=Time.unscaledDeltaTime*(10f/0.5f);
+                deltatextcolor.a+=Time.unscaledDeltaTime*(1f/0.5f);
+                deltatext.GetComponent<RectTransform>().anchoredPosition=deltatextpos;
+                deltatext.color=deltatextcolor;
+            }
+            else
+            {
+                deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,0f,0f);
+                deltatextcolor.a=1f;
+                deltatext.color=deltatextcolor;
+            }
+        }
         if(timer<0)
         {
             timer=0;

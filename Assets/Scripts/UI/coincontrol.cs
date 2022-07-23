@@ -15,6 +15,9 @@ public class coincontrol : MonoBehaviour
     private int delta;
     private float speedct;
     public float timer;
+    private Vector3 deltatextpos;
+    private Color deltatextcolor;
+    private float deltastaytime=1.5f;
 
     private string inttostring(int k)
     {
@@ -48,10 +51,15 @@ public class coincontrol : MonoBehaviour
     {
         coinnumber+=num;
         getdelta();
-        timer=2f;
+
+        timer=deltastaytime;
         deltatext.text="+"+inttostring(num);
-        deltatext.color=new Color(0f,1f,0f,1f);
+        deltatext.color=new Color(0f,1f,0f,0f);
         deltatext.gameObject.SetActive(true);
+        deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-10f,0f);
+        deltatextpos=new Vector3(10f,-10f,0f);
+        deltatextcolor=new Color(0f,1f,0,0f);
+
     }
 
     public bool pay(int num)
@@ -60,10 +68,13 @@ public class coincontrol : MonoBehaviour
         {
             coinnumber-=num;
             getdelta();
-            timer=2f;
+            timer=deltastaytime;
             deltatext.text="-"+inttostring(num);
-            deltatext.color=new Color(1f,0f,0f,1f);
+            deltatext.color=new Color(1f,0f,0f,0f);
             deltatext.gameObject.SetActive(true);
+            deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-10f,0f);
+            deltatextpos=new Vector3(10f,-10f,0f);
+            deltatextcolor=new Color(1f,0f,0,0f);
             return true;
         }
         else
@@ -89,8 +100,8 @@ public class coincontrol : MonoBehaviour
     {
         entitysize=canvasrt.sizeDelta;
         float theight=entitysize.y/=30f;
-        showtext.GetComponent<RectTransform>().sizeDelta=new Vector2(theight*4f,theight/8f*10f);
-        deltatext.GetComponent<RectTransform>().sizeDelta=new Vector2(theight*5f,theight/8f*10f);
+        showtext.GetComponent<RectTransform>().sizeDelta=new Vector2(theight*3f,theight/8f*10f);
+        deltatext.GetComponent<RectTransform>().sizeDelta=new Vector2(theight*4f,theight/8f*10f);
         //showtext.GetComponent<RectTransform>().anchoredPosition=new Vector3(theight*2f+10f,-theight*3.5f-20f,0f);
         showtext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,0f,0f);
         showtext.fontSize=(int)(theight);
@@ -128,7 +139,23 @@ public class coincontrol : MonoBehaviour
             speedct=0f;
         }
         
-        if(timer>0) timer-=Time.unscaledDeltaTime;
+        if(timer>0)
+        {
+            timer-=Time.unscaledDeltaTime;
+            if(timer>=deltastaytime-0.5f)
+            {
+                deltatextpos.y+=Time.unscaledDeltaTime*(10f/0.5f);
+                deltatextcolor.a+=Time.unscaledDeltaTime*(1f/0.5f);
+                deltatext.GetComponent<RectTransform>().anchoredPosition=deltatextpos;
+                deltatext.color=deltatextcolor;
+            }
+            else
+            {
+                deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,0f,0f);
+                deltatextcolor.a=1f;
+                deltatext.color=deltatextcolor;
+            }
+        }
         if(timer<0)
         {
             timer=0;
