@@ -18,6 +18,7 @@ public class bagmanager : MonoBehaviour
     public Button usebutton;
     public Image useimage;
     public Image sellimage;
+    public Image emptysig;
     public bag myitemlist; //real bag store
     public bool bagisopen;
     public bool cansell;
@@ -57,6 +58,11 @@ public class bagmanager : MonoBehaviour
         return m;
     }
 
+    private void judgeempty()
+    {
+        if (myitemlist.itemlist.Count==0) emptysig.gameObject.SetActive(true); else emptysig.gameObject.SetActive(false);
+    }
+
     private void createnewitem(itemstruct item)
     {
         if (!myitemlist.itemlist.Contains(item)) myitemlist.itemlist.Add(item);
@@ -66,6 +72,7 @@ public class bagmanager : MonoBehaviour
         newItempro.slotitem = item;
         newItempro.slotimage.sprite = item.itemimage;
         newItempro.slotnum.text = inttostring(item.itemnum);
+        emptysig.gameObject.SetActive(false);
     }
 
     public void refreshitem(itemstruct item)
@@ -98,6 +105,7 @@ public class bagmanager : MonoBehaviour
             createnewitem(item);
             refreshitem(item);
         }
+        judgeempty();
     }
 
     public void judgecanuse()
@@ -181,6 +189,7 @@ public class bagmanager : MonoBehaviour
                 break;
             }
         }
+        judgeempty();
     }
 
     public void useitem()
@@ -267,15 +276,16 @@ public class bagmanager : MonoBehaviour
         refreshitem(friendshipflask);
         refreshitem(emptyflask);
         refreshitem(diamond);
+        judgeempty();
     }
 
     void Awake()
     {
         myitemlist.itemlist.Clear();
         bloodflask.itemnum = 1;
-        energyflask.itemnum = 1;
-        friendshipflask.itemnum = 1;
-        emptyflask.itemnum = 1;
+        energyflask.itemnum = 0;
+        friendshipflask.itemnum = 0;
+        emptyflask.itemnum = 0;
         diamond.itemnum = 1;
         refreshall();
     }

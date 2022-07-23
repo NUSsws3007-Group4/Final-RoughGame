@@ -55,11 +55,12 @@ public class bloodbarcontrol : MonoBehaviour
         return targetvolume;
     }
 
-    public void setvolume(int delta)
+    public void setvolume(int num)
     {
-        if(delta<0) delta=0;
-        if(delta>maxblood) delta=maxblood;
-        targetvolume=delta;
+        if(num<0) num=0;
+        if(num>maxblood) num=maxblood;
+        int delta=num-targetvolume;
+        if(delta>0) increasevolume(delta); else decreasevolume(-delta);
     }
 
     public void increasevolume(int delta)
