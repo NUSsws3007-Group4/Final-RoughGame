@@ -39,7 +39,6 @@ public class EliteEnemyBehavior : EnemyBehavior
             if (mLifeLeft <= 0)
                 Death();
         }
-
     }
     protected override void attackBehavior()
     {

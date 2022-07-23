@@ -103,6 +103,21 @@ public class FlyEliteEnemy : EnemyBehavior
         }
     }
 
+    protected override void attackedBehavior()
+    {
+        transform.GetChild(3).gameObject.SetActive(true);
+        attackedTimer -= Time.deltaTime;
+        mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
+        if (attackedTimer <= 0)
+        {
+            attackedTimer = 0.5f;
+            anim.SetBool("Attacked", false);
+            transform.GetChild(3).gameObject.SetActive(false);
+            if (mLifeLeft <= 0)
+                Death();
+        }
+    }
+
     protected override void Death()
     {
         Destroy(guardKey.gameObject);
