@@ -177,13 +177,13 @@ public class bagmanager : MonoBehaviour
         {
             case "bloodflask":
                 {
-                    muim.GetComponent<bloodbarcontrol>().increasevolume(1f);
+                    muim.GetComponent<bloodbarcontrol>().increasevolume(1);
                     pickupitem(emptyflask);
                     break;
                 }
             case "energyflask":
                 {
-                    muim.GetComponent<energybarcontrol>().increasevolume(1f);
+                    muim.GetComponent<energybarcontrol>().increasevolume(1);
                     pickupitem(emptyflask);
                     break;
                 }
@@ -241,11 +241,11 @@ public class bagmanager : MonoBehaviour
     void Awake()
     {
         myitemlist.itemlist.Clear();
-        bloodflask.itemnum = 0;
-        energyflask.itemnum = 0;
-        friendshipflask.itemnum = 0;
-        emptyflask.itemnum = 0;
-        diamond.itemnum = 0;
+        bloodflask.itemnum = 1;
+        energyflask.itemnum = 1;
+        friendshipflask.itemnum = 1;
+        emptyflask.itemnum = 1;
+        diamond.itemnum = 1;
         refreshall();
     }
 

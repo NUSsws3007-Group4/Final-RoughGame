@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class energybarcontrol : MonoBehaviour
 {
-    public float maxenergy=10f;
+    public int maxenergy=10;
     private const float alterspeed=3f;
     private const float effectalterspeed=2f;
 
@@ -17,14 +17,31 @@ public class energybarcontrol : MonoBehaviour
 
     private float energyvolume;
     private float effectvolume;
-    private float targetvolume;
+    private int targetvolume;
     private float entitydeltavolume;
     private float effectdeltavolume;
     private Vector2 entitysize;
     private Vector2 effectsize;
     private float rate;
 
-    public void changemaxenergy(float delta)
+    public Text showtext;
+    public Text deltatext;
+    private float timer;
+
+    private string inttostring(int k)
+    {
+        string m="";
+        if(k==0) m="0";
+        while(k>0)
+        {
+            m=(char)(k%10+48)+m;
+            k/=10;
+        }
+        return m;
+    }
+
+
+    public void changemaxenergy(int delta)
     {
         maxenergy+=delta;
     }
@@ -34,26 +51,40 @@ public class energybarcontrol : MonoBehaviour
         return targetvolume;
     }
 
-    public void setvolume(float delta)
+    public void setvolume(int delta)
     {
-        if(delta<0f) delta=0f;
+        if(delta<0) delta=0;
         if(delta>maxenergy) delta=maxenergy;
         targetvolume=delta;
     }
 
-    public void increasevolume(float delta)
+    public void increasevolume(int delta)
     {
         targetvolume=targetvolume+delta;
-        if(targetvolume<0f) targetvolume=0f;
+
+        showtext.text=inttostring(targetvolume);
+        timer=2f;
+        deltatext.text="+"+inttostring(delta);
+        deltatext.color=new Color(0f,1f,0f,1f);
+        deltatext.gameObject.SetActive(true);
+
+        if(targetvolume<0) targetvolume=0;
         if(targetvolume>maxenergy) targetvolume=maxenergy;
         if(targetvolume>energyvolume) entitydeltavolume=alterspeed; else entitydeltavolume=-alterspeed;
 
     }
 
-    public void decreasevolume(float delta)
+    public void decreasevolume(int delta)
     {
         targetvolume=targetvolume-delta;
-        if(targetvolume<0f) targetvolume=0f;
+
+        showtext.text=inttostring(targetvolume);
+        timer=2f;
+        deltatext.text="-"+inttostring(delta);
+        deltatext.color=new Color(1f,0f,0f,1f);
+        deltatext.gameObject.SetActive(true);
+
+        if(targetvolume<0) targetvolume=0;
         if(targetvolume>maxenergy) targetvolume=maxenergy;
         if(targetvolume>energyvolume) entitydeltavolume=alterspeed; else entitydeltavolume=-alterspeed;
     }
@@ -66,9 +97,14 @@ public class energybarcontrol : MonoBehaviour
         energybarframe.GetComponent<RectTransform>().sizeDelta=entitysize;        
         energybarentity.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.x*energyvolume/maxenergy,entitysize.y);
         energybareffect.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.x*effectvolume/maxenergy,entitysize.y);
-        energybarframe.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y*2-10f,0f);
-        energybarentity.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y*2-10f,0f);
-        energybareffect.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y*2-10f,0f);
+
+        showtext.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.y*4f,entitysize.y);
+        deltatext.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.y*4f,entitysize.y);
+        showtext.fontSize=(int)(entitysize.y*8.5f/10f);
+        deltatext.fontSize=showtext.fontSize;
+        //energybarframe.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y*2-10f,0f);
+        //energybarentity.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y*2-10f,0f);
+        //energybareffect.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y*2-10f,0f);
         entitysize.x=entitysize.y;
         energyicon.GetComponent<RectTransform>().sizeDelta=entitysize;
         energyicon.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y,-entitysize.y*2-10f,0f);
@@ -84,19 +120,25 @@ public class energybarcontrol : MonoBehaviour
         energyvolume=maxenergy;
         effectvolume=maxenergy;
         targetvolume=maxenergy;
+
+        showtext.text=inttostring(maxenergy);
+        deltatext.text="";
+        deltatext.gameObject.SetActive(false);
+
         setsize();
         entitydeltavolume=0f;
         effectdeltavolume=0f;
         entitysize=energybarframe.GetComponent<RectTransform>().sizeDelta;
         effectsize=entitysize;
         rate=entitysize.x/maxenergy;
+        timer=0f;
     }
-
+    
     void Update()
     {
         if(energyvolume!=targetvolume)
         {
-            energyvolume+=entitydeltavolume*Time.smoothDeltaTime;
+            energyvolume+=entitydeltavolume*Time.unscaledDeltaTime;
             if((entitydeltavolume>0 && energyvolume>targetvolume) || (entitydeltavolume<0 && energyvolume<targetvolume))
             {
                 energyvolume=targetvolume;
@@ -105,7 +147,7 @@ public class energybarcontrol : MonoBehaviour
         if(effectvolume!=energyvolume)
         {
             if(energyvolume<effectvolume) effectdeltavolume=-effectalterspeed; else effectdeltavolume=effectalterspeed;
-            effectvolume+=effectdeltavolume*Time.smoothDeltaTime;
+            effectvolume+=effectdeltavolume*Time.unscaledDeltaTime;
             if(energyvolume==targetvolume && ((effectdeltavolume>0 && effectvolume>energyvolume) || (effectdeltavolume<0 && effectvolume<energyvolume)))
             {
                 effectvolume=energyvolume;
@@ -116,5 +158,12 @@ public class energybarcontrol : MonoBehaviour
         effectsize.x=effectvolume*rate;
         energybarentity.GetComponent<RectTransform>().sizeDelta=entitysize;
         energybareffect.GetComponent<RectTransform>().sizeDelta=effectsize;
+
+        if(timer>0) timer-=Time.unscaledDeltaTime;
+        if(timer<0)
+        {
+            timer=0;
+            deltatext.gameObject.SetActive(false);
+        }
     }
 }

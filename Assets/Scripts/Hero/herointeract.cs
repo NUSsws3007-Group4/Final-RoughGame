@@ -92,7 +92,7 @@ public class herointeract : MonoBehaviour
         if (collider.gameObject.layer == 14 || collider.gameObject.layer == 13)
         {
             mHurtTimer = 0;
-            mUIManager.decreasevolume(1f);
+            mUIManager.decreasevolume(1);
             gameObject.GetComponent<HeroBehavior>().hurt();
         }
         //gameObject.GetComponent<HeroMovement>().setspeed(-50*((float)gameObject.GetComponent<HeroMovement>().getMoveDirection()));
@@ -105,7 +105,7 @@ public class herointeract : MonoBehaviour
             if (mHurtTimer >= 1f)
             {
                 mHurtTimer = 0;
-                mUIManager.decreasevolume(1f);
+                mUIManager.decreasevolume(1);
                 gameObject.GetComponent<HeroBehavior>().hurt();
             }
 

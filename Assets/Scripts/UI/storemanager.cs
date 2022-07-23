@@ -112,7 +112,7 @@ public class storemanager : MonoBehaviour
 
     void Start()
     {
-        seticestyle();
+        setforeststyle();
         closemystore();
         canopenstore=false;
         clock=0;
