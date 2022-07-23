@@ -5,16 +5,17 @@ using UnityEngine;
 public class AttackIndicatorBehavior : MonoBehaviour
 {  
     protected float attackTimer = 0f;
+    protected float normalAttackColdDown = 0.6f;
     void Start()
     {
         attackTimer = 0f;
-        gameObject.GetComponent<HeroAttackHurt>().hurt=1;
+        GameObject.Find("hero").GetComponent<HeroAttackHurt>().hurt=25;//Tag:normalAttack
     }
 
     void Update()
     {
         attackTimer += Time.deltaTime;
-        if(attackTimer >= 0.6f)
+        if(attackTimer >= normalAttackColdDown)
         {
             gameObject.SetActive(false);
             attackTimer = 0f;
