@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class AttackIndicatorBehavior : MonoBehaviour
 {  
+    protected const float OriginCD = 0.6f;//初始设定CD
     protected float attackTimer = 0f;
+    protected float normalAttackColdDown;
     void Start()
     {
         attackTimer = 0f;
-        gameObject.GetComponent<HeroAttackHurt>().hurt=1;
+        gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt = 25;//Tag:normalAttack
+        normalAttackColdDown = OriginCD * gameObject.transform.parent.GetComponent<HeroAttackHurt>().coldDownCoef;
     }
 
     void Update()
     {
         attackTimer += Time.deltaTime;
-        if(attackTimer >= 0.6f)
+        if(attackTimer >= normalAttackColdDown)
         {
             gameObject.SetActive(false);
             attackTimer = 0f;
