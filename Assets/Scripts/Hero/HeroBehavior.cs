@@ -500,7 +500,7 @@ public class HeroBehavior : MonoBehaviour
     private void updateAnime()
     {
         mAnimeControl.SetBool("IsSneak", mIsSneak);
-        mAnimeControl.SetBool("IsMove", !(mSpeed == 0f));
+        mAnimeControl.SetBool("IsMove", !(mSpeed == mOffsetSpeed));
         mAnimeControl.SetBool("IsMoveVertical", mRigidbody.velocity.y >= 0.05f);
         mAnimeControl.SetBool("IsOnLadder", mPlace == mPlaceStatus.OnLadder);
         mAnimeControl.SetBool("IsJump", mPlace == mPlaceStatus.InAir && mRigidbody.velocity.y > 0);
