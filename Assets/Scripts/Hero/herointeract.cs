@@ -25,13 +25,11 @@ public class herointeract : MonoBehaviour
             if (mybagmanager.bagisopen)
             {
                 mybagmanager.closemybag();
-                Time.timeScale = 1;
             }
             else
             {
                 mystoremanager.closemystore();
                 mybagmanager.openmybag();
-                Time.timeScale = 0;
             }
         }
         if (Input.GetKeyDown(KeyCode.T))
@@ -39,13 +37,12 @@ public class herointeract : MonoBehaviour
             if (mystoremanager.storeisopen)
             {
                 mystoremanager.closemystore();
-                Time.timeScale = 1;
+                
             }
             else
             {
                 mybagmanager.closemybag();
                 mystoremanager.openmystore();
-                Time.timeScale = 0;
             }
         }
     }

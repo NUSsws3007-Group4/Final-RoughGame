@@ -68,6 +68,7 @@ public class HeroBehavior : MonoBehaviour
         InAir = 4,
         OnLadder = 8,
     }
+    private bool mLeavingLadder = false;
     private mPlaceStatus mPlace = mPlaceStatus.InAir;
     /// <summary> 
     ///人物速度
@@ -335,10 +336,11 @@ public class HeroBehavior : MonoBehaviour
             }
             else if (mPlace == mPlaceStatus.OnLadder)
             {
-                mPlace = mPlaceStatus.InAir;
+                leftLadder();
+                mLeavingLadder = true;
                 Vector2 vel = mRigidbody.velocity;
                 vel.y = mJumpForce;
-                vel.x = -(int)mFaceDir * mJumpHorizon;
+                mSpeed = vel.x = -(int)mFaceDir * mJumpHorizon;
                 mRigidbody.velocity = vel;
             }
             else if (mJumpCount < mJumpSkill)
@@ -377,23 +379,24 @@ public class HeroBehavior : MonoBehaviour
             }
             mRigidbody.velocity = vel;
         }
-        //刷新面向
-        if ((mSpeed - mOffsetSpeed) * (int)mFaceDir < 0)
-        {
-            mFaceDir = mFaceDir == mDirection.right ? mDirection.left : mDirection.right;
-            gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
-            Vector2 meeldir = transform.GetChild(0).localPosition;
-            meeldir.x = -meeldir.x;
-            transform.GetChild(0).localPosition = meeldir;
-        }
+        
         //冲刺
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("Can start dash: " + mDashManager.startDash(mPlace));
+            if(mDashManager.startDash(mPlace,this))
+            {
+                Debug.Log("dashing");
+                //mPlace = mPlaceStatus.InAir;
+            }
         }
         Vector2 velocity = mRigidbody.velocity;
         velocity.x = mSpeed;
         velocity = mDashManager.updateDash(velocity, mPlace, mFaceDir);
+        //刷新面向
+        if ((velocity.x - mOffsetSpeed) * (int)mFaceDir < 0)
+        {
+            changeFacing();
+        }
         mRigidbody.velocity = velocity;
         if (respaned)
         {
@@ -485,7 +488,15 @@ public class HeroBehavior : MonoBehaviour
             return mDirection.stop;
         }
     }
-
+    public mDirection changeFacing()
+    {
+        mFaceDir = mFaceDir == mDirection.right ? mDirection.left : mDirection.right;
+        gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
+        Vector2 meeldir = transform.GetChild(0).localPosition;
+        meeldir.x = -meeldir.x;
+        transform.GetChild(0).localPosition = meeldir;
+        return mFaceDir;
+    }
     private void updateAnime()
     {
         mAnimeControl.SetBool("IsSneak", mIsSneak);
@@ -537,6 +548,7 @@ public class HeroBehavior : MonoBehaviour
                 }
                 else
                 {
+                    mLeavingLadder = false;
                     touchLadder();
                 }
                 break;
@@ -596,7 +608,9 @@ public class HeroBehavior : MonoBehaviour
                     }
                     else
                     {
-                        touchLadder();
+                        if (!mLeavingLadder)
+                            touchLadder();
+                        
                     }
                     break;
                 default:
@@ -623,6 +637,7 @@ public class HeroBehavior : MonoBehaviour
                 mPlace = mPlaceStatus.InAir;
                 break;
             case "Ladder":
+                mLeavingLadder = false;
                 leftLadder();
                 break;
             default:
@@ -646,7 +661,7 @@ class DashManager
     /// <summary>
     /// 获取冲刺能力
     /// </summary>
-    private bool mDashEnabled = false;
+    private bool mDashEnabled = true;
     /// <summary> 
     ///冲刺
     ///</summary>
@@ -679,20 +694,21 @@ class DashManager
     {
         mDashUsed = false;
     }
-    public bool startDash(HeroBehavior.mPlaceStatus _place)
+    public bool startDash(HeroBehavior.mPlaceStatus _place, HeroBehavior hero)
     {
         if (!isDashAvalible(_place))
         {
+            
             return false;
         }
         else
         {
-            mIsDash = true;
-            mDashUsed = true;
             if (((int)_place & 10) != 0)
             {
-
+                hero.changeFacing();
             }
+            mIsDash = true;
+            mDashUsed = true;
             return true;
         }
     }
@@ -701,9 +717,7 @@ class DashManager
     {
         if (mIsDash)
         {
-            if (_place == HeroBehavior.mPlaceStatus.InAir)
-            {
-
+            
                 mDashTimeCount += Time.smoothDeltaTime;
                 if (mDashTimeCount >= mDashForce)
                 {
@@ -711,12 +725,7 @@ class DashManager
                     mDashTimeCount = 0;
                 }
                 return new Vector2(mDashSpeed * (float)_faceing, 0);
-            }
-            else
-            {
-                mIsDash = false;
-                return _speed;
-            }
+            
         }
         else
         {
