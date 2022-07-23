@@ -108,8 +108,8 @@ public class storemanager : MonoBehaviour
         bloodflask.locked=false;
         energyflask.itemnuminstore=3;
         energyflask.locked=false;
-        friendshipflask.itemnuminstore=3;
-        friendshipflask.locked=true;
+        friendshipflask.itemnuminstore=6;
+        friendshipflask.locked=false;
     }
 
     void Start()

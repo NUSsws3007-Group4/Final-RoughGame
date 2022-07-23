@@ -138,7 +138,9 @@ public class bagmanager : MonoBehaviour
                     else
                     {
                         usebutton.interactable = false;
+                        friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
                     }
+                    updateinfo(friendshipflask.iteminfo);
                     break;
                 }
             case "diamond":
@@ -200,7 +202,26 @@ public class bagmanager : MonoBehaviour
             case "friendshipflask":
                 {
                     hero.GetComponent<HeroBehavior>().upFriendship(10);
+                    int i = ++hero.GetComponent<HeroFakeFriendly>().usedCount;
                     pickupitem(emptyflask);
+                    switch (i)
+                    {
+                        case 1:
+                            friendshipflask.iteminfo = "This liquid can make enemies more friendly to you.\nEnjoy it.";
+                            break;
+                        case 3:
+                            friendshipflask.iteminfo = "Enemies seem to be more friendly to me...\nBut why do I feel anxious?\nMaybe I shouln't use it too much...";
+                            break;
+                        case 5:
+                            friendshipflask.iteminfo = "I'm worried that something bad will happen...";
+                            break;
+                    }
+                    if (i >= 5)
+                    {
+                        hero.GetComponent<HeroFakeFriendly>().fakeFriendly = true;
+                    };
+                    updateinfo(friendshipflask.iteminfo);
+
                     break;
                 }
             case "diamond":
@@ -266,6 +287,8 @@ public class bagmanager : MonoBehaviour
         iteminformationshowed.text = "";
         cansell = false;
         hero = GameObject.Find("hero");
+        Debug.Log(hero.name);
+        friendshipflask.iteminfo = "A kind of mysterious liquid...\nWant to have a try?";
         closemybag();
     }
 
