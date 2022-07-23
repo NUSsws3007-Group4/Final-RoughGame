@@ -10145,6 +10145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveUpDown: 1
+  mPlayer: {fileID: 0}
 --- !u!66 &912243861
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -10893,7 +10894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ae12e4043590e4a80b50209f73d2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: comingsoon
+  nextLevel: Level3
 --- !u!70 &996024544
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -14702,6 +14703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveUpDown: 0
+  mPlayer: {fileID: 0}
 --- !u!1001 &1908155986
 PrefabInstance:
   m_ObjectHideFlags: 0
