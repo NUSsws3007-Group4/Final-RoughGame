@@ -18,6 +18,18 @@ public class merchantbehavior : MonoBehaviour
         timer=0f;
         flag=true;
         if(dialoguebox!=null) dialoguebox.SetActive(false);
+        if(!hero)
+        {
+            hero = GameObject.Find("hero");
+        }
+        if(!stg||!bg)
+        {
+            GameObject canvas = GameObject.Find("Canvas");
+            stg = canvas.GetComponent<storemanager>();
+            bg = canvas.GetComponent<bagmanager>();
+            GameObject cam = GameObject.Find("Cameramanager");
+            cm = cam.GetComponent<cameramanagerbehavior>();
+        }
     }
 
     void Update()
