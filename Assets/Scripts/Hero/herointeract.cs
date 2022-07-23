@@ -9,7 +9,7 @@ public class herointeract : MonoBehaviour
     public bloodbarcontrol mUIManager = null;
     public bagmanager mybagmanager;
     public storemanager mystoremanager;
-    public itemstruct bloodflask,energyflask,friendshipflask,emptyflask,diamond;
+    public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond;
 
     private float mHurtTimer = 0;
     void Start()
@@ -20,28 +20,32 @@ public class herointeract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B))
         {
-            if(mybagmanager.bagisopen)
+            if (mybagmanager.bagisopen)
             {
                 mybagmanager.closemybag();
+                Time.timeScale = 1;
             }
             else
             {
                 mystoremanager.closemystore();
                 mybagmanager.openmybag();
+                Time.timeScale = 0;
             }
         }
-        if(Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            if(mystoremanager.storeisopen)
+            if (mystoremanager.storeisopen)
             {
                 mystoremanager.closemystore();
+                Time.timeScale = 1;
             }
             else
             {
                 mybagmanager.closemybag();
                 mystoremanager.openmystore();
+                Time.timeScale = 0;
             }
         }
     }
@@ -50,34 +54,34 @@ public class herointeract : MonoBehaviour
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
-            switch(collider.gameObject.tag)
+            switch (collider.gameObject.tag)
             {
                 case "cherry":
-                {
-                    //Destroy(collider.gameObject);
-                    mybagmanager.pickupitem(bloodflask);
-                    break;
-                }
+                    {
+                        //Destroy(collider.gameObject);
+                        mybagmanager.pickupitem(bloodflask);
+                        break;
+                    }
                 case "energyflask":
-                {
-                    mybagmanager.pickupitem(energyflask);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(energyflask);
+                        break;
+                    }
                 case "diamond":
-                {
-                    mybagmanager.pickupitem(diamond);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(diamond);
+                        break;
+                    }
                 case "Dash":
-                {
-                    mHeroBehavior.setDashSkill(true);
-                    break;
-                }
+                    {
+                        mHeroBehavior.setDashSkill(true);
+                        break;
+                    }
                 case "DoubleJump":
-                {
-                    mHeroBehavior.setJumpSkill(1);
-                    break;
-                }
+                    {
+                        mHeroBehavior.setJumpSkill(1);
+                        break;
+                    }
             }
         }
 
@@ -104,7 +108,7 @@ public class herointeract : MonoBehaviour
                 mUIManager.decreasevolume(1f);
                 gameObject.GetComponent<HeroBehavior>().hurt();
             }
-            
+
         }
         //gameObject.GetComponent<HeroMovement>().setspeed(-50*((float)gameObject.GetComponent<HeroMovement>().getMoveDirection()));
     }

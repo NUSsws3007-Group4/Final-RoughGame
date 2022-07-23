@@ -8,7 +8,7 @@ public class AttackTipSlime : SlimeBehavior
     public GameObject attackimage;
     public GameObject friendlyimage;
 
-    void Awake()
+    protected override void Awake()
     {
         attackimage.SetActive(false);
     }
