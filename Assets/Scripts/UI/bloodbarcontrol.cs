@@ -127,7 +127,7 @@ public class bloodbarcontrol : MonoBehaviour
 
     void Start()
     {
-        maxblood=10;
+        maxblood=200;
         //initiate size and position
         bloodvolume=maxblood;
         effectvolume=maxblood;

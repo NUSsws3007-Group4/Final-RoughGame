@@ -127,7 +127,7 @@ public class energybarcontrol : MonoBehaviour
 
     void Start()
     {
-        maxenergy=10;
+        maxenergy=5;
         //initiate size and position
         energyvolume=maxenergy;
         effectvolume=maxenergy;
