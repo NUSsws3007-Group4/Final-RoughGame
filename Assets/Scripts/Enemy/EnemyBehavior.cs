@@ -79,8 +79,8 @@ public class EnemyBehavior : MonoBehaviour
             anim.SetBool("Attacked", true);
             mRigidbody.velocity = new Vector3(0, 0, 0);
             mRigidbody.AddForce(-100 * transform.right);
-            mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt *
-            collision.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;//计算受伤
+            mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt *
+            collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().powerUpCoef;//计算受伤
             switch (mFriendshipStatus)
             {
                 case 2:

@@ -13100,42 +13100,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 208285167}
     m_Modifications:
-    - target: {fileID: 336839945, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 336839948, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_Radius
-      value: 0.81
-      objectReference: {fileID: 0}
-    - target: {fileID: 336839948, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 336839948, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: diamond
-      value: 
-      objectReference: {fileID: 11400000, guid: 762491ef494ddb44eb53e920bafc1456, type: 2}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: bloodflask
-      value: 
-      objectReference: {fileID: 11400000, guid: bf32a22fca0135a4aaf570e80800e967, type: 2}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: emptyflask
-      value: 
-      objectReference: {fileID: 11400000, guid: eceadc21bc92283478b21174a6eb50bb, type: 2}
     - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: mUIManager
       value: 
       objectReference: {fileID: 1875227788}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: energyflask
-      value: 
-      objectReference: {fileID: 11400000, guid: 338cf03521332bd4e828d54dee60de75, type: 2}
     - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: mybagmanager
       value: 
@@ -13144,41 +13112,9 @@ PrefabInstance:
       propertyPath: mystoremanager
       value: 
       objectReference: {fileID: 689011599}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: friendshipflask
-      value: 
-      objectReference: {fileID: 11400000, guid: 4e5c073e0ce164c4b9bee43eaa04bcc3, type: 2}
     - target: {fileID: 4268124987306694998, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_Name
       value: hero
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306694998, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306694999, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306695000, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306695000, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306695000, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 527526782, guid: eb5e418a974b2d449bbfd3856de77cf1, type: 3}
-    - target: {fileID: 4268124987306695000, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306695000, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_RootOrder
@@ -13224,34 +13160,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306695002, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306695002, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306695002, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306695003, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: muim
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306695003, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695003, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: mHealth
       value: 
       objectReference: {fileID: 1875227788}
-    - target: {fileID: 4268124987306695004, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
 --- !u!114 &826561832 stripped

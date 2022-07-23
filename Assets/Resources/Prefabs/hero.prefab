@@ -96,8 +96,8 @@ GameObject:
   - component: {fileID: 336839949}
   - component: {fileID: 336839948}
   - component: {fileID: 336839947}
-  - component: {fileID: 336839950}
   - component: {fileID: 336839951}
+  - component: {fileID: 1564237677}
   m_Layer: 19
   m_Name: AttackIndicator
   m_TagString: normalAttack
@@ -209,19 +209,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &336839950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336839944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae33f755f5f8dd42b22f559a60ec3b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hurt: 0
 --- !u!114 &336839951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +219,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b684a474d3446e04785fcd1087395cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1564237677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336839944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbca10382749ce43836f031ce1418e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &366653564
@@ -419,6 +418,7 @@ GameObject:
   - component: {fileID: 1918388478}
   - component: {fileID: 1918388491}
   - component: {fileID: 1751235120886904614}
+  - component: {fileID: 1918388493}
   m_Layer: 8
   m_Name: hero
   m_TagString: Player
@@ -630,3 +630,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usedCount: 0
   fakeFriendly: 0
+--- !u!114 &1918388493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4268124987306694998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae33f755f5f8dd42b22f559a60ec3b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurt: 0
+  powerUpCoef: 1
+  coldDownCoef: 1
