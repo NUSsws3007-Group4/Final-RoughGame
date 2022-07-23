@@ -60,6 +60,7 @@ public class storemanager : MonoBehaviour
         {
             mystoreUI.SetActive(true);
             storeisopen=true;
+            Time.timeScale = 0;
         }
     }
 
@@ -67,6 +68,7 @@ public class storemanager : MonoBehaviour
     {
         mystoreUI.SetActive(false);
         storeisopen=false;
+        Time.timeScale = 1;
     }
 
     public void refreshstore() //refresh everything in store

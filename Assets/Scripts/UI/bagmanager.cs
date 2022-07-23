@@ -11,6 +11,7 @@ public class bagmanager : MonoBehaviour
     public GameObject mybagUI = null; //UI
     public GameObject slotgrid; //itemlistUI
     public GameObject muim;
+    public GameObject hero;
     public Text iteminformationshowed;
     public itemstruct nowselecteditem;
     public Button discardbutton;
@@ -23,6 +24,7 @@ public class bagmanager : MonoBehaviour
 
     public void openmybag()
     {
+        Time.timeScale = 0;
         mybagUI.SetActive(true);
         usebutton.interactable = false;
         discardbutton.interactable = false;
@@ -38,6 +40,7 @@ public class bagmanager : MonoBehaviour
     {
         mybagUI.SetActive(false);
         bagisopen = false;
+        Time.timeScale = 1;
     }
 
     private string inttostring(int k)
@@ -126,9 +129,16 @@ public class bagmanager : MonoBehaviour
                     }
                     break;
                 }
-            case "friendshipflask": //not done yet
+            case "friendshipflask":
                 {
-                    usebutton.interactable = true;
+                    if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
+                    {
+                        usebutton.interactable = true;
+                    }
+                    else
+                    {
+                        usebutton.interactable = false;
+                    }
                     break;
                 }
             case "diamond":
@@ -189,7 +199,7 @@ public class bagmanager : MonoBehaviour
                 }
             case "friendshipflask":
                 {
-                    //friendly
+                    hero.GetComponent<HeroBehavior>().upFriendship(10);
                     pickupitem(emptyflask);
                     break;
                 }
@@ -255,6 +265,7 @@ public class bagmanager : MonoBehaviour
         discardbutton.interactable = false;
         iteminformationshowed.text = "";
         cansell = false;
+        hero = GameObject.Find("hero");
         closemybag();
     }
 
