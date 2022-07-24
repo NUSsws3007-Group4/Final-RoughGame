@@ -127,9 +127,9 @@ public class energybarcontrol : MonoBehaviour
         energybareffect.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.x*effectvolume/maxenergy,entitysize.y);
 
         showtext.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.y*4f,entitysize.y);
-        deltatext.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.y*4f,entitysize.y);
+        deltatext.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.y*4f,entitysize.y/8f*10f);
         showtext.fontSize=(int)(entitysize.y*8.5f/10f);
-        deltatext.fontSize=showtext.fontSize;
+        deltatext.fontSize=(int)(entitysize.y);
         //energybarframe.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y*2-10f,0f);
         //energybarentity.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y*2-10f,0f);
         //energybareffect.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y*2-10f,0f);
