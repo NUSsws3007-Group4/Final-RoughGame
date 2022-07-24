@@ -14,7 +14,6 @@ TagManager:
   - Puzzle
   - bullet
   - Elevator
-<<<<<<< Updated upstream
   - GroundEliteCombat
   - GroundEliteRemote
   - SlimeBall
@@ -24,13 +23,6 @@ TagManager:
   - MPincrease
   - CDreduce
   - atkup
-=======
-  - SlimeBall
-  - Arrow
-  - Bee
-  - GroundEliteRemote
-  - GroundEliteCombat
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
