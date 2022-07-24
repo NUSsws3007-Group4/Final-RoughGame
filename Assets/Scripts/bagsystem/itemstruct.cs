@@ -15,5 +15,5 @@ public class itemstruct : ScriptableObject
     public int itemprice;
     [TextArea]
     public string iteminfo;
-    public int itemtype;
+    public string itemtype;
 }
