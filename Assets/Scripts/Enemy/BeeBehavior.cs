@@ -13,7 +13,7 @@ public class BeeBehavior : MonoBehaviour
     private RaycastHit2D info;
     public GameObject targetHero;
     private Animator anim;
-    private float beeSpeed = 8f;
+    private float beeSpeed = 5f;
     private float patrolSpeed = 4f;
     private void Start() 
     {
