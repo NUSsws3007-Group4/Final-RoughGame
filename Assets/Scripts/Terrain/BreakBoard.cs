@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class BreakBoard : MonoBehaviour
 {
-    public GameObject dashsign;
-    public GameObject dashtutorialbox;
-    public cameramanagerbehavior cm;
-    public GameObject focusassis;
     // Start is called before the first frame update
     void Start()
     {
-        dashtutorialbox.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("attack:" + other.gameObject.layer);
+        TutorialManager tu;
+        if (tu = gameObject.GetComponent<TutorialManager>())
+        {
+            tu.showBox();
+        }
         if (other.gameObject.layer == 19)
         {
             foreach (Transform i in transform)
@@ -29,9 +30,6 @@ public class BreakBoard : MonoBehaviour
                 i.gameObject.SetActive(false);
             }
             gameObject.SetActive(false);
-            focusassis.transform.position=dashsign.transform.position;
-            dashtutorialbox.SetActive(true);
-            cm.startfocus(focusassis,3f,dashtutorialbox);
         }
     }
 
@@ -39,6 +37,11 @@ public class BreakBoard : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other)
     {
         Debug.Log("attack:" + other.gameObject.layer);
+        TutorialManager tu;
+        if (tu = gameObject.GetComponent<TutorialManager>())
+        {
+            tu.showBox();
+        }
         if (other.gameObject.layer == 19)
         {
             foreach (Transform i in transform)
