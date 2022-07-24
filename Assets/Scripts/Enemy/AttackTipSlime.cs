@@ -7,6 +7,7 @@ public class AttackTipSlime : SlimeBehavior
     public GameObject s;
     public GameObject attackimage;
     public GameObject friendlyimage;
+    public GameObject wall;
 
     protected override void Awake()
     {
@@ -32,6 +33,8 @@ public class AttackTipSlime : SlimeBehavior
     }
     protected override void Death()
     {
+        if (wall)
+            wall.SetActive(false);
         s.SetActive(true);
         friendlyimage.SetActive(true);
         s.GetComponent<FriendshipTipBehavior>().timer=5f;
