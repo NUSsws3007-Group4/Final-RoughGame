@@ -7,6 +7,7 @@ public class EliteEnemyBehavior : EnemyBehavior
     private float cx1, cx2, cy1, cy2;
     private Vector3 spawnPoint;
     private GameObject guardPortal;
+    private bagmanager bgm;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -142,12 +143,16 @@ public class EliteEnemyBehavior : EnemyBehavior
         if (distance < detectDistance)
         {
             guardPortal.SetActive(true);
+            bgm.friendshipflask.locked = false;
+            bgm.pickupitem(bgm.friendshipflask);
         }
 
     }
     protected override void Death()
     {
         guardPortal.SetActive(true);
+        bgm.friendshipflask.locked = false;
+        bgm.pickupitem(bgm.friendshipflask);
         base.Death();
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
