@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Threading;
-public class EliteEnemyBehavior : EnemyBehavior
+public class Elite3EnemyBehavior : EnemyBehavior
 {
     private float remoteAttackTimer = 0f;
     private bool edgeTouched = false;
@@ -24,22 +24,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         initialright = transform.right;
         guardPortal.SetActive(false);
     }
-    protected override void attackedBehavior()
-    {
-        transform.GetChild(3).gameObject.SetActive(true);
-        transform.GetChild(4).gameObject.SetActive(true);
-        attackedTimer -= Time.deltaTime;
-        mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
-        if (attackedTimer <= 0)
-        {
-            attackedTimer = 0.5f;
-            anim.SetBool("Attacked", false);
-            transform.GetChild(3).gameObject.SetActive(false);
-            transform.GetChild(4).gameObject.SetActive(false);
-            if (mLifeLeft <= 0)
-                Death();
-        }
-    }
+
     protected override void attackBehavior()
     {
         Bounds b1 = transform.GetChild(2).GetComponent<BoxCollider2D>().bounds;
@@ -51,22 +36,19 @@ public class EliteEnemyBehavior : EnemyBehavior
         if (!((cx1 > cx2) || (cy1 > cy2)))
         {
             Invoke("CloseCombact", 0.2f);
-            anim.SetTrigger("Attacking");
+            anim.SetTrigger("AttackingNear");
             attackTimer = 0f;
 
         }
         else if (remoteAttackTimer >= 6.0f)
         {
-            Invoke("CloseCombact", 0.2f);
-            anim.SetTrigger("Attacking");
+            anim.SetTrigger("AttackingRemote");
             remoteAttackTimer = 0f;
             attackTimer = 0f;
             spawnPoint = transform.localPosition;
-            spawnPoint.y += 0.6f;
-            spawnPoint.x += 0.4f * transform.right.x;
-            Invoke("GenerateRemote", 0.2f);
-
-
+            spawnPoint.y += 0.3f;
+            spawnPoint.x += 0.2f * transform.right.x;
+            Invoke("GenerateRemote", 0.9f);
         }
     }
     protected override void patrolBehavior()
@@ -90,7 +72,6 @@ public class EliteEnemyBehavior : EnemyBehavior
 
     protected override void chaseBehavior()
     {
-
         if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
             Invoke("Respawn", 0.2f);
         else
@@ -102,7 +83,7 @@ public class EliteEnemyBehavior : EnemyBehavior
                 transform.right = -transform.right;
                 edgeTouched = false;
             }
-            if (!edgeTouched && distance > 1f)
+             if (!edgeTouched && distance > 2f)
             {
                 anim.SetBool("Walking", true);
                 vel = mRigidbody.velocity;
@@ -155,11 +136,8 @@ public class EliteEnemyBehavior : EnemyBehavior
         if (collision.gameObject.layer == 19)
         {
             anim.SetBool("Attacked", true);
-            if (!edgeTouched)
-            {
-                mRigidbody.velocity = new Vector3(0, 0, 0);
-                mRigidbody.AddForce(-100 * transform.right);
-            }
+            mRigidbody.velocity = new Vector3(0, 0, 0);
+            mRigidbody.AddForce(-100 * transform.right);
             mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
             switch (mFriendshipStatus)
             {
@@ -198,13 +176,22 @@ public class EliteEnemyBehavior : EnemyBehavior
 
     private void GenerateRemote()
     {
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 2; ++i)
         {
-            GameObject remoteAttack = Instantiate(Resources.Load("Prefabs/Elite1Remote") as GameObject);
+            GameObject remoteAttack = Instantiate(Resources.Load("Prefabs/Elite3Remote") as GameObject);
             remoteAttack.transform.localPosition = spawnPoint;
             remoteAttack.transform.right = transform.right;
-            spawnPoint.y -= 0.6f;
-            spawnPoint.x -= 0.2f * transform.right.x;
+            spawnPoint.y -= 1.0f;
         }
+        spawnPoint.y += 1.5f;
+        spawnPoint.x += 0.3f * transform.right.x;
+        Invoke("GenerateCentralRemote", 0.15f);
+    }
+
+    private void GenerateCentralRemote()
+    {
+        GameObject remoteAttack = Instantiate(Resources.Load("Prefabs/Elite3Remote") as GameObject);
+        remoteAttack.transform.localPosition = spawnPoint;
+        remoteAttack.transform.right = transform.right;
     }
 }
