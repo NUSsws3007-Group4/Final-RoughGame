@@ -17,7 +17,7 @@ public class TreeManBehavior : MonoBehaviour
     private Animator anim;
     private bool isactive=true;
 
-    private int nowATK = 10;
+    public int nowATK = 10;
     private float atkTimer = 0f;
 
     private void Start()
@@ -64,8 +64,8 @@ public class TreeManBehavior : MonoBehaviour
         if (collision.gameObject.layer == 19)
         {
             //anim.SetBool("Attacked", true);
-            mRigidbody.velocity = new Vector3(0, 0, 0);
-            mRigidbody.AddForce(-100 * transform.right);
+            // mRigidbody.velocity = new Vector3(0, 0, 0);
+            // mRigidbody.AddForce(-100 * transform.right);
             mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt *
             collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().powerUpCoef;//计算受伤
             switch (mFriendshipStatus)
@@ -96,12 +96,14 @@ public class TreeManBehavior : MonoBehaviour
 
     private void Respawn()
     {
+        Debug.Log("Tree Respawn");
         patrol = true;
         nowATK = 10;
-        mLifeLeft = 200;//基础生命值以史莱姆为例子
+        mLifeLeft = 200;
         transform.localPosition = initialpos;
         transform.right = initialright;
-        mRigidbody.velocity = new Vector3(0,0,0);
+        enemyRenderer.flipX = false;
+        //mRigidbody.velocity = new Vector3(0,0,0);
         attackTimer = 0.5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
     }
@@ -109,9 +111,6 @@ public class TreeManBehavior : MonoBehaviour
     private void patrolBehavior()
     {
         transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-        vel = mRigidbody.velocity;
-        vel.x = 0f;
-        mRigidbody.velocity = transform.right * 2 + vel;
         distance = Vector3.Distance(pos, targetpos);
         if (distance <= detectDistance)
         {
@@ -183,18 +182,27 @@ public class TreeManBehavior : MonoBehaviour
     }
     private void attackBehavior()
     {
-        /*TODO: tree man attack prefabs*/
-        GameObject remoteAttack = Instantiate(Resources.Load("Prefabs/BulletScreen") as GameObject);
+        GameObject remoteAttack = Instantiate(Resources.Load("Prefabs/TreeAttack") as GameObject);
         targetpos = targetHero.transform.localPosition;
+        if(targetHero.transform.position.x < transform.position.x)
+        {
+            enemyRenderer.flipX = true;
+        }
+        else
+        {
+            enemyRenderer.flipX = false;
+        }
+
         remoteAttack.transform.localPosition = transform.localPosition;
-        remoteAttack.transform.up = (targetpos - transform.localPosition).normalized;
+        remoteAttack.transform.right = (targetpos - transform.localPosition).normalized;
+        remoteAttack.gameObject.GetComponent<TreeAttack>().branchDmg = nowATK;
         Debug.Log("EnemyAttacking");
     }
 
     private void attackedBehavior()
     {
         attackedTimer -= Time.deltaTime;
-        mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
+        //mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
         if (attackedTimer <= 0)
         {
             attackedTimer = 0.5f;
