@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class storemanager : MonoBehaviour
 {
-    public itemstruct bloodflask,energyflask,diamond,friendshipflask;//ragerune,cooldownrune,robustrune,energyrune;
+    public itemstruct bloodflask,energyflask,friendshipflask,ragepotion,soulpotion,defencepotion;//ragerune,cooldownrune,robustrune,energyrune;
 
     public Text iteminformationshowed;
     public GameObject muim;
@@ -110,11 +110,17 @@ public class storemanager : MonoBehaviour
         energyflask.locked=false;
         friendshipflask.itemnuminstore=6;
         friendshipflask.locked=false;
+        ragepotion.itemnuminstore=2;
+        ragepotion.locked=true;
+        defencepotion.itemnuminstore=2;
+        defencepotion.locked=true;
+        soulpotion.itemnuminstore=2;
+        soulpotion.locked=true;
     }
 
     void Start()
     {
-        setforeststyle();
+        seticestyle();
         closemystore();
         canopenstore=false;
         clock=0;

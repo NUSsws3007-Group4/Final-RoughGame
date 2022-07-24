@@ -8,6 +8,8 @@ public class energybarcontrol : MonoBehaviour
     public int maxenergy=5;
     private float alterspeed;
     private float effectalterspeed;
+    private bool runenergy;
+    private float infinitetimer;
 
     public Image energybarentity=null;
     public Image energybareffect=null;
@@ -51,6 +53,13 @@ public class energybarcontrol : MonoBehaviour
         rate=energybarframe.GetComponent<RectTransform>().sizeDelta.x/maxenergy;
     }
 
+    public void setinfinite()
+    {
+        setvolume(maxenergy);
+        runenergy=false;
+        infinitetimer=60f;
+    }
+
     public void changemaxenergy(int delta)
     {
         if(delta>0) increasevolume(delta); else decreasevolume(-delta);
@@ -92,6 +101,7 @@ public class energybarcontrol : MonoBehaviour
 
     public void decreasevolume(int delta)
     {
+        if(!runenergy) return;
         targetvolume=targetvolume-delta;
 
         showtext.text=inttostring(targetvolume);
@@ -140,6 +150,7 @@ public class energybarcontrol : MonoBehaviour
         energyvolume=maxenergy;
         effectvolume=maxenergy;
         targetvolume=maxenergy;
+        runenergy=true;
 
         showtext.text=inttostring(maxenergy);
         deltatext.text="";
@@ -200,6 +211,13 @@ public class energybarcontrol : MonoBehaviour
         {
             timer=0;
             deltatext.gameObject.SetActive(false);
+        }
+
+        if(infinitetimer>0) infinitetimer-=Time.unscaledDeltaTime;
+        if(infinitetimer<0)
+        {
+            infinitetimer=0;
+            runenergy=true;
         }
     }
 }

@@ -12,7 +12,7 @@ public class herointeract : MonoBehaviour
     public bloodbarcontrol mUIManager = null;
     public bagmanager mybagmanager;
     public storemanager mystoremanager;
-    public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond,ragerune,cooldownrune,robustrune,energyrune,key;
+    public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond,powerrune,cooldownrune,robustrune,energyrune,key,ragepotion,soulpotion,defencepotion;
 
     private float mHurtTimer = 0;
     void Start()
@@ -94,7 +94,7 @@ public class herointeract : MonoBehaviour
                     }
                 case "atkup":
                 {
-                    mybagmanager.pickupitem(ragerune);
+                    mybagmanager.pickupitem(powerrune);
                     break;
                 }
                 case "CDreduce":
@@ -115,6 +115,21 @@ public class herointeract : MonoBehaviour
                 case "key":
                 {
                     mybagmanager.pickupitem(key);
+                    break;
+                }
+                case "ragepotion":
+                {
+                    mybagmanager.pickupitem(ragepotion);
+                    break;
+                }
+                case "defencepotion":
+                {
+                    mybagmanager.pickupitem(defencepotion);
+                    break;
+                }
+                case "soulpotion":
+                {
+                    mybagmanager.pickupitem(soulpotion);
                     break;
                 }
             }

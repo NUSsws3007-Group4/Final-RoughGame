@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e6ce74e10ceec340ba2014fb04d4ea6, type: 3}
-  m_Name: Key
+  m_Name: bloodflask
   m_EditorClassIdentifier: 
-  itemname: Key
-  itemimage: {fileID: 21300000, guid: b1308d5f7f9f103468e040cfe7baceee, type: 3}
-  itemnum: 1
+  itemname: Healing Potion
+  itemimage: {fileID: 21300000, guid: 014332cc19f9daa48847508c38809abc, type: 3}
+  itemnum: 3
   itemnuminstore: 0
   locked: 0
-  itemprice: 0
-  iteminfo: You find a key......Remember to take care of it!But where is the door?
-  itemtype: '[Prop]'
+  itemprice: 100
+  iteminfo: This is a Healing Potion,it can cure you!
+  itemtype: '[Potion]'

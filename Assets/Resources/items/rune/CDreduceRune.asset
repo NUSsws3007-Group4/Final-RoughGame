@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6ce74e10ceec340ba2014fb04d4ea6, type: 3}
   m_Name: CDreduceRune
   m_EditorClassIdentifier: 
-  itemname: Cooldown Rune
+  itemname: Agility Rune
   itemimage: {fileID: 21300000, guid: 8bf865e0ea5d94243b19cd1cff7be252, type: 3}
   itemnum: 0
   itemnuminstore: 0

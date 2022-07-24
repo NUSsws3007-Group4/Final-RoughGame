@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class bagmanager : MonoBehaviour
 {
     //all items
-    public itemstruct bloodflask, energyflask, diamond, friendshipflask, emptyflask,ragerune,cooldownrune,robustrune,energyrune,key;
+    public itemstruct bloodflask, energyflask, diamond, friendshipflask, emptyflask,powerrune,cooldownrune,robustrune,energyrune,key,ragepotion,soulpotion,defencepotion;
 
     public GameObject mybagUI = null; //UI
     public GameObject slotgrid; //itemlistUI
@@ -119,7 +119,7 @@ public class bagmanager : MonoBehaviour
             {
                 switch (nowselecteditem.itemname)
                 {
-                    case "bloodflask":
+                    case "Healing Potion":
                     {
                         if (muim.GetComponent<bloodbarcontrol>().getvolume() < muim.GetComponent<bloodbarcontrol>().maxblood)
                         {
@@ -131,7 +131,7 @@ public class bagmanager : MonoBehaviour
                         }
                         break;
                     }
-                    case "energyflask":
+                    case "Energy Potion":
                     {
                         if (muim.GetComponent<energybarcontrol>().getvolume() < muim.GetComponent<energybarcontrol>().maxenergy)
                         {
@@ -143,7 +143,7 @@ public class bagmanager : MonoBehaviour
                         }
                         break;
                     }
-                    case "friendshipflask":
+                    case "Friendship Potion":
                     {
                         if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
                         {
@@ -155,6 +155,21 @@ public class bagmanager : MonoBehaviour
                             friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
                         }
                         updateinfo(friendshipflask.iteminfo,friendshipflask.itemtype+" "+friendshipflask.itemname);
+                        break;
+                    }
+                    case "Rage Potion":
+                    {
+                        usebutton.interactable = true;
+                        break;
+                    }
+                    case "Defence Potion":
+                    {
+                        usebutton.interactable = true;
+                        break;
+                    }
+                    case "Soul Potion":
+                    {
+                        usebutton.interactable = true;
                         break;
                     }
                 }
@@ -220,19 +235,19 @@ public class bagmanager : MonoBehaviour
     {
         switch (nowselecteditem.itemname)
         {
-            case "bloodflask":
+            case "Healing Potion":
                 {
                     muim.GetComponent<bloodbarcontrol>().increasevolume(1);
                     pickupitem(emptyflask);
                     break;
                 }
-            case "energyflask":
+            case "Energy Potion":
                 {
                     muim.GetComponent<energybarcontrol>().increasevolume(1);
                     pickupitem(emptyflask);
                     break;
                 }
-            case "friendshipflask":
+            case "Friendship Potion":
                 {
                     hero.GetComponent<HeroBehavior>().upFriendship(10);
                     int i = ++hero.GetComponent<HeroFakeFriendly>().usedCount;
@@ -257,20 +272,35 @@ public class bagmanager : MonoBehaviour
 
                     break;
                 }
-            case "diamond":
+            case "Diamond":
                 {
                     int earning = (int)(Random.Range(80, 120));
                     muim.GetComponent<coincontrol>().earn(earning);
                     break;
                 }
-            case "emptyflask":
+            case "Empty Flask":
                 {
                     muim.GetComponent<coincontrol>().earn(5);
                     break;
                 }
-            case "key":
+            case "Key":
             {
                 //open the door
+                break;
+            }
+            case "Rage Potion":
+            {
+                //攻击力翻倍
+                break;
+            }
+            case "Defence Potion":
+            {
+                //防御力
+                break;
+            }
+            case "Soul Potion":
+            {
+                muim.GetComponent<energybarcontrol>().setinfinite();
                 break;
             }
         }
@@ -307,26 +337,32 @@ public class bagmanager : MonoBehaviour
         refreshitem(emptyflask);
         refreshitem(diamond);
         refreshitem(key);
-        refreshitem(ragerune);
+        refreshitem(powerrune);
         refreshitem(cooldownrune);
         refreshitem(robustrune);
         refreshitem(energyrune);
+        refreshitem(ragepotion);
+        refreshitem(defencepotion);
+        refreshitem(soulpotion);
         judgeempty();
     }
 
     void Awake()
     {
         myitemlist.itemlist.Clear();
-        bloodflask.itemnum = 1;
-        energyflask.itemnum = 1;
-        friendshipflask.itemnum = 1;
-        emptyflask.itemnum = 1;
-        diamond.itemnum = 1;
-        key.itemnum=1;
-        ragerune.itemnum=0;
-        cooldownrune.itemnum=0;
-        robustrune.itemnum=0;
-        energyrune.itemnum=0;
+        bloodflask.itemnum = 2;
+        energyflask.itemnum = 2;
+        friendshipflask.itemnum = 2;
+        defencepotion.itemnum=2;
+        ragepotion.itemnum=2;
+        soulpotion.itemnum=2;
+        emptyflask.itemnum = 2;
+        diamond.itemnum = 2;
+        key.itemnum=2;
+        powerrune.itemnum=1;
+        cooldownrune.itemnum=1;
+        robustrune.itemnum=1;
+        energyrune.itemnum=1;
         refreshall();
     }
 
