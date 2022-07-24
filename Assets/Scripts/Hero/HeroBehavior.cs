@@ -210,7 +210,7 @@ public class HeroBehavior : MonoBehaviour
         mAcceleration = mAccelerationDefault;
     }
 
-    public void hurt(int _damage = 1)
+    public void hurt()
     {
         mAnimeControl.SetTrigger("Hurt");
     }
