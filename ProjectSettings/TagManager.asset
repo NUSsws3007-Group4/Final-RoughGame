@@ -13,6 +13,7 @@ TagManager:
   - diamond
   - Puzzle
   - bullet
+  - Elevator
   layers:
   - Default
   - TransparentFX

@@ -9963,7 +9963,7 @@ GameObject:
   - component: {fileID: 912243861}
   m_Layer: 6
   m_Name: elevator_1_V
-  m_TagString: Untagged
+  m_TagString: Elevator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10145,7 +10145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveUpDown: 1
-  mPlayer: {fileID: 0}
 --- !u!66 &912243861
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -14397,7 +14396,7 @@ GameObject:
   - component: {fileID: 1791492925}
   m_Layer: 6
   m_Name: elevator_2_H
-  m_TagString: Untagged
+  m_TagString: Elevator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14703,7 +14702,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveUpDown: 0
-  mPlayer: {fileID: 0}
 --- !u!1001 &1908155986
 PrefabInstance:
   m_ObjectHideFlags: 0

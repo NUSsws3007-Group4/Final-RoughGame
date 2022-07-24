@@ -75,18 +75,25 @@ public class BeeBehavior : MonoBehaviour
     {
         if (patrol && collision.gameObject.layer == 17)
             transform.right = -transform.right;
-
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        string layer = LayerMask.LayerToName(collision.gameObject.layer);
+        switch (layer)
         {
-            mRigidbody.velocity = new Vector3(0, 0, 0);
-            anim.SetBool("Explode", true);
-            Invoke("Suicide", 0.4f);
-        }
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            mRigidbody.velocity = new Vector3(0, 0, 0);
-            anim.SetBool("Explode", true);
-            Invoke("Suicide", 0.4f);
+            
+            case "Ground":
+                if (!(collision.gameObject.tag == "Elevator"))
+                {
+                    mRigidbody.velocity = new Vector3(0, 0, 0);
+                    anim.SetBool("Explode", true);
+                    Invoke("Suicide", 0.4f);
+                }
+                break;
+            case "Player":
+                mRigidbody.velocity = new Vector3(0, 0, 0);
+                anim.SetBool("Explode", true);
+                Invoke("Suicide", 0.4f);
+                break;
+            default:
+                break;
         }
     }
 
