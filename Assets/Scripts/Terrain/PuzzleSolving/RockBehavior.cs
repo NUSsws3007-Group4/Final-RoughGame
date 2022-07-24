@@ -8,7 +8,8 @@ public class RockBehavior : MonoBehaviour
     public GameObject p1, p2, p3, p4,l1,l2,l3,l4,l5;
     public bool solved;
     public Sprite triggered;
-    private GameObject s, elite;
+    private GameObject elite;
+    public GameObject puzzlebase;
     public void setSwitch(bool _enabled)
     {
         foreach (Transform i in transform)
@@ -40,6 +41,7 @@ public class RockBehavior : MonoBehaviour
             solved = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = triggered;
             elite.GetComponent<FlyEliteEnemy>().AllowPass();
+            puzzlebase.GetComponent<PuzzleControl>().setPuzzleOpen(false);
             foreach (Transform i in transform)
             {
                 i.gameObject.SetActive(false);
