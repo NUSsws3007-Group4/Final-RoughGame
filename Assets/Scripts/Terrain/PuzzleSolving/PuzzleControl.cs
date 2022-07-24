@@ -25,7 +25,10 @@ public class PuzzleControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (Transform i in transform)
+        {
+            i.gameObject.SetActive(puzzleEnabled);
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
