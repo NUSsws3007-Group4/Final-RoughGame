@@ -54,9 +54,12 @@ public class merchantbehavior : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        stg.canopenstore=false;
-        bg.cansell=false;
-        stg.closemystore();
-        bg.judgebutton();
+        if(collider.gameObject.tag=="Player")
+        {
+            stg.canopenstore=false;
+            bg.cansell=false;
+            stg.closemystore();
+            bg.judgebutton();
+        }
     }
 }
