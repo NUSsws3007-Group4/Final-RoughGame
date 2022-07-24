@@ -157,6 +157,20 @@ public class bagmanager : MonoBehaviour
                         updateinfo(friendshipflask.iteminfo,friendshipflask.itemtype+" "+friendshipflask.itemname);
                         break;
                     }
+                    case "?":
+                    {
+                        if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
+                        {
+                            usebutton.interactable = true;
+                        }
+                        else
+                        {
+                            usebutton.interactable = false;
+                            friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
+                        }
+                        updateinfo(friendshipflask.iteminfo,friendshipflask.itemtype+" "+friendshipflask.itemname);
+                        break;
+                    }
                     case "Rage Potion":
                     {
                         usebutton.interactable = true;
@@ -237,7 +251,7 @@ public class bagmanager : MonoBehaviour
         {
             case "Healing Potion":
                 {
-                    muim.GetComponent<bloodbarcontrol>().increasevolume(1);
+                    muim.GetComponent<bloodbarcontrol>().increasevolume(25);
                     pickupitem(emptyflask);
                     break;
                 }
@@ -272,9 +286,35 @@ public class bagmanager : MonoBehaviour
 
                     break;
                 }
+            case "?":
+            {
+                hero.GetComponent<HeroBehavior>().upFriendship(10);
+                    int i = ++hero.GetComponent<HeroFakeFriendly>().usedCount;
+                    pickupitem(emptyflask);
+                    switch (i)
+                    {
+                        case 1:
+                            friendshipflask.itemname="Friendship Flask";
+                            friendshipflask.iteminfo = "This liquid can make enemies more friendly to you.\nEnjoy it.";
+                            break;
+                        case 3:
+                            friendshipflask.iteminfo = "Enemies seem to be more friendly to me...\nBut why do I feel anxious?\nMaybe I shouln't use it too much...";
+                            break;
+                        case 5:
+                            friendshipflask.iteminfo = "I'm worried that something bad will happen...";
+                            break;
+                    }
+                    if (i >= 5)
+                    {
+                        hero.GetComponent<HeroFakeFriendly>().fakeFriendly = true;
+                    };
+                    updateinfo(friendshipflask.iteminfo,friendshipflask.itemtype+" "+friendshipflask.itemname);
+                    break;
+
+            }
             case "Diamond":
                 {
-                    int earning = (int)(Random.Range(80, 120));
+                    int earning = (int)(Random.Range(60, 150));
                     muim.GetComponent<coincontrol>().earn(earning);
                     break;
                 }
@@ -375,6 +415,7 @@ public class bagmanager : MonoBehaviour
         hero = GameObject.Find("hero");
         Debug.Log(hero.name);
         friendshipflask.iteminfo = "A kind of mysterious liquid...\nWant to have a try?";
+        friendshipflask.itemname = "?";
         closemybag();
     }
 

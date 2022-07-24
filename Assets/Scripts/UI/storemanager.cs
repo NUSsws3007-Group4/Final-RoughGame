@@ -122,7 +122,7 @@ public class storemanager : MonoBehaviour
     {
         seticestyle();
         closemystore();
-        canopenstore=false;
+        canopenstore=true;
         clock=0;
     }
 

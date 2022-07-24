@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemname: Rage Potion
   itemimage: {fileID: 21300000, guid: bc2e67d2e448c7a43bcfb52a6b35fb6f, type: 3}
-  itemnum: 0
-  itemnuminstore: 3
+  itemnum: 2
+  itemnuminstore: 2
   locked: 1
   itemprice: 200
-  iteminfo: Get furious!Your attack force doubles!But only for a while,watch your
-    time.
+  iteminfo: 'Get furious!Your attack force doubles!
+
+    It only works for a while,watch
+    your time.'
   itemtype: '[Potion]'
