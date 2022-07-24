@@ -13,12 +13,13 @@ public class GateOpenByKey : MonoBehaviour
 
     // Update is called once per frame
 
-    void OnCollisionEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 8 && bgm.key.itemnum > 0)
         {
+            bgm.key.itemnum--;
+            bgm.refreshitem(bgm.key);
             Destroy(transform.gameObject);
-            bgm.key.itemnum = 0;
         }
     }
 }
