@@ -117,9 +117,9 @@ public class bloodbarcontrol : MonoBehaviour
         bloodbareffect.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.x*effectvolume/maxblood,entitysize.y);
 
         showtext.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.y*4f,entitysize.y);
-        deltatext.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.y*4f,entitysize.y);
+        deltatext.GetComponent<RectTransform>().sizeDelta=new Vector2(entitysize.y*4f,entitysize.y/8f*10f);
         showtext.fontSize=(int)(entitysize.y*8.5f/10f);
-        deltatext.fontSize=showtext.fontSize;
+        deltatext.fontSize=(int)(entitysize.y);
         //bloodbarframe.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y,0f);      
         //bloodbarentity.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y,0f);
         //bloodbareffect.GetComponent<RectTransform>().anchoredPosition=new Vector3(entitysize.y*2f+10f,-entitysize.y,0f);
