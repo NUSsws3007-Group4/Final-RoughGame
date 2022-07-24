@@ -127,7 +127,7 @@ public class storeitembehavior : MonoBehaviour
     {
         if(switcht>0)
         {
-            switchtime-=Time.smoothDeltaTime;
+            switchtime-=Time.unscaledDeltaTime;
             if(switchtime<0f)
             {
                 switchtime=0.07f;

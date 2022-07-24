@@ -8,10 +8,10 @@ public class merchantbehavior : MonoBehaviour
     private bool flag=true;
     public GameObject dialoguebox;
     private float timer;
-    public cameramanagerbehavior cm;
-    public GameObject hero;
-    public storemanager stg;
-    public bagmanager bg;
+    private cameramanagerbehavior cm;
+    private GameObject hero;
+    private storemanager stg;
+    private bagmanager bg;
 
     void Start()
     {
