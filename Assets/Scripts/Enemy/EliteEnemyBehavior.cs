@@ -155,8 +155,11 @@ public class EliteEnemyBehavior : EnemyBehavior
         if (collision.gameObject.layer == 19)
         {
             anim.SetBool("Attacked", true);
-            mRigidbody.velocity = new Vector3(0, 0, 0);
-            mRigidbody.AddForce(-100 * transform.right);
+            if (!edgeTouched)
+            {
+                mRigidbody.velocity = new Vector3(0, 0, 0);
+                mRigidbody.AddForce(-100 * transform.right);
+            }
             mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
             switch (mFriendshipStatus)
             {
