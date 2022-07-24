@@ -160,7 +160,8 @@ public class EliteEnemyBehavior : EnemyBehavior
                 mRigidbody.velocity = new Vector3(0, 0, 0);
                 mRigidbody.AddForce(-100 * transform.right);
             }
-            mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+            mLifeLeft -= collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                         collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
             switch (mFriendshipStatus)
             {
                 case 2:
