@@ -173,6 +173,12 @@ public class herointeract : MonoBehaviour
                 mUIManager.decreasevolume(50);
                 gameObject.GetComponent<HeroBehavior>().hurt();
             }
+            else if(collider.gameObject.tag == "TreeAttack")//树人攻击
+            {
+                int _branchDamage = collider.gameObject.GetComponent<TreeAttack>().branchDmg;
+                mUIManager.decreasevolume(_branchDamage);
+                gameObject.GetComponent<HeroBehavior>().hurt();
+            }
         }
     }
     void OnTriggerStay2D(Collider2D collider)

@@ -119,6 +119,7 @@ public class HeroBehavior : MonoBehaviour
     ///</summary>
     private Rigidbody2D mRigidbody;
     public bloodbarcontrol mHealth;
+    private HeroAudioManager mAudio;
 
 
     /****************
@@ -212,6 +213,7 @@ public class HeroBehavior : MonoBehaviour
 
     public void hurt()
     {
+        mAudio.audioHurt();
         mAnimeControl.SetTrigger("Hurt");
     }
     /// <summary> 
@@ -219,7 +221,7 @@ public class HeroBehavior : MonoBehaviour
     ///</summary>
     void Start()
     {
-
+        mAudio = gameObject.GetComponent<HeroAudioManager>();
         mRespawnPoint = new Vector3(0f, 0f);
         mAcceleration = mAccelerationDefault;
         mMaxSpeed = mMaxSpeedDefault;
@@ -329,6 +331,7 @@ public class HeroBehavior : MonoBehaviour
 
             if (mPlace == mPlaceStatus.OnGround)
             {
+                mAudio.audioJump();
                 mPlace = mPlaceStatus.InAir;
                 Vector2 vel = mRigidbody.velocity;
                 vel.y = mJumpForce;
@@ -336,6 +339,7 @@ public class HeroBehavior : MonoBehaviour
             }
             else if (mPlace == mPlaceStatus.OnLadder)
             {
+                mAudio.audioJump();
                 leftLadder();
                 mLeavingLadder = true;
                 Vector2 vel = mRigidbody.velocity;
@@ -345,6 +349,7 @@ public class HeroBehavior : MonoBehaviour
             }
             else if (mJumpCount < mJumpSkill)
             {
+                mAudio.audioJump();
                 mPlace = mPlaceStatus.InAir;
                 Vector2 vel = mRigidbody.velocity;
                 vel.y = mJumpForce;
@@ -414,6 +419,7 @@ public class HeroBehavior : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.J) && attackCD >= 0.8f)//按下J开始攻击
             {
+                mAudio.audioAttack();
                 attackCD = 0f;
                 transform.GetChild(0).gameObject.SetActive(true);
                 mAnimeControl.SetTrigger("Attack");

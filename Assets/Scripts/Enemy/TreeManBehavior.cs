@@ -5,7 +5,7 @@ using UnityEngine;
 public class TreeManBehavior : MonoBehaviour
 {
     private float waitTimer = 0, attackTimer = 1.0f, attackedTimer = 0.5f,
-                    detectDistance = 8f, chaseDistance = 12f, detectAngle = 45f,
+                    detectDistance = 8f, chaseDistance = 12f, detectAngle = 70f,
                     distance, angle, dot;
     private int mLifeLeft = 200, mFriendshipRequired = 20, mFriendshipStatus = 0, multiplication = 2, friendshipAddValue = 10;
     private bool patrol = true, frienshipAdded = false;
@@ -17,7 +17,7 @@ public class TreeManBehavior : MonoBehaviour
     private Animator anim;
     private bool isactive=true;
 
-    private int nowATK = 10;
+    public int nowATK = 10;
     private float atkTimer = 0f;
 
     private void Start()
@@ -26,7 +26,7 @@ public class TreeManBehavior : MonoBehaviour
         enemyRenderer = GetComponent<SpriteRenderer>();
         mRigidbody = gameObject.GetComponent<Rigidbody2D>();
         targetHero = GameObject.Find("hero");
-        initialpos = transform.localPosition;
+        initialpos = transform.position;
         initialright = transform.right;
     }
     private void Update()
@@ -42,10 +42,20 @@ public class TreeManBehavior : MonoBehaviour
                 if (mFriendshipStatus == 2 && targetHero.GetComponent<HeroBehavior>().getFriendship() < mFriendshipRequired)
                     mFriendshipStatus = 0;
 
-                pos = transform.localPosition;
-                targetpos = targetHero.transform.localPosition;
+                pos = transform.position;
+                targetpos = targetHero.transform.position;
                 targetDirection = targetpos - pos;
                 dot = Vector3.Dot(transform.right, targetDirection.normalized);
+
+                if(patrol)
+                {
+                    Debug.Log("Tree Patrol");
+                }
+
+                if (dot > 0.2f)
+                {
+                    transform.right = -transform.right;
+                }
 
                 if (patrol)
                     if (mFriendshipStatus >= 1)
@@ -63,9 +73,6 @@ public class TreeManBehavior : MonoBehaviour
 
         if (collision.gameObject.layer == 19)
         {
-            //anim.SetBool("Attacked", true);
-            mRigidbody.velocity = new Vector3(0, 0, 0);
-            mRigidbody.AddForce(-100 * transform.right);
             mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt *
             collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().powerUpCoef;//计算受伤
             switch (mFriendshipStatus)
@@ -96,12 +103,13 @@ public class TreeManBehavior : MonoBehaviour
 
     private void Respawn()
     {
+        Debug.Log("Tree Respawn");
         patrol = true;
         nowATK = 10;
-        mLifeLeft = 200;//基础生命值以史莱姆为例子
-        transform.localPosition = initialpos;
+        mLifeLeft = 200;
+        transform.position = initialpos;
         transform.right = initialright;
-        mRigidbody.velocity = new Vector3(0,0,0);
+        //mRigidbody.velocity = new Vector3(0,0,0);
         attackTimer = 0.5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
     }
@@ -109,30 +117,26 @@ public class TreeManBehavior : MonoBehaviour
     private void patrolBehavior()
     {
         transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-        vel = mRigidbody.velocity;
-        vel.x = 0f;
-        mRigidbody.velocity = transform.right * 2 + vel;
         distance = Vector3.Distance(pos, targetpos);
+
         if (distance <= detectDistance)
         {
-            angle = Vector3.Angle(targetpos - pos, transform.right);
-            if (angle < detectAngle)
-            {
+            //angle = Vector3.Angle(targetpos - pos, transform.right);
+            //if (angle < detectAngle)
+            //{
                 targetDirection = (targetpos - pos).normalized;
-                info = Physics2D.Raycast(transform.localPosition, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
+                info = Physics2D.Raycast(transform.position, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
                 if (info.collider != null && info.collider.gameObject.layer == 8)
                 {
                     patrol = false;
                     transform.GetChild(0).GetComponent<Renderer>().enabled = true;
                 }
-            }
+            //}
         }
     }
     private void friendlyBehavior()
     {
         distance = Vector3.Distance(pos, targetpos);
-        if (dot < -0.2f)
-            transform.right = -transform.right;
 
         if (!frienshipAdded && distance < detectDistance)
         {
@@ -150,7 +154,7 @@ public class TreeManBehavior : MonoBehaviour
             Respawn();
         else
         { 
-            info = Physics2D.Raycast(transform.localPosition, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
+            info = Physics2D.Raycast(transform.position, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
             mRigidbody.velocity = new Vector3(0, 0, 0);
             
             attackTimer += Time.deltaTime;
@@ -183,18 +187,18 @@ public class TreeManBehavior : MonoBehaviour
     }
     private void attackBehavior()
     {
-        /*TODO: tree man attack prefabs*/
-        GameObject remoteAttack = Instantiate(Resources.Load("Prefabs/BulletScreen") as GameObject);
-        targetpos = targetHero.transform.localPosition;
-        remoteAttack.transform.localPosition = transform.localPosition;
-        remoteAttack.transform.up = (targetpos - transform.localPosition).normalized;
+        GameObject remoteAttack = Instantiate(Resources.Load("Prefabs/TreeAttack") as GameObject);
+        targetpos = targetHero.transform.position;
+        remoteAttack.transform.position = transform.position;
+        remoteAttack.transform.right = (targetpos - transform.localPosition).normalized;
+        remoteAttack.gameObject.GetComponent<TreeAttack>().branchDmg = nowATK;
         Debug.Log("EnemyAttacking");
     }
 
     private void attackedBehavior()
     {
         attackedTimer -= Time.deltaTime;
-        mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
+        //mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
         if (attackedTimer <= 0)
         {
             attackedTimer = 0.5f;
