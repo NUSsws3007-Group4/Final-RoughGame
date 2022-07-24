@@ -72,18 +72,18 @@ public class Elite3EnemyBehavior : EnemyBehavior
 
     protected override void chaseBehavior()
     {
-
         if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
             Invoke("Respawn", 0.2f);
         else
         {
+            distance = Vector3.Distance(pos, targetpos);
             info = Physics2D.Raycast(transform.localPosition, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
             if (dot < -0.2f)
             {
                 transform.right = -transform.right;
                 edgeTouched = false;
             }
-            if (!edgeTouched && (dot < -0.2f || dot > 0.2f))
+             if (!edgeTouched && distance > 2f)
             {
                 anim.SetBool("Walking", true);
                 vel = mRigidbody.velocity;
