@@ -117,6 +117,8 @@ public class bagmanager : MonoBehaviour
         {
             case "[Potion]":
             {
+                useimage.gameObject.SetActive(true);
+                sellimage.gameObject.SetActive(false);
                 switch (nowselecteditem.itemname)
                 {
                     case "Healing Potion":
@@ -192,24 +194,32 @@ public class bagmanager : MonoBehaviour
             }
             case "[Treasure]":
             {
+                useimage.gameObject.SetActive(false);
+                sellimage.gameObject.SetActive(true);
                 usebutton.interactable=cansell;
                 discardbutton.interactable=true;
                 break;
             }
             case "[Scrap]":
             {
+                useimage.gameObject.SetActive(false);
+                sellimage.gameObject.SetActive(true);
                 usebutton.interactable=cansell;
                 discardbutton.interactable=true;
                 break;
             }
             case "[Rune]":
             {
+                useimage.gameObject.SetActive(true);
+                sellimage.gameObject.SetActive(false);
                 usebutton.interactable=false;
                 discardbutton.interactable=false;
                 break;
             }
             case "[Prop]":
             {
+                useimage.gameObject.SetActive(true);
+                sellimage.gameObject.SetActive(false);
                 usebutton.interactable=nearthedoor;
                 discardbutton.interactable=true;
                 break;
@@ -294,7 +304,7 @@ public class bagmanager : MonoBehaviour
                     switch (i)
                     {
                         case 1:
-                            friendshipflask.itemname="Friendship Flask";
+                            friendshipflask.itemname="Friendship Potion";
                             friendshipflask.iteminfo = "This liquid can make enemies more friendly to you.\nEnjoy it.";
                             break;
                         case 3:
@@ -391,19 +401,19 @@ public class bagmanager : MonoBehaviour
     void Awake()
     {
         myitemlist.itemlist.Clear();
-        bloodflask.itemnum = 2;
-        energyflask.itemnum = 2;
-        friendshipflask.itemnum = 2;
-        defencepotion.itemnum=2;
-        ragepotion.itemnum=2;
-        soulpotion.itemnum=2;
-        emptyflask.itemnum = 2;
-        diamond.itemnum = 2;
-        key.itemnum=2;
-        powerrune.itemnum=1;
-        cooldownrune.itemnum=1;
-        robustrune.itemnum=1;
-        energyrune.itemnum=1;
+        bloodflask.itemnum = 0;
+        energyflask.itemnum = 0;
+        friendshipflask.itemnum = 0;
+        defencepotion.itemnum=0;
+        ragepotion.itemnum=0;
+        soulpotion.itemnum=0;
+        emptyflask.itemnum = 0;
+        diamond.itemnum = 0;
+        key.itemnum=0;
+        powerrune.itemnum=0;
+        cooldownrune.itemnum=0;
+        robustrune.itemnum=0;
+        energyrune.itemnum=0;
         refreshall();
     }
 

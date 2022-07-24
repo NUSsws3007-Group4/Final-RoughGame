@@ -12,7 +12,7 @@ public class Slotproperty : MonoBehaviour
     public void OnClicked()
     {
         bagmanager bg=GameObject.Find("Canvas").GetComponent<bagmanager>();
-        if(slotitem.itemname=="diamond" || slotitem.itemname=="emptyflask")
+        if(slotitem.itemtype=="[Treasure]" || slotitem.itemtype=="[Scrap]")
         {
             bg.useimage.gameObject.SetActive(false);
             bg.sellimage.gameObject.SetActive(true);

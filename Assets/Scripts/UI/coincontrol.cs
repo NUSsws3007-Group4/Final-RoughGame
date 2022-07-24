@@ -113,8 +113,8 @@ public class coincontrol : MonoBehaviour
     void Start()
     {
         setsize();
-        coinnumber=500;
-        currentcoinnumber=500;
+        coinnumber=0;
+        currentcoinnumber=0;
         showtext.text=inttostring(currentcoinnumber);
         delta=0;
         speedct=0f;
