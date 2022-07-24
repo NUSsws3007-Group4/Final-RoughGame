@@ -20,7 +20,7 @@ public class PowerUpPotion : MonoBehaviour
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            other.gameObject.GetComponent<HeroAttackHurt>().powerUpPotion = true;
+            //other.gameObject.GetComponent<HeroAttackHurt>().powerUpPotion = true;
             Destroy(transform.gameObject);
         }
     }
