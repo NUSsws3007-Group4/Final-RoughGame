@@ -86,28 +86,55 @@ public class herointeract : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.layer == 14 || collider.gameObject.layer == 13)
+        if (collider.gameObject.layer == 14)
         {
             mHurtTimer = 0;
-            mUIManager.decreasevolume(1);
+            mUIManager.decreasevolume(25);
             gameObject.GetComponent<HeroBehavior>().hurt();
         }
-        //gameObject.GetComponent<HeroMovement>().setspeed(-50*((float)gameObject.GetComponent<HeroMovement>().getMoveDirection()));
+
+        if(collider.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        {
+            if(collider.gameObject.tag == "SlimeBall")//史莱姆
+            {
+                mUIManager.decreasevolume(10);
+                gameObject.GetComponent<HeroBehavior>().hurt();
+            }
+            else if(collider.gameObject.tag == "Arrow")//飞行精英怪
+            {
+                mUIManager.decreasevolume(30);
+                gameObject.GetComponent<HeroBehavior>().hurt();
+            }
+            else if(collider.gameObject.tag == "Bee")//自杀蜜蜂
+            {
+                mUIManager.decreasevolume(50);
+                gameObject.GetComponent<HeroBehavior>().hurt();
+            }
+            else if(collider.gameObject.tag == "GroundEliteRemote")//地面精英怪远程攻击
+            {
+                mUIManager.decreasevolume(20);
+                gameObject.GetComponent<HeroBehavior>().hurt();
+            }
+            else if(collider.gameObject.tag == "GroundEliteCombat")//地面精英怪近战攻击
+            {
+                mUIManager.decreasevolume(50);
+                gameObject.GetComponent<HeroBehavior>().hurt();
+            }
+        }
     }
     void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.gameObject.layer == 14 || collider.gameObject.layer == 13)
+        if (collider.gameObject.layer == 14)
         {
             mHurtTimer += Time.deltaTime;
             if (mHurtTimer >= 1f)
             {
                 mHurtTimer = 0;
-                mUIManager.decreasevolume(1);
+                mUIManager.decreasevolume(25);
                 gameObject.GetComponent<HeroBehavior>().hurt();
             }
 
         }
-        //gameObject.GetComponent<HeroMovement>().setspeed(-50*((float)gameObject.GetComponent<HeroMovement>().getMoveDirection()));
     }
 
 }
