@@ -33,10 +33,10 @@ public class TreeManBehavior : MonoBehaviour
     {
         if(isactive)
         {
-            // if (anim.GetBool("Attacked"))
-            //     attackedBehavior();
-            //else
-            //{
+             if (anim.GetBool("Attacked"))
+                 attackedBehavior();
+            else
+            {
                 if (mFriendshipStatus == 0 && targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
                     mFriendshipStatus = 2;
                 if (mFriendshipStatus == 2 && targetHero.GetComponent<HeroBehavior>().getFriendship() < mFriendshipRequired)
@@ -46,11 +46,6 @@ public class TreeManBehavior : MonoBehaviour
                 targetpos = targetHero.transform.position;
                 targetDirection = targetpos - pos;
                 dot = Vector3.Dot(transform.right, targetDirection.normalized);
-
-                if(patrol)
-                {
-                    Debug.Log("Tree Patrol");
-                }
 
                 if (dot > 0.2f)
                 {
@@ -64,15 +59,17 @@ public class TreeManBehavior : MonoBehaviour
                         patrolBehavior();
                 else
                     chaseBehavior();
-            //}
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(!isactive) return;
 
-        if (collision.gameObject.layer == 19)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))
         {
+            anim.SetBool("Attacked", true);
+
             mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt *
             collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().powerUpCoef;//计算受伤
             switch (mFriendshipStatus)
@@ -202,7 +199,7 @@ public class TreeManBehavior : MonoBehaviour
         if (attackedTimer <= 0)
         {
             attackedTimer = 0.5f;
-            //anim.SetBool("Attacked", false);
+            anim.SetBool("Attacked", false);
             if (mLifeLeft <= 0)
                 Death();
         }
