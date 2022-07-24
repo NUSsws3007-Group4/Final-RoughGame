@@ -12,7 +12,7 @@ public class herointeract : MonoBehaviour
     public bloodbarcontrol mUIManager = null;
     public bagmanager mybagmanager;
     public storemanager mystoremanager;
-    public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond;
+    public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond,ragerune,cooldownrune,robustrune,energyrune;
 
     private float mHurtTimer = 0;
     void Start()
@@ -62,7 +62,7 @@ public class herointeract : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        if (collider.gameObject.layer == LayerMask.NameToLayer("Item"))
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Item") || collider.gameObject.layer == LayerMask.NameToLayer("PowerUp"))
         {
             switch (collider.gameObject.tag)
             {
@@ -92,6 +92,26 @@ public class herointeract : MonoBehaviour
                         mHeroBehavior.setJumpSkill(1);
                         break;
                     }
+                case "atkup":
+                {
+                    mybagmanager.pickupitem(ragerune);
+                    break;
+                }
+                case "CDreduce":
+                {
+                    mybagmanager.pickupitem(cooldownrune);
+                    break;
+                }
+                case "HPincrease":
+                {
+                    mybagmanager.pickupitem(robustrune);
+                    break;
+                }
+                case "MPincrease":
+                {
+                    mybagmanager.pickupitem(energyrune);
+                    break;
+                }
             }
         }
 

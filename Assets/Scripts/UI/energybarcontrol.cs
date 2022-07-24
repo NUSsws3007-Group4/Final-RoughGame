@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class energybarcontrol : MonoBehaviour
 {
     public int maxenergy=5;
-    private const float alterspeed=3f;
-    private const float effectalterspeed=2f;
+    private float alterspeed;
+    private float effectalterspeed;
 
     public Image energybarentity=null;
     public Image energybareffect=null;
@@ -44,11 +44,18 @@ public class energybarcontrol : MonoBehaviour
         return m;
     }
 
+    public void updaterate()
+    {
+        alterspeed=maxenergy/3f;
+        effectalterspeed=maxenergy/5f;
+        rate=energybarframe.GetComponent<RectTransform>().sizeDelta.x/maxenergy;
+    }
 
     public void changemaxenergy(int delta)
     {
         if(delta>0) increasevolume(delta); else decreasevolume(-delta);
         maxenergy+=delta;
+        updaterate();
     }
 
     public float getvolume()
@@ -143,7 +150,7 @@ public class energybarcontrol : MonoBehaviour
         effectdeltavolume=0f;
         entitysize=energybarframe.GetComponent<RectTransform>().sizeDelta;
         effectsize=entitysize;
-        rate=entitysize.x/maxenergy;
+        updaterate();
         timer=0f;
     }
     

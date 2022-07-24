@@ -91,7 +91,7 @@ public class bagmanager : MonoBehaviour
                     nowselecteditem = null;
                     discardbutton.interactable = false;
                     usebutton.interactable = false;
-                    iteminformationshowed.text = "";
+                    updateinfo("","");
                 }
                 else
                 {
@@ -201,7 +201,7 @@ public class bagmanager : MonoBehaviour
                     nowselecteditem = null;
                     discardbutton.interactable = false;
                     usebutton.interactable = false;
-                    iteminformationshowed.text = "";
+                    updateinfo("","");
                 }
                 break;
             }
@@ -281,7 +281,7 @@ public class bagmanager : MonoBehaviour
         }
     }
 
-    public void updateinfo(string info,string naame)
+    public void updateinfo(string info,string name)
     {
         iteminformationshowed.text = info;
         itemtypename.text=name;
@@ -312,7 +312,7 @@ public class bagmanager : MonoBehaviour
     {
         usebutton.interactable = false;
         discardbutton.interactable = false;
-        iteminformationshowed.text = "";
+        updateinfo("","");
         cansell = false;
         hero = GameObject.Find("hero");
         Debug.Log(hero.name);

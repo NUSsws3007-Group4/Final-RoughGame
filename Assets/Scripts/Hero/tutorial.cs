@@ -7,8 +7,9 @@ public class tutorial : MonoBehaviour
     public GameObject moveimage;
     public GameObject jumpimage;
     public GameObject bagimage;
+    public bagmanager bg;
     public int state;
-    private bool at,dt;
+    private bool at,dt,flag=false;
 
     void Awake()
     {
@@ -21,7 +22,7 @@ public class tutorial : MonoBehaviour
 
     void Start()
     {
-        
+        flag=false;
     }
 
     void Update()
@@ -49,6 +50,10 @@ public class tutorial : MonoBehaviour
         else if(state==2)
         {
             if(Input.GetKeyDown(KeyCode.B))
+            {
+                flag=true;
+            }
+            if(flag && bg.bagisopen)
             {
                 state++;
                 bagimage.SetActive(false);

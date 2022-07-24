@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class bloodbarcontrol : MonoBehaviour
 {
     public int maxblood=200;
-    private const float alterspeed=3f;
-    private const float effectalterspeed=2f;
+    private float alterspeed;
+    private float effectalterspeed;
 
     public Image bloodbarentity=null;
     public Image bloodbareffect=null;
@@ -44,10 +44,18 @@ public class bloodbarcontrol : MonoBehaviour
         return m;
     }
 
+    public void updaterate()
+    {
+        alterspeed=maxblood/3f;
+        effectalterspeed=maxblood/5f;
+        rate=bloodbarframe.GetComponent<RectTransform>().sizeDelta.x/maxblood;
+    }
+
     public void changemaxblood(int delta)
     {
         if(delta>0) increasevolume(delta); else decreasevolume(-delta);
         maxblood+=delta;
+        updaterate();
     }
 
     public float getvolume()
@@ -142,7 +150,8 @@ public class bloodbarcontrol : MonoBehaviour
         effectdeltavolume=0f;
         entitysize=bloodbarframe.GetComponent<RectTransform>().sizeDelta;
         effectsize=entitysize;
-        rate=entitysize.x/maxblood;
+        //rate=entitysize.x/maxblood;
+        updaterate();
         timer=0f;
     }
 
