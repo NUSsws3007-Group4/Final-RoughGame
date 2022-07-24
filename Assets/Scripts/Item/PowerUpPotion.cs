@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HPscroll : MonoBehaviour
+public class PowerUpPotion : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,12 +16,11 @@ public class HPscroll : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("HP increase");
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            GameObject.Find("UImanager").GetComponent<bloodbarcontrol>().changemaxblood(100);
+            other.gameObject.GetComponent<HeroAttackHurt>().powerUpPotion = true;
             Destroy(transform.gameObject);
         }
     }
