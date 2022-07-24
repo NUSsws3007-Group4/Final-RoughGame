@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class bagmanager : MonoBehaviour
 {
     //all items
-    public itemstruct bloodflask, energyflask, diamond, friendshipflask, emptyflask,powerrune,cooldownrune,robustrune,energyrune,key,ragepotion,soulpotion,defencepotion;
+    public itemstruct bloodflask, energyflask, diamond, friendshipflask, emptyflask, powerrune, cooldownrune, robustrune, energyrune, key, ragepotion, soulpotion, defencepotion;
 
     public GameObject mybagUI = null; //UI
     public GameObject slotgrid; //itemlistUI
@@ -35,7 +35,7 @@ public class bagmanager : MonoBehaviour
         useimage.gameObject.SetActive(true);
         sellimage.gameObject.SetActive(false);
 
-        updateinfo("","");
+        updateinfo("", "");
         bagisopen = true;
     }
 
@@ -62,7 +62,7 @@ public class bagmanager : MonoBehaviour
 
     private void judgeempty()
     {
-        if (myitemlist.itemlist.Count==0) emptysig.gameObject.SetActive(true); else emptysig.gameObject.SetActive(false);
+        if (myitemlist.itemlist.Count == 0) emptysig.gameObject.SetActive(true); else emptysig.gameObject.SetActive(false);
     }
 
     private void createnewitem(itemstruct item)
@@ -92,7 +92,7 @@ public class bagmanager : MonoBehaviour
                     nowselecteditem = null;
                     discardbutton.interactable = false;
                     usebutton.interactable = false;
-                    updateinfo("","");
+                    updateinfo("", "");
                 }
                 else
                 {
@@ -116,114 +116,114 @@ public class bagmanager : MonoBehaviour
         switch (nowselecteditem.itemtype)
         {
             case "[Potion]":
-            {
-                useimage.gameObject.SetActive(true);
-                sellimage.gameObject.SetActive(false);
-                switch (nowselecteditem.itemname)
                 {
-                    case "Healing Potion":
+                    useimage.gameObject.SetActive(true);
+                    sellimage.gameObject.SetActive(false);
+                    switch (nowselecteditem.itemname)
                     {
-                        if (muim.GetComponent<bloodbarcontrol>().getvolume() < muim.GetComponent<bloodbarcontrol>().maxblood)
-                        {
-                            usebutton.interactable = true;
-                        }
-                        else
-                        {
-                            usebutton.interactable = false;
-                        }
-                        break;
+                        case "Healing Potion":
+                            {
+                                if (muim.GetComponent<bloodbarcontrol>().getvolume() < muim.GetComponent<bloodbarcontrol>().maxblood)
+                                {
+                                    usebutton.interactable = true;
+                                }
+                                else
+                                {
+                                    usebutton.interactable = false;
+                                }
+                                break;
+                            }
+                        case "Energy Potion":
+                            {
+                                if (muim.GetComponent<energybarcontrol>().getvolume() < muim.GetComponent<energybarcontrol>().maxenergy)
+                                {
+                                    usebutton.interactable = true;
+                                }
+                                else
+                                {
+                                    usebutton.interactable = false;
+                                }
+                                break;
+                            }
+                        case "Friendship Potion":
+                            {
+                                if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
+                                {
+                                    usebutton.interactable = true;
+                                }
+                                else
+                                {
+                                    usebutton.interactable = false;
+                                    friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
+                                }
+                                updateinfo(friendshipflask.iteminfo, friendshipflask.itemtype + " " + friendshipflask.itemname);
+                                break;
+                            }
+                        case "?":
+                            {
+                                if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
+                                {
+                                    usebutton.interactable = true;
+                                }
+                                else
+                                {
+                                    usebutton.interactable = false;
+                                    friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
+                                }
+                                updateinfo(friendshipflask.iteminfo, friendshipflask.itemtype + " " + friendshipflask.itemname);
+                                break;
+                            }
+                        case "Rage Potion":
+                            {
+                                usebutton.interactable = true;
+                                break;
+                            }
+                        case "Defence Potion":
+                            {
+                                usebutton.interactable = true;
+                                break;
+                            }
+                        case "Soul Potion":
+                            {
+                                usebutton.interactable = true;
+                                break;
+                            }
                     }
-                    case "Energy Potion":
-                    {
-                        if (muim.GetComponent<energybarcontrol>().getvolume() < muim.GetComponent<energybarcontrol>().maxenergy)
-                        {
-                            usebutton.interactable = true;
-                        }
-                        else
-                        {
-                            usebutton.interactable = false;
-                        }
-                        break;
-                    }
-                    case "Friendship Potion":
-                    {
-                        if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
-                        {
-                            usebutton.interactable = true;
-                        }
-                        else
-                        {
-                            usebutton.interactable = false;
-                            friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
-                        }
-                        updateinfo(friendshipflask.iteminfo,friendshipflask.itemtype+" "+friendshipflask.itemname);
-                        break;
-                    }
-                    case "?":
-                    {
-                        if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
-                        {
-                            usebutton.interactable = true;
-                        }
-                        else
-                        {
-                            usebutton.interactable = false;
-                            friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
-                        }
-                        updateinfo(friendshipflask.iteminfo,friendshipflask.itemtype+" "+friendshipflask.itemname);
-                        break;
-                    }
-                    case "Rage Potion":
-                    {
-                        usebutton.interactable = true;
-                        break;
-                    }
-                    case "Defence Potion":
-                    {
-                        usebutton.interactable = true;
-                        break;
-                    }
-                    case "Soul Potion":
-                    {
-                        usebutton.interactable = true;
-                        break;
-                    }
+                    discardbutton.interactable = true;
+                    break;
                 }
-                discardbutton.interactable=true;
-                break;
-            }
             case "[Treasure]":
-            {
-                useimage.gameObject.SetActive(false);
-                sellimage.gameObject.SetActive(true);
-                usebutton.interactable=cansell;
-                discardbutton.interactable=true;
-                break;
-            }
+                {
+                    useimage.gameObject.SetActive(false);
+                    sellimage.gameObject.SetActive(true);
+                    usebutton.interactable = cansell;
+                    discardbutton.interactable = true;
+                    break;
+                }
             case "[Scrap]":
-            {
-                useimage.gameObject.SetActive(false);
-                sellimage.gameObject.SetActive(true);
-                usebutton.interactable=cansell;
-                discardbutton.interactable=true;
-                break;
-            }
+                {
+                    useimage.gameObject.SetActive(false);
+                    sellimage.gameObject.SetActive(true);
+                    usebutton.interactable = cansell;
+                    discardbutton.interactable = true;
+                    break;
+                }
             case "[Rune]":
-            {
-                useimage.gameObject.SetActive(true);
-                sellimage.gameObject.SetActive(false);
-                usebutton.interactable=false;
-                discardbutton.interactable=false;
-                break;
-            }
+                {
+                    useimage.gameObject.SetActive(true);
+                    sellimage.gameObject.SetActive(false);
+                    usebutton.interactable = false;
+                    discardbutton.interactable = false;
+                    break;
+                }
             case "[Prop]":
-            {
-                useimage.gameObject.SetActive(true);
-                sellimage.gameObject.SetActive(false);
-                usebutton.interactable=nearthedoor;
-                discardbutton.interactable=true;
-                break;
-            }
+                {
+                    useimage.gameObject.SetActive(true);
+                    sellimage.gameObject.SetActive(false);
+                    usebutton.interactable = nearthedoor;
+                    discardbutton.interactable = true;
+                    break;
+                }
         }
     }
 
@@ -247,7 +247,7 @@ public class bagmanager : MonoBehaviour
                     nowselecteditem = null;
                     discardbutton.interactable = false;
                     usebutton.interactable = false;
-                    updateinfo("","");
+                    updateinfo("", "");
                 }
                 break;
             }
@@ -278,9 +278,6 @@ public class bagmanager : MonoBehaviour
                     pickupitem(emptyflask);
                     switch (i)
                     {
-                        case 1:
-                            friendshipflask.iteminfo = "This liquid can make enemies more friendly to you.\nEnjoy it.";
-                            break;
                         case 3:
                             friendshipflask.iteminfo = "Enemies seem to be more friendly to me...\nBut why do I feel anxious?\nMaybe I shouln't use it too much...";
                             break;
@@ -292,36 +289,26 @@ public class bagmanager : MonoBehaviour
                     {
                         hero.GetComponent<HeroFakeFriendly>().fakeFriendly = true;
                     };
-                    updateinfo(friendshipflask.iteminfo,friendshipflask.itemtype+" "+friendshipflask.itemname);
+                    updateinfo(friendshipflask.iteminfo, friendshipflask.itemtype + " " + friendshipflask.itemname);
 
                     break;
                 }
             case "?":
-            {
-                hero.GetComponent<HeroBehavior>().upFriendship(10);
+                {
+                    hero.GetComponent<HeroBehavior>().upFriendship(10);
                     int i = ++hero.GetComponent<HeroFakeFriendly>().usedCount;
                     pickupitem(emptyflask);
                     switch (i)
                     {
                         case 1:
-                            friendshipflask.itemname="Friendship Potion";
+                            friendshipflask.itemname = "Friendship Potion";
                             friendshipflask.iteminfo = "This liquid can make enemies more friendly to you.\nEnjoy it.";
                             break;
-                        case 3:
-                            friendshipflask.iteminfo = "Enemies seem to be more friendly to me...\nBut why do I feel anxious?\nMaybe I shouln't use it too much...";
-                            break;
-                        case 5:
-                            friendshipflask.iteminfo = "I'm worried that something bad will happen...";
-                            break;
                     }
-                    if (i >= 5)
-                    {
-                        hero.GetComponent<HeroFakeFriendly>().fakeFriendly = true;
-                    };
-                    updateinfo(friendshipflask.iteminfo,friendshipflask.itemtype+" "+friendshipflask.itemname);
+                    updateinfo(friendshipflask.iteminfo, friendshipflask.itemtype + " " + friendshipflask.itemname);
                     break;
 
-            }
+                }
             case "Diamond":
                 {
                     int earning = (int)(Random.Range(60, 150));
@@ -334,26 +321,26 @@ public class bagmanager : MonoBehaviour
                     break;
                 }
             case "Key":
-            {
-                //open the door
-                break;
-            }
+                {
+                    Destroy(GameObject.Find("Gate1"));
+                    break;
+                }
             case "Rage Potion":
-            {
-                //攻击力翻倍
-                hero.gameObject.GetComponent<HeroAttackHurt>().powerUpPotion = true;
-                break;
-            }
+                {
+                    //攻击力翻倍
+                    hero.gameObject.GetComponent<HeroAttackHurt>().powerUpPotion = true;
+                    break;
+                }
             case "Defence Potion":
-            {
-                hero.gameObject.GetComponent<herointeract>().isResistance = true;
-                break;
-            }
+                {
+                    hero.gameObject.GetComponent<herointeract>().isResistance = true;
+                    break;
+                }
             case "Soul Potion":
-            {
-                muim.GetComponent<energybarcontrol>().setinfinite();
-                break;
-            }
+                {
+                    muim.GetComponent<energybarcontrol>().setinfinite();
+                    break;
+                }
         }
         judgebutton();
         discarditem();
@@ -374,10 +361,10 @@ public class bagmanager : MonoBehaviour
         }
     }
 
-    public void updateinfo(string info,string name)
+    public void updateinfo(string info, string name)
     {
         iteminformationshowed.text = info;
-        itemtypename.text=name;
+        itemtypename.text = name;
     }
 
     void refreshall()
@@ -404,16 +391,16 @@ public class bagmanager : MonoBehaviour
         bloodflask.itemnum = 0;
         energyflask.itemnum = 0;
         friendshipflask.itemnum = 0;
-        defencepotion.itemnum=0;
-        ragepotion.itemnum=0;
-        soulpotion.itemnum=0;
+        defencepotion.itemnum = 0;
+        ragepotion.itemnum = 0;
+        soulpotion.itemnum = 0;
         emptyflask.itemnum = 0;
         diamond.itemnum = 0;
-        key.itemnum=0;
-        powerrune.itemnum=0;
-        cooldownrune.itemnum=0;
-        robustrune.itemnum=0;
-        energyrune.itemnum=0;
+        key.itemnum = 0;
+        powerrune.itemnum = 0;
+        cooldownrune.itemnum = 0;
+        robustrune.itemnum = 0;
+        energyrune.itemnum = 0;
         refreshall();
     }
 
@@ -421,12 +408,13 @@ public class bagmanager : MonoBehaviour
     {
         usebutton.interactable = false;
         discardbutton.interactable = false;
-        updateinfo("","");
+        updateinfo("", "");
         cansell = false;
         hero = GameObject.Find("hero");
         Debug.Log(hero.name);
         friendshipflask.iteminfo = "A kind of mysterious liquid...\nWant to have a try?";
         friendshipflask.itemname = "?";
+        friendshipflask.locked = true;
         closemybag();
     }
 

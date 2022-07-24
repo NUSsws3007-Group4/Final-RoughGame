@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemname: Healing Potion
   itemimage: {fileID: 21300000, guid: 014332cc19f9daa48847508c38809abc, type: 3}
-  itemnum: 3
-  itemnuminstore: 0
+  itemnum: 0
+  itemnuminstore: 3
   locked: 0
   itemprice: 100
-  iteminfo: This is a Healing Potion,it can cure you!
+  iteminfo: 'This is a Healing Potion.
+
+    It can cure you!'
   itemtype: '[Potion]'

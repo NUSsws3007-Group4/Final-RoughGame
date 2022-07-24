@@ -23,6 +23,7 @@ TagManager:
   - MPincrease
   - CDreduce
   - atkup
+  - Key
   layers:
   - Default
   - TransparentFX

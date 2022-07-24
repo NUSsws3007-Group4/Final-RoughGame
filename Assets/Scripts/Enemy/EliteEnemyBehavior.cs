@@ -3,10 +3,11 @@ using System.Threading;
 public class EliteEnemyBehavior : EnemyBehavior
 {
     private float remoteAttackTimer = 0f;
-    private bool edgeTouched = false;
+    private bool edgeTouched = false, flaskunlocked = false;
     private float cx1, cx2, cy1, cy2;
     private Vector3 spawnPoint;
     private GameObject guardPortal;
+    private bagmanager bgm;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -22,6 +23,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         mLifeLeft = 250;
         initialpos = transform.localPosition;
         initialright = transform.right;
+        bgm = GameObject.Find("Canvas").GetComponent<bagmanager>();
         guardPortal.SetActive(false);
     }
     protected override void attackedBehavior()
@@ -142,12 +144,20 @@ public class EliteEnemyBehavior : EnemyBehavior
         if (distance < detectDistance)
         {
             guardPortal.SetActive(true);
+            if (!flaskunlocked)
+            {
+                bgm.friendshipflask.locked = false;
+                bgm.pickupitem(bgm.friendshipflask);
+                flaskunlocked = true;
+            }
         }
 
     }
     protected override void Death()
     {
         guardPortal.SetActive(true);
+        bgm.friendshipflask.locked = false;
+        bgm.pickupitem(bgm.friendshipflask);
         base.Death();
     }
     protected override void OnTriggerEnter2D(Collider2D collision)

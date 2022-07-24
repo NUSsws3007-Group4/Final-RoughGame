@@ -15,9 +15,13 @@ MonoBehaviour:
   itemname: Defence Potion
   itemimage: {fileID: 21300000, guid: 8335d21dc6b04ad4b9e0e46612729818, type: 3}
   itemnum: 0
-  itemnuminstore: 3
+  itemnuminstore: 2
   locked: 1
   itemprice: 200
-  iteminfo: Put your armor on!It can reduce the injury in the combat,but has a time
-    limit.
+  iteminfo: 'Put your armor on!
+
+    It can reduce the injury in the combat,
+
+    but
+    has a time limit.'
   itemtype: '[Potion]'

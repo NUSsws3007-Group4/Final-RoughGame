@@ -112,7 +112,7 @@ public class herointeract : MonoBehaviour
                     mybagmanager.pickupitem(energyrune);
                     break;
                 }
-                case "key":
+                case "Key":
                 {
                     mybagmanager.pickupitem(key);
                     break;
