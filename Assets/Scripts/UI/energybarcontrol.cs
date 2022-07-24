@@ -84,6 +84,10 @@ public class energybarcontrol : MonoBehaviour
     {
         targetvolume=targetvolume+delta;
 
+        if(targetvolume<0) targetvolume=0;
+        if(targetvolume>maxenergy) targetvolume=maxenergy;
+        if(targetvolume>energyvolume) entitydeltavolume=alterspeed; else entitydeltavolume=-alterspeed;
+
         showtext.text=inttostring(targetvolume);
         timer=deltastaytime;
         deltatext.text="+"+inttostring(delta);
@@ -92,17 +96,16 @@ public class energybarcontrol : MonoBehaviour
         deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-20f,0f);
         deltatextpos=new Vector3(10f,-20f,0f);
         deltatextcolor=new Color(0f,1f,0,0f);
-
-        if(targetvolume<0) targetvolume=0;
-        if(targetvolume>maxenergy) targetvolume=maxenergy;
-        if(targetvolume>energyvolume) entitydeltavolume=alterspeed; else entitydeltavolume=-alterspeed;
-
     }
 
     public void decreasevolume(int delta)
     {
         if(!runenergy) return;
         targetvolume=targetvolume-delta;
+
+        if(targetvolume<0) targetvolume=0;
+        if(targetvolume>maxenergy) targetvolume=maxenergy;
+        if(targetvolume>energyvolume) entitydeltavolume=alterspeed; else entitydeltavolume=-alterspeed;
 
         showtext.text=inttostring(targetvolume);
         timer=deltastaytime;
@@ -112,10 +115,6 @@ public class energybarcontrol : MonoBehaviour
         deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-20f,0f);
         deltatextpos=new Vector3(10f,-20f,0f);
         deltatextcolor=new Color(1f,0f,0,0f);
-
-        if(targetvolume<0) targetvolume=0;
-        if(targetvolume>maxenergy) targetvolume=maxenergy;
-        if(targetvolume>energyvolume) entitydeltavolume=alterspeed; else entitydeltavolume=-alterspeed;
     }
 
     public void setsize()
