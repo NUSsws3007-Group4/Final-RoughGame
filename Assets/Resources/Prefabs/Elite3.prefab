@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 4433364994462041049}
   m_Layer: 13
   m_Name: CloseCombactArea
-  m_TagString: Untagged
+  m_TagString: GroundEliteCombat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

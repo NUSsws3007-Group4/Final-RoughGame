@@ -331,11 +331,12 @@ public class bagmanager : MonoBehaviour
             case "Rage Potion":
             {
                 //攻击力翻倍
+                hero.gameObject.GetComponent<HeroAttackHurt>().powerUpPotion = true;
                 break;
             }
             case "Defence Potion":
             {
-                //防御力
+                hero.gameObject.GetComponent<herointeract>().isResistance = true;
                 break;
             }
             case "Soul Potion":

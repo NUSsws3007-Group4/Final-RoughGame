@@ -38,12 +38,13 @@ public class BreakBoard : MonoBehaviour
     {
         Debug.Log("attack:" + other.gameObject.layer);
         TutorialManager tu;
-        if (tu = gameObject.GetComponent<TutorialManager>())
-        {
-            tu.showBox();
-        }
+
         if (other.gameObject.layer == 19)
         {
+            if (tu = gameObject.GetComponent<TutorialManager>())
+            {
+                tu.showBox();
+            }
             foreach (Transform i in transform)
             {
                 i.gameObject.SetActive(false);

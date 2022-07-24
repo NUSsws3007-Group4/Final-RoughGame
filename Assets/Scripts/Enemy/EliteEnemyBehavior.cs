@@ -19,7 +19,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         chaseDistance = 20f;
         mFriendshipRequired = 70;
         friendshipAddValue = 0;
-        mLifeLeft = 10;
+        mLifeLeft = 250;
         initialpos = transform.localPosition;
         initialright = transform.right;
         guardPortal.SetActive(false);
@@ -28,8 +28,11 @@ public class EliteEnemyBehavior : EnemyBehavior
     {
         transform.GetChild(3).gameObject.SetActive(true);
         transform.GetChild(4).gameObject.SetActive(true);
+        mRigidbody.velocity = new Vector3(0, 0, 0);
+        if (!edgeTouched)
+            mRigidbody.AddForce(-100 * transform.right);
+
         attackedTimer -= Time.deltaTime;
-        mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
         if (attackedTimer <= 0)
         {
             attackedTimer = 0.5f;
@@ -160,12 +163,14 @@ public class EliteEnemyBehavior : EnemyBehavior
                 mRigidbody.velocity = new Vector3(0, 0, 0);
                 mRigidbody.AddForce(-100 * transform.right);
             }
-            mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+            mLifeLeft -= collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                         collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
             switch (mFriendshipStatus)
             {
                 case 2:
-                    for (int i = 0; i < multiplication - 1; ++i)
-                        mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+                    mLifeLeft -= collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                                collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef *
+                                (multiplication - 1);
                     mFriendshipStatus = 1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
@@ -174,8 +179,6 @@ public class EliteEnemyBehavior : EnemyBehavior
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
-                    for (int i = 0; i < multiplication + 1; ++i)
-                        attackBehavior();
                     break;
             }
             Debug.Log("Life:" + mLifeLeft);
@@ -187,7 +190,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         Debug.Log("Elite Respawn" + initialpos);
         edgeTouched = false;
         patrol = true;
-        mLifeLeft = 10;
+        mLifeLeft = 250;
         mRigidbody.velocity = new Vector3(0, 0, 0);
         transform.localPosition = initialpos;
         transform.right = initialright;
