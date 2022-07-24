@@ -15,7 +15,7 @@ public class TreeManBehavior : MonoBehaviour
     private Vector3 targetpos, initialpos, initialright, pos, targetDirection, vel;
     private RaycastHit2D info;
     private Animator anim;
-    private bool isactive=true;
+    private bool isactive = true;
 
     public int nowATK = 10;
     private float atkTimer = 0f;
@@ -31,12 +31,12 @@ public class TreeManBehavior : MonoBehaviour
     }
     private void Update()
     {
-        if(isactive)
+        if (isactive)
         {
-            // if (anim.GetBool("Attacked"))
-            //     attackedBehavior();
-            //else
-            //{
+            if (anim.GetBool("Attacked"))
+                attackedBehavior();
+            else
+            {
                 if (mFriendshipStatus == 0 && targetHero.GetComponent<HeroBehavior>().getFriendship() >= mFriendshipRequired)
                     mFriendshipStatus = 2;
                 if (mFriendshipStatus == 2 && targetHero.GetComponent<HeroBehavior>().getFriendship() < mFriendshipRequired)
@@ -46,11 +46,6 @@ public class TreeManBehavior : MonoBehaviour
                 targetpos = targetHero.transform.position;
                 targetDirection = targetpos - pos;
                 dot = Vector3.Dot(transform.right, targetDirection.normalized);
-
-                if(patrol)
-                {
-                    Debug.Log("Tree Patrol");
-                }
 
                 if (dot > 0.2f)
                 {
@@ -64,22 +59,25 @@ public class TreeManBehavior : MonoBehaviour
                         patrolBehavior();
                 else
                     chaseBehavior();
-            //}
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!isactive) return;
+        if (!isactive) return;
 
-        if (collision.gameObject.layer == 19)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))
         {
+            anim.SetBool("Attacked", true);
+
             mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt *
             collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().powerUpCoef;//计算受伤
             switch (mFriendshipStatus)
             {
                 case 2:
-                    for (int i = 0; i < multiplication - 1; ++i)
-                        mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt;
+                    mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt *
+                            collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().powerUpCoef *
+                            (multiplication - 1);
                     mFriendshipStatus = 1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
@@ -88,8 +86,6 @@ public class TreeManBehavior : MonoBehaviour
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
-                    for (int i = 0; i < multiplication + 1; ++i)
-                        attackBehavior();
                     break;
             }
             Debug.Log("Life:" + mLifeLeft);
@@ -124,13 +120,13 @@ public class TreeManBehavior : MonoBehaviour
             //angle = Vector3.Angle(targetpos - pos, transform.right);
             //if (angle < detectAngle)
             //{
-                targetDirection = (targetpos - pos).normalized;
-                info = Physics2D.Raycast(transform.position, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
-                if (info.collider != null && info.collider.gameObject.layer == 8)
-                {
-                    patrol = false;
-                    transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-                }
+            targetDirection = (targetpos - pos).normalized;
+            info = Physics2D.Raycast(transform.position, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
+            if (info.collider != null && info.collider.gameObject.layer == 8)
+            {
+                patrol = false;
+                transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+            }
             //}
         }
     }
@@ -153,14 +149,14 @@ public class TreeManBehavior : MonoBehaviour
         if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
             Respawn();
         else
-        { 
+        {
             info = Physics2D.Raycast(transform.position, targetDirection, chaseDistance, 1 << 6 | 1 << 8);
             mRigidbody.velocity = new Vector3(0, 0, 0);
-            
+
             attackTimer += Time.deltaTime;
             atkTimer += Time.deltaTime;
 
-            if(atkTimer >= 1.0f && nowATK <= 30)
+            if (atkTimer >= 1.0f && nowATK <= 30)
             {
                 nowATK += 5;
                 atkTimer = 0f;
@@ -202,7 +198,7 @@ public class TreeManBehavior : MonoBehaviour
         if (attackedTimer <= 0)
         {
             attackedTimer = 0.5f;
-            //anim.SetBool("Attacked", false);
+            anim.SetBool("Attacked", false);
             if (mLifeLeft <= 0)
                 Death();
         }
