@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class herointeract : MonoBehaviour
 {
+    public bool isResistance = false;
+    private float resistanceTimer = 0f;
+
     HeroBehavior mHeroBehavior = null;
     // Start is called before the first frame update
     public bloodbarcontrol mUIManager = null;
@@ -20,6 +23,16 @@ public class herointeract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isResistance)
+        {
+            resistanceTimer += Time.deltaTime;
+            if(resistanceTimer >= 10f)//无敌状态持续10s
+            {
+                resistanceTimer = 0f;
+                isResistance = false;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             if (mybagmanager.bagisopen)
@@ -86,14 +99,14 @@ public class herointeract : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.layer == 14)
+        if (collider.gameObject.layer == 14 && !isResistance)
         {
             mHurtTimer = 0;
             mUIManager.decreasevolume(25);
             gameObject.GetComponent<HeroBehavior>().hurt();
         }
 
-        if(collider.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        if(collider.gameObject.layer == LayerMask.NameToLayer("Bullet") && !isResistance)
         {
             if(collider.gameObject.tag == "SlimeBall")//史莱姆
             {
@@ -124,7 +137,7 @@ public class herointeract : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.gameObject.layer == 14)
+        if (collider.gameObject.layer == 14 && !isResistance)
         {
             mHurtTimer += Time.deltaTime;
             if (mHurtTimer >= 1f)
