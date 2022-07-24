@@ -13972,6 +13972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -14561,7 +14562,6 @@ GameObject:
   - component: {fileID: 1177786480}
   - component: {fileID: 1177786482}
   - component: {fileID: 1177786481}
-  - component: {fileID: 1177786483}
   - component: {fileID: 1177786484}
   m_Layer: 6
   m_Name: lupai
@@ -14722,21 +14722,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1177786483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1177786479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df4de68a1f5510a4ebe419466d74dcc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogbox: {fileID: 0}
-  dialogboxtext: {fileID: 0}
-  signtext: ' something hidden?'
 --- !u!19719996 &1177786484
 TilemapCollider2D:
   m_ObjectHideFlags: 0
