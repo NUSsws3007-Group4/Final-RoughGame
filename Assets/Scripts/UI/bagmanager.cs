@@ -414,6 +414,7 @@ public class bagmanager : MonoBehaviour
         Debug.Log(hero.name);
         friendshipflask.iteminfo = "A kind of mysterious liquid...\nWant to have a try?";
         friendshipflask.itemname = "?";
+        friendshipflask.locked = true;
         closemybag();
     }
 
