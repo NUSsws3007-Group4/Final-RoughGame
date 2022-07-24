@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class bagmanager : MonoBehaviour
 {
     //all items
-    public itemstruct bloodflask, energyflask, diamond, friendshipflask, emptyflask,ragerune,cooldownrune,robustrune,energyrune;
+    public itemstruct bloodflask, energyflask, diamond, friendshipflask, emptyflask,ragerune,cooldownrune,robustrune,energyrune,key;
 
     public GameObject mybagUI = null; //UI
     public GameObject slotgrid; //itemlistUI
@@ -23,6 +23,7 @@ public class bagmanager : MonoBehaviour
     public bag myitemlist; //real bag store
     public bool bagisopen;
     public bool cansell;
+    public bool nearthedoor;
 
     public void openmybag()
     {
@@ -178,6 +179,12 @@ public class bagmanager : MonoBehaviour
                 discardbutton.interactable=false;
                 break;
             }
+            case "[Prop]":
+            {
+                usebutton.interactable=nearthedoor;
+                discardbutton.interactable=true;
+                break;
+            }
         }
     }
 
@@ -261,6 +268,11 @@ public class bagmanager : MonoBehaviour
                     muim.GetComponent<coincontrol>().earn(5);
                     break;
                 }
+            case "key":
+            {
+                //open the door
+                break;
+            }
         }
         judgebutton();
         discarditem();
@@ -294,6 +306,11 @@ public class bagmanager : MonoBehaviour
         refreshitem(friendshipflask);
         refreshitem(emptyflask);
         refreshitem(diamond);
+        refreshitem(key);
+        refreshitem(ragerune);
+        refreshitem(cooldownrune);
+        refreshitem(robustrune);
+        refreshitem(energyrune);
         judgeempty();
     }
 
@@ -301,10 +318,15 @@ public class bagmanager : MonoBehaviour
     {
         myitemlist.itemlist.Clear();
         bloodflask.itemnum = 1;
-        energyflask.itemnum = 0;
-        friendshipflask.itemnum = 0;
-        emptyflask.itemnum = 0;
+        energyflask.itemnum = 1;
+        friendshipflask.itemnum = 1;
+        emptyflask.itemnum = 1;
         diamond.itemnum = 1;
+        key.itemnum=1;
+        ragerune.itemnum=0;
+        cooldownrune.itemnum=0;
+        robustrune.itemnum=0;
+        energyrune.itemnum=0;
         refreshall();
     }
 

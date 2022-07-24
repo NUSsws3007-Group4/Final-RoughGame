@@ -12,7 +12,7 @@ public class herointeract : MonoBehaviour
     public bloodbarcontrol mUIManager = null;
     public bagmanager mybagmanager;
     public storemanager mystoremanager;
-    public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond,ragerune,cooldownrune,robustrune,energyrune;
+    public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond,ragerune,cooldownrune,robustrune,energyrune,key;
 
     private float mHurtTimer = 0;
     void Start()
@@ -110,6 +110,11 @@ public class herointeract : MonoBehaviour
                 case "MPincrease":
                 {
                     mybagmanager.pickupitem(energyrune);
+                    break;
+                }
+                case "key":
+                {
+                    mybagmanager.pickupitem(key);
                     break;
                 }
             }
