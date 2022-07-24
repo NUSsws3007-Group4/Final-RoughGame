@@ -19,4 +19,4 @@ MonoBehaviour:
   locked: 0
   itemprice: 5
   iteminfo: Seems not useful at all......Maybe you can sell it cheap to a merchant?
-  itemtype: 0
+  itemtype: '[Scrap]'

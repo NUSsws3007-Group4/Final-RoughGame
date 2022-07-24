@@ -1920,6 +1920,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: hero
+      value: 
+      objectReference: {fileID: 1918388477}
+    - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
       propertyPath: muim
       value: 
       objectReference: {fileID: 1875227784}
@@ -1928,6 +1932,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1372085076}
     - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: ragerune
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d21e728575d6ac43ab9f10967742b8b, type: 2}
+    - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
       propertyPath: useimage
       value: 
       objectReference: {fileID: 900924839}
@@ -1935,10 +1943,38 @@ PrefabInstance:
       propertyPath: sellimage
       value: 
       objectReference: {fileID: 1506695565}
+    - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: energyrune
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ba13a32d701583489e3151a3486fb30, type: 2}
+    - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: robustrune
+      value: 
+      objectReference: {fileID: 11400000, guid: dbd61ffae289c7b4790c532d8f5d37cd, type: 2}
+    - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: cooldownrune
+      value: 
+      objectReference: {fileID: 11400000, guid: 59458a3f6b3e03d45bd05960f201be35, type: 2}
     - target: {fileID: 5466738979695906772, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
       propertyPath: muim
       value: 
       objectReference: {fileID: 1875227784}
+    - target: {fileID: 5466738979695906772, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: ragerune
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d21e728575d6ac43ab9f10967742b8b, type: 2}
+    - target: {fileID: 5466738979695906772, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: energyrune
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ba13a32d701583489e3151a3486fb30, type: 2}
+    - target: {fileID: 5466738979695906772, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: robustrune
+      value: 
+      objectReference: {fileID: 11400000, guid: dbd61ffae289c7b4790c532d8f5d37cd, type: 2}
+    - target: {fileID: 5466738979695906772, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: cooldownrune
+      value: 
+      objectReference: {fileID: 11400000, guid: 59458a3f6b3e03d45bd05960f201be35, type: 2}
     - target: {fileID: 5466738979696784103, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
       propertyPath: m_SizeDelta.x
       value: 152.9859

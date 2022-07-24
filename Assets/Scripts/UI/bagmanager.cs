@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class bagmanager : MonoBehaviour
 {
     //all items
-    public itemstruct bloodflask, energyflask, diamond, friendshipflask, emptyflask;
+    public itemstruct bloodflask, energyflask, diamond, friendshipflask, emptyflask,ragerune,cooldownrune,robustrune,energyrune;
 
     public GameObject mybagUI = null; //UI
     public GameObject slotgrid; //itemlistUI
     public GameObject muim;
     public GameObject hero;
     public Text iteminformationshowed;
+    public Text itemtypename;
     public itemstruct nowselecteditem;
     public Button discardbutton;
     public Button usebutton;
@@ -33,7 +34,7 @@ public class bagmanager : MonoBehaviour
         useimage.gameObject.SetActive(true);
         sellimage.gameObject.SetActive(false);
 
-        iteminformationshowed.text = "";
+        updateinfo("","");
         bagisopen = true;
     }
 
@@ -108,59 +109,75 @@ public class bagmanager : MonoBehaviour
         judgeempty();
     }
 
-    public void judgecanuse()
+    public void judgebutton()
     {
         if (nowselecteditem == null) return;
-        switch (nowselecteditem.itemname)
+        switch (nowselecteditem.itemtype)
         {
-            case "bloodflask":
+            case "[Potion]":
+            {
+                switch (nowselecteditem.itemname)
                 {
-                    if (muim.GetComponent<bloodbarcontrol>().getvolume() < muim.GetComponent<bloodbarcontrol>().maxblood)
+                    case "bloodflask":
                     {
-                        usebutton.interactable = true;
+                        if (muim.GetComponent<bloodbarcontrol>().getvolume() < muim.GetComponent<bloodbarcontrol>().maxblood)
+                        {
+                            usebutton.interactable = true;
+                        }
+                        else
+                        {
+                            usebutton.interactable = false;
+                        }
+                        break;
                     }
-                    else
+                    case "energyflask":
                     {
-                        usebutton.interactable = false;
+                        if (muim.GetComponent<energybarcontrol>().getvolume() < muim.GetComponent<energybarcontrol>().maxenergy)
+                        {
+                            usebutton.interactable = true;
+                        }
+                        else
+                        {
+                            usebutton.interactable = false;
+                        }
+                        break;
                     }
-                    break;
+                    case "friendshipflask":
+                    {
+                        if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
+                        {
+                            usebutton.interactable = true;
+                        }
+                        else
+                        {
+                            usebutton.interactable = false;
+                            friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
+                        }
+                        updateinfo(friendshipflask.iteminfo,friendshipflask.itemtype+" "+friendshipflask.itemname);
+                        break;
+                    }
                 }
-            case "energyflask":
-                {
-                    if (muim.GetComponent<energybarcontrol>().getvolume() < muim.GetComponent<energybarcontrol>().maxenergy)
-                    {
-                        usebutton.interactable = true;
-                    }
-                    else
-                    {
-                        usebutton.interactable = false;
-                    }
-                    break;
-                }
-            case "friendshipflask":
-                {
-                    if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
-                    {
-                        usebutton.interactable = true;
-                    }
-                    else
-                    {
-                        usebutton.interactable = false;
-                        friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
-                    }
-                    updateinfo(friendshipflask.iteminfo);
-                    break;
-                }
-            case "diamond":
-                {
-                    usebutton.interactable = cansell;
-                    break;
-                }
-            case "emptyflask":
-                {
-                    usebutton.interactable = cansell;
-                    break;
-                }
+                discardbutton.interactable=true;
+                break;
+            }
+            case "[Treasure]":
+            {
+                usebutton.interactable=cansell;
+                discardbutton.interactable=true;
+                break;
+            }
+            case "[Scrap]":
+            {
+                usebutton.interactable=cansell;
+                discardbutton.interactable=true;
+                break;
+            }
+            case "[Rune]":
+            {
+                usebutton.interactable=false;
+                discardbutton.interactable=false;
+                break;
+            }
         }
     }
 
@@ -229,7 +246,7 @@ public class bagmanager : MonoBehaviour
                     {
                         hero.GetComponent<HeroFakeFriendly>().fakeFriendly = true;
                     };
-                    updateinfo(friendshipflask.iteminfo);
+                    updateinfo(friendshipflask.iteminfo,friendshipflask.itemtype+" "+friendshipflask.itemname);
 
                     break;
                 }
@@ -245,7 +262,7 @@ public class bagmanager : MonoBehaviour
                     break;
                 }
         }
-        judgecanuse();
+        judgebutton();
         discarditem();
     }
 
@@ -264,9 +281,10 @@ public class bagmanager : MonoBehaviour
         }
     }
 
-    public void updateinfo(string info)
+    public void updateinfo(string info,string naame)
     {
         iteminformationshowed.text = info;
+        itemtypename.text=name;
     }
 
     void refreshall()

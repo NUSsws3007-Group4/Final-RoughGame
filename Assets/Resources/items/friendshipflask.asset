@@ -21,4 +21,4 @@ MonoBehaviour:
   iteminfo: 'A kind of mysterious liquid......
 
     Have a try?'
-  itemtype: 0
+  itemtype: '[Potion]'

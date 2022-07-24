@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e6ce74e10ceec340ba2014fb04d4ea6, type: 3}
-  m_Name: diamond
+  m_Name: HPincreaseRune
   m_EditorClassIdentifier: 
-  itemname: diamond
-  itemimage: {fileID: 21300000, guid: b7ae160c05361574e840be36cf2681e8, type: 3}
-  itemnum: 1
+  itemname: Robust Rune
+  itemimage: {fileID: 21300000, guid: a12f6770becee5e4baf9618c06128704, type: 3}
+  itemnum: 0
   itemnuminstore: 0
   locked: 0
   itemprice: 0
-  iteminfo: A diamond!Go to a merchant and exchange it for coins,it is valuable!
-  itemtype: '[Treasure]'
+  iteminfo: 
+  itemtype: '[Rune]'

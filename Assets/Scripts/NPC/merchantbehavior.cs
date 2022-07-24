@@ -57,6 +57,6 @@ public class merchantbehavior : MonoBehaviour
         stg.canopenstore=false;
         bg.cansell=false;
         stg.closemystore();
-        bg.judgecanuse();
+        bg.judgebutton();
     }
 }

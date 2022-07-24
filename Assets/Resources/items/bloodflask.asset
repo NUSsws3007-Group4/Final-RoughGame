@@ -19,4 +19,4 @@ MonoBehaviour:
   locked: 0
   itemprice: 100
   iteminfo: This is a blood flask,it can cure you!
-  itemtype: 0
+  itemtype: '[Potion]'

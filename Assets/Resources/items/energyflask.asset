@@ -19,4 +19,4 @@ MonoBehaviour:
   locked: 0
   itemprice: 100
   iteminfo: This is an energyflask,it can help you recover energy!
-  itemtype: 0
+  itemtype: '[Potion]'

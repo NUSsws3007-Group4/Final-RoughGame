@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class storemanager : MonoBehaviour
 {
-    public itemstruct bloodflask,energyflask,diamond,friendshipflask;
+    public itemstruct bloodflask,energyflask,diamond,friendshipflask;//ragerune,cooldownrune,robustrune,energyrune;
 
     public Text iteminformationshowed;
     public GameObject muim;

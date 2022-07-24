@@ -22,9 +22,9 @@ public class Slotproperty : MonoBehaviour
             bg.useimage.gameObject.SetActive(true);
             bg.sellimage.gameObject.SetActive(false);
         }
-        bg.updateinfo(slotitem.iteminfo);
+        bg.updateinfo(slotitem.iteminfo,slotitem.itemtype+" "+slotitem.itemname);
         bg.nowselecteditem=slotitem;
         bg.discardbutton.interactable=true;
-        bg.judgecanuse();
+        bg.judgebutton();
     }
 }
