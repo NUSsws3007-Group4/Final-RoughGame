@@ -18,8 +18,6 @@ MonoBehaviour:
   itemnuminstore: 0
   locked: 0
   itemprice: 0
-  iteminfo: 'You find a key......Remember to take care of it!
-
-    But where is the
-    door?'
+  iteminfo: You find a key......\nRemember to take care of it!\nBut where is the
+    door?
   itemtype: '[Prop]'
