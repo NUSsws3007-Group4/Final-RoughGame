@@ -165,8 +165,9 @@ public class EliteEnemyBehavior : EnemyBehavior
             switch (mFriendshipStatus)
             {
                 case 2:
-                    for (int i = 0; i < multiplication - 1; ++i)
-                        mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+                    mLifeLeft -= collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                                collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef *
+                                (multiplication - 1);
                     mFriendshipStatus = 1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
@@ -175,8 +176,6 @@ public class EliteEnemyBehavior : EnemyBehavior
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
-                    for (int i = 0; i < multiplication + 1; ++i)
-                        attackBehavior();
                     break;
             }
             Debug.Log("Life:" + mLifeLeft);
