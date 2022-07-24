@@ -19,7 +19,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         chaseDistance = 20f;
         mFriendshipRequired = 70;
         friendshipAddValue = 0;
-        mLifeLeft = 500;
+        mLifeLeft = 250;
         initialpos = transform.localPosition;
         initialright = transform.right;
         guardPortal.SetActive(false);
@@ -28,8 +28,11 @@ public class EliteEnemyBehavior : EnemyBehavior
     {
         transform.GetChild(3).gameObject.SetActive(true);
         transform.GetChild(4).gameObject.SetActive(true);
+        mRigidbody.velocity = new Vector3(0, 0, 0);
+        if (!edgeTouched)
+            mRigidbody.AddForce(-100 * transform.right);
+
         attackedTimer -= Time.deltaTime;
-        mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
         if (attackedTimer <= 0)
         {
             attackedTimer = 0.5f;
@@ -187,7 +190,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         Debug.Log("Elite Respawn" + initialpos);
         edgeTouched = false;
         patrol = true;
-        mLifeLeft = 500;
+        mLifeLeft = 250;
         mRigidbody.velocity = new Vector3(0, 0, 0);
         transform.localPosition = initialpos;
         transform.right = initialright;
