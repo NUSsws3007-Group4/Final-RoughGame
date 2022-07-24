@@ -126,18 +126,18 @@ public class coincontrol : MonoBehaviour
     {
         if (currentcoinnumber != coinnumber)
         {
-            speedct += Time.unscaledDeltaTime;
-            if (speedct > 0.02f)
+            //speedct += Time.unscaledDeltaTime;
+            //if (speedct > 0.02f)
             {
                 currentcoinnumber += delta;
                 showtext.text = inttostring(currentcoinnumber);
-                speedct = 0f;
+                //speedct = 0f;
             }
         }
-        else
-        {
-            speedct = 0f;
-        }
+        //else
+        //{
+            //speedct = 0f;
+        //}
 
         if (timer > 0)
         {

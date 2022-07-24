@@ -58,6 +58,7 @@ public class storemanager : MonoBehaviour
     {
         if(canopenstore)
         {
+            refreshstore();
             mystoreUI.SetActive(true);
             storeisopen=true;
             Time.timeScale = 0;
@@ -122,7 +123,7 @@ public class storemanager : MonoBehaviour
     {
         seticestyle();
         closemystore();
-        canopenstore=true;
+        canopenstore=false;
         clock=0;
     }
 
