@@ -2,9 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour
+public class PuzzleControl : MonoBehaviour
 {
     public Camera cam;
+    private bool puzzleEnabled = false;
+    /// <summary>
+    /// 设置是否能解密
+    /// </summary>
+    /// <param name="_enabled">
+    /// 是否启用解密
+    /// </param>
+    public void setPuzzleOpen(bool _enabled)
+    {
+        puzzleEnabled = _enabled;
+    }
     // Start is called before the first frame update
     void Start()
     {
