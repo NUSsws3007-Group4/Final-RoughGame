@@ -12,7 +12,7 @@ public class herointeract : MonoBehaviour
     public bloodbarcontrol mUIManager = null;
     public bagmanager mybagmanager;
     public storemanager mystoremanager;
-    public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond,ragerune,cooldownrune,robustrune,energyrune;
+    public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond,ragerune,cooldownrune,robustrune,energyrune,key;
 
     private float mHurtTimer = 0;
     void Start()
@@ -112,6 +112,11 @@ public class herointeract : MonoBehaviour
                     mybagmanager.pickupitem(energyrune);
                     break;
                 }
+                case "key":
+                {
+                    mybagmanager.pickupitem(key);
+                    break;
+                }
             }
         }
 
@@ -151,6 +156,12 @@ public class herointeract : MonoBehaviour
             else if(collider.gameObject.tag == "GroundEliteCombat")//地面精英怪近战攻击
             {
                 mUIManager.decreasevolume(50);
+                gameObject.GetComponent<HeroBehavior>().hurt();
+            }
+            else if(collider.gameObject.tag == "TreeAttack")//树人攻击
+            {
+                int _branchDamage = collider.gameObject.GetComponent<TreeAttack>().branchDmg;
+                mUIManager.decreasevolume(_branchDamage);
                 gameObject.GetComponent<HeroBehavior>().hurt();
             }
         }
