@@ -554,6 +554,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &85702162 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6595152490428693700, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+  m_PrefabInstance: {fileID: 240819022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &90456467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,6 +1444,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 208285167}
     m_Modifications:
+    - target: {fileID: 900924838, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1126626628, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211160883, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506695564, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609695569, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921251732, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 238868339789166573, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
       propertyPath: m_Text
       value: 
@@ -1950,6 +1985,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1372085076}
     - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: ragerune
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d21e728575d6ac43ab9f10967742b8b, type: 2}
+    - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
       propertyPath: useimage
       value: 
       objectReference: {fileID: 900924839}
@@ -1957,6 +1996,22 @@ PrefabInstance:
       propertyPath: sellimage
       value: 
       objectReference: {fileID: 1506695565}
+    - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: energyrune
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ba13a32d701583489e3151a3486fb30, type: 2}
+    - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: robustrune
+      value: 
+      objectReference: {fileID: 11400000, guid: dbd61ffae289c7b4790c532d8f5d37cd, type: 2}
+    - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: cooldownrune
+      value: 
+      objectReference: {fileID: 11400000, guid: 59458a3f6b3e03d45bd05960f201be35, type: 2}
+    - target: {fileID: 5466738979695906771, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
+      propertyPath: itemtypename
+      value: 
+      objectReference: {fileID: 85702162}
     - target: {fileID: 5466738979695906772, guid: b6f17ca970af1384bafc139d9ed229cf, type: 3}
       propertyPath: muim
       value: 
@@ -13121,6 +13176,10 @@ PrefabInstance:
       propertyPath: mystoremanager
       value: 
       objectReference: {fileID: 689011599}
+    - target: {fileID: 1918388491, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: bg
+      value: 
+      objectReference: {fileID: 689011600}
     - target: {fileID: 4268124987306694998, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_Name
       value: hero
@@ -13701,7 +13760,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
