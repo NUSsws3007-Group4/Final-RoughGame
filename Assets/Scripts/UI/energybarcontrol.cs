@@ -47,6 +47,7 @@ public class energybarcontrol : MonoBehaviour
 
     public void changemaxenergy(int delta)
     {
+        if(delta>0) increasevolume(delta); else decreasevolume(-delta);
         maxenergy+=delta;
     }
 

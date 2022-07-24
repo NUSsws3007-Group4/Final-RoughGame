@@ -21,7 +21,6 @@ public class RockBehavior : MonoBehaviour
     void Start()
     {
         solved = false;
-        s=GameObject.Find("Switch");
         elite=GameObject.Find("elite");
     }
 
