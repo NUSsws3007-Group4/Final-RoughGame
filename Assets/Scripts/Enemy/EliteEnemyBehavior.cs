@@ -3,7 +3,7 @@ using System.Threading;
 public class EliteEnemyBehavior : EnemyBehavior
 {
     private float remoteAttackTimer = 0f;
-    private bool edgeTouched = false;
+    private bool edgeTouched = false, flaskunlocked = false;
     private float cx1, cx2, cy1, cy2;
     private Vector3 spawnPoint;
     private GameObject guardPortal;
@@ -23,6 +23,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         mLifeLeft = 250;
         initialpos = transform.localPosition;
         initialright = transform.right;
+        bgm = GameObject.Find("Canvas").GetComponent<bagmanager>();
         guardPortal.SetActive(false);
     }
     protected override void attackedBehavior()
@@ -143,8 +144,12 @@ public class EliteEnemyBehavior : EnemyBehavior
         if (distance < detectDistance)
         {
             guardPortal.SetActive(true);
-            bgm.friendshipflask.locked = false;
-            bgm.pickupitem(bgm.friendshipflask);
+            if (!flaskunlocked)
+            {
+                bgm.friendshipflask.locked = false;
+                bgm.pickupitem(bgm.friendshipflask);
+                flaskunlocked = true;
+            }
         }
 
     }
