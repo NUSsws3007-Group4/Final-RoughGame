@@ -7,7 +7,7 @@ public class FlyEliteEnemy : EnemyBehavior
     private const float pi = 3.1415926f;
     private int barrageAttackCount = 0;
     private float arrowShotTimer = 0f;
-    private GameObject guardKey, rock;
+    private GameObject guardPortal, puzzleBase;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -20,8 +20,8 @@ public class FlyEliteEnemy : EnemyBehavior
         enemyRenderer = GetComponent<SpriteRenderer>();
         mRigidbody = gameObject.GetComponent<Rigidbody2D>();
         targetHero = GameObject.Find("hero");
-        guardKey = GameObject.Find("KeyArea");
-        rock = GameObject.Find("Rock");
+        guardPortal = GameObject.Find("KeyArea");
+        puzzleBase = GameObject.Find("puzzlebase");
         detectDistance = 4f;
         initialpos = transform.localPosition;
         initialright = transform.right;
@@ -29,8 +29,8 @@ public class FlyEliteEnemy : EnemyBehavior
     override protected void patrolBehavior()
     {
         anim.SetBool("FlyEliteIdle", true);
-        rock.GetComponent<RockBehavior>().setSwitch(false);
         transform.GetChild(2).GetComponent<Renderer>().enabled = false;
+        puzzleBase.GetComponent<PuzzleControl>().setPuzzleOpen(false);
         base.patrolBehavior();
     }
 
@@ -80,10 +80,9 @@ public class FlyEliteEnemy : EnemyBehavior
         base.friendlyBehavior();
         if (distance < detectDistance)
         {
-            rock.GetComponent<RockBehavior>().setSwitch(true);
+            puzzleBase.GetComponent<PuzzleControl>().setPuzzleOpen(true);
             transform.GetChild(2).GetComponent<Renderer>().enabled = true;
         }
-
     }
     private void BarrageArrowAttack()
     {
@@ -120,12 +119,12 @@ public class FlyEliteEnemy : EnemyBehavior
 
     protected override void Death()
     {
-        Destroy(guardKey.gameObject);
+        Destroy(guardPortal.gameObject);
         base.Death();
     }
     public void AllowPass()
     {
-        Destroy(guardKey.gameObject);
+        Destroy(guardPortal.gameObject);
     }
 
 }
