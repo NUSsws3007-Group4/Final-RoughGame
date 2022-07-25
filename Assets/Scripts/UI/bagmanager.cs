@@ -28,6 +28,7 @@ public class bagmanager : MonoBehaviour
     public void openmybag()
     {
         Time.timeScale = 0;
+        refreshall();
         mybagUI.SetActive(true);
         usebutton.interactable = false;
         discardbutton.interactable = false;
@@ -345,6 +346,18 @@ public class bagmanager : MonoBehaviour
         }
         judgebutton();
         discarditem();
+    }
+
+    public void quickuseitem(itemstruct item)
+    {
+        itemstruct tmp;
+        if(item.itemnum>0)
+        {
+            tmp=nowselecteditem;
+            nowselecteditem=item;
+            useitem();
+            nowselecteditem=tmp;
+        }
     }
 
     public void pickupitem(itemstruct newitem)

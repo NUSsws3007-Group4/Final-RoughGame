@@ -26,6 +26,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         bgm = GameObject.Find("Canvas").GetComponent<bagmanager>();
         guardPortal.SetActive(false);
     }
+
     protected override void attackedBehavior()
     {
         transform.GetChild(3).gameObject.SetActive(true);
@@ -158,7 +159,8 @@ public class EliteEnemyBehavior : EnemyBehavior
         guardPortal.SetActive(true);
         bgm.friendshipflask.locked = false;
         bgm.pickupitem(bgm.friendshipflask);
-        base.Death();
+        Destroy(transform.gameObject);
+        //base.Death();
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
     {

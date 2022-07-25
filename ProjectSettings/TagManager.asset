@@ -24,6 +24,11 @@ TagManager:
   - CDreduce
   - atkup
   - Key
+  - energyflask
+  - friendshipflask
+  - soulpotion
+  - ragepotion
+  - defencepotion
   layers:
   - Default
   - TransparentFX

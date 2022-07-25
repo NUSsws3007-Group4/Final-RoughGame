@@ -7,6 +7,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
     private float cx1, cx2, cy1, cy2;
     private Vector3 spawnPoint;
     private GameObject guardPortal;
+    private GameObject dropitem;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -126,7 +127,24 @@ public class Elite3EnemyBehavior : EnemyBehavior
     protected override void Death()
     {
         guardPortal.SetActive(true);
-        base.Death();
+        Destroy(transform.gameObject);
+        float rn=Random.Range(0f,3f);
+        if(rn<1f)
+        {
+            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/InfiniteMagicPotion") as GameObject);
+        }
+        else if(rn<2f)
+        {
+            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/PowerUpPotion") as GameObject);
+        }
+        else
+        {
+            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/ResistencePotion") as GameObject);
+        }
+        Vector3 newpos=transform.position;
+        newpos.y+=1;
+        dropitem.transform.position=newpos;
+        
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
     {

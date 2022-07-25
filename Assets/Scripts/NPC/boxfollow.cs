@@ -14,6 +14,13 @@ public class boxfollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localPosition=target.transform.localPosition+offset;
+        if(target!=null)
+        {
+            transform.localPosition=target.transform.localPosition+offset;
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

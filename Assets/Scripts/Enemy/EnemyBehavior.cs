@@ -16,6 +16,8 @@ public class EnemyBehavior : MonoBehaviour
     protected RaycastHit2D info;
     protected Animator anim;
     protected bool isactive=true;
+    private GameObject muim;
+    private GameObject dropitem;
 
     protected virtual void Start()
     {
@@ -105,6 +107,31 @@ public class EnemyBehavior : MonoBehaviour
     protected virtual void Death()
     {
         Destroy(transform.gameObject);
+        float rn=Random.Range(0f,5f);
+        if(rn<1f)
+        {
+            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/bloodflask") as GameObject);
+        }
+        else if(rn<2f)
+        {
+            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/energyflask") as GameObject);
+        }
+        else if(rn<3f)
+        {
+            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/diamond") as GameObject);
+        }
+        else
+        {
+            muim=GameObject.Find("UImanager");
+            int mon=(int)(Random.Range(20,60));
+            muim.GetComponent<coincontrol>().earn(mon);
+        }
+        if(rn<3)
+        {
+            Vector3 newpos=transform.position;
+            newpos.y+=1;
+            dropitem.transform.position=newpos;
+        }
     }
 
     protected virtual void Respawn()

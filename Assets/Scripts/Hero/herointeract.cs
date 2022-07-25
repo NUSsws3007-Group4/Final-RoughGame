@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class herointeract : MonoBehaviour
 {
@@ -12,9 +13,12 @@ public class herointeract : MonoBehaviour
     public bloodbarcontrol mUIManager = null;
     public bagmanager mybagmanager;
     public storemanager mystoremanager;
-    public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond,powerrune,cooldownrune,robustrune,energyrune,key,ragepotion,soulpotion,defencepotion;
+    public GameObject muim;
+    //public itemstruct bloodflask, energyflask, friendshipflask, emptyflask, diamond,powerrune,cooldownrune,robustrune,energyrune,key,ragepotion,soulpotion,defencepotion;
 
     private float mHurtTimer = 0;
+    public Text runoutH,runoutE,fullblood,fullenergy;
+
     void Start()
     {
         mHeroBehavior = gameObject.GetComponent<HeroBehavior>();
@@ -58,6 +62,36 @@ public class herointeract : MonoBehaviour
                 mystoremanager.openmystore();
             }
         }
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if(muim.GetComponent<bloodbarcontrol>().getvolume()>=muim.GetComponent<bloodbarcontrol>().maxblood)
+            {
+                fullblood.GetComponent<runoutsign>().activate();
+            }
+            else if(mybagmanager.bloodflask.itemnum<=0)
+            {
+                runoutH.GetComponent<runoutsign>().activate();
+            }
+            else
+            {
+                mybagmanager.quickuseitem(mybagmanager.bloodflask);
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if(muim.GetComponent<energybarcontrol>().getvolume()>=muim.GetComponent<energybarcontrol>().maxenergy)
+            {
+                fullenergy.GetComponent<runoutsign>().activate();
+            }
+            else if(mybagmanager.energyflask.itemnum<=0)
+            {
+                runoutH.GetComponent<runoutsign>().activate();
+            }
+            else
+            {
+                mybagmanager.quickuseitem(mybagmanager.energyflask);
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collider)
@@ -69,17 +103,22 @@ public class herointeract : MonoBehaviour
                 case "cherry":
                     {
                         //Destroy(collider.gameObject);
-                        mybagmanager.pickupitem(bloodflask);
+                        mybagmanager.pickupitem(mybagmanager.bloodflask);
                         break;
                     }
                 case "energyflask":
                     {
-                        mybagmanager.pickupitem(energyflask);
+                        mybagmanager.pickupitem(mybagmanager.energyflask);
                         break;
                     }
+                case "friendshipflask":
+                {
+                    mybagmanager.pickupitem(mybagmanager.friendshipflask);
+                    break;
+                }
                 case "diamond":
                     {
-                        mybagmanager.pickupitem(diamond);
+                        mybagmanager.pickupitem(mybagmanager.diamond);
                         break;
                     }
                 case "Dash":
@@ -94,42 +133,42 @@ public class herointeract : MonoBehaviour
                     }
                 case "atkup":
                 {
-                    mybagmanager.pickupitem(powerrune);
+                    mybagmanager.pickupitem(mybagmanager.powerrune);
                     break;
                 }
                 case "CDreduce":
                 {
-                    mybagmanager.pickupitem(cooldownrune);
+                    mybagmanager.pickupitem(mybagmanager.cooldownrune);
                     break;
                 }
                 case "HPincrease":
                 {
-                    mybagmanager.pickupitem(robustrune);
+                    mybagmanager.pickupitem(mybagmanager.robustrune);
                     break;
                 }
                 case "MPincrease":
                 {
-                    mybagmanager.pickupitem(energyrune);
+                    mybagmanager.pickupitem(mybagmanager.energyrune);
                     break;
                 }
                 case "Key":
                 {
-                    mybagmanager.pickupitem(key);
+                    mybagmanager.pickupitem(mybagmanager.key);
                     break;
                 }
                 case "ragepotion":
                 {
-                    mybagmanager.pickupitem(ragepotion);
+                    mybagmanager.pickupitem(mybagmanager.ragepotion);
                     break;
                 }
                 case "defencepotion":
                 {
-                    mybagmanager.pickupitem(defencepotion);
+                    mybagmanager.pickupitem(mybagmanager.defencepotion);
                     break;
                 }
                 case "soulpotion":
                 {
-                    mybagmanager.pickupitem(soulpotion);
+                    mybagmanager.pickupitem(mybagmanager.soulpotion);
                     break;
                 }
             }
