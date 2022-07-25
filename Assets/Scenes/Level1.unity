@@ -15905,7 +15905,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2425280
+    m_Bits: 2425281
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 2d0627e9f4c504c49920e8f0e4062f2a, type: 2}
   m_TargetDisplay: 0
@@ -16074,7 +16074,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

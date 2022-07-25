@@ -11,13 +11,14 @@ public class tinymapbehavior : MonoBehaviour
     private float mwidth;
     private Vector2 msizedelta;
     private Vector3 mpos;
-    private const float heightbywidth=120f/225f;
+    private const float heightbywidth=32f/68f;
     public RawImage Darkcover;
 
     void Start()
     {
         //Darkcover.color=new Color(0f,0f,0f,0f);
         ftrt=ftcanvas.GetComponent<RectTransform>();
+        /*
         msizedelta=ftrt.sizeDelta;
         msizedelta.y/=3f; 
         msizedelta.x=msizedelta.y/heightbywidth;
@@ -27,6 +28,7 @@ public class tinymapbehavior : MonoBehaviour
             msizedelta.x/=3f;
             msizedelta.y=msizedelta.x*heightbywidth;     
         }
+        */
         msizedelta.x=msizedelta.y=0f;
         gameObject.GetComponent<RectTransform>().sizeDelta=msizedelta;
     }
@@ -54,6 +56,7 @@ public class tinymapbehavior : MonoBehaviour
 
         if(Input.GetKeyUp(KeyCode.Tab))
         {
+            /*
             msizedelta=ftrt.sizeDelta;  
             msizedelta.y/=3f; 
             msizedelta.x=msizedelta.y/heightbywidth;
@@ -63,6 +66,7 @@ public class tinymapbehavior : MonoBehaviour
                 msizedelta.x/=3f;
                 msizedelta.y=msizedelta.x*heightbywidth;     
             }
+            */
             msizedelta.x=msizedelta.y=0f;
             mpos.x=0f;
             mpos.y=0f;
