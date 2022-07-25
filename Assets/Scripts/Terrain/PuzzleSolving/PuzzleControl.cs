@@ -37,7 +37,7 @@ public class PuzzleControl : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && puzzleEnabled)
         {
             Vector2 colliNormal = collision.contacts[0].normal;
             if (colliNormal.y < -0.9f)
