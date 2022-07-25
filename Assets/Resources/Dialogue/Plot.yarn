@@ -1,0 +1,104 @@
+﻿title: HeroInit
+---
+Bridgett: Where am I...
+Bridgett: ...
+Bridgett: Invasion of frost...
+Bridgett: My sister was taken away by the frost. I have to save her.
+Bridgett: The frost came from that mountain.
+Bridgett: I should go west to find portals.
+Bridgett: I need to get to the top of the mountain.
+===
+
+title: Elite1Friendly
+---
+Clotille: Thank you for not killing my friends, seems that you are a friendly person. 
+Clotille: Here, take this, it may be useful.
+You got a fragment of the rune.
+Clotille: Oh, and take this too.
+Clotille: But remember to be careful with it.
+You got three flasks of mysterious liquid.
+Clotille: Maybe you'll be able to save us… And save her…
+===
+
+title: Elite1Defeated
+---
+Clotille: God... You are so powerful...
+You picked up a fragment of the rune.
+There's also a shiny flask of mysterious golden liquid.
+Bridgett: What is this...
+===
+
+title: Elite2Friendly
+---
+Silena: Good job, you're almost there.
+Silena: But I lost the fragment somewhere...
+Silena: Maybe you can go up and solve the puzzle to find it.
+===
+
+title: Elite2PuzzleSolved
+---
+Silena: Smart... You deserve it.
+You got a fragment of the rune.
+Silena: Go west, the portal is waiting for you.
+Silena: It will bring you higher.
+===
+
+title: Elite2FriendshipFlaskWarning
+---
+Silena: Hope that you haven't gone astray.
+===
+
+title: Elite2Defeated
+---
+Silena: Skillful...
+You got a fragment of the rune.
+Bridgett: The door at the bottom should be have been opened. Let me go and check it.
+===
+
+title: Elite3Friendly
+---
+Neve: You are a kind person. I don't want to fight with you.
+Neve: But, as the last guard, I can't let you get through too easily.
+Neve: Go up and find your way to the portal.
+===
+
+title: Elite3AllowPass
+---
+Neve: Extraordinary performance...
+Neve: You are free to go.
+Neve: Don't forget to take this.
+You got a fragment of the rune.
+===
+
+title: Elite3Defeated
+---
+Neve: Wonderful battle...
+You got a fragment of the rune.
+===
+
+title: TrueFriendlyEnding
+---
+Karina: I heard that you are friendly...
+Karina: Is your ability matched with your kindness?
+Karina: 
+===
+
+title: FakeFriendlyEnding
+---
+===
+
+title: FightEnding
+---
+===
+
+title: SlaughterEnding
+---
+
+===
+
+title: NormalEnding
+---
+Bridgett: Frost is gone...
+Bridgett: But where is my sister?
+===
+
