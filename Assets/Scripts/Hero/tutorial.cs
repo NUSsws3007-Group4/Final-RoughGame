@@ -16,6 +16,7 @@ public class tutorial : MonoBehaviour
     {
         moveimage.SetActive(true);
         jumpimage.SetActive(false);
+        tinymapImage.SetActive(false);
         bagimage.SetActive(false);
         state=0;
         at=dt=false;
