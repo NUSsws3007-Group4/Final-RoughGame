@@ -1813,7 +1813,7 @@ GameObject:
   - component: {fileID: 435286053}
   - component: {fileID: 435286056}
   - component: {fileID: 435286055}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: KeyArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11030,7 +11030,7 @@ GameObject:
   - component: {fileID: 996024545}
   - component: {fileID: 996024544}
   - component: {fileID: 996024543}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11063,8 +11063,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.5467014, y: 0}
-  m_Size: {x: 4.093403, y: 4.093403}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
   m_Direction: 0
 --- !u!212 &996024545
 SpriteRenderer:
@@ -13834,7 +13834,7 @@ GameObject:
   - component: {fileID: 1633541910}
   - component: {fileID: 1633541909}
   - component: {fileID: 1633541908}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: "\u6218\u80DCelite\u6216\u89E3\u5BC6\u6210\u529F\u6253\u5F00"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
