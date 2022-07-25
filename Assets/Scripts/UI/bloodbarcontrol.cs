@@ -53,8 +53,8 @@ public class bloodbarcontrol : MonoBehaviour
 
     public void changemaxblood(int delta)
     {
-        if(delta>0) increasevolume(delta); else decreasevolume(-delta);
         maxblood+=delta;
+        if(delta>0) increasevolume(delta); else decreasevolume(-delta);
         updaterate();
     }
 
