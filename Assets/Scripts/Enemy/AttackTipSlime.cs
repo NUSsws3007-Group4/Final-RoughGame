@@ -16,6 +16,8 @@ public class AttackTipSlime : SlimeBehavior
 
     override protected void Start()
     {
+        //s.SetActive(false);
+        friendlyimage.SetActive(false);
         isactive=false;
         base.Start();
         mRigidbody.velocity = new Vector3(0, 0, 0);

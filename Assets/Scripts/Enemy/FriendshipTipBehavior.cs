@@ -9,8 +9,8 @@ public class FriendshipTipBehavior : SlimeBehavior
 
     override protected void Start()
     {
-        friendlyimage.SetActive(false);
-        timer=0f;
+        //friendlyimage.SetActive(false);
+        timer=5f;
         base.Start();
         mRigidbody.velocity = new Vector3(0, 0, 0);
         mFriendshipRequired = 0;
