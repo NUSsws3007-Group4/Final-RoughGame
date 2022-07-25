@@ -6,6 +6,7 @@ public class tutorial : MonoBehaviour
 {
     public GameObject moveimage;
     public GameObject jumpimage;
+    public GameObject tinymapImage;
     public GameObject bagimage;
     public bagmanager bg;
     public int state;
@@ -44,10 +45,19 @@ public class tutorial : MonoBehaviour
             {
                 state++;
                 jumpimage.SetActive(false);
+                tinymapImage.SetActive(true);
+            }
+        }
+        else if (state == 2)
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                state++;
+                tinymapImage.SetActive(false);
                 bagimage.SetActive(true);
             }
         }
-        else if(state==2)
+        else if(state==3)
         {
             if(Input.GetKeyDown(KeyCode.B))
             {
