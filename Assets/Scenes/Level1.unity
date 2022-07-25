@@ -15470,7 +15470,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762310511}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61b7ae1a6d2047e4c9fc15f3a53edd99, type: 3}
   m_Name: 
@@ -15556,6 +15556,10 @@ PrefabInstance:
       propertyPath: mystoremanager
       value: 
       objectReference: {fileID: 689011599}
+    - target: {fileID: 1918388486, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: m_Volume
+      value: 0.506
+      objectReference: {fileID: 0}
     - target: {fileID: 1918388491, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: bg
       value: 
