@@ -6,6 +6,7 @@ public class PuzzleControl : MonoBehaviour
 {
     public Camera cam;
     private bool puzzleEnabled = false;
+    private GameObject muim;
     /// <summary>
     /// 设置是否能解密
     /// </summary>
@@ -19,7 +20,7 @@ public class PuzzleControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        muim=GameObject.Find("UImanager");
     }
 
     // Update is called once per frame
@@ -40,13 +41,21 @@ public class PuzzleControl : MonoBehaviour
         {
             Vector2 colliNormal = collision.contacts[0].normal;
             if (colliNormal.y < -0.9f)
+            {
                 cam.depth = 6;
+                muim.GetComponent<bloodbarcontrol>().setactiveall(false);
+                muim.GetComponent<energybarcontrol>().setactiveall(false);
+                muim.GetComponent<coincontrol>().setactiveall(false);
+            }
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            muim.GetComponent<bloodbarcontrol>().setactiveall(true);
+            muim.GetComponent<energybarcontrol>().setactiveall(true);
+            muim.GetComponent<coincontrol>().setactiveall(true);
             cam.depth = -10;
         }
     }

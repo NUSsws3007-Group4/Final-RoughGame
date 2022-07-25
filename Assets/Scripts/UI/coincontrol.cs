@@ -37,7 +37,7 @@ public class coincontrol : MonoBehaviour
         isactive=s;
         coinicon.gameObject.SetActive(s);
         showtext.gameObject.SetActive(s);
-        if(!s) deltatext.gameObject.SetActive(s);
+        //if(!s) deltatext.gameObject.SetActive(s);
     }
 
     private void getdelta()
@@ -58,6 +58,9 @@ public class coincontrol : MonoBehaviour
 
     public void earn(int num)
     {
+        coinicon.gameObject.SetActive(true);
+        showtext.gameObject.SetActive(true);
+
         coinnumber += num;
         getdelta();
 
@@ -75,6 +78,9 @@ public class coincontrol : MonoBehaviour
     {
         if (coinnumber >= num)
         {
+            coinicon.gameObject.SetActive(true);
+            showtext.gameObject.SetActive(true);
+
             coinnumber -= num;
             getdelta();
             timer = deltastaytime;
@@ -136,18 +142,18 @@ public class coincontrol : MonoBehaviour
     {
         if (currentcoinnumber != coinnumber)
         {
-            //speedct += Time.unscaledDeltaTime;
-            //if (speedct > 0.02f)
             {
                 currentcoinnumber += delta;
                 showtext.text = inttostring(currentcoinnumber);
-                //speedct = 0f;
             }
         }
-        //else
-        //{
-            //speedct = 0f;
-        //}
+        /*
+        else
+        {
+            coinicon.gameObject.SetActive(isactive);
+            showtext.gameObject.SetActive(isactive);
+        }
+        */
 
         if (timer > 0)
         {
@@ -170,6 +176,8 @@ public class coincontrol : MonoBehaviour
         {
             timer = 0;
             deltatext.gameObject.SetActive(false);
+            coinicon.gameObject.SetActive(isactive);
+            showtext.gameObject.SetActive(isactive);
         }
 
     }

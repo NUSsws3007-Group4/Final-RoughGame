@@ -55,7 +55,7 @@ public class energybarcontrol : MonoBehaviour
         energybarframe.gameObject.SetActive(s);
         energyicon.gameObject.SetActive(s);
         showtext.gameObject.SetActive(s);
-        if(!s) deltatext.gameObject.SetActive(s);
+        //if(!s) deltatext.gameObject.SetActive(s);
     }
 
     public void updaterate()
@@ -94,10 +94,19 @@ public class energybarcontrol : MonoBehaviour
 
     public void increasevolume(int delta)
     {
+        energybarentity.gameObject.SetActive(true);
+        energybareffect.gameObject.SetActive(true);
+        energybarframe.gameObject.SetActive(true);
+        energyicon.gameObject.SetActive(true);
+        showtext.gameObject.SetActive(true);
+
+        int tmp=targetvolume;
         targetvolume=targetvolume+delta;
 
         if(targetvolume<0) targetvolume=0;
         if(targetvolume>maxenergy) targetvolume=maxenergy;
+        delta=targetvolume-tmp;
+
         if(targetvolume>energyvolume) entitydeltavolume=alterspeed; else entitydeltavolume=-alterspeed;
 
         showtext.text=inttostring(targetvolume);
@@ -113,10 +122,20 @@ public class energybarcontrol : MonoBehaviour
     public void decreasevolume(int delta)
     {
         if(!runenergy) return;
+
+        energybarentity.gameObject.SetActive(true);
+        energybareffect.gameObject.SetActive(true);
+        energybarframe.gameObject.SetActive(true);
+        energyicon.gameObject.SetActive(true);
+        showtext.gameObject.SetActive(true);
+        
+        int tmp=targetvolume;
         targetvolume=targetvolume-delta;
 
         if(targetvolume<0) targetvolume=0;
         if(targetvolume>maxenergy) targetvolume=maxenergy;
+        delta=tmp-targetvolume;
+        
         if(targetvolume>energyvolume) entitydeltavolume=alterspeed; else entitydeltavolume=-alterspeed;
 
         showtext.text=inttostring(targetvolume);
@@ -196,6 +215,16 @@ public class energybarcontrol : MonoBehaviour
                 effectvolume=energyvolume;
             }
         }
+        /*
+        if(energyvolume==targetvolume && energyvolume==effectvolume)
+        {
+            energybarentity.gameObject.SetActive(isactive);
+            energybareffect.gameObject.SetActive(isactive);
+            energybarframe.gameObject.SetActive(isactive);
+            energyicon.gameObject.SetActive(isactive);
+            showtext.gameObject.SetActive(isactive);
+        }
+        */
 
         entitysize.x=energyvolume*rate;
         effectsize.x=effectvolume*rate;
@@ -223,6 +252,11 @@ public class energybarcontrol : MonoBehaviour
         {
             timer=0;
             deltatext.gameObject.SetActive(false);
+            energybarentity.gameObject.SetActive(isactive);
+            energybareffect.gameObject.SetActive(isactive);
+            energybarframe.gameObject.SetActive(isactive);
+            energyicon.gameObject.SetActive(isactive);
+            showtext.gameObject.SetActive(isactive);
         }
 
         if(infinitetimer>0) infinitetimer-=Time.unscaledDeltaTime;

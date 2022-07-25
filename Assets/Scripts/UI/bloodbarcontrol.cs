@@ -53,7 +53,7 @@ public class bloodbarcontrol : MonoBehaviour
         bloodbarframe.gameObject.SetActive(s);
         bloodicon.gameObject.SetActive(s);
         showtext.gameObject.SetActive(s);
-        if(!s) deltatext.gameObject.SetActive(s);
+        //if(!s) deltatext.gameObject.SetActive(s);
     }
 
     public void updaterate()
@@ -85,17 +85,26 @@ public class bloodbarcontrol : MonoBehaviour
 
     public void increasevolume(int delta)
     {
+        bloodbarentity.gameObject.SetActive(true);
+        bloodbareffect.gameObject.SetActive(true);
+        bloodbarframe.gameObject.SetActive(true);
+        bloodicon.gameObject.SetActive(true);
+        showtext.gameObject.SetActive(true);
+        
+        int tmp=targetvolume;
         targetvolume=targetvolume+delta;
 
         if(targetvolume<0) targetvolume=0;
         if(targetvolume>maxblood) targetvolume=maxblood;
+        delta=targetvolume-tmp;
+
         if(targetvolume>bloodvolume) entitydeltavolume=alterspeed; else entitydeltavolume=-alterspeed;
 
         showtext.text=inttostring(targetvolume);
         timer=deltastaytime;
         deltatext.text="+"+inttostring(delta);
         deltatext.color=new Color(0f,1f,0f,0f);
-        if(isactive) deltatext.gameObject.SetActive(true);
+        deltatext.gameObject.SetActive(true);
         deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-10f,0f);
         deltatextpos=new Vector3(10f,-10f,0f);
         deltatextcolor=new Color(0f,1f,0,0f);
@@ -103,17 +112,26 @@ public class bloodbarcontrol : MonoBehaviour
 
     public void decreasevolume(int delta)
     {
+        bloodbarentity.gameObject.SetActive(true);
+        bloodbareffect.gameObject.SetActive(true);
+        bloodbarframe.gameObject.SetActive(true);
+        bloodicon.gameObject.SetActive(true);
+        showtext.gameObject.SetActive(true);
+
+        int tmp=targetvolume;
         targetvolume=targetvolume-delta;
 
         if(targetvolume<0) targetvolume=0;
         if(targetvolume>maxblood) targetvolume=maxblood;
+        delta=tmp-targetvolume;
+
         if(targetvolume>bloodvolume) entitydeltavolume=alterspeed; else entitydeltavolume=-alterspeed;
 
         showtext.text=inttostring(targetvolume);
         timer=deltastaytime;
         deltatext.text="-"+inttostring(delta);
         deltatext.color=new Color(1f,0f,0f,0f);
-        if(isactive) deltatext.gameObject.SetActive(true);
+        deltatext.gameObject.SetActive(true);
         deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-10f,0f);
         deltatextpos=new Vector3(10f,-10f,0f);
         deltatextcolor=new Color(1f,0f,0,0f);
@@ -186,6 +204,16 @@ public class bloodbarcontrol : MonoBehaviour
                 effectvolume=bloodvolume;
             }
         }
+        /*
+        if(bloodvolume==targetvolume && bloodvolume==effectvolume)
+        {
+            bloodbarentity.gameObject.SetActive(isactive);
+            bloodbareffect.gameObject.SetActive(isactive);
+            bloodbarframe.gameObject.SetActive(isactive);
+            bloodicon.gameObject.SetActive(isactive);
+            showtext.gameObject.SetActive(isactive);
+        }
+        */
 
         entitysize.x=bloodvolume*rate;
         effectsize.x=effectvolume*rate;
@@ -213,6 +241,11 @@ public class bloodbarcontrol : MonoBehaviour
         {
             timer=0;
             deltatext.gameObject.SetActive(false);
+            bloodbarentity.gameObject.SetActive(isactive);
+            bloodbareffect.gameObject.SetActive(isactive);
+            bloodbarframe.gameObject.SetActive(isactive);
+            bloodicon.gameObject.SetActive(isactive);
+            showtext.gameObject.SetActive(isactive);
         }
     }
 }
