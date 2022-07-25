@@ -5,11 +5,12 @@ using UnityEngine;
 public class RockBehavior : MonoBehaviour
 {
     public bool[] switchLst = { false, false, false, false, false };
-    public GameObject p1, p2, p3, p4,l1,l2,l3,l4,l5;
+    public GameObject p1, p2, p3, p4, l1, l2, l3, l4, l5;
     public bool solved;
     public Sprite triggered;
     private GameObject elite;
     public GameObject puzzlebase;
+    public GameObject JumpPad;
     public void setSwitch(bool _enabled)
     {
         foreach (Transform i in transform)
@@ -20,6 +21,7 @@ public class RockBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        JumpPad.SetActive(false);
         solved = false;
         elite=GameObject.Find("elite");
     }
@@ -43,6 +45,7 @@ public class RockBehavior : MonoBehaviour
             puzzlebase.GetComponent<PuzzleControl>().setPuzzleOpen(false);
             foreach (Transform i in transform)
             {
+                JumpPad.SetActive(true);
                 i.gameObject.SetActive(false);
             }
         }
