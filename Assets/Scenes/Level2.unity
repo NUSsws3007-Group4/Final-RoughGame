@@ -11310,6 +11310,7 @@ MonoBehaviour:
   solved: 0
   triggered: {fileID: -7771193783775295362, guid: e3e6b3d6c57dc7b488e7d1e8be902988, type: 3}
   puzzlebase: {fileID: 2013804082}
+  JumpPad: {fileID: 1294527403}
 --- !u!1001 &840258110
 PrefabInstance:
   m_ObjectHideFlags: 0
