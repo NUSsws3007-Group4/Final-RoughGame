@@ -154,7 +154,8 @@ public class bagmanager : MonoBehaviour
                                 else
                                 {
                                     usebutton.interactable = false;
-                                    friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
+                                    if (hero.GetComponent<HeroBehavior>().getFriendship() < 0)
+                                        friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
                                 }
                                 updateinfo(friendshipflask.iteminfo, friendshipflask.itemtype + " " + friendshipflask.itemname);
                                 break;
