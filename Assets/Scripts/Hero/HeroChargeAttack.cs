@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : MonoBehaviour
+public class HeroChargeAttack : MonoBehaviour
 {
     private bool isDown = false;
     private float chargeTimer = 0f;
