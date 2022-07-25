@@ -46,7 +46,7 @@ public class AttackTipSlime : SlimeBehavior
     override protected void Update()
     {
         base.Update();
-        if(targetHero.GetComponent<tutorial>().state>2)
+        if(targetHero.GetComponent<tutorial>().state>3)
         {
             isactive=true;
             attackimage.SetActive(true);

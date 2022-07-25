@@ -19,7 +19,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
         chaseDistance = 20f;
         mFriendshipRequired = 70;
         friendshipAddValue = 0;
-        mLifeLeft = 10;
+        mLifeLeft = 500;
         initialpos = transform.localPosition;
         initialright = transform.right;
         guardPortal.SetActive(false);
@@ -138,12 +138,14 @@ public class Elite3EnemyBehavior : EnemyBehavior
             anim.SetBool("Attacked", true);
             mRigidbody.velocity = new Vector3(0, 0, 0);
             mRigidbody.AddForce(-100 * transform.right);
-            mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+            mLifeLeft -= collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                         collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
             switch (mFriendshipStatus)
             {
                 case 2:
                     for (int i = 0; i < multiplication - 1; ++i)
-                        mLifeLeft -= collision.gameObject.GetComponent<HeroAttackHurt>().hurt;
+                       mLifeLeft -= collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                                    collision.transform.parent.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
                     mFriendshipStatus = 1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
@@ -165,7 +167,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
         Debug.Log("Elite Respawn" + initialpos);
         edgeTouched = false;
         patrol = true;
-        mLifeLeft = 10;
+        mLifeLeft = 500;
         mRigidbody.velocity = new Vector3(0, 0, 0);
         transform.localPosition = initialpos;
         transform.right = initialright;

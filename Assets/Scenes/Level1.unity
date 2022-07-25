@@ -1460,7 +1460,6 @@ GameObject:
   - component: {fileID: 220612695}
   - component: {fileID: 220612697}
   - component: {fileID: 220612696}
-  - component: {fileID: 220612698}
   m_Layer: 0
   m_Name: jcholder
   m_TagString: Untagged
@@ -1522,18 +1521,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 5}
   m_EdgeRadius: 0
---- !u!114 &220612698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220612694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6009262b8c85cc54e8a56e38fc84e80f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &240819022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15483,7 +15470,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762310511}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61b7ae1a6d2047e4c9fc15f3a53edd99, type: 3}
   m_Name: 
@@ -15557,69 +15544,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 208285167}
     m_Modifications:
-    - target: {fileID: 336839948, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_Radius
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 336839948, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 336839948, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: key
-      value: 
-      objectReference: {fileID: 11400000, guid: 3130ac012fa7cfb4fbfe99f1696be030, type: 2}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: ragerune
-      value: 
-      objectReference: {fileID: 11400000, guid: 9d21e728575d6ac43ab9f10967742b8b, type: 2}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: powerrune
-      value: 
-      objectReference: {fileID: 11400000, guid: 9d21e728575d6ac43ab9f10967742b8b, type: 2}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: energyrune
-      value: 
-      objectReference: {fileID: 11400000, guid: 6ba13a32d701583489e3151a3486fb30, type: 2}
     - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: mUIManager
       value: 
       objectReference: {fileID: 1875227788}
     - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: ragepotion
-      value: 
-      objectReference: {fileID: 11400000, guid: adc178e29fb7bdc41805ce18ae15435a, type: 2}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: robustrune
-      value: 
-      objectReference: {fileID: 11400000, guid: dbd61ffae289c7b4790c532d8f5d37cd, type: 2}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: soulpotion
-      value: 
-      objectReference: {fileID: 11400000, guid: e92059a202c5b3a4f97c3362c22332b1, type: 2}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: cooldownrune
-      value: 
-      objectReference: {fileID: 11400000, guid: 59458a3f6b3e03d45bd05960f201be35, type: 2}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: mybagmanager
       value: 
       objectReference: {fileID: 689011600}
-    - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: defencepotion
-      value: 
-      objectReference: {fileID: 11400000, guid: 377c754aacb35844aaf536d92838fb37, type: 2}
     - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: mystoremanager
       value: 
       objectReference: {fileID: 689011599}
     - target: {fileID: 1918388486, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: MinDistance
-      value: 4.24889
+      propertyPath: m_Volume
+      value: 0.506
       objectReference: {fileID: 0}
     - target: {fileID: 1918388491, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: bg
@@ -15628,10 +15567,6 @@ PrefabInstance:
     - target: {fileID: 4268124987306694998, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_Name
       value: hero
-      objectReference: {fileID: 0}
-    - target: {fileID: 4268124987306695000, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_RootOrder
@@ -16139,6 +16074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -44118,114 +44054,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4268124987306695001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
   m_PrefabInstance: {fileID: 821018907}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1918388485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918388477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c679c861d9f0a649a231a072d03e5c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!82 &1918388486
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918388477}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1.7169893
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1927069165
 GameObject:
   m_ObjectHideFlags: 0
