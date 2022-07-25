@@ -31,6 +31,7 @@ public class bloodbarcontrol : MonoBehaviour
     private Vector3 deltatextpos;
     private Color deltatextcolor;
     private float deltastaytime=1.5f;
+    private bool isactive;
 
     private string inttostring(int k)
     {
@@ -42,6 +43,17 @@ public class bloodbarcontrol : MonoBehaviour
             k/=10;
         }
         return m;
+    }
+
+    public void setactiveall(bool s)
+    {
+        isactive=s;
+        bloodbarentity.gameObject.SetActive(s);
+        bloodbareffect.gameObject.SetActive(s);
+        bloodbarframe.gameObject.SetActive(s);
+        bloodicon.gameObject.SetActive(s);
+        showtext.gameObject.SetActive(s);
+        if(!s) deltatext.gameObject.SetActive(s);
     }
 
     public void updaterate()
@@ -83,7 +95,7 @@ public class bloodbarcontrol : MonoBehaviour
         timer=deltastaytime;
         deltatext.text="+"+inttostring(delta);
         deltatext.color=new Color(0f,1f,0f,0f);
-        deltatext.gameObject.SetActive(true);
+        if(isactive) deltatext.gameObject.SetActive(true);
         deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-10f,0f);
         deltatextpos=new Vector3(10f,-10f,0f);
         deltatextcolor=new Color(0f,1f,0,0f);
@@ -101,7 +113,7 @@ public class bloodbarcontrol : MonoBehaviour
         timer=deltastaytime;
         deltatext.text="-"+inttostring(delta);
         deltatext.color=new Color(1f,0f,0f,0f);
-        deltatext.gameObject.SetActive(true);
+        if(isactive) deltatext.gameObject.SetActive(true);
         deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-10f,0f);
         deltatextpos=new Vector3(10f,-10f,0f);
         deltatextcolor=new Color(1f,0f,0,0f);
@@ -152,6 +164,7 @@ public class bloodbarcontrol : MonoBehaviour
         //rate=entitysize.x/maxblood;
         updaterate();
         timer=0f;
+        setactiveall(true);
     }
 
     void Update()

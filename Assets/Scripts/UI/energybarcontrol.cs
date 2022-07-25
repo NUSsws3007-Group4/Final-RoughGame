@@ -33,6 +33,7 @@ public class energybarcontrol : MonoBehaviour
     private Vector3 deltatextpos;
     private Color deltatextcolor;
     private float deltastaytime=1.5f;
+    private bool isactive;
 
     private string inttostring(int k)
     {
@@ -44,6 +45,17 @@ public class energybarcontrol : MonoBehaviour
             k/=10;
         }
         return m;
+    }
+
+    public void setactiveall(bool s)
+    {
+        isactive=s;
+        energybarentity.gameObject.SetActive(s);
+        energybareffect.gameObject.SetActive(s);
+        energybarframe.gameObject.SetActive(s);
+        energyicon.gameObject.SetActive(s);
+        showtext.gameObject.SetActive(s);
+        if(!s) deltatext.gameObject.SetActive(s);
     }
 
     public void updaterate()
@@ -92,7 +104,7 @@ public class energybarcontrol : MonoBehaviour
         timer=deltastaytime;
         deltatext.text="+"+inttostring(delta);
         deltatext.color=new Color(0f,1f,0f,0f);
-        deltatext.gameObject.SetActive(true);
+        if(isactive) deltatext.gameObject.SetActive(true);
         deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-20f,0f);
         deltatextpos=new Vector3(10f,-20f,0f);
         deltatextcolor=new Color(0f,1f,0,0f);
@@ -111,7 +123,7 @@ public class energybarcontrol : MonoBehaviour
         timer=deltastaytime;
         deltatext.text="-"+inttostring(delta);
         deltatext.color=new Color(1f,0f,0f,0f);
-        deltatext.gameObject.SetActive(true);
+        if(isactive) deltatext.gameObject.SetActive(true);
         deltatext.GetComponent<RectTransform>().anchoredPosition=new Vector3(10f,-20f,0f);
         deltatextpos=new Vector3(10f,-20f,0f);
         deltatextcolor=new Color(1f,0f,0,0f);
@@ -162,6 +174,7 @@ public class energybarcontrol : MonoBehaviour
         effectsize=entitysize;
         updaterate();
         timer=0f;
+        setactiveall(true);
     }
     
     void Update()
