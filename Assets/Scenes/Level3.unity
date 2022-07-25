@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3791,10 +3791,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialoguebox: {fileID: 0}
-  cm: {fileID: 0}
-  hero: {fileID: 0}
-  stg: {fileID: 0}
-  bg: {fileID: 0}
 --- !u!212 &661948500
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13817,8 +13813,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 2.0622692, y: 0}
+  m_Size: {x: 5.1245384, y: 5.1245384}
   m_Direction: 0
 --- !u!212 &1526585984
 SpriteRenderer:
