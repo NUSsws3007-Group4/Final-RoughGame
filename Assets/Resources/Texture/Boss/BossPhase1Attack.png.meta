@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: boss attack_0
+      name: BossPhase1Attack_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 128
+        x: 51
+        y: 24
+        width: 44
+        height: 88
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e6058c474ce30b449b201a09a85a29b
-      internalID: 1438639470
+      spriteID: d1fe92027a6fe02438274a85cdae529a
+      internalID: -1173883427
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss attack_1
+      name: BossPhase1Attack_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
+        x: 177
+        y: 24
+        width: 46
+        height: 88
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa0b1d37eab2da340a2104a3daf2a50b
-      internalID: -1911900511
+      spriteID: 7eb4085a011bbf44494c098ab45103e7
+      internalID: 392196148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: boss attack_2
+      name: BossPhase1Attack_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
-        width: 128
-        height: 128
+        x: 299
+        y: 24
+        width: 53
+        height: 88
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7091607554020e845a766b34bbc51316
-      internalID: 40383356
+      spriteID: ad55e8763535d9b43931617654dff295
+      internalID: -1893559933
       vertices: []
       indices: 
       edges: []
@@ -189,9 +189,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      boss attack_2: 40383356
-      boss attack_0: 1438639470
-      boss attack_1: -1911900511
+      BossPhase1Attack_1: 392196148
+      BossPhase1Attack_2: -1893559933
+      BossPhase1Attack_0: -1173883427
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

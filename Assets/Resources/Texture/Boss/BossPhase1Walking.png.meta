@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: normal walking_0
+      name: BossPhase1Walking_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        x: 374
+        y: 206
+        width: 380
+        height: 692
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 615a73b97e76d384f90f26d7d5783d2c
-      internalID: 1222953263
+      spriteID: 9b2cbffd307d5354db37239f4005c4f8
+      internalID: -1973055117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normal walking_1
+      name: BossPhase1Walking_1
       rect:
         serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 1024
-        height: 1024
+        x: 1430
+        y: 190
+        width: 356
+        height: 708
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c73063592ef427b4dbe5312898beaef3
-      internalID: -1522720922
+      spriteID: 1c2f169a9602cbb4591e44d4ca1dc26a
+      internalID: -2122422175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normal walking_2
+      name: BossPhase1Walking_2
       rect:
         serializedVersion: 2
-        x: 2048
-        y: 0
-        width: 1024
-        height: 1024
+        x: 2438
+        y: 182
+        width: 364
+        height: 716
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c358ce3a38502ae4693d20636eb45333
-      internalID: 1959226679
+      spriteID: 1f311e2643368aa4cb51903f742af468
+      internalID: 1254716402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: normal walking_3
+      name: BossPhase1Walking_3
       rect:
         serializedVersion: 2
-        x: 3072
-        y: 0
-        width: 1024
-        height: 1024
+        x: 3478
+        y: 190
+        width: 356
+        height: 708
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed37ffb27d65eeb48989b6e431754066
-      internalID: 1505211154
+      spriteID: ef810083e7b62e948ba5d01ce04d019a
+      internalID: 2048573198
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      normal walking_1: -1522720922
-      normal walking_2: 1959226679
-      normal walking_3: 1505211154
-      normal walking_0: 1222953263
+      BossPhase1Walking_3: 2048573198
+      BossPhase1Walking_0: -1973055117
+      BossPhase1Walking_1: -2122422175
+      BossPhase1Walking_2: 1254716402
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
