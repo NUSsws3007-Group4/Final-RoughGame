@@ -27,7 +27,7 @@ public class Elite3Bullet : MonoBehaviour
         Vector3 rushVector = targetPos - transform.position;
         rushVector.z = 0f;
         transform.right = rushVector;
-        transform.position += transform.right * Time.smoothDeltaTime * 3f;
+        transform.position += transform.right * Time.smoothDeltaTime * 8f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -4,7 +4,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
 {
     private float remoteAttackTimer = 0f;
     private bool edgeTouched = false;
-    private float cx1, cx2, cy1, cy2, dialogueTimer = 0f;
+    private float cx1, cx2, cy1, cy2, dialogueTimer = 10f;
     private Vector3 spawnPoint;
     private bagmanager bgm;
     private GameObject guardDoor;
@@ -25,7 +25,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
         initialpos = transform.localPosition;
         initialright = transform.right;
         bgm = GameObject.Find("Canvas").GetComponent<bagmanager>();
-        guardDoor.SetActive(false);
+        guardDoor.SetActive(true);
         dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
 
