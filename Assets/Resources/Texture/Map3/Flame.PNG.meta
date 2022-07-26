@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1603e6e32dfbf9140bf59c09ffb9cd46
+guid: 1fdb77d47bbd1ff4b9fcb5f3fd2ed11e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 10
+  spritePixelsToUnits: 25
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Treeman_0
+      name: Flame_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 21
-        width: 17
-        height: 17
+        x: 2
+        y: 50
+        width: 31
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7dd608d6c26220449b26613ed43aaa6
-      internalID: -665396672
+      spriteID: 16801d2aa14316a479ec010bd52d7c21
+      internalID: -657842895
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Treeman_1
+      name: Flame_1
       rect:
         serializedVersion: 2
-        x: 21
-        y: 21
-        width: 17
-        height: 17
+        x: 50
+        y: 49
+        width: 31
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ae05556e34f41e40b3e5ae7d9d59545
-      internalID: 142929579
+      spriteID: 10538a5e8cb8dc54aa55bc9eecdf41de
+      internalID: 1736521697
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Treeman_2
+      name: Flame_2
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 49
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f44cca770669d5449857f8dc4312dd42
+      internalID: 1153803266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 17
-        height: 17
+        width: 31
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 775ccb8e0290d0b45a176f77e4417a7a
-      internalID: 2109090380
+      spriteID: 10611f5ac0d3d954982110c3663e8f66
+      internalID: -1393623086
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Treeman_3
+      name: Flame_4
       rect:
         serializedVersion: 2
-        x: 21
-        y: 0
-        width: 17
-        height: 17
+        x: 50
+        y: 2
+        width: 31
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +214,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 094e7f28180092745b0f3279de6b725f
-      internalID: 1610433893
+      spriteID: 4149b077ded6c5847bf3e18cc7023ca3
+      internalID: -520511994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_5
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 0
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2790db3762e65094ab51bb0e599ee01f
+      internalID: -1264064485
       vertices: []
       indices: 
       edges: []
@@ -202,7 +244,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 52d963ced8e35ad44900eb39eea09873
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +252,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Treeman_0: -665396672
-      Treeman_2: 2109090380
-      Treeman_1: 142929579
-      Treeman_3: 1610433893
+      Flame_0: -657842895
+      Flame_1: 1736521697
+      Flame_4: -2135566986
+      Flame_5: -520511994
+      Flame_2: 1153803266
+      Flame_3: -1393623086
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

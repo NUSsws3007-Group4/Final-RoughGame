@@ -27,6 +27,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         initialright = transform.right;
         bgm = GameObject.Find("Canvas").GetComponent<bagmanager>();
         guardPortal.SetActive(false);
+        dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
 
     protected override void attackedBehavior()

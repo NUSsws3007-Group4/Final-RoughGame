@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class TreeManBehavior : MonoBehaviour
 {
@@ -16,9 +17,10 @@ public class TreeManBehavior : MonoBehaviour
     private RaycastHit2D info;
     private Animator anim;
     private bool isactive = true;
-    private bool dropped=false;
+    private bool dropped = false;
     private GameObject dropitem;
     private GameObject muim;
+    private DialogueRunner dialogueRunner;
 
     public int nowATK = 10;
     private float atkTimer = 0f;
@@ -31,6 +33,7 @@ public class TreeManBehavior : MonoBehaviour
         targetHero = GameObject.Find("hero");
         initialpos = transform.position;
         initialright = transform.right;
+        dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
     private void Update()
     {
@@ -85,14 +88,24 @@ public class TreeManBehavior : MonoBehaviour
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
                         targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(friendshipAddValue);
+                    dialogueRunner.Stop();
+                    dialogueRunner.StartDialogue("FriendlyAttacked");
                     break;
                 case 1:
                     mFriendshipStatus = -1;
+                    patrol = false;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
+                    attackBehavior();
+                    if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
+                    {
+                        targetHero.GetComponent<EndingJudgement>().attackFriends = true;
+                        targetHero.GetComponent<HeroBehavior>().setFriendship(-6666);
+                    }
                     break;
             }
             Debug.Log("Life:" + mLifeLeft);
         }
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("RemoteAttack"))
         {
             anim.SetBool("Attacked", true);
@@ -103,19 +116,25 @@ public class TreeManBehavior : MonoBehaviour
             switch (mFriendshipStatus)
             {
                 case 2:
-                    for (int i = 0; i < multiplication - 1; ++i)
-                        mLifeLeft -= targetHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
-                                     targetHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
+                    mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt *
+                            collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().powerUpCoef *
+                            (multiplication - 1);
                     mFriendshipStatus = 1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
                         targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(friendshipAddValue);
+                    dialogueRunner.Stop();
+                    dialogueRunner.StartDialogue("FriendlyAttacked");
                     break;
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
-                    for (int i = 0; i < multiplication + 1; ++i)
-                        attackBehavior();
+                    attackBehavior();
+                    if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
+                    {
+                        targetHero.GetComponent<EndingJudgement>().attackFriends = true;
+                        targetHero.GetComponent<HeroBehavior>().setFriendship(-6666);
+                    }
                     break;
             }
             Debug.Log("Life:" + mLifeLeft);
@@ -126,32 +145,32 @@ public class TreeManBehavior : MonoBehaviour
     {
         Destroy(transform.gameObject);
 
-        if(dropped) return;
-        dropped=true;
-        float rn=Random.Range(0f,5f);
-        if(rn<1f)
+        if (dropped) return;
+        dropped = true;
+        float rn = Random.Range(0f, 5f);
+        if (rn < 1f)
         {
-            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/bloodflask") as GameObject);
+            dropitem = Instantiate(Resources.Load("Prefabs/dropitems/bloodflask") as GameObject);
         }
-        else if(rn<2f)
+        else if (rn < 2f)
         {
-            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/energyflask") as GameObject);
+            dropitem = Instantiate(Resources.Load("Prefabs/dropitems/energyflask") as GameObject);
         }
-        else if(rn<3f)
+        else if (rn < 3f)
         {
-            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/diamond") as GameObject);
+            dropitem = Instantiate(Resources.Load("Prefabs/dropitems/diamond") as GameObject);
         }
         else
         {
-            muim=GameObject.Find("UImanager");
-            int mon=(int)(Random.Range(20,60));
+            muim = GameObject.Find("UImanager");
+            int mon = (int)(Random.Range(20, 60));
             muim.GetComponent<coincontrol>().earn(mon);
         }
-        if(rn<3)
+        if (rn < 3)
         {
-            Vector3 newpos=transform.position;
-            newpos.y+=1;
-            dropitem.transform.position=newpos;
+            Vector3 newpos = transform.position;
+            newpos.y += 1;
+            dropitem.transform.position = newpos;
         }
     }
 
@@ -198,11 +217,11 @@ public class TreeManBehavior : MonoBehaviour
             targetHero.gameObject.GetComponent<HeroBehavior>().upFriendship(friendshipAddValue);
             frienshipAdded = true;
             transform.GetChild(1).GetComponent<Renderer>().enabled = true;
-            if(!dropped)
+            if (!dropped)
             {
-                dropped=true;
-                muim=GameObject.Find("UImanager");
-                int mon=(int)(Random.Range(30,60));
+                dropped = true;
+                muim = GameObject.Find("UImanager");
+                int mon = (int)(Random.Range(30, 60));
                 muim.GetComponent<coincontrol>().earn(mon);
             }
         }
@@ -229,7 +248,8 @@ public class TreeManBehavior : MonoBehaviour
 
             if (attackTimer >= 1.0f)
             {
-                attackBehavior();
+                anim.SetTrigger("Attacking");
+                Invoke("attackBehavior", 0.4f);
                 attackTimer = 0f;
             }
 

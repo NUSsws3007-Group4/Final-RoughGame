@@ -15601,7 +15601,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5fc56e23eb810684aa1fa0bd6dded4f3, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -16038,7 +16038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ae12e4043590e4a80b50209f73d2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: comingsoon
+  nextLevel: boss
 --- !u!70 &1526585983
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
