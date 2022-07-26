@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Yarn.Unity;
 
 public class HeroBehavior : MonoBehaviour
 {
@@ -120,6 +121,7 @@ public class HeroBehavior : MonoBehaviour
     private Rigidbody2D mRigidbody;
     public bloodbarcontrol mHealth;
     private HeroAudioManager mAudio;
+    private DialogueRunner dialogueRunner;
 
 
     /****************
@@ -128,10 +130,20 @@ public class HeroBehavior : MonoBehaviour
     public void setJumpSkill(int _skill)
     {
         mJumpSkill = _skill;
+        if (_skill == 1)
+        {
+            dialogueRunner.Stop();
+            dialogueRunner.StartDialogue("DoubleJump");
+        }
     }
     public void setDashSkill(bool _enabled)
     {
         mDashManager.setDashSkill(_enabled);
+        if (_enabled)
+        {
+            dialogueRunner.Stop();
+            dialogueRunner.StartDialogue("Dash");
+        }
     }
     /// <summary>
     /// 触发攻击动画
@@ -227,6 +239,7 @@ public class HeroBehavior : MonoBehaviour
         mMaxSpeed = mMaxSpeedDefault;
         smoothmove = false;
         mRigidbody = gameObject.GetComponent<Rigidbody2D>();
+        dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
 
     void Update()
@@ -322,7 +335,7 @@ public class HeroBehavior : MonoBehaviour
                 //新的速度是原速度减去加速度*时间*方向
                 float newSpeed = ((smoothmove) ? mSpeed - mAcceleration * Time.smoothDeltaTime * (mSpeed > mOffsetSpeed ? 1 : -1) : mOffsetSpeed);
                 //到0不再减速
-                mSpeed = ((newSpeed- mOffsetSpeed) * (mSpeed - mOffsetSpeed) < 0) ? mOffsetSpeed : newSpeed;
+                mSpeed = ((newSpeed - mOffsetSpeed) * (mSpeed - mOffsetSpeed) < 0) ? mOffsetSpeed : newSpeed;
             }
         }
         //跳
@@ -384,11 +397,11 @@ public class HeroBehavior : MonoBehaviour
             }
             mRigidbody.velocity = vel;
         }
-        
+
         //冲刺
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if(mDashManager.startDash(mPlace,this))
+            if (mDashManager.startDash(mPlace, this))
             {
                 Debug.Log("dashing");
                 //mPlace = mPlaceStatus.InAir;
@@ -616,7 +629,7 @@ public class HeroBehavior : MonoBehaviour
                     {
                         if (!mLeavingLadder)
                             touchLadder();
-                        
+
                     }
                     break;
                 default:
@@ -704,7 +717,7 @@ class DashManager
     {
         if (!isDashAvalible(_place))
         {
-            
+
             return false;
         }
         else
@@ -723,15 +736,15 @@ class DashManager
     {
         if (mIsDash)
         {
-            
-                mDashTimeCount += Time.smoothDeltaTime;
-                if (mDashTimeCount >= mDashForce)
-                {
-                    mIsDash = false;
-                    mDashTimeCount = 0;
-                }
-                return new Vector2(mDashSpeed * (float)_faceing, 0);
-            
+
+            mDashTimeCount += Time.smoothDeltaTime;
+            if (mDashTimeCount >= mDashForce)
+            {
+                mIsDash = false;
+                mDashTimeCount = 0;
+            }
+            return new Vector2(mDashSpeed * (float)_faceing, 0);
+
         }
         else
         {

@@ -1,12 +1,36 @@
 ﻿title: HeroInit
 ---
-Bridgett: Where am I...
+???: Where am I...(Press X or click mouse to continue)
 Bridgett: ...
 Bridgett: Invasion of frost...
 Bridgett: My sister was taken away by the frost. I have to save her.
 Bridgett: The frost came from that mountain.
 Bridgett: I should go west to find portals.
 Bridgett: I need to get to the top of the mountain.
+===
+
+title: Help
+---
+You can press H to call the help page.
+===
+
+title: Dash
+---
+Bridgett: Now I can dash. Let me have a try.
+Bridgett: I'll go to the platform over my head.
+Press Q to dash when in the air.
+===
+
+title: Squat
+---
+Bridgett: How narrow...I can't walk through it.
+Press S or Left Control to squat.
+===
+
+title: DoubleJump
+---
+Bridgett: Double jump, interesting.
+Bridgett: I'll use it to go straight westwards.
 ===
 
 title: Elite1Friendly
@@ -101,4 +125,3 @@ title: NormalEnding
 Bridgett: Frost is gone...
 Bridgett: But where is my sister?
 ===
-
