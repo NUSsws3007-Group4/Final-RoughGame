@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class AttackTipSlime : SlimeBehavior
 {
@@ -22,6 +23,7 @@ public class AttackTipSlime : SlimeBehavior
         base.Start();
         mRigidbody.velocity = new Vector3(0, 0, 0);
         s.SetActive(false);
+        dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
     protected override void patrolBehavior()
     {
@@ -40,6 +42,8 @@ public class AttackTipSlime : SlimeBehavior
         s.SetActive(true);
         friendlyimage.SetActive(true);
         s.GetComponent<FriendshipTipBehavior>().timer=5f;
+        dialogueRunner.Stop();
+        dialogueRunner.StartDialogue("Help");
         base.Death();
     }
 

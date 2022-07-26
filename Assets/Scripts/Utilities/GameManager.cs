@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private float xsize;
     private float ysize;
     private Vector3 cameracentre;
+    public GameObject cover;
     GameObject newenemy;
 
     public void exitgame()
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
+            cover.SetActive(true);
+            cover.GetComponent<CanvasGroup>().alpha=1;
             Application.Quit();
 #endif
     }
@@ -88,7 +91,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
+        cover.GetComponent<CanvasGroup>().alpha=0;
+        cover.SetActive(false);
     }
 
     void Update()

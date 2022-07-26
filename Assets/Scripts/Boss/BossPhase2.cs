@@ -9,7 +9,6 @@ public class BossPhase2 : MonoBehaviour
     private const float pi = 3.14159f;
     private int bossHP = 500;//生命值
     private int bossShield = 0;//护盾值（不会恢复）
-    private float bossSpeed = 5f;//移动速度
     private int iceThornNum = 0;//冰刺数目产生
     private float iceThornTimer = 0f;//冰刺攻击间隔计数器
     private float iceThornInterval = 0f;//冰刺攻击间隔设置
@@ -17,15 +16,15 @@ public class BossPhase2 : MonoBehaviour
     private float distanceToPlayer = 0f;//Boss和Player之间的距离
     private float iceCrystalTimer = 0f;//冰棱攻击间隔计数器
     private float barrageTimer = 0f;//弹幕攻击计数器
-    private bool stopReviveTag = false;//终止重生标记
-    private float reviveTimer = 0f;//重生计数器
     private List<Vector3> iceThornPos = new List<Vector3>();//开设冰刺位置数组
     private int playerAttackDamage = 0;
+    private bool attacked = false;
+    private float attackedTimer = 0;
+    private int blinkCount = 0;
 
     private GameObject mHero;
+    private EndingJudgement judge;
     public Transform playerTransform;
-    public int endingNum;
-    public float status;
     private DialogueRunner dialogueRunner;
 
 
@@ -33,13 +32,32 @@ public class BossPhase2 : MonoBehaviour
     {
         mHero = GameObject.Find("hero");
         dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
+        judge = mHero.GetComponent<EndingJudgement>();
     }
 
     void Update()
     {
-        dialogueRunner.GetComponent<VariableStorageBehaviour>().TryGetValue<float>("$ready", out status);
+        if (attacked)
+        {
+            attackedTimer += Time.deltaTime;
+            if (attackedTimer >= 0.2f)
+            {
+                Color c = gameObject.GetComponent<SpriteRenderer>().color;
+                if (c.a == 1)
+                    c.a = 0.6f;
+                else c.a = 1f;
+                gameObject.GetComponent<SpriteRenderer>().color = c;
+                attackedTimer = 0;
+                blinkCount++;
+            }
+            if (blinkCount == 4)
+            {
+                attacked = false;
+                blinkCount = 0;
+            }
+        }
 
-        if (status == 3f)
+        if (judge.status == 2f)
         {
             PhaseThree();
         }
@@ -70,18 +88,15 @@ public class BossPhase2 : MonoBehaviour
 
     private void BossHurt(int damage)
     {
-        if (bossShield > 0)
-        {
-            bossShield = bossShield > damage ? bossShield - damage : 0;
-        }
-        else if (bossShield == 0)
-        {
-            bossHP = bossHP > damage ? bossHP - damage : 0;
-        }
+        bossHP = bossHP > damage ? bossHP - damage : 0;
+        if (bossHP <= 0)
+            BossDeath();
+
     }
 
     private void BossDeath()
     {
+        judge.BossDead = true;
         Destroy(transform.gameObject);
     }
 
@@ -164,6 +179,7 @@ public class BossPhase2 : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))//受到近战攻击
         {
+            attacked = true;
             playerAttackDamage = mHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
                                   mHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
             if (mHero.gameObject.GetComponent<HeroBehavior>().withFlame)
@@ -172,6 +188,7 @@ public class BossPhase2 : MonoBehaviour
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("RemoteAttack"))//受到远程攻击 不算火焰攻击
         {
+            attacked = true;
             playerAttackDamage = mHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
                                   mHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
             BossHurt(playerAttackDamage);//伤害结算       

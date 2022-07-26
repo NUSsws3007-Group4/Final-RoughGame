@@ -47,6 +47,8 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        if(mLifeLeft<=0)
+            Death();
         if (isactive)
         {
             if (anim.GetBool("Attacked"))

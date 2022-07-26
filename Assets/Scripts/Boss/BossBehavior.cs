@@ -25,16 +25,15 @@ public class BossBehavior : MonoBehaviour
     private float reviveTimer = 0f;//重生计数器
     private float peaceTimer = 0f;//躲避计数器
     private List<Vector3> iceThornPos = new List<Vector3>();//开设冰刺位置数组
-    private int attackedCount = 0;//友好状态受击计数
+    private int attackedCount = 0, blinkCount = 0;//友好状态受击计数
     private float attackedTimer = 0f;
     private int playerAttackDamage = 0;
-
+    private bool attacked = false;
     private GameObject mHero, nextStage;
     private EndingJudgement judge;
     public Transform playerTransform;
     private Animator anim;
     public int endingNum;
-    public float status;
     private DialogueRunner dialogueRunner;
 
 
@@ -46,22 +45,33 @@ public class BossBehavior : MonoBehaviour
         judge = mHero.GetComponent<EndingJudgement>();
         dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
         transform.right = -transform.right;
+        nextStage.SetActive(false);
     }
 
     void Update()
     {
-        if (anim.GetBool("Attacked"))
+        if (attacked)
         {
             attackedTimer += Time.deltaTime;
-            if (attackedTimer >= 2f)
+            if (attackedTimer >= 0.2f)
             {
-                anim.SetBool("Attacked", false); attackedTimer = 0;
+                Color c = gameObject.GetComponent<SpriteRenderer>().color;
+                if (c.a == 1)
+                    c.a = 0.6f;
+                else c.a = 1f;
+                gameObject.GetComponent<SpriteRenderer>().color = c;
+                attackedTimer = 0;
+                blinkCount++;
+            }
+            if (blinkCount == 4)
+            {
+                attacked = false;
+                blinkCount = 0;
             }
         }
-        dialogueRunner.GetComponent<VariableStorageBehaviour>().TryGetValue<float>("$ready", out status);
-        endingNum = 6;//普通结局
-        if (!triggered0 && status == 0)
+        if (!triggered0 && judge.status == 0)
         {
+            endingNum = 6;//普通结局
             triggered0 = true;
             dialogueRunner.Stop();
             if (mHero.GetComponent<HeroBehavior>().getFriendship() == 100)
@@ -80,15 +90,16 @@ public class BossBehavior : MonoBehaviour
                 dialogueRunner.StartDialogue("FightEndingBegin");
                 if (!judge.f1 && !judge.f2 && !judge.f3)
                 {
+                    Debug.Log("Satisfied");
                     endingNum = 2; //重生
                     if (judge.friendshipTipSlimeKilled || judge.friendAttacked >= 5)
                         endingNum = 3;//全灭
                 }
             }
-
+            judge.ending = endingNum;
         }
 
-        if (status == 1f)
+        if (judge.status == 1f)
         {
             if (endingNum <= 1)
             {
@@ -98,15 +109,7 @@ public class BossBehavior : MonoBehaviour
                     triggered1 = true;
                     peaceTimer = -2000f;
                     dialogueRunner.Stop();
-                    switch (endingNum)
-                    {
-                        case 0:
-                            dialogueRunner.StartDialogue("TrueFriendlyEnding");
-                            break;
-                        case 1:
-                            dialogueRunner.StartDialogue("FakeFriendlyEnding");
-                            break;
-                    }
+                    judge.BossDead = true;
                 }
                 if (!triggered1)
                 {
@@ -128,10 +131,9 @@ public class BossBehavior : MonoBehaviour
                 }
             }//打斗线 打第一阶段
         }
-        if (status == 2f)
+        if (judge.status == 2f)
         {
             nextStage.SetActive(true);
-            nextStage.GetComponent<BossPhase2>().endingNum = endingNum;
             BossDeath();
         }
 
@@ -282,6 +284,7 @@ public class BossBehavior : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))//受到近战攻击
         {
+            attacked = true;
             anim.SetBool("Attacked", true);
             playerAttackDamage = mHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
                                   mHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
@@ -307,6 +310,7 @@ public class BossBehavior : MonoBehaviour
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("RemoteAttack"))//受到远程攻击 不算火焰攻击
         {
+            attacked = true;
             anim.SetBool("Attacked", true);
             playerAttackDamage = mHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
                                   mHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;

@@ -9,6 +9,7 @@ public class FlyEliteEnemy : EnemyBehavior
     private int barrageAttackCount = 0;
     private float arrowShotTimer = 0f, dialogueTimer = 10f;
     private GameObject guardPortal, puzzleBase;
+    private bagmanager bgm;
 
     private bool temp = false, dialogueTriggered = false;
     // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class FlyEliteEnemy : EnemyBehavior
         initialpos = transform.localPosition;
         initialright = transform.right;
         dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
+        bgm = GameObject.Find("Canvas").GetComponent<bagmanager>();
     }
     protected override void Update()
     {
@@ -105,7 +107,7 @@ public class FlyEliteEnemy : EnemyBehavior
                     dialogueRunner.StartDialogue("Elite2Friendly");
                     if (targetHero.GetComponent<EndingJudgement>().usedCount != 0)
                     {
-                        Invoke("Bonus", 5);
+                        Invoke("Bonus", 10);
                     }
                     temp = true;
                 }
@@ -150,6 +152,7 @@ public class FlyEliteEnemy : EnemyBehavior
 
     protected override void Death()
     {
+        bgm.pickupitem(bgm.scroll2);
         GameObject Jp;
         if (Jp = GameObject.Find("jumppad"))
         {
@@ -174,6 +177,7 @@ public class FlyEliteEnemy : EnemyBehavior
     }
     public void AllowPass(GameObject Jp = null)
     {
+        bgm.pickupitem(bgm.scroll2);
         if (Jp)
         {
             Jp.SetActive(true);

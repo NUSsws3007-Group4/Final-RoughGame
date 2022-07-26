@@ -5,6 +5,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
     private float remoteAttackTimer = 0f;
     private bool edgeTouched = false;
     private float cx1, cx2, cy1, cy2, dialogueTimer = 10f;
+    private int blinkCount = 0;
     private Vector3 spawnPoint;
     private bagmanager bgm;
     private GameObject guardDoor;
@@ -67,6 +68,26 @@ public class Elite3EnemyBehavior : EnemyBehavior
             spawnPoint.x += 0.2f * transform.right.x;
             Invoke("GenerateRemote", 0.9f);
         }
+    }
+    protected override void attackedBehavior()
+    {
+        attackedTimer += Time.deltaTime;
+        if (attackedTimer >= 0.2f)
+        {
+            Color c = gameObject.GetComponent<SpriteRenderer>().color;
+            if (c.a == 1)
+                c.a = 0.6f;
+            else c.a = 1f;
+            gameObject.GetComponent<SpriteRenderer>().color = c;
+            attackedTimer = 0;
+            blinkCount++;
+        }
+        if (blinkCount == 4)
+        {
+            anim.SetBool("Attacked", false);
+            blinkCount = 0;
+        }
+
     }
     protected override void patrolBehavior()
     {
@@ -153,6 +174,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
     protected override void Death()
     {
         dialogueRunner.Stop();
+        bgm.pickupitem(bgm.scroll3);
         if (dialogueTriggered)
         {
             dialogueRunner.StartDialogue("Elite3Defeated2");
@@ -202,7 +224,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
                     transform.GetChild(0).GetComponent<Renderer>().enabled = true;
                     transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-                    patrol=false;
+                    patrol = false;
                     if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
                     {
                         targetHero.GetComponent<EndingJudgement>().attackFriends = true;
@@ -289,6 +311,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
     public void AllowPass()
     {
         targetHero.GetComponent<EndingJudgement>().f3 = true;
+        bgm.pickupitem(bgm.scroll3);
         dialogueRunner.Stop();
         dialogueRunner.StartDialogue("Elite3AllowPass");
         muim = GameObject.Find("UImanager");

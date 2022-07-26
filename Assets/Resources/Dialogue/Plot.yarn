@@ -179,6 +179,7 @@ Karina: You deserve the rune of purification...
 <<wait 5>>
 Bridgett: Sister!
 <<set $ready to 5>>
+Peace Ending
 ===
 title: FakeFriendlyEnding
 ---
@@ -189,6 +190,7 @@ Karina: Everything happened in this loop will be wiped...
 <<wait 5>>
 Karina: I have to save my sister, Bridgett.
 <<set $ready to 5>>
+Hypocrisy Ending
 ===
 
 title: FightEndingBegin
@@ -223,6 +225,7 @@ MysteriousVoice: You two will live together...
 Karina and Bridgett were respawned by the rune.
 They lived together happily, as if nothing had happened.
 <<set $ready to 5>>
+Re-Incarnation
 ===
 
 title: SlaughterEnding
@@ -230,6 +233,7 @@ title: SlaughterEnding
 <<set $ready to 4>>
 Everything was buried in the sea of fire...
 <<set $ready to 5>>
+Slaughter Ending
 ===
 
 title: NormalEnding
@@ -238,6 +242,7 @@ title: NormalEnding
 Bridgett: Frost is gone...
 Bridgett: But where is my sister?
 <<set $ready to 5>>
+Normal Ending
 ===
 
 title: BossWarning

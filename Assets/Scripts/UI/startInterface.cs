@@ -9,6 +9,7 @@ public class startInterface : MonoBehaviour
     private Animator anim;
     private bool Loading = false;
     private float loadTimer = 0f;
+    public GameObject cover;
     public void Load()
     {
         anim.SetTrigger("Load");
@@ -26,6 +27,11 @@ public class startInterface : MonoBehaviour
         if (Loading)
             loadTimer += Time.deltaTime;
         if (loadTimer >= 2.5f)
+        {
+            cover.SetActive(true);
+            cover.GetComponent<CanvasGroup>().alpha += 0.8f * Time.deltaTime;
+        }
+        if (loadTimer >= 4.0f)
             SceneManager.LoadScene("Level1");
 
     }
