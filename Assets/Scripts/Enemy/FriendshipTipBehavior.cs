@@ -25,7 +25,7 @@ public class FriendshipTipBehavior : SlimeBehavior
         base.friendlyBehavior();
         if (frienshipAdded)
         {
-            Invoke("Death", 15);
+            Invoke("Death1", 15);
         }
     }
     protected override void Update()
@@ -45,5 +45,8 @@ public class FriendshipTipBehavior : SlimeBehavior
     {
         targetHero.GetComponent<EndingJudgement>().friendshipTipSlimeKilled = true;
         base.Death();
+    }
+    protected void Death1(){
+        Destroy(transform.gameObject);
     }
 }
