@@ -169,7 +169,7 @@ public class FlyEliteEnemy : EnemyBehavior
         }
         targetHero.GetComponent<EndingJudgement>().f2 = false;
         Destroy(guardPortal.gameObject);
-
+        Destroy(transform.gameObject);
 
     }
     public void AllowPass(GameObject Jp = null)
