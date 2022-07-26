@@ -86,7 +86,7 @@ public class EnemyBehavior : MonoBehaviour
         if (collision.gameObject.layer == 19)
         {
             anim.SetBool("Attacked", true);
-            GameObject.Find("hero").GetComponent<AudioManager>().PlayAudio("Enemy/EnemyHurt");
+            GameObject.Find("hero").GetComponent<AudioManager>().PlayEnemy("EnemyHurt");
             mRigidbody.velocity = new Vector3(0, 0, 0);
             mRigidbody.AddForce(-100 * transform.right);
             mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt *
@@ -123,7 +123,7 @@ public class EnemyBehavior : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("RemoteAttack"))
         {
             anim.SetBool("Attacked", true);
-            GameObject.Find("hero").GetComponent<AudioManager>().PlayAudio("Enemy/EnemyHurt");
+            GameObject.Find("hero").GetComponent<AudioManager>().PlayEnemy("EnemyHurt");
             mRigidbody.velocity = new Vector3(0, 0, 0);
             mRigidbody.AddForce(-100 * transform.right);
             mLifeLeft -= targetHero.gameObject.GetComponent<HeroAttackHurt>().hurt *

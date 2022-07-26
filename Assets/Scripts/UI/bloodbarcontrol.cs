@@ -85,7 +85,7 @@ public class bloodbarcontrol : MonoBehaviour
 
     public void increasevolume(int delta)
     {
-        GameObject.Find("hero").GetComponent<AudioManager>().PlayAudio("Hero/HealthUP");
+        GameObject.Find("hero").GetComponent<AudioManager>().PlayEffect("HealthUP");
         bloodbarentity.gameObject.SetActive(true);
         bloodbareffect.gameObject.SetActive(true);
         bloodbarframe.gameObject.SetActive(true);

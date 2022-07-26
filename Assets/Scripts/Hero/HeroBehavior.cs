@@ -411,7 +411,7 @@ public class HeroBehavior : MonoBehaviour
             if (mDashManager.startDash(mPlace, this))
             {
                 Debug.Log("dashing");
-                mAudio.PlayAudio("Hero/dash");
+                mAudio.PlayHero("dash");
                 //mPlace = mPlaceStatus.InAir;
             }
         }

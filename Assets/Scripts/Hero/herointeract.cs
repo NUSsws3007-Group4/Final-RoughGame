@@ -101,11 +101,11 @@ public class herointeract : MonoBehaviour
         {
             if(collider.gameObject.layer == LayerMask.NameToLayer("Item"))
             {
-                gameObject.GetComponent<AudioManager>().PlayAudio("Hero/GetItem");
+                gameObject.GetComponent<AudioManager>().PlayEffect("GetItem");
             }
             else
             {
-                gameObject.GetComponent<AudioManager>().PlayAudio("Hero/GainSkill");
+                gameObject.GetComponent<AudioManager>().PlayEffect("GainSkill");
             }
             switch (collider.gameObject.tag)
             {

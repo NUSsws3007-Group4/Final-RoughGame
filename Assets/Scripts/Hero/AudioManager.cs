@@ -4,48 +4,70 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    AudioSource speaker;
+    public AudioSource speakerHero;
+    public AudioSource speakerEnemy;
+    public AudioSource speakerEffect;
     // Start is called before the first frame update
     void Start()
     {
-        speaker = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     /// <summary>
-    /// 播放Resources/Audio下声音
+    /// 播放敌人音效
     /// </summary>
-    /// <param name="_path">
-    /// 在Audio下路径以及文件名
+    /// <param name="_file">
+    /// 在Audio/Enemy下路径以及文件名
     /// </param>
-    public void PlayAudio(string _path)
+    public void PlayEnemy(string _file)
     {
-        if(!speaker.isPlaying||true)//要不要这个？
-        {
-            speaker.clip = Resources.Load<AudioClip>("Audio/"+ _path);
-            speaker.Play();
-        }
+        speakerEnemy.clip = Resources.Load<AudioClip>("Audio/Enemy/" + _file);
+        speakerEnemy.Play();
+    }
+
+    /// <summary>
+    /// 播放物品音效
+    /// </summary>
+    /// <param name="_file">
+    /// 在Audio/Effect下路径以及文件名
+    /// </param>
+    public void PlayEffect(string _file)
+    {
+        speakerEffect.clip = Resources.Load<AudioClip>("Audio/Effect/" + _file);
+        speakerEffect.Play();
+    }
+
+    /// <summary>
+    /// 播放玩家音效
+    /// </summary>
+    /// <param name="_file">
+    /// 在Audio/Hero下路径以及文件名
+    /// </param>
+    public void PlayHero(string _file)
+    {
+        speakerHero.clip = Resources.Load<AudioClip>("Audio/Hero/" + _file);
+        speakerHero.Play();
     }
     public void audioJump()
     {
-        PlayAudio("Hero/juming");
+        PlayHero("juming");
 
     }
     public void audioHurt()
     {
-        PlayAudio("Hero/attacked");
+        PlayHero("attacked");
     }
     public void audioAttack()
     {
         int i = Random.Range(1, 6);
-        PlayAudio("Hero/sword_"+i);
+        PlayHero("sword_"+i);
     }
     public void audioSkill()
     {
-        PlayAudio("Hero/skillAttacking");
+        PlayHero("skillAttacking");
     }
 }

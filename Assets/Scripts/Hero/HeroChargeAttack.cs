@@ -50,7 +50,7 @@ public class HeroChargeAttack : MonoBehaviour
         }
         else if(!isDown && chargeTimer >= 0.5f)//触发蓄力效果
         {
-            gameObject.GetComponent<AudioManager>().PlayAudio("Hero/skillAttacking");
+            gameObject.GetComponent<AudioManager>().PlayHero("skillAttacking");
             cooldownTimer = cooldownTime * gameObject.GetComponent<HeroAttackHurt>().coldDownCoef + 0.6f;
             chargeTimer = chargeTimer > 3.0f ? 3.0f : chargeTimer;//限制时长为3s
             deltaATK = (int)((chargeTimer-0.5f)/0.1f);//计算加成攻击力
