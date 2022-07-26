@@ -100,7 +100,7 @@ public class EliteEnemyBehavior : EnemyBehavior
 
     protected override void chaseBehavior()
     {
-
+        guardPortal.SetActive(false);
         if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
             Invoke("Respawn", 0.2f);
         else
@@ -154,6 +154,8 @@ public class EliteEnemyBehavior : EnemyBehavior
             {
                 bgm.friendshipflask.locked = false;
                 bgm.pickupitem(bgm.friendshipflask);
+                bgm.pickupitem(bgm.friendshipflask);
+                bgm.pickupitem(bgm.friendshipflask);
                 dialogueRunner.Stop();
                 dialogueRunner.StartDialogue("Elite1Friendly");
                 flaskunlocked = true;
@@ -163,11 +165,18 @@ public class EliteEnemyBehavior : EnemyBehavior
     }
     protected override void Death()
     {
-        guardPortal.SetActive(true);
-        bgm.friendshipflask.locked = false;
-        bgm.pickupitem(bgm.friendshipflask);
         dialogueRunner.Stop();
-        dialogueRunner.StartDialogue("Elite1Defeated");
+        guardPortal.SetActive(true);
+        if (!flaskunlocked)
+        {
+            bgm.friendshipflask.locked = false;
+            bgm.pickupitem(bgm.friendshipflask);
+            dialogueRunner.StartDialogue("Elite1Defeated");
+        }
+        else
+        {
+            dialogueRunner.StartDialogue("Elite1Defeated2");
+        }
         targetHero.GetComponent<EndingJudgement>().f1 = false;
 
         Destroy(transform.gameObject);
