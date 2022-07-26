@@ -18,5 +18,8 @@ MonoBehaviour:
   itemnuminstore: 0
   locked: 0
   itemprice: 0
-  iteminfo: 
+  iteminfo: 'Become a stronger warrior!
+
+    Keep this rune to get higher attack
+    force.'
   itemtype: '[Rune]'
