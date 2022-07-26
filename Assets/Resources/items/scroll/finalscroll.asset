@@ -18,5 +18,8 @@ MonoBehaviour:
   itemnuminstore: 0
   locked: 0
   itemprice: 0
-  iteminfo: 
+  iteminfo: 'You finally find them all and glued them......
+
+    But what''s it used
+    for?'
   itemtype: '[Relic]'
