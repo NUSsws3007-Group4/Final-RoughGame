@@ -20,6 +20,7 @@ public class HeroRemoteAttack : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.K) && mEnegyBarManager.getvolume() >= 1)
             {
+                gameObject.GetComponent<AudioManager>().PlayHero("RemoteAttack");
                 mEnegyBarManager.decreasevolume(1);
                 GameObject remoteAttack = Instantiate(Resources.Load("Prefabs/HeroBullet") as GameObject);
             }
