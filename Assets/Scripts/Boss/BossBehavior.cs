@@ -115,31 +115,26 @@ public class BossBehavior : MonoBehaviour
                     IceThornAttack(iceThornNum, iceThornInterval);
                 }
             }//和平线 躲避
-            else
+            else if (bossHP > 0)
             {
-                if (!triggered1)
+                if (bossShield > 0)
                 {
-                    if (bossShield > 0)
-                    {
-                        PhaseOne();//有护盾阶段
-                    }
-                    else if (bossShield == 0)
-                    {
-                        Debug.Log("Phase 2");
-                        PhaseTwo();//无护盾 移动阶段
-                    }
-                    else
-                    {
-                        triggered1 = true;
-                        //启动第二形态
-                    }
+                    PhaseOne();//有护盾阶段
                 }
-                if (triggered0 && triggered1)
+                else if (bossShield == 0)
                 {
-                    triggered0 = false;
+                    Debug.Log("Phase 2");
+                    PhaseTwo();//无护盾 移动阶段
                 }
             }//打斗线 打第一阶段
         }
+        if (status == 2f)
+        {
+            nextStage.SetActive(true);
+            nextStage.GetComponent<BossPhase2>().endingNum = endingNum;
+            BossDeath();
+        }
+
     }
 
     private void PhaseOne()//有护盾阶段 不移动
@@ -187,9 +182,11 @@ public class BossBehavior : MonoBehaviour
         {
             bossHP = bossHP > damage ? bossHP - damage : 0;
         }
-        Debug.Log(bossShield + " " + bossHP);
         if (bossHP <= 0)
-            BossDeath();
+        {
+            dialogueRunner.Stop();
+            dialogueRunner.StartDialogue("Phase1Beaten");
+        }
     }
 
     private void BossDeath()
