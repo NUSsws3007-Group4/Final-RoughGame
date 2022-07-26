@@ -21,7 +21,7 @@ public class EnemyBehavior : MonoBehaviour
     private GameObject muim;
     private GameObject dropitem;
     private bool dropped = false;
-    private DialogueRunner dialogueRunner;
+    protected DialogueRunner dialogueRunner;
 
     protected virtual void Start()
     {
@@ -103,6 +103,7 @@ public class EnemyBehavior : MonoBehaviour
                     break;
                 case 1:
                     mFriendshipStatus = -1;
+                    patrol=false;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
                     attackBehavior();
                     if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
@@ -131,12 +132,18 @@ public class EnemyBehavior : MonoBehaviour
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
                         targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(friendshipAddValue);
+                    dialogueRunner.Stop();
+                    dialogueRunner.StartDialogue("FriendlyAttacked");
                     break;
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
-                    for (int i = 0; i < multiplication + 1; ++i)
-                        attackBehavior();
+                    attackBehavior();
+                    if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
+                    {
+                        targetHero.GetComponent<EndingJudgement>().attackFriends = true;
+                        targetHero.GetComponent<HeroBehavior>().setFriendship(-6666);
+                    }
                     break;
             }
             Debug.Log("Life:" + mLifeLeft);
