@@ -20,4 +20,4 @@ Assembly-CSharp.csproj
 /Packages/*
 !/Packages/manifest.json
 /Web
-!/Library/PackageCache/dev.yarnspinner.unity@2.2.1
+!/Library/PackageCache/dev.yarnspinner.unity@2.2.1/
