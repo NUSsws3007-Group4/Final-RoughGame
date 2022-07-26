@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class BossBehavior : MonoBehaviour
 {
 
     private const float pi = 3.14159f;
-    private int bossHP = 10;//生命值
-    private int bossShield = 0;//护盾值（不会恢复）
+    public bool triggered0 = false, triggered1 = false;
+    private int bossHP = 500;//生命值
+    private int bossShield = 200;//护盾值（不会恢复）
     private float bossSpeed = 5f;//移动速度
     private int iceThornNum = 0;//冰刺数目产生
     private float iceThornTimer = 0f;//冰刺攻击间隔计数器
@@ -21,43 +23,126 @@ public class BossBehavior : MonoBehaviour
     private float recoverTimer = 0f;//回血计数器
     private bool stopReviveTag = false;//终止重生标记
     private float reviveTimer = 0f;//重生计数器
+    private float peaceTimer = 0f;//躲避计数器
     private List<Vector3> iceThornPos = new List<Vector3>();//开设冰刺位置数组
-    
+
     private int playerAttackDamage = 0;
 
-    private GameObject mHero;
+    private GameObject mHero, nextStage;
+    private EndingJudgement judge;
     public Transform playerTransform;
+    public int endingNum;
+    public float status;
+    private DialogueRunner dialogueRunner;
+
 
     void Start()
     {
         mHero = GameObject.Find("hero");
+        nextStage = GameObject.Find("BossPhase2");
+        judge = mHero.GetComponent<EndingJudgement>();
+        dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
 
     void Update()
     {
-        flameAttackTimer += Time.smoothDeltaTime;
+        dialogueRunner.GetComponent<VariableStorageBehaviour>().TryGetValue<float>("$ready", out status);
+        endingNum = 6;//普通结局
+        if (!triggered0 && status == 0)
+        {
+            triggered0 = true;
+            dialogueRunner.Stop();
+            if (mHero.GetComponent<HeroBehavior>().getFriendship() == 100)
+            {
+                dialogueRunner.StartDialogue("FriendlyEndingBegin");
+                if (judge.f1 && judge.f2 && judge.f3)
+                {
+                    if (judge.usedCount < 5)
+                        endingNum = 0;//真和平
+                    else
+                        endingNum = 1;//伪和平
+                }
+            }
+            else
+            {
+                dialogueRunner.StartDialogue("FightEndingBegin");
+                if (!judge.f1 && !judge.f2 && !judge.f3)
+                {
+                    endingNum = 2; //重生
+                    if (judge.friendshipTipSlimeKilled || judge.friendAttacked >= 5)
+                        endingNum = 3;//全灭
+                }
+            }
 
-        if(flameAttackTimer >= 10f)//超越10s未受到火焰伤害
-        {
-            flameAttackTimer = 0f;
-            isFlameAttack = false;
         }
 
-        if(bossShield > 0)
+        if (status == 1f)
         {
-            PhaseOne();//有护盾阶段
+            if (endingNum <= 1)
+            {
+                peaceTimer += Time.deltaTime;
+                if (peaceTimer >= 30f)
+                {
+                    triggered1 = true;
+                    peaceTimer = -2000f;
+                    dialogueRunner.Stop();
+                    switch (endingNum)
+                    {
+                        case 0:
+                            dialogueRunner.StartDialogue("TrueFriendlyEnding");
+                            break;
+                        case 1:
+                            dialogueRunner.StartDialogue("FakeFriendlyEnding");
+                            break;
+                    }
+                }
+                if (!triggered1)
+                {
+                    iceThornNum = Random.Range(2, 3);
+                    iceThornInterval = 1f;
+                    IceThornAttack(iceThornNum, iceThornInterval);
+                }
+            }//和平线 躲避
+            else
+            {
+                if (!triggered1)
+                {
+                    if (bossShield > 0)
+                    {
+                        PhaseOne();//有护盾阶段
+                    }
+                    else if (bossShield == 0 && bossHP > 500 && bossHP <= 1000)
+                    {
+                        PhaseTwo();//无护盾 移动阶段
+                    }
+                    else
+                    {
+                        triggered1=true;
+                        //启动第二阶段
+                    }
+                }
+            }//打斗线 打第一阶段
         }
-        else if(bossShield==0 && bossHP > 500 && bossHP <= 1000)
+
+        if (status == 1f && endingNum > 1)
         {
-            PhaseTwo();//无护盾 移动阶段
-        }
-        else if(bossShield==0 && bossHP > 0 && bossHP <= 500)
-        {
-            PhaseThree();//无护盾 移动阶段 不受火焰伤害时回血
-        }
-        else if(bossHP == 0)
-        {
-            BossRevive();
+            flameAttackTimer += Time.smoothDeltaTime;
+
+            if (flameAttackTimer >= 10f)//超越10s未受到火焰伤害
+            {
+                flameAttackTimer = 0f;
+                isFlameAttack = false;
+            }
+
+
+            else if (bossShield == 0 && bossHP > 0 && bossHP <= 500)
+            {
+                PhaseThree();//无护盾 移动阶段 不受火焰伤害时回血
+            }
+            else if (bossHP == 0)
+            {
+                BossRevive();
+            }
         }
     }
 
@@ -74,17 +159,17 @@ public class BossBehavior : MonoBehaviour
         playerTransform = GameObject.Find("hero").transform;//取出player.transform
         distanceToPlayer = CalDistanceToPlayer();//计算距离以判定冰棱攻击
 
-        if(distanceToPlayer >= 10f)
+        if (distanceToPlayer >= 10f)
         {
             MovementToPlayer();//调用移动
         }
-        
+
 
         iceThornNum = Random.Range(4, 6);
         iceThornInterval = 2f;
         IceThornAttack(iceThornNum, iceThornInterval);
 
-        if(distanceToPlayer >= 5.0f)
+        if (distanceToPlayer >= 5.0f)
         {
             //Debug.Log("Attacking with Ice Crystal!");
             IceCrystalAttack();
@@ -95,24 +180,24 @@ public class BossBehavior : MonoBehaviour
     {
         playerTransform = GameObject.Find("hero").transform;
         distanceToPlayer = CalDistanceToPlayer();
-        
-        if(distanceToPlayer >= 10f)
+
+        if (distanceToPlayer >= 10f)
         {
             MovementToPlayer();
         }
-        
+
 
         iceThornNum = Random.Range(4, 6);
         iceThornInterval = 1.5f;
         IceThornAttack(iceThornNum, iceThornInterval);
 
-        if(distanceToPlayer <= 20f)
+        if (distanceToPlayer <= 20f)
         {
             IceCrystalAttack();
         }
 
         barrageTimer += Time.smoothDeltaTime;
-        if(barrageTimer >= 4.0f)
+        if (barrageTimer >= 4.0f)
         {
             barrageTimer = 0f;
             BarrageAttack();
@@ -120,25 +205,25 @@ public class BossBehavior : MonoBehaviour
 
         recoverTimer += Time.smoothDeltaTime;
         //如果10s没有受到火焰伤害&&回复冷却完成&&不会超过50%血量
-        if(!isFlameAttack && recoverTimer >= 1.0f && bossHP+20 <= 500)
+        if (!isFlameAttack && recoverTimer >= 1.0f && bossHP + 20 <= 500)
         {
             recoverTimer = 0f;
             bossHP += 20;
         }
 
         Debug.Log(bossHP);
-        
+
     }
 
     private void BossRevive()
     {
         reviveTimer += Time.smoothDeltaTime;
-        if(!stopReviveTag)//重生被终止 结算死亡
+        if (!stopReviveTag)//重生被终止 结算死亡
         {
             reviveTimer = 0f;
             BossDeath();
         }
-        if(reviveTimer >= 20f)//超过20s未被火焰属性打断
+        if (reviveTimer >= 20f)//超过20s未被火焰属性打断
         {
             reviveTimer = 0f;
             bossHP = 500;
@@ -147,13 +232,13 @@ public class BossBehavior : MonoBehaviour
 
     private void BossHurt(int damage)
     {
-        if(bossShield > 0)
+        if (bossShield > 0)
         {
-            bossShield = bossShield>damage ? bossShield-damage : 0;
+            bossShield = bossShield > damage ? bossShield - damage : 0;
         }
-        else if(bossShield == 0)
+        else if (bossShield == 0)
         {
-            bossHP = bossHP>damage ? bossHP-damage : 0;
+            bossHP = bossHP > damage ? bossHP - damage : 0;
         }
     }
 
@@ -165,23 +250,23 @@ public class BossBehavior : MonoBehaviour
     private void IceThornAttack(int spawnNum, float spawnInterval)
     {
         iceThornTimer += Time.smoothDeltaTime;
-        if(iceThornTimer >= spawnInterval)
+        if (iceThornTimer >= spawnInterval)
         {
             iceThornTimer = 0f;//清空计时器
-            
-            
+
+
             iceThornPos.Clear();//清空
             playerTransform = GameObject.Find("hero").transform;
 
             WarningSignSpawn(spawnNum);
-            Invoke("IceThornSpawn",1f);    
-            
+            Invoke("IceThornSpawn", 1f);
+
         }
     }
 
     private void WarningSignSpawn(int spawnNum)
     {
-        for(int i = 0;i < spawnNum;i++)//生成警告标志
+        for (int i = 0; i < spawnNum; i++)//生成警告标志
         {
             GameObject warningSign = Instantiate(Resources.Load("Prefabs/WarningSign") as GameObject);
             Vector3 p = playerTransform.localPosition;
@@ -193,7 +278,7 @@ public class BossBehavior : MonoBehaviour
 
     private void IceThornSpawn()
     {
-        for(int i = 0;i < iceThornPos.Count;i++)//生成冰棱
+        for (int i = 0; i < iceThornPos.Count; i++)//生成冰棱
         {
             GameObject tempIceThorn = Instantiate(Resources.Load("Prefabs/IceThorn") as GameObject);
             tempIceThorn.transform.localPosition = iceThornPos[i];
@@ -204,7 +289,7 @@ public class BossBehavior : MonoBehaviour
     private void IceCrystalAttack()
     {
         iceCrystalTimer += Time.smoothDeltaTime;
-        if(iceCrystalTimer >= 3.0f)
+        if (iceCrystalTimer >= 3.0f)
         {
             iceCrystalTimer = 0f;
             GameObject iceCrystal = Instantiate(Resources.Load("Prefabs/IceCrystal") as GameObject);
@@ -232,9 +317,9 @@ public class BossBehavior : MonoBehaviour
     private float CalDistanceToPlayer()
     {
         return Mathf.Sqrt(Mathf.Abs(playerTransform.transform.localPosition.x - transform.localPosition.x)
-        *Mathf.Abs(playerTransform.transform.localPosition.x - transform.localPosition.x)
-        +Mathf.Abs(playerTransform.transform.localPosition.y - transform.localPosition.y)
-        *Mathf.Abs(playerTransform.transform.localPosition.y - transform.localPosition.y));
+        * Mathf.Abs(playerTransform.transform.localPosition.x - transform.localPosition.x)
+        + Mathf.Abs(playerTransform.transform.localPosition.y - transform.localPosition.y)
+        * Mathf.Abs(playerTransform.transform.localPosition.y - transform.localPosition.y));
 
     }
 
@@ -242,14 +327,14 @@ public class BossBehavior : MonoBehaviour
     {
         float dotRes = Vector3.Dot(transform.right, (playerTransform.transform.localPosition - transform.localPosition).normalized);
 
-        if(dotRes >= -0.1f && dotRes <= 0.1f)
+        if (dotRes >= -0.1f && dotRes <= 0.1f)
         {
             bossSpeed = 0f;//不移动
         }
         else
         {
             bossSpeed = 5f;
-            if(dotRes < -0.1f)
+            if (dotRes < -0.1f)
             {
                 transform.right = -transform.right;//转向
             }
@@ -265,23 +350,24 @@ public class BossBehavior : MonoBehaviour
     //     return coldnessProduce;
     // }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))//受到近战攻击
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))//受到近战攻击
         {
-            if(mHero.gameObject.GetComponent<HeroBehavior>().withFlame)
+            if (mHero.gameObject.GetComponent<HeroBehavior>().withFlame)
             {
                 stopReviveTag = true;
                 isFlameAttack = true;
                 flameAttackTimer = 0f;
             }
-            playerAttackDamage =  mHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
+            playerAttackDamage = mHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
                                   mHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
 
             BossHurt(playerAttackDamage);//伤害结算       
         }
-        if(collision.gameObject.layer == LayerMask.NameToLayer("RemoteAttack"))//受到远程攻击 不算火焰攻击
+        if (collision.gameObject.layer == LayerMask.NameToLayer("RemoteAttack"))//受到远程攻击 不算火焰攻击
         {
-            playerAttackDamage =  mHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
+            playerAttackDamage = mHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
                                   mHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
             BossHurt(playerAttackDamage);//伤害结算       
         }
