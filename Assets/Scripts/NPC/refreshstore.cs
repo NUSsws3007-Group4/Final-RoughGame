@@ -12,7 +12,7 @@ public class refreshstore : MonoBehaviour
         stm=GameObject.Find("Canvas").GetComponent<storemanager>();
         stm.bloodflask.itemnuminstore+=1;
         stm.energyflask.itemnuminstore+=1;
-        stm.friendshipflask.itemnuminstore+=1;
+        //stm.friendshipflask.itemnuminstore+=1;
         stm.ragepotion.itemnuminstore+=1;
         stm.soulpotion.itemnuminstore+=1;
         stm.defencepotion.itemnuminstore+=1;

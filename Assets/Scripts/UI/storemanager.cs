@@ -106,9 +106,9 @@ public class storemanager : MonoBehaviour
 
     void Awake() //set store info;
     {
-        bloodflask.itemnuminstore=3;
+        bloodflask.itemnuminstore=2;
         bloodflask.locked=false;
-        energyflask.itemnuminstore=3;
+        energyflask.itemnuminstore=2;
         energyflask.locked=false;
         friendshipflask.itemnuminstore=6;
         friendshipflask.locked=false;
