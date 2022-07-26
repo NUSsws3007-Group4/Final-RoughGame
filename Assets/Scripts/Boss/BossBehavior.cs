@@ -117,33 +117,33 @@ public class BossBehavior : MonoBehaviour
                     }
                     else
                     {
-                        triggered1=true;
+                        triggered1 = true;
                         //启动第二阶段
                     }
                 }
             }//打斗线 打第一阶段
         }
 
-        if (status == 1f && endingNum > 1)
-        {
-            flameAttackTimer += Time.smoothDeltaTime;
+        /* if (status == 1f && endingNum > 1)
+         {
+             flameAttackTimer += Time.smoothDeltaTime;
 
-            if (flameAttackTimer >= 10f)//超越10s未受到火焰伤害
-            {
-                flameAttackTimer = 0f;
-                isFlameAttack = false;
-            }
+             if (flameAttackTimer >= 10f)//超越10s未受到火焰伤害
+             {
+                 flameAttackTimer = 0f;
+                 isFlameAttack = false;
+             }
 
 
-            else if (bossShield == 0 && bossHP > 0 && bossHP <= 500)
-            {
-                PhaseThree();//无护盾 移动阶段 不受火焰伤害时回血
-            }
-            else if (bossHP == 0)
-            {
-                BossRevive();
-            }
-        }
+             else if (bossShield == 0 && bossHP > 0 && bossHP <= 500)
+             {
+                 PhaseThree();//无护盾 移动阶段 不受火焰伤害时回血
+             }
+             else if (bossHP == 0)
+             {
+                 BossRevive();
+             }
+         }*/
     }
 
     private void PhaseOne()//有护盾阶段 不移动

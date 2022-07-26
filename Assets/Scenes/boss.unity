@@ -2371,18 +2371,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.036942482, y: 0.11605477}
+  m_Offset: {x: -0.0075531006, y: 0.03596258}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2.25}
+    oldSize: {x: 1.3333334, y: 3}
     newSize: {x: 3.2, y: 3.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.021471, y: 2.2678905}
+  m_Size: {x: 1.2884445, y: 2.926425}
   m_EdgeRadius: 0
 --- !u!4 &4506008933375116694
 Transform:
@@ -2392,7 +2392,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5520223521015818625}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.13, y: -4.95, z: 1.24551}
+  m_LocalPosition: {x: 19.62, y: -4.52, z: 1.24551}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2413,6 +2413,7 @@ GameObject:
   - component: {fileID: 3173439720310414473}
   - component: {fileID: 7098697836015903587}
   - component: {fileID: 5654929586314419162}
+  - component: {fileID: 7098697836015903588}
   m_Layer: 11
   m_Name: BossPhase1
   m_TagString: Untagged
@@ -2432,7 +2433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692b8ddf3b9aa3943b65419727939c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggered0: 0
+  triggered1: 0
   playerTransform: {fileID: 0}
+  endingNum: 0
+  status: 0
 --- !u!50 &7098697836015903587
 Rigidbody2D:
   serializedVersion: 4
@@ -2454,3 +2459,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &7098697836015903588
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5520223521015818625}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ec8a3152ea389cc4c96c116c7e01d1f1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
