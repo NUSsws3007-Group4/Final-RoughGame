@@ -17,7 +17,6 @@ public class BreakBoard : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("attack:" + other.gameObject.layer);
         TutorialManager tu;
 
         if (other.gameObject.layer == 19)
@@ -37,7 +36,6 @@ public class BreakBoard : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("attack:" + other.gameObject.layer);
         TutorialManager tu;
 
         if (other.gameObject.layer == 19)
