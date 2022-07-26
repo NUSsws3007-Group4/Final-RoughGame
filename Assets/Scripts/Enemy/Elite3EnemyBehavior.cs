@@ -166,6 +166,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
         }
         targetHero.GetComponent<EndingJudgement>().f3 = false;
         Destroy(guardDoor.gameObject);
+        Destroy(transform.gameObject);
 
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
