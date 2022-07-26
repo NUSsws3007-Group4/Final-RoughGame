@@ -93,6 +93,11 @@ Silena: Have you solved the puzzle yet?
 Silena: Go up and try it. I believe that you are smart enough.
 ===
 
+title: PuzzleSolving
+---
+Press E to interact with the switches.
+===
+
 title: Elite2PuzzleSolved
 ---
 Silena: Smart... You deserve it.
@@ -163,21 +168,21 @@ Karina: Insist for 30 seconds and we'll get the answer.
 title: TrueFriendlyEnding
 ---
 Karina: You deserve the rune of purification...
-<<set $ready to 2>>
+<<set $ready to 4>>
 ...
 <<wait 5>>
 Bridgett: Sister!
-<<set $ready to 3>>
+<<set $ready to 5>>
 ===
 title: FakeFriendlyEnding
 ---
 Karina: Evil person will only be trapped in the loop.
 (Sigh)
 Karina: Everything happened in this loop will be wiped...
-<<set $ready to 2>>
+<<set $ready to 4>>
 <<wait 5>>
 Karina: I have to save my sister, Bridgett.
-<<set $ready to 3>>
+<<set $ready to 5>>
 ===
 
 title: FightEndingBegin
@@ -188,8 +193,30 @@ Karina: Get ready for death.
 <<set $ready to 1>>
 ===
 
-title: 1
+title: Phase1Beaten
 ---
+Karina: Now you will see my real power.
+<<set $ready to 2>>
+===
+
+title: Phase2Beaten
+---
+Karina was beaten.
+Fire became beyond control.
+Everything was in the sea of fire.
+<<wait 5>>
+Bridgett too.
+<<set $ready to 3>>
+===
+title: RespawnEnding
+---
+MysteriousVoice: Extraordinary willpower...
+MysteriousVoice: You two will live together...
+<<set $ready to 4>>
+<<wait 5>>
+Karina and Bridgett were respawned by the rune.
+They lived together happily, as if nothing had happened.
+<<set $ready to 5>>
 ===
 
 title: SlaughterEnding
@@ -201,5 +228,5 @@ title: NormalEnding
 ---
 Bridgett: Frost is gone...
 Bridgett: But where is my sister?
-<<set $ready to 3>>
+<<set $ready to 5>>
 ===

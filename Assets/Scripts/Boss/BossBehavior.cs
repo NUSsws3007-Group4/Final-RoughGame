@@ -31,6 +31,7 @@ public class BossBehavior : MonoBehaviour
     private GameObject mHero, nextStage;
     private EndingJudgement judge;
     public Transform playerTransform;
+    private Animator anim;
     public int endingNum;
     public float status;
     private DialogueRunner dialogueRunner;
@@ -40,6 +41,7 @@ public class BossBehavior : MonoBehaviour
     {
         mHero = GameObject.Find("hero");
         nextStage = GameObject.Find("BossPhase2");
+        anim = GetComponent<Animator>();
         judge = mHero.GetComponent<EndingJudgement>();
         dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
@@ -120,6 +122,10 @@ public class BossBehavior : MonoBehaviour
                         triggered1 = true;
                         //启动第二阶段
                     }
+                }
+                if (triggered0 && triggered1)
+                {
+                    triggered0 = false;
                 }
             }//打斗线 打第一阶段
         }
@@ -330,10 +336,12 @@ public class BossBehavior : MonoBehaviour
         if (dotRes >= -0.1f && dotRes <= 0.1f)
         {
             bossSpeed = 0f;//不移动
+            anim.SetBool("Walking", false);
         }
         else
         {
             bossSpeed = 5f;
+            anim.SetBool("Walking", true);
             if (dotRes < -0.1f)
             {
                 transform.right = -transform.right;//转向
