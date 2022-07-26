@@ -127,10 +127,10 @@ public class HeroBehavior : MonoBehaviour
     /****************
      * 接口区
      ****************/
-    public Direction getFaceDir()
+    public int getFaceDir()
     {
 
-        return mFaceDir;
+        return (int)mFaceDir;
     }
 
     public void setJumpSkill(int _skill)
