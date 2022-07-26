@@ -149,6 +149,7 @@ public class EliteEnemyBehavior : EnemyBehavior
         if (distance < detectDistance)
         {
             guardPortal.SetActive(true);
+            targetHero.GetComponent<EndingJudgement>().f1 = true;
             if (!flaskunlocked)
             {
                 bgm.friendshipflask.locked = false;
@@ -165,8 +166,11 @@ public class EliteEnemyBehavior : EnemyBehavior
         guardPortal.SetActive(true);
         bgm.friendshipflask.locked = false;
         bgm.pickupitem(bgm.friendshipflask);
+        dialogueRunner.Stop();
+        dialogueRunner.StartDialogue("Elite1Defeated");
+        targetHero.GetComponent<EndingJudgement>().f1 = false;
+
         Destroy(transform.gameObject);
-        //base.Death();
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
@@ -193,10 +197,17 @@ public class EliteEnemyBehavior : EnemyBehavior
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
                         targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(friendshipAddValue);
+                    dialogueRunner.Stop();
+                    dialogueRunner.StartDialogue("FriendlyAttacked");
                     break;
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
+                    if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
+                    {
+                        targetHero.GetComponent<EndingJudgement>().attackFriends = true;
+                        targetHero.GetComponent<HeroBehavior>().setFriendship(-6666);
+                    }
                     break;
             }
             Debug.Log("Life:" + mLifeLeft);
