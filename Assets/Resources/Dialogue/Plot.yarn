@@ -1,5 +1,6 @@
 ﻿title: HeroInit
 ---
+<<declare $ready = 0 as number>>
 ???: Where am I...(Press X or click mouse to continue)
 Bridgett: ...
 Bridgett: Invasion of frost...
@@ -151,18 +152,43 @@ Neve: ...
 You got a fragment of the rune.
 ===
 
-title: TrueFriendlyEnding
+title: FriendlyEndingBegin
 ---
 Karina: I heard that you are friendly...
 Karina: Is your ability matched with your kindness?
-Karina: 
+Karina: Insist for 30 seconds and we'll get the answer.
+<<set $ready to 1>>
 ===
 
+title: TrueFriendlyEnding
+---
+Karina: You deserve the rune of purification...
+<<set $ready to 2>>
+...
+<<wait 5>>
+Bridgett: Sister!
+<<set $ready to 3>>
+===
 title: FakeFriendlyEnding
 ---
+Karina: Evil person will only be trapped in the loop.
+(Sigh)
+Karina: Everything happened in this loop will be wiped...
+<<set $ready to 2>>
+<<wait 5>>
+Karina: I have to save my sister, Bridgett.
+<<set $ready to 3>>
 ===
 
-title: FightEnding
+title: FightEndingBegin
+---
+Karina: It seems that you have overcome a lot.
+Karina: Now you are facing your strongest enemy.
+Karina: Get ready for death.
+<<set $ready to 1>>
+===
+
+title: 1
 ---
 ===
 
@@ -175,4 +201,5 @@ title: NormalEnding
 ---
 Bridgett: Frost is gone...
 Bridgett: But where is my sister?
+<<set $ready to 3>>
 ===
