@@ -54,9 +54,9 @@ public class HeroBehavior : MonoBehaviour
     /// <summary> 
     ///移动方向
     ///</summary>
-    public enum mDirection { left = -1, stop, right };
-    private mDirection mMoveDir;
-    private mDirection mFaceDir = mDirection.right;
+    public enum Direction { left = -1, stop, right };
+    private Direction mMoveDir;
+    private Direction mFaceDir = Direction.right;
     /// <summary> 
     ///位置状态
     ///</summary>
@@ -127,6 +127,12 @@ public class HeroBehavior : MonoBehaviour
     /****************
      * 接口区
      ****************/
+    public Direction getFaceDir()
+    {
+
+        return mFaceDir;
+    }
+
     public void setJumpSkill(int _skill)
     {
         mJumpSkill = _skill;
@@ -314,7 +320,7 @@ public class HeroBehavior : MonoBehaviour
         mAnimeControl.SetBool("IsRun", mIsRun);
 
         //左移
-        if (getMoveDirection() != mDirection.stop)
+        if (getMoveDirection() != Direction.stop)
         {
             if (Mathf.Abs(mSpeed - mOffsetSpeed) < mMaxSpeed)
             {
@@ -492,24 +498,24 @@ public class HeroBehavior : MonoBehaviour
         }
     }
 
-    private mDirection getMoveDirection()
+    private Direction getMoveDirection()
     {
         if (Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         {
-            return mDirection.left;
+            return Direction.left;
         }
         else if (Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
-            return mDirection.right;
+            return Direction.right;
         }
         else
         {
-            return mDirection.stop;
+            return Direction.stop;
         }
     }
-    public mDirection changeFacing()
+    public Direction changeFacing()
     {
-        mFaceDir = mFaceDir == mDirection.right ? mDirection.left : mDirection.right;
+        mFaceDir = mFaceDir == Direction.right ? Direction.left : Direction.right;
         gameObject.GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
         Vector2 meeldir = transform.GetChild(0).localPosition;
         meeldir.x = -meeldir.x;
@@ -732,7 +738,7 @@ class DashManager
         }
     }
     //更新位置覆写
-    public Vector2 updateDash(Vector2 _speed, HeroBehavior.mPlaceStatus _place, HeroBehavior.mDirection _faceing)
+    public Vector2 updateDash(Vector2 _speed, HeroBehavior.mPlaceStatus _place, HeroBehavior.Direction _faceing)
     {
         if (mIsDash)
         {
