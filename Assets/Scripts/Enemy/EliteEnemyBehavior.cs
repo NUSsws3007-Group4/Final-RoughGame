@@ -153,6 +153,7 @@ public class EliteEnemyBehavior : EnemyBehavior
             {
                 bgm.friendshipflask.locked = false;
                 bgm.pickupitem(bgm.friendshipflask);
+                dialogueRunner.Stop();
                 dialogueRunner.StartDialogue("Elite1Friendly");
                 flaskunlocked = true;
             }

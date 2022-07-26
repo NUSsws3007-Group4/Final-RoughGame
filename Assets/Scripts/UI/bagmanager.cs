@@ -277,7 +277,7 @@ public class bagmanager : MonoBehaviour
             case "Friendship Potion":
                 {
                     hero.GetComponent<HeroBehavior>().upFriendship(10);
-                    int i = ++hero.GetComponent<HeroFakeFriendly>().usedCount;
+                    int i = ++hero.GetComponent<EndingJudgement>().usedCount;
                     pickupitem(emptyflask);
                     switch (i)
                     {
@@ -290,7 +290,7 @@ public class bagmanager : MonoBehaviour
                     }
                     if (i >= 5)
                     {
-                        hero.GetComponent<HeroFakeFriendly>().fakeFriendly = true;
+                        hero.GetComponent<EndingJudgement>().fakeFriendly = true;
                     };
                     updateinfo(friendshipflask.iteminfo, friendshipflask.itemtype + " " + friendshipflask.itemname);
 
@@ -299,7 +299,7 @@ public class bagmanager : MonoBehaviour
             case "?":
                 {
                     hero.GetComponent<HeroBehavior>().upFriendship(10);
-                    int i = ++hero.GetComponent<HeroFakeFriendly>().usedCount;
+                    int i = ++hero.GetComponent<EndingJudgement>().usedCount;
                     pickupitem(emptyflask);
                     switch (i)
                     {
