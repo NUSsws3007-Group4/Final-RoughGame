@@ -12346,6 +12346,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &419455373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 419455373, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
+  m_PrefabInstance: {fileID: 2370873792421295542}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &428581387
 GameObject:
   m_ObjectHideFlags: 0
@@ -16832,6 +16837,10 @@ PrefabInstance:
       propertyPath: e2
       value: 
       objectReference: {fileID: 108202003}
+    - target: {fileID: 313771629045756745, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: e3
+      value: 
+      objectReference: {fileID: 419455373}
     - target: {fileID: 313771629045756745, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: cover
       value: 
@@ -46584,29 +46593,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 208285167}
     m_Modifications:
-    - target: {fileID: 108202006, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.98
+    - target: {fileID: 419455373, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 108202006, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.24
+    - target: {fileID: 419455374, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
       objectReference: {fileID: 0}
-    - target: {fileID: 563448406, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 563448406, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 1703092895, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 1703092895, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.24
+    - target: {fileID: 419455374, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 80248969062326758, guid: 0c82ed4e295e4ed4b82efbd952516fbc, type: 3}
       propertyPath: m_SizeDelta.y

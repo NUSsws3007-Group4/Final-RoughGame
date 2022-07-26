@@ -14,7 +14,7 @@ public class EndingJudgement : MonoBehaviour
     public GameObject cover;
     public Color c;
     public float status;
-    public GameObject e0, e1, e2;
+    public GameObject e0, e1, e2, e3;
 
     void Start()
     {
@@ -24,6 +24,7 @@ public class EndingJudgement : MonoBehaviour
         e0.SetActive(false);
         e1.SetActive(false);
         e2.SetActive(false);
+        e3.SetActive(false);
     }
     void Update()
     {
@@ -72,6 +73,10 @@ public class EndingJudgement : MonoBehaviour
                 case 2:
                     e2.SetActive(true);
                     break;
+                case 3:
+                    e3.SetActive(true);
+                    break;
+
             }
         }
     }
