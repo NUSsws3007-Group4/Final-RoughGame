@@ -6,14 +6,12 @@ public class ChargeAttackIndicator : MonoBehaviour
 {
     // Start is called before the first frame update
     private int extraATKFromCharge = 0;
-
-    protected const float OriginCD = 0.6f;//初始设定CD
+    private const float mAttackTime = 0.6f;
     protected float attackTimer = 0f;
-    protected float normalAttackColdDown;
     void Start()
     {
+        gameObject.SetActive(false);
         attackTimer = 0f;       
-        normalAttackColdDown = OriginCD * gameObject.transform.parent.GetComponent<HeroAttackHurt>().coldDownCoef;
     }
 
     void Update()
@@ -21,10 +19,10 @@ public class ChargeAttackIndicator : MonoBehaviour
         transform.parent.GetComponent<HeroAttackHurt>().hurt = 25 + extraATKFromCharge;//融合蓄力攻击基数
 
         attackTimer += Time.deltaTime;
-        if(attackTimer >= normalAttackColdDown)
+        if(attackTimer >= mAttackTime)
         {
-            gameObject.SetActive(false);
             attackTimer = 0f;
+            gameObject.SetActive(false);
         }
         
     }
