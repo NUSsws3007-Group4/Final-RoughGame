@@ -23,3 +23,4 @@ Assembly-CSharp.csproj
 !/Library/PackageCache
 /Library/PackageCache/**/
 !/Library/PackageCache/dev.yarnspinner.unity@2.2.1
+!/Library/PackageCache/dev.yarnspinner.unity@2.2.1/*
