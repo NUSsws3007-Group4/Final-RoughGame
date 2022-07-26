@@ -14420,7 +14420,16 @@ PrefabInstance:
       propertyPath: mHealth
       value: 
       objectReference: {fileID: 1875227788}
-    m_RemovedComponents: []
+    - target: {fileID: 6351141744593980764, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9222472961307388076, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8200772898039395001, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
 --- !u!1 &828218074
 GameObject:
