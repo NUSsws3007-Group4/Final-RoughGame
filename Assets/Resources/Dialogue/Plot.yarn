@@ -40,6 +40,12 @@ Bridgett: Double jump, interesting.
 Bridgett: I'll use it to go straight westwards.
 ===
 
+title: FriendlyAttacked
+---
+Watch out! You don't have to attack friendly guys.
+Are you sure that you want that?
+===
+
 title: Elite1Friendly
 ---
 Clotille: Thank you for not killing my friends, seems that you are a friendly person. 

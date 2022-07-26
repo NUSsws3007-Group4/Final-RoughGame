@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Yarn.Unity;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -16,10 +17,11 @@ public class EnemyBehavior : MonoBehaviour
     protected Vector3 targetpos, initialpos, initialright, pos, targetDirection, vel;
     protected RaycastHit2D info;
     protected Animator anim;
-    protected bool isactive=true;
+    protected bool isactive = true;
     private GameObject muim;
     private GameObject dropitem;
-    private bool dropped=false;
+    private bool dropped = false;
+    private DialogueRunner dialogueRunner;
 
     protected virtual void Start()
     {
@@ -33,6 +35,7 @@ public class EnemyBehavior : MonoBehaviour
         vel = mRigidbody.velocity;
         vel.x = 0f;
         mRigidbody.velocity = transform.right * 2 + vel;
+        dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
 
     }
     protected virtual void Awake()
@@ -42,7 +45,7 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(isactive)
+        if (isactive)
         {
             if (anim.GetBool("Attacked"))
                 attackedBehavior();
@@ -71,7 +74,7 @@ public class EnemyBehavior : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!isactive) return;
+        if (!isactive) return;
         if (patrol && collision.gameObject.layer == 17)
             transform.right = -transform.right;
         vel = mRigidbody.velocity;
@@ -88,18 +91,25 @@ public class EnemyBehavior : MonoBehaviour
             switch (mFriendshipStatus)
             {
                 case 2:
-                    for (int i = 0; i < multiplication - 1; ++i)
-                        mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt;
+                    mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt *
+                            collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().powerUpCoef *
+                            (multiplication - 1);
                     mFriendshipStatus = 1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
                         targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(friendshipAddValue);
+                    dialogueRunner.Stop();
+                    dialogueRunner.StartDialogue("FriendlyAttacked");
                     break;
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
-                    for (int i = 0; i < multiplication + 1; ++i)
-                        attackBehavior();
+                    attackBehavior();
+                    if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
+                    {
+                        targetHero.GetComponent<EndingJudgement>().attackFriends = true;
+                        targetHero.GetComponent<HeroBehavior>().setFriendship(-6666);
+                    }
                     break;
             }
             Debug.Log("Life:" + mLifeLeft);
@@ -109,32 +119,32 @@ public class EnemyBehavior : MonoBehaviour
     protected virtual void Death()
     {
         Destroy(transform.gameObject);
-        if(dropped) return;
-        dropped=true;
-        float rn=Random.Range(0f,5f);
-        if(rn<1f)
+        if (dropped) return;
+        dropped = true;
+        float rn = Random.Range(0f, 5f);
+        if (rn < 1f)
         {
-            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/bloodflask") as GameObject);
+            dropitem = Instantiate(Resources.Load("Prefabs/dropitems/bloodflask") as GameObject);
         }
-        else if(rn<2f)
+        else if (rn < 2f)
         {
-            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/energyflask") as GameObject);
+            dropitem = Instantiate(Resources.Load("Prefabs/dropitems/energyflask") as GameObject);
         }
-        else if(rn<3f)
+        else if (rn < 3f)
         {
-            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/diamond") as GameObject);
+            dropitem = Instantiate(Resources.Load("Prefabs/dropitems/diamond") as GameObject);
         }
         else
         {
-            muim=GameObject.Find("UImanager");
-            int mon=(int)(Random.Range(20,60));
+            muim = GameObject.Find("UImanager");
+            int mon = (int)(Random.Range(20, 60));
             muim.GetComponent<coincontrol>().earn(mon);
         }
-        if(rn<3)
+        if (rn < 3)
         {
-            Vector3 newpos=transform.position;
-            newpos.y+=1;
-            dropitem.transform.position=newpos;
+            Vector3 newpos = transform.position;
+            newpos.y += 1;
+            dropitem.transform.position = newpos;
         }
     }
 
@@ -186,11 +196,11 @@ public class EnemyBehavior : MonoBehaviour
             targetHero.gameObject.GetComponent<HeroBehavior>().upFriendship(friendshipAddValue);
             frienshipAdded = true;
             transform.GetChild(1).GetComponent<Renderer>().enabled = true;
-            if(!dropped)
+            if (!dropped)
             {
-                dropped=true;
-                muim=GameObject.Find("UImanager");
-                int mon=(int)(Random.Range(30,60));
+                dropped = true;
+                muim = GameObject.Find("UImanager");
+                int mon = (int)(Random.Range(30, 60));
                 muim.GetComponent<coincontrol>().earn(mon);
             }
         }

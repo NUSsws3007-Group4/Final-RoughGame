@@ -10,7 +10,7 @@ public class FriendshipTipBehavior : SlimeBehavior
     override protected void Start()
     {
         //friendlyimage.SetActive(false);
-        timer=5f;
+        timer = 5f;
         base.Start();
         mRigidbody.velocity = new Vector3(0, 0, 0);
         mFriendshipRequired = 0;
@@ -31,15 +31,19 @@ public class FriendshipTipBehavior : SlimeBehavior
     protected override void Update()
     {
         base.Update();
-        if(timer>0)
+        if (timer > 0)
         {
-            timer-=Time.deltaTime;
-            if(timer<=0)
+            timer -= Time.deltaTime;
+            if (timer <= 0)
             {
-                timer=0;
+                timer = 0;
                 friendlyimage.SetActive(false);
             }
         }
     }
-
+    protected override void Death()
+    {
+        targetHero.GetComponent<EndingJudgement>().friendshipTipSlimeKilled = true;
+        base.Death();
+    }
 }

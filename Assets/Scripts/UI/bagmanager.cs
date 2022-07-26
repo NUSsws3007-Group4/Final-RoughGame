@@ -290,7 +290,7 @@ public class bagmanager : MonoBehaviour
                     }
                     if (i >= 5)
                     {
-                        hero.GetComponent<EndingJudgement>().fakeFriendly = true;
+                        hero.GetComponent<EndingJudgement>().attackFriends = true;
                     };
                     updateinfo(friendshipflask.iteminfo, friendshipflask.itemtype + " " + friendshipflask.itemname);
 
