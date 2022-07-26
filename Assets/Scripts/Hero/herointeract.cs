@@ -58,6 +58,7 @@ public class herointeract : MonoBehaviour
             }
             else
             {
+
                 mybagmanager.closemybag();
                 mystoremanager.openmystore();
             }
@@ -98,6 +99,14 @@ public class herointeract : MonoBehaviour
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Item") || collider.gameObject.layer == LayerMask.NameToLayer("PowerUp"))
         {
+            if(collider.gameObject.layer == LayerMask.NameToLayer("Item"))
+            {
+                gameObject.GetComponent<AudioManager>().PlayAudio("Hero/GetItem");
+            }
+            else
+            {
+                gameObject.GetComponent<AudioManager>().PlayAudio("Hero/GainSkill");
+            }
             switch (collider.gameObject.tag)
             {
                 case "cherry":
@@ -112,10 +121,10 @@ public class herointeract : MonoBehaviour
                         break;
                     }
                 case "friendshipflask":
-                {
-                    mybagmanager.pickupitem(mybagmanager.friendshipflask);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.friendshipflask);
+                        break;
+                    }
                 case "diamond":
                     {
                         mybagmanager.pickupitem(mybagmanager.diamond);
@@ -132,60 +141,60 @@ public class herointeract : MonoBehaviour
                         break;
                     }
                 case "atkup":
-                {
-                    mybagmanager.pickupitem(mybagmanager.powerrune);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.powerrune);
+                        break;
+                    }
                 case "CDreduce":
-                {
-                    mybagmanager.pickupitem(mybagmanager.cooldownrune);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.cooldownrune);
+                        break;
+                    }
                 case "HPincrease":
-                {
-                    mybagmanager.pickupitem(mybagmanager.robustrune);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.robustrune);
+                        break;
+                    }
                 case "MPincrease":
-                {
-                    mybagmanager.pickupitem(mybagmanager.energyrune);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.energyrune);
+                        break;
+                    }
                 case "Key":
-                {
-                    mybagmanager.pickupitem(mybagmanager.key);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.key);
+                        break;
+                    }
                 case "ragepotion":
-                {
-                    mybagmanager.pickupitem(mybagmanager.ragepotion);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.ragepotion);
+                        break;
+                    }
                 case "defencepotion":
-                {
-                    mybagmanager.pickupitem(mybagmanager.defencepotion);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.defencepotion);
+                        break;
+                    }
                 case "soulpotion":
-                {
-                    mybagmanager.pickupitem(mybagmanager.soulpotion);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.soulpotion);
+                        break;
+                    }
                 case "scroll1":
-                {
-                    mybagmanager.pickupitem(mybagmanager.scroll1);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.scroll1);
+                        break;
+                    }
                 case "scroll2":
-                {
-                    mybagmanager.pickupitem(mybagmanager.scroll2);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.scroll2);
+                        break;
+                    }
                 case "scroll3":
-                {
-                    mybagmanager.pickupitem(mybagmanager.scroll3);
-                    break;
-                }
+                    {
+                        mybagmanager.pickupitem(mybagmanager.scroll3);
+                        break;
+                    }
             }
         }
 

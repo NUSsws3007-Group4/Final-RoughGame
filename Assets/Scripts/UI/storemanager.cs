@@ -58,6 +58,7 @@ public class storemanager : MonoBehaviour
     {
         if(canopenstore)
         {
+            GameObject.Find("hero").GetComponent<AudioManager>().PlayAudio("NPC/StoreOpen");
             refreshstore();
             mystoreUI.SetActive(true);
             storeisopen=true;

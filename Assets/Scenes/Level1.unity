@@ -15406,7 +15406,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: aff0d0e7beccb334ca661630ed689142, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.615
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -15893,7 +15893,7 @@ GameObject:
   - component: {fileID: 574546135}
   - component: {fileID: 574546134}
   - component: {fileID: 574546136}
-  m_Layer: 12
+  m_Layer: 20
   m_Name: dash
   m_TagString: Dash
   m_Icon: {fileID: 0}
@@ -16652,6 +16652,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 208285167}
     m_Modifications:
+    - target: {fileID: 1216335640, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1918388478, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: muim
       value: 
@@ -16684,6 +16688,10 @@ PrefabInstance:
       propertyPath: mystoremanager
       value: 
       objectReference: {fileID: 5466738979801191578}
+    - target: {fileID: 1918388486, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: m_Volume
+      value: 0.386
+      objectReference: {fileID: 0}
     - target: {fileID: 1918388491, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: bg
       value: 
@@ -43887,7 +43895,7 @@ GameObject:
   - component: {fileID: 1581844052}
   - component: {fileID: 1581844051}
   - component: {fileID: 1581844053}
-  m_Layer: 12
+  m_Layer: 20
   m_Name: doublejump
   m_TagString: DoubleJump
   m_Icon: {fileID: 0}

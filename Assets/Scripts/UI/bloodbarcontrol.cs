@@ -80,11 +80,12 @@ public class bloodbarcontrol : MonoBehaviour
         if(num<0) num=0;
         if(num>maxblood) num=maxblood;
         int delta=num-targetvolume;
-        if(delta>0) increasevolume(delta); else decreasevolume(-delta);
+        if(delta>=0) increasevolume(delta); else decreasevolume(-delta);
     }
 
     public void increasevolume(int delta)
     {
+        GameObject.Find("hero").GetComponent<AudioManager>().PlayAudio("Hero/HealthUP");
         bloodbarentity.gameObject.SetActive(true);
         bloodbareffect.gameObject.SetActive(true);
         bloodbarframe.gameObject.SetActive(true);

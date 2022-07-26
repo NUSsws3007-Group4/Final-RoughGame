@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
     /// </param>
     public void PlayAudio(string _path)
     {
-        if(!speaker.isPlaying)
+        if(!speaker.isPlaying||true)//要不要这个？
         {
             speaker.clip = Resources.Load<AudioClip>("Audio/"+ _path);
             speaker.Play();
