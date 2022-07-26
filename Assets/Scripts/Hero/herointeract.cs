@@ -49,7 +49,7 @@ public class herointeract : MonoBehaviour
                 mybagmanager.openmybag();
             }
         }
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (mystoremanager.storeisopen)
             {
