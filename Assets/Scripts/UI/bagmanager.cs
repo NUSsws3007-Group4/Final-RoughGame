@@ -148,7 +148,7 @@ public class bagmanager : MonoBehaviour
                             }
                         case "Friendship Potion":
                             {
-                                if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
+                                if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() <= 100)
                                 {
                                     usebutton.interactable = true;
                                 }
@@ -163,14 +163,15 @@ public class bagmanager : MonoBehaviour
                             }
                         case "?":
                             {
-                                if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() < 100)
+                                if (hero.GetComponent<HeroBehavior>().getFriendship() >= 0 && hero.GetComponent<HeroBehavior>().getFriendship() <= 100)
                                 {
                                     usebutton.interactable = true;
                                 }
                                 else
                                 {
                                     usebutton.interactable = false;
-                                    friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
+                                    if (hero.GetComponent<HeroBehavior>().getFriendship() < 0)
+                                        friendshipflask.iteminfo = "Evil person doesn't deserve to use this... Reflect on what you have done.";
                                 }
                                 updateinfo(friendshipflask.iteminfo, friendshipflask.itemtype + " " + friendshipflask.itemname);
                                 break;
@@ -276,7 +277,7 @@ public class bagmanager : MonoBehaviour
             case "Friendship Potion":
                 {
                     hero.GetComponent<HeroBehavior>().upFriendship(10);
-                    int i = ++hero.GetComponent<HeroFakeFriendly>().usedCount;
+                    int i = ++hero.GetComponent<EndingJudgement>().usedCount;
                     pickupitem(emptyflask);
                     switch (i)
                     {
@@ -289,7 +290,7 @@ public class bagmanager : MonoBehaviour
                     }
                     if (i >= 5)
                     {
-                        hero.GetComponent<HeroFakeFriendly>().fakeFriendly = true;
+                        hero.GetComponent<EndingJudgement>().fakeFriendly = true;
                     };
                     updateinfo(friendshipflask.iteminfo, friendshipflask.itemtype + " " + friendshipflask.itemname);
 
@@ -298,7 +299,7 @@ public class bagmanager : MonoBehaviour
             case "?":
                 {
                     hero.GetComponent<HeroBehavior>().upFriendship(10);
-                    int i = ++hero.GetComponent<HeroFakeFriendly>().usedCount;
+                    int i = ++hero.GetComponent<EndingJudgement>().usedCount;
                     pickupitem(emptyflask);
                     switch (i)
                     {
@@ -351,12 +352,12 @@ public class bagmanager : MonoBehaviour
     public void quickuseitem(itemstruct item)
     {
         itemstruct tmp;
-        if(item.itemnum>0)
+        if (item.itemnum > 0)
         {
-            tmp=nowselecteditem;
-            nowselecteditem=item;
+            tmp = nowselecteditem;
+            nowselecteditem = item;
             useitem();
-            nowselecteditem=tmp;
+            nowselecteditem = tmp;
         }
     }
 
