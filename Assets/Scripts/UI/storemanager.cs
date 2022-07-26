@@ -111,17 +111,17 @@ public class storemanager : MonoBehaviour
         energyflask.locked=false;
         friendshipflask.itemnuminstore=6;
         friendshipflask.locked=false;
-        ragepotion.itemnuminstore=2;
+        ragepotion.itemnuminstore=0;
         ragepotion.locked=true;
-        defencepotion.itemnuminstore=2;
+        defencepotion.itemnuminstore=0;
         defencepotion.locked=true;
-        soulpotion.itemnuminstore=2;
+        soulpotion.itemnuminstore=0;
         soulpotion.locked=true;
     }
 
     void Start()
     {
-        seticestyle();
+        setgrassstyle();
         closemystore();
         canopenstore=false;
         clock=0;

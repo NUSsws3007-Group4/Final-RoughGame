@@ -18,5 +18,9 @@ MonoBehaviour:
   itemnuminstore: 0
   locked: 0
   itemprice: 0
-  iteminfo: 
+  iteminfo: 'A rune handed down by ancient pharmacists......Everyone who was ever
+    in possession of it lived much more longer......
+
+    Keep it to get higher upper
+    health limit.'
   itemtype: '[Rune]'

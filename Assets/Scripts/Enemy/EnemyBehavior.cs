@@ -18,9 +18,11 @@ public class EnemyBehavior : MonoBehaviour
     protected RaycastHit2D info;
     protected Animator anim;
     protected bool isactive = true;
+
     protected GameObject muim;
     protected GameObject dropitem;
     protected bool dropped = false;
+    
     protected DialogueRunner dialogueRunner;
 
     protected virtual void Start()
@@ -125,9 +127,9 @@ public class EnemyBehavior : MonoBehaviour
             switch (mFriendshipStatus)
             {
                 case 2:
-                    mLifeLeft -= targetHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
-                                 targetHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef *
-                                (multiplication - 1);
+                    mLifeLeft -= collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt *
+                            collision.gameObject.transform.parent.GetComponent<HeroAttackHurt>().powerUpCoef *
+                            (multiplication - 1);
                     mFriendshipStatus = 1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
@@ -137,8 +139,8 @@ public class EnemyBehavior : MonoBehaviour
                     break;
                 case 1:
                     mFriendshipStatus = -1;
-                    patrol=false;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
+                    attackBehavior();
                     if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
                     {
                         targetHero.GetComponent<EndingJudgement>().attackFriends = true;
@@ -146,6 +148,7 @@ public class EnemyBehavior : MonoBehaviour
                     }
                     break;
             }
+            Debug.Log("Life:" + mLifeLeft);
         }
     }
 
