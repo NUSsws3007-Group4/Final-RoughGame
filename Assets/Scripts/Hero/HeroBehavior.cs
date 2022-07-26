@@ -226,7 +226,7 @@ public class HeroBehavior : MonoBehaviour
         respaned = true;
         mHealth.setvolume(mHealth.maxblood);
         mRigidbody.velocity = new Vector2(0f, 0f);
-        gameObject.transform.localPosition = mRespawnPoint;
+        gameObject.transform.position = mRespawnPoint;
         mSpeed = 0f;
         mAcceleration = mAccelerationDefault;
     }
@@ -242,7 +242,6 @@ public class HeroBehavior : MonoBehaviour
     void Start()
     {
         mAudio = gameObject.GetComponent<HeroAudioManager>();
-        mRespawnPoint = new Vector3(0f, 0f);
         mAcceleration = mAccelerationDefault;
         mMaxSpeed = mMaxSpeedDefault;
         smoothmove = false;
