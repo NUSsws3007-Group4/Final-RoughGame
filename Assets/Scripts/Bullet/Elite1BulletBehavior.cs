@@ -24,7 +24,6 @@ public class Elite1BulletBehavior : MonoBehaviour
         if (collision.gameObject.layer != 10 && collision.gameObject.layer != 17 && collision.gameObject.layer != 13)
         {
             Destroy(transform.gameObject);
-            Debug.Log(collision);
         }
     }
 }

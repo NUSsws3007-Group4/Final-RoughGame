@@ -7,10 +7,10 @@ public class FlyEliteEnemy : EnemyBehavior
 {
     private const float pi = 3.1415926f;
     private int barrageAttackCount = 0;
-    private float arrowShotTimer = 0f;
+    private float arrowShotTimer = 0f, dialogueTimer = 10f;
     private GameObject guardPortal, puzzleBase;
 
-    private bool dialogueTriggered = false;
+    private bool temp = false, dialogueTriggered = false;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -29,6 +29,19 @@ public class FlyEliteEnemy : EnemyBehavior
         initialpos = transform.localPosition;
         initialright = transform.right;
         dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
+    }
+    protected override void Update()
+    {
+        base.Update();
+        if (temp)
+        {
+            dialogueTimer += Time.deltaTime;
+            if (dialogueTimer >= 2f)
+            {
+                dialogueTriggered = true;
+            }
+        }
+
     }
     override protected void patrolBehavior()
     {
@@ -86,18 +99,22 @@ public class FlyEliteEnemy : EnemyBehavior
         {
             puzzleBase.GetComponent<PuzzleControl>().setPuzzleOpen(true);
             transform.GetChild(2).GetComponent<Renderer>().enabled = true;
-            dialogueRunner.Stop();
-            if (!dialogueTriggered)
+            if (dialogueTimer >= 5f)
             {
-                dialogueRunner.StartDialogue("Elite2Friendly");
-                if (targetHero.GetComponent<EndingJudgement>().usedCount != 0)
+                dialogueRunner.Stop();
+                if (!dialogueTriggered)
                 {
-                    Invoke("Bonus", 5);
+                    dialogueRunner.StartDialogue("Elite2Friendly");
+                    if (targetHero.GetComponent<EndingJudgement>().usedCount != 0)
+                    {
+                        Invoke("Bonus", 5);
+                    }
+                    temp = true;
                 }
-
+                else
+                    dialogueRunner.StartDialogue("Elite2Friendly2");
+                dialogueTimer = 0f;
             }
-            else
-                dialogueRunner.StartDialogue("Elite2Friendly2");
 
         }
     }
@@ -161,11 +178,13 @@ public class FlyEliteEnemy : EnemyBehavior
     {
         if (Jp)
         {
-            dialogueRunner.Stop();
-            dialogueRunner.StartDialogue("Elite2PuzzleSolved");
             Jp.SetActive(true);
         }
         targetHero.GetComponent<EndingJudgement>().f2 = true;
+        dialogueRunner.Stop();
+        dialogueRunner.StartDialogue("Elite2PuzzleSolved");
+        muim = GameObject.Find("UImanager");
+        muim.GetComponent<coincontrol>().earn(1000);
         Destroy(guardPortal.gameObject);
     }
 

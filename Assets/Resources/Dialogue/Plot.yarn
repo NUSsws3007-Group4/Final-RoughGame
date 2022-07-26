@@ -32,12 +32,20 @@ title: Climb
 Bridgett: To high...
 Bridgett: But maybe I can climb up.
 Stick to the ladder and use W/S to move up and down.
+Bridgett: Ah... Disgusting mucus...
 ===
 
 title: DoubleJump
 ---
 Bridgett: Double jump, interesting.
 Bridgett: I'll use it to go straight westwards.
+===
+
+title: Merchant
+---
+Merchant: Wanna trade?
+Merchant: Come on, I'm waiting for you.
+Approach a merchant and press E to trade.
 ===
 
 title: FriendlyAttacked
@@ -117,6 +125,12 @@ Neve: But, as the last guard, I can't let you get through too easily.
 Neve: Go up and find your way to the portal.
 ===
 
+title: Elite3Friendly2
+---
+Neve: Have you found your way?
+Neve: I'm looking forward to your performance.
+===
+
 title: Elite3AllowPass
 ---
 Neve: Extraordinary performance...
@@ -128,6 +142,12 @@ You got a fragment of the rune.
 title: Elite3Defeated
 ---
 Neve: Wonderful battle...
+You got a fragment of the rune.
+===
+
+title: Elite3Defeated2
+---
+Neve: ...
 You got a fragment of the rune.
 ===
 
