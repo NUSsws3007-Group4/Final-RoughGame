@@ -14,12 +14,16 @@ public class EndingJudgement : MonoBehaviour
     public GameObject cover;
     public Color c;
     public float status;
+    public GameObject e0, e1, e2;
 
     void Start()
     {
         dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
         cover.GetComponent<CanvasGroup>().alpha = 0;
         cover.SetActive(false);
+        e0.SetActive(false);
+        e1.SetActive(false);
+        e2.SetActive(false);
     }
     void Update()
     {
@@ -53,6 +57,21 @@ public class EndingJudgement : MonoBehaviour
             if (cover.GetComponent<CanvasGroup>().alpha <= 1)
             {
                 cover.GetComponent<CanvasGroup>().alpha += 0.3f * Time.deltaTime;
+            }
+        }
+        if (status == 5)
+        {
+            switch (ending)
+            {
+                case 0:
+                    e0.SetActive(true);
+                    break;
+                case 1:
+                    e1.SetActive(true);
+                    break;
+                case 2:
+                    e2.SetActive(true);
+                    break;
             }
         }
     }
