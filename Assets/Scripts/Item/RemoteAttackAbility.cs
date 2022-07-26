@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class RemoteAttackAbility : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class RemoteAttackAbility : MonoBehaviour
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            DialogueRunner dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
+            dialogueRunner.Stop();
+            dialogueRunner.StartDialogue("RemoteAttack");
             other.gameObject.GetComponent<HeroRemoteAttack>().remoteAttackEnable = true;
             Destroy(transform.gameObject);
         }
