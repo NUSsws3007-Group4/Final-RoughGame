@@ -41,7 +41,8 @@ public class AudioManager : MonoBehaviour
     }
     public void audioAttack()
     {
-        PlayAudio("Hero/swordAttacking");
+        int i = Random.Range(1, 6);
+        PlayAudio("Hero/sword_"+i);
     }
     public void audioSkill()
     {
