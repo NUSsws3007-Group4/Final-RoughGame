@@ -505,7 +505,6 @@ GameObject:
   - component: {fileID: 1918388493}
   - component: {fileID: 1918388486}
   - component: {fileID: 1918388485}
-  - component: {fileID: 7579150170869993866}
   m_Layer: 8
   m_Name: hero
   m_TagString: Player
@@ -631,7 +630,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 1.3}
+  m_Size: {x: 0.69, y: 1.32}
   m_EdgeRadius: 0
 --- !u!114 &4268124987306695003
 MonoBehaviour:
@@ -685,19 +684,11 @@ MonoBehaviour:
   mUIManager: {fileID: 0}
   mybagmanager: {fileID: 0}
   mystoremanager: {fileID: 0}
-  bloodflask: {fileID: 11400000, guid: bf32a22fca0135a4aaf570e80800e967, type: 2}
-  energyflask: {fileID: 11400000, guid: 338cf03521332bd4e828d54dee60de75, type: 2}
-  friendshipflask: {fileID: 11400000, guid: 4e5c073e0ce164c4b9bee43eaa04bcc3, type: 2}
-  emptyflask: {fileID: 11400000, guid: eceadc21bc92283478b21174a6eb50bb, type: 2}
-  diamond: {fileID: 11400000, guid: 762491ef494ddb44eb53e920bafc1456, type: 2}
-  powerrune: {fileID: 11400000, guid: 9d21e728575d6ac43ab9f10967742b8b, type: 2}
-  cooldownrune: {fileID: 11400000, guid: 59458a3f6b3e03d45bd05960f201be35, type: 2}
-  robustrune: {fileID: 11400000, guid: dbd61ffae289c7b4790c532d8f5d37cd, type: 2}
-  energyrune: {fileID: 11400000, guid: 6ba13a32d701583489e3151a3486fb30, type: 2}
-  key: {fileID: 11400000, guid: 3130ac012fa7cfb4fbfe99f1696be030, type: 2}
-  ragepotion: {fileID: 11400000, guid: adc178e29fb7bdc41805ce18ae15435a, type: 2}
-  soulpotion: {fileID: 11400000, guid: e92059a202c5b3a4f97c3362c22332b1, type: 2}
-  defencepotion: {fileID: 11400000, guid: 377c754aacb35844aaf536d92838fb37, type: 2}
+  muim: {fileID: 0}
+  runoutH: {fileID: 0}
+  runoutE: {fileID: 0}
+  fullblood: {fileID: 0}
+  fullenergy: {fileID: 0}
 --- !u!114 &1918388491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,18 +845,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c679c861d9f0a649a231a072d03e5c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7579150170869993866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4268124987306694998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3422f382184b140a8f65007003aa4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6351141744593980764
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,6 +857,7 @@ GameObject:
   - component: {fileID: 2001820528498314275}
   - component: {fileID: 8200772898039395001}
   - component: {fileID: 7747212597512495752}
+  - component: {fileID: 9222472961307388076}
   m_Layer: 19
   m_Name: ChargeAttackIndicator
   m_TagString: Untagged
@@ -989,3 +969,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9222472961307388076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351141744593980764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3422f382184b140a8f65007003aa4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

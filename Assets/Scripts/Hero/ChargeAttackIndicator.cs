@@ -18,7 +18,7 @@ public class ChargeAttackIndicator : MonoBehaviour
 
     void Update()
     {
-        gameObject.transform.parent.GetComponent<HeroAttackHurt>().hurt = 25 + extraATKFromCharge;//融合蓄力攻击基数
+        transform.parent.GetComponent<HeroAttackHurt>().hurt = 25 + extraATKFromCharge;//融合蓄力攻击基数
 
         attackTimer += Time.deltaTime;
         if(attackTimer >= normalAttackColdDown)
