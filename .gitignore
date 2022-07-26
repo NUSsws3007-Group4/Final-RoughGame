@@ -21,5 +21,5 @@ Assembly-CSharp.csproj
 !/Packages/manifest.json
 /Web
 !/Library/PackageCache
-/Library/PackageCache/*
-!/Library/PackageCache/dev.yarnspinner.unity@2.2.1/*
+/Library/PackageCache/**/
+!/Library/PackageCache/dev.yarnspinner.unity@2.2.1
