@@ -125,6 +125,12 @@ Neve: But, as the last guard, I can't let you get through too easily.
 Neve: Go up and find your way to the portal.
 ===
 
+title: Elite3Friendly2
+---
+Neve: Have you found your way?
+Neve: I'm looking forward to your performance.
+===
+
 title: Elite3AllowPass
 ---
 Neve: Extraordinary performance...
@@ -136,6 +142,12 @@ You got a fragment of the rune.
 title: Elite3Defeated
 ---
 Neve: Wonderful battle...
+You got a fragment of the rune.
+===
+
+title: Elite3Defeated2
+---
+Neve: ...
 You got a fragment of the rune.
 ===
 

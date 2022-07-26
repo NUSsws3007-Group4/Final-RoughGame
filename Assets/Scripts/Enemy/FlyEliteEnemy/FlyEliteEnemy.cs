@@ -183,6 +183,8 @@ public class FlyEliteEnemy : EnemyBehavior
         targetHero.GetComponent<EndingJudgement>().f2 = true;
         dialogueRunner.Stop();
         dialogueRunner.StartDialogue("Elite2PuzzleSolved");
+        muim = GameObject.Find("UImanager");
+        muim.GetComponent<coincontrol>().earn(1000);
         Destroy(guardPortal.gameObject);
     }
 

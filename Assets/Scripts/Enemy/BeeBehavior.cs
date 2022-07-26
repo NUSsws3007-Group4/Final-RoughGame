@@ -70,7 +70,6 @@ public class BeeBehavior : MonoBehaviour
         Vector3 rushVector = targetPos - transform.position;
         rushVector.z = 0f;
         transform.right = rushVector;
-
         transform.position += transform.right * Time.smoothDeltaTime * beeSpeed;
     }
 
