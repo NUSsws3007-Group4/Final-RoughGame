@@ -212,6 +212,33 @@ public class EliteEnemyBehavior : EnemyBehavior
             }
             Debug.Log("Life:" + mLifeLeft);
         }
+        if(collision.gameObject.layer == LayerMask.NameToLayer("RemoteAttack"))
+        {
+            anim.SetBool("Attacked", true);
+            if (!edgeTouched)
+            {
+                mRigidbody.velocity = new Vector3(0, 0, 0);
+                mRigidbody.AddForce(-100 * transform.right);
+            }
+            mLifeLeft -= targetHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                         targetHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
+            switch (mFriendshipStatus)
+            {
+                case 2:
+                    mLifeLeft -= targetHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                                 targetHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef *
+                                (multiplication - 1);
+                    mFriendshipStatus = 1;
+                    targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
+                    if (frienshipAdded)
+                        targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(friendshipAddValue);
+                    break;
+                case 1:
+                    mFriendshipStatus = -1;
+                    targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
+                    break;
+            }
+        }
     }
 
     protected override void Respawn()
