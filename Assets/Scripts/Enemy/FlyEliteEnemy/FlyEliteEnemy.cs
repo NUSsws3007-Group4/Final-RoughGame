@@ -119,6 +119,11 @@ public class FlyEliteEnemy : EnemyBehavior
 
     protected override void Death()
     {
+        GameObject Jp;
+        if (Jp = GameObject.Find("jumppad"))
+        {
+            Jp.SetActive(true);
+        }
         Destroy(guardPortal.gameObject);
         base.Death();
     }
