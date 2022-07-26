@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwitchBehavior : MonoBehaviour
 {
+    public Sprite N, E;
     public int switchCode1, switchCode2, switchCode3;
     public RockBehavior con;
     bool isStay = false;
@@ -16,7 +17,18 @@ public class SwitchBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isStay&& Input.GetKeyDown(KeyCode.E))
+        if (N&&E)
+        { 
+            if (isStay)
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = E;
+            }
+            else
+            {
+                gameObject.GetComponent<SpriteRenderer>().sprite = N;
+            }
+        }
+        if (isStay && Input.GetKeyDown(KeyCode.E))
         {
             con.switchLst[switchCode1] = !con.switchLst[switchCode1];
             con.switchLst[switchCode2] = !con.switchLst[switchCode2];
