@@ -16,6 +16,9 @@ public class TreeManBehavior : MonoBehaviour
     private RaycastHit2D info;
     private Animator anim;
     private bool isactive = true;
+    private bool dropped=false;
+    private GameObject dropitem;
+    private GameObject muim;
 
     public int nowATK = 10;
     private float atkTimer = 0f;
@@ -95,6 +98,34 @@ public class TreeManBehavior : MonoBehaviour
     private void Death()
     {
         Destroy(transform.gameObject);
+
+        if(dropped) return;
+        dropped=true;
+        float rn=Random.Range(0f,5f);
+        if(rn<1f)
+        {
+            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/bloodflask") as GameObject);
+        }
+        else if(rn<2f)
+        {
+            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/energyflask") as GameObject);
+        }
+        else if(rn<3f)
+        {
+            dropitem=Instantiate(Resources.Load("Prefabs/dropitems/diamond") as GameObject);
+        }
+        else
+        {
+            muim=GameObject.Find("UImanager");
+            int mon=(int)(Random.Range(20,60));
+            muim.GetComponent<coincontrol>().earn(mon);
+        }
+        if(rn<3)
+        {
+            Vector3 newpos=transform.position;
+            newpos.y+=1;
+            dropitem.transform.position=newpos;
+        }
     }
 
     private void Respawn()
@@ -140,6 +171,13 @@ public class TreeManBehavior : MonoBehaviour
             targetHero.gameObject.GetComponent<HeroBehavior>().upFriendship(friendshipAddValue);
             frienshipAdded = true;
             transform.GetChild(1).GetComponent<Renderer>().enabled = true;
+            if(!dropped)
+            {
+                dropped=true;
+                muim=GameObject.Find("UImanager");
+                int mon=(int)(Random.Range(30,60));
+                muim.GetComponent<coincontrol>().earn(mon);
+            }
         }
         attackedTimer = 0.5f;
         mRigidbody.velocity = new Vector3(0, 0, 0);

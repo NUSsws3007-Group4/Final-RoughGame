@@ -15,6 +15,9 @@ public class BeeBehavior : MonoBehaviour
     private Animator anim;
     private float beeSpeed = 5f;
     private float patrolSpeed = 4f;
+    private GameObject muim;
+    private bool dropped=false;
+
     private void Start() 
     {
         anim = GetComponent<Animator>();
@@ -100,6 +103,13 @@ public class BeeBehavior : MonoBehaviour
     private void Suicide()
     {
         Destroy(transform.gameObject);
+        if(!dropped)
+        {
+            dropped=true;
+            muim=GameObject.Find("UImanager");
+            int mon=(int)(Random.Range(30,60));
+            muim.GetComponent<coincontrol>().earn(mon);
+        }
     }
     
 }

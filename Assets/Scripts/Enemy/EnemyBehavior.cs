@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class EnemyBehavior : MonoBehaviour
     protected bool isactive=true;
     private GameObject muim;
     private GameObject dropitem;
+    private bool dropped=false;
 
     protected virtual void Start()
     {
@@ -107,6 +109,8 @@ public class EnemyBehavior : MonoBehaviour
     protected virtual void Death()
     {
         Destroy(transform.gameObject);
+        if(dropped) return;
+        dropped=true;
         float rn=Random.Range(0f,5f);
         if(rn<1f)
         {
@@ -169,6 +173,7 @@ public class EnemyBehavior : MonoBehaviour
             }
         }
     }
+
     protected virtual void friendlyBehavior()
     {
         distance = Vector3.Distance(pos, targetpos);
@@ -181,10 +186,18 @@ public class EnemyBehavior : MonoBehaviour
             targetHero.gameObject.GetComponent<HeroBehavior>().upFriendship(friendshipAddValue);
             frienshipAdded = true;
             transform.GetChild(1).GetComponent<Renderer>().enabled = true;
+            if(!dropped)
+            {
+                dropped=true;
+                muim=GameObject.Find("UImanager");
+                int mon=(int)(Random.Range(30,60));
+                muim.GetComponent<coincontrol>().earn(mon);
+            }
         }
         attackedTimer = 0.5f;
         mRigidbody.velocity = new Vector3(0, 0, 0);
     }
+
     protected virtual void chaseBehavior()
     {
         if (targetHero.GetComponent<HeroBehavior>().IsRespawned())
