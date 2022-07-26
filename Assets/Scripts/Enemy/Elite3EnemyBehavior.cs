@@ -7,7 +7,7 @@ public class Elite3EnemyBehavior : EnemyBehavior
     private float cx1, cx2, cy1, cy2;
     private Vector3 spawnPoint;
     private GameObject guardPortal;
-    private GameObject dropitem;
+    //private GameObject dropitem;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -128,6 +128,8 @@ public class Elite3EnemyBehavior : EnemyBehavior
     {
         guardPortal.SetActive(true);
         Destroy(transform.gameObject);
+        if(dropped) return;
+        dropped=true;
         float rn=Random.Range(0f,3f);
         if(rn<1f)
         {

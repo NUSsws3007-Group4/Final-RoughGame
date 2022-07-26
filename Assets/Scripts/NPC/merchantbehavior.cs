@@ -43,10 +43,10 @@ public class merchantbehavior : MonoBehaviour
         {
             stg.canopenstore=true;
             bg.cansell=true;
-            if(flag)
+            if(flag && dialoguebox!=null)
             {
                 flag=false;
-                if(dialoguebox!=null) dialoguebox.SetActive(true);
+                dialoguebox.SetActive(true);
                 cm.startfocus(gameObject,3f,dialoguebox);
             }
         }

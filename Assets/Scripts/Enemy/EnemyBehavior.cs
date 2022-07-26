@@ -18,9 +18,11 @@ public class EnemyBehavior : MonoBehaviour
     protected RaycastHit2D info;
     protected Animator anim;
     protected bool isactive = true;
+
     protected GameObject muim;
-    private GameObject dropitem;
-    private bool dropped = false;
+    protected GameObject dropitem;
+    protected bool dropped = false;
+    
     protected DialogueRunner dialogueRunner;
 
     protected virtual void Start()
