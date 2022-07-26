@@ -7,6 +7,8 @@ using Yarn.Unity;
 public class HeroBehavior : MonoBehaviour
 {
     public Text text;
+    public bool withFlame = false;
+
     private float attackCD = 1.0f;
     public void settestui()
     {
