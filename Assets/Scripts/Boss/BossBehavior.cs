@@ -137,9 +137,15 @@ public class BossBehavior : MonoBehaviour
                 if (triggered0 && triggered1)
                 {
                     triggered0 = false;
+                    dialogueRunner.Stop();
+                    dialogueRunner.StartDialogue("Phase1Beaten");
                 }
             }//打斗线 打第一阶段
         }
+        if (status == 2f){
+            nextStage.SetActive(true);
+        }
+
     }
 
     private void PhaseOne()//有护盾阶段 不移动
@@ -188,8 +194,6 @@ public class BossBehavior : MonoBehaviour
             bossHP = bossHP > damage ? bossHP - damage : 0;
         }
         Debug.Log(bossShield + " " + bossHP);
-        if (bossHP <= 0)
-            BossDeath();
     }
 
     private void BossDeath()
