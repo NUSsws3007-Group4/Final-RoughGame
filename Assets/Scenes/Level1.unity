@@ -16688,6 +16688,10 @@ PrefabInstance:
       propertyPath: bg
       value: 
       objectReference: {fileID: 5466738979801191581}
+    - target: {fileID: 1918388497, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
+      propertyPath: mEnegyBarManager
+      value: 
+      objectReference: {fileID: 1875227795}
     - target: {fileID: 4268124987306694998, guid: 6368e1522e70a2a47b2d992463026d51, type: 3}
       propertyPath: m_Name
       value: hero
@@ -45325,6 +45329,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6442757998943169324, guid: 772c6f0d6a3c56842bd406c5ad505081, type: 3}
   m_PrefabInstance: {fileID: 1115318625}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1875227795 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6442757998943169326, guid: 772c6f0d6a3c56842bd406c5ad505081, type: 3}
+  m_PrefabInstance: {fileID: 1115318625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875227784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1bad4db1f834e46a6126990420cad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1882101984
 GameObject:
   m_ObjectHideFlags: 0
