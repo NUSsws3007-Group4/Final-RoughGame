@@ -9,7 +9,6 @@ public class EliteEnemyBehavior : EnemyBehavior
     private Vector3 spawnPoint;
     private GameObject guardPortal;
     private bagmanager bgm;
-    private DialogueRunner dialogueRunner;
     private bool dialogueTriggered = false;
     // Start is called before the first frame update
     protected override void Start()
@@ -28,7 +27,6 @@ public class EliteEnemyBehavior : EnemyBehavior
         initialright = transform.right;
         bgm = GameObject.Find("Canvas").GetComponent<bagmanager>();
         guardPortal.SetActive(false);
-        dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
 
     protected override void attackedBehavior()

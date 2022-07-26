@@ -21,7 +21,7 @@ public class EnemyBehavior : MonoBehaviour
     private GameObject muim;
     private GameObject dropitem;
     private bool dropped = false;
-    private DialogueRunner dialogueRunner;
+    protected DialogueRunner dialogueRunner;
 
     protected virtual void Start()
     {
