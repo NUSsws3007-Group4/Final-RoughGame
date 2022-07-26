@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class PuzzleControl : MonoBehaviour
 {
+    private bool firstOn = true;
     public Camera cam;
     private bool puzzleEnabled = false;
     private GameObject muim;
@@ -39,6 +41,13 @@ public class PuzzleControl : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") && puzzleEnabled)
         {
+            if(firstOn)
+            {
+                firstOn = false;
+                DialogueRunner dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
+                dialogueRunner.Stop();
+                dialogueRunner.StartDialogue("PuzzleSolving");
+            }
             Vector2 colliNormal = collision.contacts[0].normal;
             if (colliNormal.y < -0.9f)
             {
