@@ -12,7 +12,7 @@ public class BossBehavior : MonoBehaviour
     private int iceThornNum = 0;//冰刺数目产生
     private float iceThornTimer = 0f;//冰刺攻击间隔计数器
     private float iceThornInterval = 0f;//冰刺攻击间隔设置
-    private bool coldnessProduce = false;//是否开始产生寒冷值
+    //private bool coldnessProduce = false;//是否开始产生寒冷值
     private float distanceToPlayer = 0f;//Boss和Player之间的距离
     private float iceCrystalTimer = 0f;//冰棱攻击间隔计数器
     private float barrageTimer = 0f;//弹幕攻击计数器
@@ -23,13 +23,14 @@ public class BossBehavior : MonoBehaviour
     private float reviveTimer = 0f;//重生计数器
     private List<Vector3> iceThornPos = new List<Vector3>();//开设冰刺位置数组
     
-    
-    public int playerAttackDamage = GameObject.Find("hero").GetComponent<HeroBehavior>().ATK;/*调用player攻击力*/
+    private int playerAttackDamage = 0;
+
+    private GameObject mHero;
     public Transform playerTransform;
 
     void Start()
     {
-        
+        mHero = GameObject.Find("hero");
     }
 
     void Update()
@@ -69,7 +70,7 @@ public class BossBehavior : MonoBehaviour
 
     private void PhaseTwo()//无护盾 移动阶段
     {
-        coldnessProduce = true;//开始产生寒冷值
+        //coldnessProduce = true;//开始产生寒冷值
         playerTransform = GameObject.Find("hero").transform;//取出player.transform
         distanceToPlayer = CalDistanceToPlayer();//计算距离以判定冰棱攻击
 
@@ -259,21 +260,29 @@ public class BossBehavior : MonoBehaviour
         transform.localPosition = p;
     }
 
-    public bool IsColdnessProduced()//寒冷值接口
-    {
-        return coldnessProduce;
-    }
+    // public bool IsColdnessProduced()//寒冷值接口
+    // {
+    //     return coldnessProduce;
+    // }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))//受到攻击
+        if(collision.gameObject.layer == LayerMask.NameToLayer("PlayerBullet"))//受到近战攻击
         {
-            if(GameObject.Find("Hero").GetComponent<HeroBehavior>().isFlameEnchanted)
+            if(mHero.gameObject.GetComponent<HeroBehavior>().withFlame)
             {
                 stopReviveTag = true;
                 isFlameAttack = true;
                 flameAttackTimer = 0f;
             }
-            
+            playerAttackDamage =  mHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                                  mHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
+
+            BossHurt(playerAttackDamage);//伤害结算       
+        }
+        if(collision.gameObject.layer == LayerMask.NameToLayer("RemoteAttack"))//受到远程攻击 不算火焰攻击
+        {
+            playerAttackDamage =  mHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                                  mHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
             BossHurt(playerAttackDamage);//伤害结算       
         }
     }
