@@ -176,8 +176,34 @@ public class Elite3EnemyBehavior : EnemyBehavior
                         attackBehavior();
                     break;
             }
-            Debug.Log("Life:" + mLifeLeft);
         }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("RemoteAttack"))
+        {
+            anim.SetBool("Attacked", true);
+            mRigidbody.velocity = new Vector3(0, 0, 0);
+            mRigidbody.AddForce(-100 * transform.right);
+            mLifeLeft -= targetHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                         targetHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
+            switch (mFriendshipStatus)
+            {
+                case 2:
+                    for (int i = 0; i < multiplication - 1; ++i)
+                       mLifeLeft -= targetHero.gameObject.GetComponent<HeroAttackHurt>().hurt *
+                                    targetHero.gameObject.GetComponent<HeroAttackHurt>().powerUpCoef;
+                    mFriendshipStatus = 1;
+                    targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
+                    if (frienshipAdded)
+                        targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(friendshipAddValue);
+                    break;
+                case 1:
+                    mFriendshipStatus = -1;
+                    targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
+                    for (int i = 0; i < multiplication + 1; ++i)
+                        attackBehavior();
+                    break;
+            }
+        }
+        
     }
 
     protected override void Respawn()
