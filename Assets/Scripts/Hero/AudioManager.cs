@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroAudioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     AudioSource speaker;
     // Start is called before the first frame update
@@ -16,29 +16,35 @@ public class HeroAudioManager : MonoBehaviour
     {
         
     }
-    private void play(string _path)
+    /// <summary>
+    /// 播放Resources/Audio下声音
+    /// </summary>
+    /// <param name="_path">
+    /// 在Audio下路径以及文件名
+    /// </param>
+    public void PlayAudio(string _path)
     {
         if(!speaker.isPlaying)
         {
-            speaker.clip = Resources.Load<AudioClip>("Audio/Hero/"+ _path);
+            speaker.clip = Resources.Load<AudioClip>("Audio/"+ _path);
             speaker.Play();
         }
     }
     public void audioJump()
     {
-        play("juming");
+        PlayAudio("Hero/juming");
 
     }
     public void audioHurt()
     {
-        play("attacked");
+        PlayAudio("Hero/attacked");
     }
     public void audioAttack()
     {
-        play("swordAttacking");
+        PlayAudio("Hero/swordAttacking");
     }
     public void audioSkill()
     {
-        play("skillAttacking");
+        PlayAudio("Hero/skillAttacking");
     }
 }

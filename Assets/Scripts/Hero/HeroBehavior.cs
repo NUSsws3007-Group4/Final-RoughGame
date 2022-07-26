@@ -122,7 +122,7 @@ public class HeroBehavior : MonoBehaviour
     ///</summary>
     private Rigidbody2D mRigidbody;
     public bloodbarcontrol mHealth;
-    private HeroAudioManager mAudio;
+    private AudioManager mAudio;
     private DialogueRunner dialogueRunner;
 
 
@@ -241,7 +241,7 @@ public class HeroBehavior : MonoBehaviour
     ///</summary>
     void Start()
     {
-        mAudio = gameObject.GetComponent<HeroAudioManager>();
+        mAudio = gameObject.GetComponent<AudioManager>();
         mAcceleration = mAccelerationDefault;
         mMaxSpeed = mMaxSpeedDefault;
         smoothmove = false;
