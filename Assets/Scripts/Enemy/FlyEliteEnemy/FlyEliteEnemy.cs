@@ -46,7 +46,6 @@ public class FlyEliteEnemy : EnemyBehavior
     override protected void patrolBehavior()
     {
         anim.SetBool("FlyEliteIdle", true);
-        transform.GetChild(2).GetComponent<Renderer>().enabled = false;
         puzzleBase.GetComponent<PuzzleControl>().setPuzzleOpen(false);
         base.patrolBehavior();
     }
@@ -98,7 +97,6 @@ public class FlyEliteEnemy : EnemyBehavior
         if (distance < detectDistance)
         {
             puzzleBase.GetComponent<PuzzleControl>().setPuzzleOpen(true);
-            transform.GetChild(2).GetComponent<Renderer>().enabled = true;
             if (dialogueTimer >= 5f)
             {
                 dialogueRunner.Stop();
@@ -138,13 +136,13 @@ public class FlyEliteEnemy : EnemyBehavior
 
     protected override void attackedBehavior()
     {
-        transform.GetChild(3).gameObject.SetActive(true);
+        transform.GetChild(2).gameObject.SetActive(true);
         attackedTimer -= Time.deltaTime;
         if (attackedTimer <= 0)
         {
             attackedTimer = 0.5f;
             anim.SetBool("Attacked", false);
-            transform.GetChild(3).gameObject.SetActive(false);
+            transform.GetChild(2).gameObject.SetActive(false);
             if (mLifeLeft <= 0)
                 Death();
         }
