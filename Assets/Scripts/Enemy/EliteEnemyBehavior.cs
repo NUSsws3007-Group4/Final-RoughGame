@@ -241,10 +241,17 @@ public class EliteEnemyBehavior : EnemyBehavior
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
                         targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(friendshipAddValue);
+                    dialogueRunner.Stop();
+                    dialogueRunner.StartDialogue("FriendlyAttacked");
                     break;
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
+                    if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
+                    {
+                        targetHero.GetComponent<EndingJudgement>().attackFriends = true;
+                        targetHero.GetComponent<HeroBehavior>().setFriendship(-6666);
+                    }
                     break;
             }
         }

@@ -131,12 +131,18 @@ public class EnemyBehavior : MonoBehaviour
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(10);
                     if (frienshipAdded)
                         targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(friendshipAddValue);
+                    dialogueRunner.Stop();
+                    dialogueRunner.StartDialogue("FriendlyAttacked");
                     break;
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
-                    for (int i = 0; i < multiplication + 1; ++i)
-                        attackBehavior();
+                    attackBehavior();
+                    if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
+                    {
+                        targetHero.GetComponent<EndingJudgement>().attackFriends = true;
+                        targetHero.GetComponent<HeroBehavior>().setFriendship(-6666);
+                    }
                     break;
             }
             Debug.Log("Life:" + mLifeLeft);
