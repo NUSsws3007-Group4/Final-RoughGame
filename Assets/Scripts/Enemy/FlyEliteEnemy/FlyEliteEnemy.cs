@@ -122,8 +122,12 @@ public class FlyEliteEnemy : EnemyBehavior
         Destroy(guardPortal.gameObject);
         base.Death();
     }
-    public void AllowPass()
+    public void AllowPass(GameObject Jp = null)
     {
+        if(Jp)
+        {
+            Jp.SetActive(true);
+        }
         Destroy(guardPortal.gameObject);
     }
 

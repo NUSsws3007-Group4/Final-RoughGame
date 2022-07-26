@@ -41,11 +41,10 @@ public class RockBehavior : MonoBehaviour
         {
             solved = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = triggered;
-            elite.GetComponent<FlyEliteEnemy>().AllowPass();
+            elite.GetComponent<FlyEliteEnemy>().AllowPass(JumpPad);
             puzzlebase.GetComponent<PuzzleControl>().setPuzzleOpen(false);
             foreach (Transform i in transform)
             {
-                JumpPad.SetActive(true);
                 i.gameObject.SetActive(false);
             }
         }
