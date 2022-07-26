@@ -103,6 +103,7 @@ public class EnemyBehavior : MonoBehaviour
                     break;
                 case 1:
                     mFriendshipStatus = -1;
+                    patrol=false;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
                     attackBehavior();
                     if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
