@@ -16,7 +16,7 @@ public class Protal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mInProtal || Input.GetKeyDown(KeyCode.E))
+        if (mInProtal && Input.GetKeyDown(KeyCode.E))
         {
             Debug.LogWarning("Loading: " + nextLevel);
             DontDestroyOnLoad(GameObject.Find("KeepInTransfer"));
