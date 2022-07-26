@@ -107,6 +107,8 @@ public class EnemyBehavior : MonoBehaviour
                     mFriendshipStatus = -1;
                     patrol=false;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
+                    transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+                    transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                     attackBehavior();
                     if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
                     {
@@ -140,6 +142,8 @@ public class EnemyBehavior : MonoBehaviour
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
+                    transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+                    transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                     attackBehavior();
                     if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
                     {

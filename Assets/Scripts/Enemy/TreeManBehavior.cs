@@ -93,6 +93,8 @@ public class TreeManBehavior : MonoBehaviour
                     break;
                 case 1:
                     mFriendshipStatus = -1;
+                    transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+                    transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                     patrol = false;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
                     attackBehavior();
@@ -129,6 +131,9 @@ public class TreeManBehavior : MonoBehaviour
                 case 1:
                     mFriendshipStatus = -1;
                     targetHero.gameObject.GetComponent<HeroBehavior>().downFriendship(mFriendshipRequired);
+                    transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+                    transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                    patrol = false;
                     attackBehavior();
                     if (++targetHero.GetComponent<EndingJudgement>().friendAttacked >= 5)
                     {
