@@ -93,6 +93,7 @@ public class TreeManBehavior : MonoBehaviour
             }
             Debug.Log("Life:" + mLifeLeft);
         }
+        
         if (collision.gameObject.layer == LayerMask.NameToLayer("RemoteAttack"))
         {
             anim.SetBool("Attacked", true);
@@ -229,7 +230,8 @@ public class TreeManBehavior : MonoBehaviour
 
             if (attackTimer >= 1.0f)
             {
-                attackBehavior();
+                anim.SetTrigger("Attacking");
+                Invoke("attackBehavior",0.4f);
                 attackTimer = 0f;
             }
 
