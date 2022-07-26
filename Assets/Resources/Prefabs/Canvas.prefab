@@ -6419,6 +6419,10 @@ MonoBehaviour:
   ragepotion: {fileID: 11400000, guid: adc178e29fb7bdc41805ce18ae15435a, type: 2}
   soulpotion: {fileID: 11400000, guid: e92059a202c5b3a4f97c3362c22332b1, type: 2}
   defencepotion: {fileID: 11400000, guid: 377c754aacb35844aaf536d92838fb37, type: 2}
+  scroll1: {fileID: 11400000, guid: f7d8599cf62cbeb45b0f34f164218318, type: 2}
+  scroll2: {fileID: 11400000, guid: 33779f3fffba7364a903649995575e2d, type: 2}
+  scroll3: {fileID: 11400000, guid: 945c052bf97827147ad3ad957b5ce88e, type: 2}
+  finalscroll: {fileID: 11400000, guid: d984af90eec8b7c4aa4021d43ea11f72, type: 2}
   mybagUI: {fileID: 7726711330274059232}
   slotgrid: {fileID: 7726711329789271491}
   muim: {fileID: 0}

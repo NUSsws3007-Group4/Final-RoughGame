@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class bagmanager : MonoBehaviour
 {
     //all items
-    public itemstruct bloodflask, energyflask, diamond, friendshipflask, emptyflask, powerrune, cooldownrune, robustrune, energyrune, key, ragepotion, soulpotion, defencepotion;
+    public itemstruct bloodflask, energyflask, diamond, friendshipflask, emptyflask, powerrune, cooldownrune, robustrune, energyrune, key, ragepotion, soulpotion, defencepotion,scroll1,scroll2,scroll3,finalscroll;
 
     public GameObject mybagUI = null; //UI
     public GameObject slotgrid; //itemlistUI
@@ -89,8 +89,8 @@ public class bagmanager : MonoBehaviour
                 if (item.itemnum == 0)
                 {
                     Destroy(child.gameObject);
-                    myitemlist.itemlist.Remove(nowselecteditem);
-                    nowselecteditem = null;
+                    myitemlist.itemlist.Remove(item);
+                    //nowselecteditem = null;
                     discardbutton.interactable = false;
                     usebutton.interactable = false;
                     updateinfo("", "");
@@ -118,8 +118,8 @@ public class bagmanager : MonoBehaviour
         {
             case "[Potion]":
                 {
-                    useimage.gameObject.SetActive(true);
-                    sellimage.gameObject.SetActive(false);
+                    //useimage.gameObject.SetActive(true);
+                    //sellimage.gameObject.SetActive(false);
                     switch (nowselecteditem.itemname)
                     {
                         case "Healing Potion":
@@ -197,36 +197,44 @@ public class bagmanager : MonoBehaviour
                 }
             case "[Treasure]":
                 {
-                    useimage.gameObject.SetActive(false);
-                    sellimage.gameObject.SetActive(true);
+                    //useimage.gameObject.SetActive(false);
+                    //sellimage.gameObject.SetActive(true);
                     usebutton.interactable = cansell;
                     discardbutton.interactable = true;
                     break;
                 }
             case "[Scrap]":
                 {
-                    useimage.gameObject.SetActive(false);
-                    sellimage.gameObject.SetActive(true);
+                    //useimage.gameObject.SetActive(false);
+                    //sellimage.gameObject.SetActive(true);
                     usebutton.interactable = cansell;
                     discardbutton.interactable = true;
                     break;
                 }
             case "[Rune]":
                 {
-                    useimage.gameObject.SetActive(true);
-                    sellimage.gameObject.SetActive(false);
+                    //useimage.gameObject.SetActive(true);
+                    //sellimage.gameObject.SetActive(false);
                     usebutton.interactable = false;
                     discardbutton.interactable = false;
                     break;
                 }
             case "[Prop]":
                 {
-                    useimage.gameObject.SetActive(true);
-                    sellimage.gameObject.SetActive(false);
+                    //useimage.gameObject.SetActive(true);
+                    //sellimage.gameObject.SetActive(false);
                     usebutton.interactable = nearthedoor;
                     discardbutton.interactable = true;
                     break;
                 }
+            case "[Relic]":
+            {
+                //useimage.gameObject.SetActive(true);
+                //sellimage.gameObject.SetActive(false);
+                usebutton.interactable = false;
+                discardbutton.interactable = true;
+                break;
+            }
         }
     }
 
@@ -260,6 +268,7 @@ public class bagmanager : MonoBehaviour
 
     public void useitem()
     {
+        if(nowselecteditem==null) return;
         switch (nowselecteditem.itemname)
         {
             case "Healing Potion":
@@ -363,7 +372,8 @@ public class bagmanager : MonoBehaviour
 
     public void pickupitem(itemstruct newitem)
     {
-        Debug.Log(newitem.itemname);
+        //Debug.Log(newitem.itemname);
+        if(newitem==null) return;
         if (!myitemlist.itemlist.Contains(newitem))
         {
             newitem.itemnum = 1;
@@ -374,6 +384,20 @@ public class bagmanager : MonoBehaviour
             newitem.itemnum++;
             refreshitem(newitem);
         }
+        if(newitem==scroll1 || newitem==scroll2 || newitem==scroll3)
+        {
+            if(myitemlist.itemlist.Contains(scroll1) && myitemlist.itemlist.Contains(scroll2) && myitemlist.itemlist.Contains(scroll3))
+            {
+                scroll1.itemnum=0;
+                scroll2.itemnum=0;
+                scroll3.itemnum=0;
+                refreshitem(scroll1);
+                refreshitem(scroll2);
+                refreshitem(scroll3);
+                pickupitem(finalscroll);
+            }
+        }
+        judgeempty();
     }
 
     public void updateinfo(string info, string name)
@@ -397,6 +421,10 @@ public class bagmanager : MonoBehaviour
         refreshitem(ragepotion);
         refreshitem(defencepotion);
         refreshitem(soulpotion);
+        refreshitem(scroll1);
+        refreshitem(scroll2);
+        refreshitem(scroll3);
+        refreshitem(finalscroll);
         judgeempty();
     }
 
@@ -416,6 +444,10 @@ public class bagmanager : MonoBehaviour
         cooldownrune.itemnum = 0;
         robustrune.itemnum = 0;
         energyrune.itemnum = 0;
+        scroll1.itemnum=0;
+        scroll2.itemnum=0;
+        scroll3.itemnum=0;
+        finalscroll.itemnum=0;
         refreshall();
     }
 
@@ -431,9 +463,9 @@ public class bagmanager : MonoBehaviour
         friendshipflask.itemname = "?";
         friendshipflask.locked = true;
         closemybag();
+        //pickupitem(scroll1);
     }
 
-    // Update is called once per frame
     void Update()
     {
 

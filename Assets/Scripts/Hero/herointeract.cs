@@ -171,6 +171,21 @@ public class herointeract : MonoBehaviour
                     mybagmanager.pickupitem(mybagmanager.soulpotion);
                     break;
                 }
+                case "scroll1":
+                {
+                    mybagmanager.pickupitem(mybagmanager.scroll1);
+                    break;
+                }
+                case "scroll2":
+                {
+                    mybagmanager.pickupitem(mybagmanager.scroll2);
+                    break;
+                }
+                case "scroll3":
+                {
+                    mybagmanager.pickupitem(mybagmanager.scroll3);
+                    break;
+                }
             }
         }
 
