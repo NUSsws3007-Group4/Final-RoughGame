@@ -9,7 +9,7 @@ public class EliteEnemyBehavior : EnemyBehavior
     private Vector3 spawnPoint;
     private GameObject guardPortal;
     private bagmanager bgm;
-    private bool dialogueTriggered = false;
+    private bool friendlyDialogueTriggered = false;
     // Start is called before the first frame update
     protected override void Start()
     {

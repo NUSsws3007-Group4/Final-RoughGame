@@ -7,10 +7,12 @@ public class startInterface : MonoBehaviour
 {
 
     private Animator anim;
+    private bool Loading = false;
+    private float loadTimer = 0f;
     public void Load()
     {
         anim.SetTrigger("Load");
-        Invoke("LoadScene", 2.5f);
+        Loading = true;
     }
     // Start is called before the first frame update
     void Start()
@@ -21,11 +23,10 @@ public class startInterface : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Loading)
+            loadTimer += Time.deltaTime;
+        if (loadTimer >= 2.5f)
+            SceneManager.LoadScene("Level1");
 
-    }
-
-    public void LoadScene()
-    {
-        SceneManager.LoadScene("Level1");
     }
 }

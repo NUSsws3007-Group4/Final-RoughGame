@@ -69,7 +69,6 @@ title: Elite1Defeated2
 ---
 Clotille: God... You are so powerful...
 Clotille: But why are you doing this to me...
-...
 ===
 
 title: Elite2Friendly
@@ -77,6 +76,12 @@ title: Elite2Friendly
 Silena: Good job, you're almost there.
 Silena: But I lost the fragment somewhere...
 Silena: Maybe you can go up and solve the puzzle to find it.
+===
+
+title: Elite2Friendly2
+---
+Silena: Have you solved the puzzle yet?
+Silena: Go up and try it. I believe that you are smart enough.
 ===
 
 title: Elite2PuzzleSolved
@@ -97,6 +102,12 @@ title: Elite2Defeated
 Silena: Skillful...
 You got a fragment of the rune.
 Bridgett: The door at the bottom should be have been opened. Let me go and check it.
+===
+
+title: Elite2Defeated2
+---
+Silena: Why...I thought that you were friendly...
+You got a fragment of the rune.
 ===
 
 title: Elite3Friendly

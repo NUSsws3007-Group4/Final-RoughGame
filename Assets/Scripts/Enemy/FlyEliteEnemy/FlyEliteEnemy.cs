@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class FlyEliteEnemy : EnemyBehavior
 {
@@ -8,6 +9,8 @@ public class FlyEliteEnemy : EnemyBehavior
     private int barrageAttackCount = 0;
     private float arrowShotTimer = 0f;
     private GameObject guardPortal, puzzleBase;
+
+    private bool dialogueTriggered = false;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -25,6 +28,7 @@ public class FlyEliteEnemy : EnemyBehavior
         detectDistance = 4f;
         initialpos = transform.localPosition;
         initialright = transform.right;
+        dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
     override protected void patrolBehavior()
     {
@@ -82,6 +86,19 @@ public class FlyEliteEnemy : EnemyBehavior
         {
             puzzleBase.GetComponent<PuzzleControl>().setPuzzleOpen(true);
             transform.GetChild(2).GetComponent<Renderer>().enabled = true;
+            dialogueRunner.Stop();
+            if (!dialogueTriggered)
+            {
+                dialogueRunner.StartDialogue("Elite2Friendly");
+                if (targetHero.GetComponent<EndingJudgement>().usedCount != 0)
+                {
+                    Invoke("Bonus", 5);
+                }
+
+            }
+            else
+                dialogueRunner.StartDialogue("Elite2Friendly2");
+
         }
     }
     private void BarrageArrowAttack()
@@ -106,7 +123,6 @@ public class FlyEliteEnemy : EnemyBehavior
     {
         transform.GetChild(3).gameObject.SetActive(true);
         attackedTimer -= Time.deltaTime;
-        mRigidbody.AddForce(0.1f * attackedTimer * transform.right);
         if (attackedTimer <= 0)
         {
             attackedTimer = 0.5f;
@@ -124,16 +140,38 @@ public class FlyEliteEnemy : EnemyBehavior
         {
             Jp.SetActive(true);
         }
+        dialogueRunner.Stop();
+        if (dialogueTriggered)
+        {
+            dialogueRunner.StartDialogue("Elite2Defeated2");
+        }
+        else
+        {
+            muim = GameObject.Find("UImanager");
+            int mon = (int)(Random.Range(500, 1000));
+            muim.GetComponent<coincontrol>().earn(mon);
+            dialogueRunner.StartDialogue("Elite2Defeated");
+        }
+        targetHero.GetComponent<EndingJudgement>().f2 = false;
         Destroy(guardPortal.gameObject);
-        base.Death();
+
+
     }
     public void AllowPass(GameObject Jp = null)
     {
-        if(Jp)
+        if (Jp)
         {
+            dialogueRunner.Stop();
+            dialogueRunner.StartDialogue("Elite2PuzzleSolved");
             Jp.SetActive(true);
         }
+        targetHero.GetComponent<EndingJudgement>().f2 = true;
         Destroy(guardPortal.gameObject);
     }
 
+    private void Bonus()
+    {
+        dialogueRunner.Stop();
+        dialogueRunner.StartDialogue("Elite2FriendshipFlaskWarning");
+    }
 }
