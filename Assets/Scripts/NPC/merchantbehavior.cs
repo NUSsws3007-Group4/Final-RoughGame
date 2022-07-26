@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Yarn.Unity;
 
 public class merchantbehavior : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class merchantbehavior : MonoBehaviour
     private GameObject hero;
     private storemanager stg;
     private bagmanager bg;
+    private DialogueRunner dialogueRunner;
 
     void Start()
     {
@@ -30,6 +32,7 @@ public class merchantbehavior : MonoBehaviour
             GameObject cam = GameObject.Find("Cameramanager");
             cm = cam.GetComponent<cameramanagerbehavior>();
         }
+        dialogueRunner = GameObject.Find("Dialogue System").GetComponent<DialogueRunner>();
     }
 
     void Update()
@@ -48,6 +51,8 @@ public class merchantbehavior : MonoBehaviour
                 flag=false;
                 if(dialoguebox!=null) dialoguebox.SetActive(true);
                 cm.startfocus(gameObject,3f,dialoguebox);
+                dialogueRunner.Stop();
+                dialogueRunner.StartDialogue("Merchant");
             }
         }
     }

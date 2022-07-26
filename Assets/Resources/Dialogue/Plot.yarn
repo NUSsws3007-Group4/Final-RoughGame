@@ -32,12 +32,20 @@ title: Climb
 Bridgett: To high...
 Bridgett: But maybe I can climb up.
 Stick to the ladder and use W/S to move up and down.
+Bridgett: Ah... Disgusting mucus...
 ===
 
 title: DoubleJump
 ---
 Bridgett: Double jump, interesting.
 Bridgett: I'll use it to go straight westwards.
+===
+
+title: Merchant
+---
+Merchant: Wanna trade?
+Merchant: Come on, I'm waiting for you.
+Approach a merchant and press E to trade.
 ===
 
 title: FriendlyAttacked

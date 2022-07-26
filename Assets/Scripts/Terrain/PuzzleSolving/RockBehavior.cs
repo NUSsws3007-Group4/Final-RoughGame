@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class RockBehavior : MonoBehaviour
 {
@@ -23,12 +24,14 @@ public class RockBehavior : MonoBehaviour
     {
         JumpPad.SetActive(false);
         solved = false;
-        elite=GameObject.Find("elite");
+        elite = GameObject.Find("elite");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (solved)
+            return;
         p1.SetActive(!switchLst[1]);
         p2.SetActive(!switchLst[2]);
         p3.SetActive(!switchLst[3]);
@@ -47,6 +50,7 @@ public class RockBehavior : MonoBehaviour
             {
                 i.gameObject.SetActive(false);
             }
+
         }
     }
 
