@@ -203,7 +203,7 @@ title: Phase2Beaten
 ---
 Karina was beaten.
 Fire became beyond control.
-Everything was in the sea of fire.
+Everything was in the flames.
 <<wait 5>>
 Bridgett too.
 <<set $ready to 3>>
@@ -221,12 +221,26 @@ They lived together happily, as if nothing had happened.
 
 title: SlaughterEnding
 ---
-
+<<set $ready to 4>>
+Everything was buried in the sea of fire...
+<<set $ready to 5>>
 ===
 
 title: NormalEnding
 ---
+<<set $ready to 4>>
 Bridgett: Frost is gone...
 Bridgett: But where is my sister?
 <<set $ready to 5>>
+===
+
+title: BossWarning
+---
+Karina: You don't have to battle. I only want to test your ability.
+Karina: Do you really want to fight?
+===
+
+title: EndingTransform
+---
+Karina: You are annoying. Let's battle.
 ===
