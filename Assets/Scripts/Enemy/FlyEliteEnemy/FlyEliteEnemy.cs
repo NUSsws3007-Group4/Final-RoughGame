@@ -14,7 +14,7 @@ public class FlyEliteEnemy : EnemyBehavior
         detectDistance = 15f;
         detectAngle = 90f;
         chaseDistance = 20f;
-        mLifeLeft = 10;
+        mLifeLeft = 200;
 
         anim = GetComponent<Animator>();
         enemyRenderer = GetComponent<SpriteRenderer>();
