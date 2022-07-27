@@ -10,6 +10,7 @@ public class FlyEliteEnemy : EnemyBehavior
     private float arrowShotTimer = 0f, dialogueTimer = 10f;
     private GameObject guardPortal, puzzleBase;
     private bagmanager bgm;
+    public GameObject Jp;
 
     private bool temp = false, dialogueTriggered = false;
     // Start is called before the first frame update
@@ -152,9 +153,9 @@ public class FlyEliteEnemy : EnemyBehavior
 
     protected override void Death()
     {
+        
         bgm.pickupitem(bgm.scroll2);
-        GameObject Jp;
-        if (Jp = GameObject.Find("jumppad"))
+        if (Jp)
         {
             Jp.SetActive(true);
         }
