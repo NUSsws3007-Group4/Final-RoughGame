@@ -2467,6 +2467,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6773714980938716427, guid: 73cb9b3e4b7f674499eaac00ac690818, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8077614929377533929, guid: 73cb9b3e4b7f674499eaac00ac690818, type: 3}
       propertyPath: m_Name
       value: BossPhase1

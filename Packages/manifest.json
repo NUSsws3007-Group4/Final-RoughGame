@@ -52,7 +52,7 @@
   "scopedRegistries": [
     {
       "name": "OpenUPM",
-      "url": "https://package.openupm.cn",
+      "url": "https://package.openupm.com",
       "scopes": [
         "dev.yarnspinner"
       ]
